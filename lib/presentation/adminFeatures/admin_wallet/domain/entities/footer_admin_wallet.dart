@@ -1,0 +1,1 @@
+import '../../data/models/admin_wallet_dto.dart';class FooterAdminWallet {  FooterAdminWallet({    this.key,    this.value,  });  String? key;  String? value;  factory FooterAdminWallet.fromDto(FooterAdminWalletDto json) {    return FooterAdminWallet(      key: json.key,      value: json.value,    );  }}

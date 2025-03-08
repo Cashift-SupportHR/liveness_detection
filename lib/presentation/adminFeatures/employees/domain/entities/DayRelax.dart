@@ -1,0 +1,1 @@
+import '../../data/models/day_relax_dto.dart';class DayRelax {  DayRelax({    this.dayValue,    this.name,  });  int? dayValue;  String? name;  factory DayRelax.fromDto(DayRelaxDto json) {    return DayRelax(name: json.name, dayValue: json.dayValue);  }}

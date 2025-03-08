@@ -1,0 +1,1 @@
+import '../../data/models/payment_period_types_dto.dart';class PaymentPeriodTypes {  PaymentPeriodTypes({    this.code,    this.name,    this.id,  });  String? code;  String? name;  int? id;  factory PaymentPeriodTypes.fromDto(PaymentPeriodTypesDto json) {    return PaymentPeriodTypes(id: json.id, code: json.code, name: json.name);  }}

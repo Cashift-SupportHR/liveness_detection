@@ -1,0 +1,1 @@
+class FilterModel {  FilterModel({    this.fromDate,    this.jobName,    this.toDate,    this.typeName,    this.projectName,  });  String? fromDate;  String? jobName;  String? projectName;  String? toDate;  String? typeName;}

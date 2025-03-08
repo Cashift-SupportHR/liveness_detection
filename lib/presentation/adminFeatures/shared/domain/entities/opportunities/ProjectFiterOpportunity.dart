@@ -1,0 +1,1 @@
+import '../../../data/models/project_fiter_opportunity_dto.dart';class ProjectFiterOpportunity {  ProjectFiterOpportunity({    this.id,    this.name,  });  int? id;  String? name;  factory ProjectFiterOpportunity.fromDto(ProjectFiterOpportunityDto dto) {    return ProjectFiterOpportunity(      name: dto.name,      id: dto.id,    );  }}

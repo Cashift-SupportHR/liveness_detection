@@ -1,0 +1,1 @@
+import 'deductions_dto.dart';class DeductionsApp {  DeductionsApp({    this.name,    this.value,    this.icon,  });  String? name;  String? value;  String? icon;  factory DeductionsApp.fromDto(Deduction json) {    return DeductionsApp(      name: json.name,      value: json.value,      icon: json.icon,    );  }}

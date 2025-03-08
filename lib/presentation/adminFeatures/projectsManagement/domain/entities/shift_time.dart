@@ -1,0 +1,1 @@
+import '../../data/models/shift_time_dto.dart';class ShiftTime {  ShiftTime({    this.id,    this.name,    this.jobId,  });  int? id;  int? jobId;  String? name;  factory ShiftTime.fromDto(ShiftTimeDto json) {    return ShiftTime(      id: json.id,      jobId: json.jobId,      name: json.name,    );  }}

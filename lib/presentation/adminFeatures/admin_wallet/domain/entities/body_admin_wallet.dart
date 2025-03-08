@@ -1,0 +1,1 @@
+import '../../data/models/admin_wallet_dto.dart';class BodyAdminWallet {  BodyAdminWallet({    this.key,    this.value,  });  String? key;  String? value;  factory BodyAdminWallet.fromDto(BodyAdminWalletDto json) {    return BodyAdminWallet(      key: json.key,      value: json.value,    );  }}

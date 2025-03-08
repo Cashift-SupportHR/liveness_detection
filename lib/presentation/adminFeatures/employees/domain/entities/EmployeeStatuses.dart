@@ -1,0 +1,1 @@
+import '../../data/models/employee_statuses_dto.dart';class EmployeeStatuses {  EmployeeStatuses({    this.code,    this.name,    this.id,  });  String? code;  String? name;  int? id;  factory EmployeeStatuses.fromDto(EmployeeStatusesDto json) {    return EmployeeStatuses(id: json.id, code: json.code, name: json.name);  }}

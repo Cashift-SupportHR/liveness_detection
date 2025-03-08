@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27">
+  <g id="Group_75188" data-name="Group 75188" transform="translate(4261 -2456)">
+    <rect id="Rectangle_3989" data-name="Rectangle 3989" width="27" height="27" rx="13.5" transform="translate(-4261 2456)" fill="#1e866f" opacity="0.06"/>
+    <g id="vuesax_linear_brifecase-timer" data-name="vuesax/linear/brifecase-timer" transform="translate(-4255.218 2462.168)">
+      <g id="brifecase-timer">
+        <path id="Vector" d="M5.141,2.571A2.571,2.571,0,1,1,2.571,0,2.571,2.571,0,0,1,5.141,2.571Z" transform="translate(5.141 6.555)" fill="none" stroke="#1e866f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <path id="Vector-2" data-name="Vector" d="M.8,0V.6a.636.636,0,0,1-.315.553L0,1.446" transform="translate(7.069 8.323)" fill="none" stroke="#1e866f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <path id="Vector-3" data-name="Vector" d="M3.7,10.283H8.837c2.584,0,3.046-1.035,3.181-2.294L12.5,2.847C12.674,1.279,12.224,0,9.48,0H3.053C.309,0-.141,1.279.033,2.847L.515,7.989C.65,9.248,1.112,10.283,3.7,10.283Z" transform="translate(1.446 3.856)" fill="none" stroke="#1e866f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <path id="Vector-4" data-name="Vector" d="M0,2.571V2.057C0,.919,0,0,2.057,0H3.085C5.141,0,5.141.919,5.141,2.057v.514" transform="translate(5.141 1.285)" fill="none" stroke="#1e866f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <path id="Vector-5" data-name="Vector" d="M3.625,0A10.5,10.5,0,0,1,0,1.7" transform="translate(10.289 7.069)" fill="none" stroke="#1e866f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <path id="Vector-6" data-name="Vector" d="M0,0A10.563,10.563,0,0,0,3.458,1.549" transform="translate(1.684 7.243)" fill="none" stroke="#1e866f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <path id="Vector-7" data-name="Vector" d="M0,0H15.424V15.424H0Z" transform="translate(15.424 15.424) rotate(180)" fill="none" opacity="0"/>
+      </g>
+    </g>
+  </g>
+</svg>

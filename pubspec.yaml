@@ -1,0 +1,250 @@
+name: shiftapp
+description: "A new Flutter project."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.0
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations: # Add this line
+    sdk: flutter # Add this line
+  intl: ^0.19.0
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.8
+  # responsive_builder: ^0.7.0
+  logger: ^2.5.0
+  get_it: ^8.0.3
+  # get material
+  get: ^4.7.2
+  #  # remote
+  retrofit: ^4.4.2
+  #  built_value: ^8.6.1
+  #  built_value_generator: ^8.6.1
+  #  json_serializable: ^6.7.1
+  #  json_annotation: ^4.8.1
+  dio: ^5.8.0+1
+  flutter_bloc: ^9.1.0
+  shared_preferences: ^2.5.2
+  flutter_svg:
+  pin_code_fields: ^8.0.1
+  # Map Error Here
+  google_maps_flutter: ^2.10.1
+  # location Error Here
+  geocoding: ^3.0.0
+  # for rest app main widget
+  #  flutter_phoenix: ^1.1.1
+
+  # Firebase
+  firebase_core: ^3.12.1
+  firebase_messaging: ^15.2.4
+  # Error Here
+  flutter_local_notifications: ^18.0.1
+  #  swipe_cards: ^2.0.0+1
+  card_swiper: ^3.0.1
+  #  tcard: ^1.3.5
+  #  swipeable_card_stack: ^0.0.5
+  #  flutter_animarker: ^3.2.0
+  #  smart_alert_dialog: ^4.0.4
+  #flutter_map_marker_cluster: ^1.1.1
+  google_maps_cluster_manager_2: ^3.2.0
+  geolocator: ^13.0.2
+  image_picker: ^1.1.2
+  flutter_countdown_timer: ^4.1.0
+  #  dropdown_search: ^5.0.6
+  qr_code_scanner_plus: ^2.0.10+1
+  simple_native_image_compress: ^2.4.0
+  equatable: ^2.0.7
+  #  platform: ^3.1.0`
+  page_indicator: ^0.4.1
+  #  circle_checkbox: ^0.0.2+1
+  location: ^8.0.0
+  sizer: ^3.0.5
+  #  lottie:
+  #  flutter_screenutil: ^5.8.4
+  device_info_plus: ^11.3.3
+#  platform_device_id: ^1.0.1
+#  easy_device_id: ^1.2.0
+#  flutter_google_places:
+  #  steps_indicator: ^1.3.0
+  linear_step_indicator: ^1.0.0+3
+  #  nepali_date_picker: ^5.3.1
+  #  label_marker: ^1.0.1
+  #firebase_dynamic_links: ^5.4.8
+
+  flutter_rating_bar: ^4.0.1
+  #  iban: ^1.0.1
+  animation_wrappers: ^3.0.0
+  flutter_staggered_animations: ^1.1.1
+  just_audio: ^0.9.46
+  local_auth: ^2.3.0
+  flutter_secure_storage: ^9.2.4
+  month_year_picker: ^0.4.0+1
+  #  animated_toggle_switch: ^0.7.0
+  #  toggle_switch: ^2.1.0
+  injectable: ^2.5.0
+
+  # Error Here
+  syncfusion_flutter_datepicker: ^28.2.7
+  qr_flutter: ^4.1.0
+  carousel_slider: ^5.0.0
+  rate: ^0.0.2
+  draggable_fab: ^0.1.4
+  # Error Here
+  syncfusion_flutter_sliders: ^28.2.7
+  pull_to_refresh_flutter3: ^2.0.2
+  file_saver: ^0.2.14
+  permission_handler: ^11.4.0
+  dotted_border:
+  smooth_page_indicator: ^1.2.1
+  vibration: ^3.1.3
+  path_provider: ^2.1.5
+  flutter_pdfview: ^1.4.0
+
+#  place_picker: ^0.10.0
+  percent_indicator: ^4.2.4
+
+#  m7_livelyness_detection: ^0.0.6+4
+  livelyness_detection: ^0.0.1+5
+  #  flutter_exif_rotation: ^0.5.1
+  collection: ^1.19.1
+  flutter_face_api: ^5.2.3
+  #  google_mlkit_face_detection: ^0.5.0
+  dropdown_button2: ^2.3.9
+  app_tracking_transparency: ^2.0.6+1
+  store_redirect: ^2.0.4
+  injectable_generator:
+  firebase_dynamic_links: ^6.1.4
+  floor: ^1.5.0
+  internet_connection_checker:
+  video_player: ^2.9.3
+  wakelock_plus: ^1.2.10
+  #  flutter_map_marker_cluster: ^1.1.1
+  rxdart: ^0.28.0
+  chucker_flutter:
+  flutter_cached_pdfview: ^0.4.3
+  #flutter_cache_manager: ^3.3.1
+  #easy_image_viewer: ^1.5.1
+  #screenshot: ^2.5.0
+#  native_screenshot: ^1.0.0
+  camera: ^0.11.1
+  device_preview_plus: ^2.3.0
+  file_picker: ^9.0.2
+
+  url_launcher: ^6.3.1
+  share_plus: ^10.1.4
+  uuid: ^4.5.1
+  android_id: ^0.4.0
+  platform_device_id_platform_interface: ^1.0.0
+
+#dependency_overrides:
+#  rxdart: ^0.27.0
+#  platform_device_id_plus:
+#    git:
+#      url: https://github.com/Harby-SoftwareEngineer/platform_device_id_plus.git
+#      ref: main # branch name
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  retrofit_generator: ^9.1.9
+  floor_generator:
+  build_runner:
+  flutter_launcher_icons: ^0.14.3
+  change_app_package_name: ^1.5.0
+  build: ^2.4.2
+  json_serializable:
+  injectable_generator:
+  # addopportunityemployee the generator to your dev_dependencies
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.  flutter_lints: ^1.0.0
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/cashift_icon.png"
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+  generate: true    # Add this line
+
+  assets:
+    - images/
+    - raw/
+    - assets/raw/thank_2.mp3
+    - assets/icons/services/
+    - assets/icons/opportunities/
+    - assets/icons/applied-offer/
+    - assets/icons/favorite-jobs/
+    - assets/icons/
+    - assets/videos/splash.mp4
+    - assets/videos/splash2.mp4
+    - assets/videos/splash3.mp4
+
+  fonts:
+
+    - family: Bold
+      fonts:
+        - asset: fonts/alfont_com_Somar-Bold.otf
+          weight: 900
+
+    - family: Light
+      fonts:
+        - asset: fonts/alfont_com_Somar-Light.otf
+          weight: 900
+
+    - family: Medium
+      fonts:
+        - asset: fonts/alfont_com_Somar-Medium.otf
+          weight: 900
+
+    - family: Regular
+      fonts:
+        - asset: fonts/alfont_com_Somar-Regular.otf
+          weight: 900
+
+    - family: Black
+      fonts:
+        - asset: fonts/alfont_com_Somar-Black.otf
+          weight: 900
+    - family: SemiBold
+      fonts:
+        - asset: fonts/Somar-SemiBold.otf
+          weight: 900
+flutter_intl:
+  enabled: true

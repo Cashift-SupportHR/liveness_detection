@@ -1,0 +1,1 @@
+import '../../data/models/tab_cashifter_dto.dart';class TabCashifter {  TabCashifter({    this.id,    this.name,  });  int? id;  String? name;  factory TabCashifter.fromDto(TabCashifterDto json) {    return TabCashifter(id: json.id, name: json.name);  }}

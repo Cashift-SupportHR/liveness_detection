@@ -1,0 +1,1 @@
+import '../../data/models/shift_employee_dto.dart';class ShiftEmployee {  ShiftEmployee({    this.shiftId,    this.shiftName,  });  int? shiftId;  String? shiftName;  factory ShiftEmployee.fromDto(ShiftEmployeeDto json) {    return ShiftEmployee(shiftId: json.shiftId, shiftName: json.shiftName);  }}
