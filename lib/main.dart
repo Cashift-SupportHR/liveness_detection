@@ -41,7 +41,16 @@ class MyHttpOverrides extends HttpOverrides {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyB0FzJl_ocB874gjwpIQVuO9urkaeR6IM8",
+      databaseURL: "https://shiftapp-1.firebaseio.com",
+      projectId: "doubleshift-f48be",
+      storageBucket: "doubleshift-f48be.appspot.com",
+      messagingSenderId: "289253454262",
+      appId: "1:289253454262:ios:28abc5cf04d30436a81117",
+    ),
+  );
   FirebaseNotifications.firebaseInitNotifications();
   ChuckerFlutter.showOnRelease = true;
   AppLoggers.setupLogger();
