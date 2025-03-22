@@ -83,11 +83,7 @@ extension ObjectExtension on Object {
 
 extension ContextExtension on BuildContext {
   T? getArguments<T>() {
-    final args = ModalRoute.of(this)!.settings.arguments;
-    if (args != null && args is T) {
-      return ModalRoute.of(this)!.settings.arguments as T;
-    }
-    return null;
+    return MyModalRoute.of(this)?.settings.arguments as T?;
   }
 
   Locale getLocal() {
@@ -230,5 +226,22 @@ extension DateUtils on DateTime {
     return yesterday.day == day &&
         yesterday.month == month &&
         yesterday.year == year;
+  }
+}
+
+/// replace ModalRoute.of(context)
+class MyModalRoute {
+
+  static ModalRoute<dynamic>? of(BuildContext context) {
+    ModalRoute<dynamic>? route;
+    context.visitAncestorElements((element) {
+      if(element.widget.runtimeType.toString() == '_ModalScopeStatus') {
+        dynamic widget = element.widget;
+        route = widget.route as ModalRoute;
+        return false;
+      }
+      return true;
+    });
+    return route;
   }
 }
