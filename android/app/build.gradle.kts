@@ -25,7 +25,7 @@ android {
         applicationId = "com.cashift"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = 21
+        minSdk = 24
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
@@ -50,6 +50,7 @@ dependencies {
     // Example dependency; adjust as needed
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("com.android.support:multidex:2.0.1")
+    implementation("androidx.appcompat:appcompat:1.7.0")
 
     // Add the core library desugaring dependency
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.2.2")
