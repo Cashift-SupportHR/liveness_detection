@@ -159,6 +159,7 @@ dependencies:
   uuid: ^4.5.1
   android_id: ^0.4.0
   platform_device_id_platform_interface: ^1.0.0
+  chewie: ^1.11.3
 
 #dependency_overrides:
 #  rxdart: ^0.27.0
