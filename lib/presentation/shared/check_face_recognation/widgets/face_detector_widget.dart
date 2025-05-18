@@ -13,6 +13,7 @@ import '../../../presentationUser/resources/constants.dart';
 import '../../../shared/components/app_cupertino_button.dart';
 import '../../../shared/components/image_builder.dart';
 import '../../../shared/components/outlint_button.dart';
+import '../../components/index.dart';
 
 class FaceDetectorWidget extends StatefulWidget {
   final AttendanceConfigDto attendanceConfigDto;
@@ -20,10 +21,10 @@ class FaceDetectorWidget extends StatefulWidget {
   FaceDetectorWidget({required this.attendanceConfigDto, required this.onFaceDetection});
 
   @override
-  State<FaceDetectorWidget> createState() => _ExpampleScreenState();
+  State<FaceDetectorWidget> createState() => _M7ExpampleScreenState();
 }
 
-class _ExpampleScreenState extends BaseState<FaceDetectorWidget> {
+class _M7ExpampleScreenState extends BaseState<FaceDetectorWidget> {
   //* MARK: - Private Variables
   //? =========================================================
   String? _capturedImagePath;

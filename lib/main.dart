@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:device_preview_plus/device_preview_plus.dart' as device_preview;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';

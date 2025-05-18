@@ -33,6 +33,7 @@ abstract class BaseCubit extends BlocBase<CommonState> {
       final response = await invoke();
       onSuccess(response);
     } catch (e) {
+      print('executeBuilder ${e}');
       if (onError != null) {
         onError(e);
       } else {

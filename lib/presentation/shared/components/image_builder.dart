@@ -2,7 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:shiftapp/presentation/presentationUser/resources/colors.dart';
+
+import '../../../core/services/routes.dart';
 
 Widget kBuildImage(String path,
     {double? size,
@@ -12,39 +15,49 @@ Widget kBuildImage(String path,
     double? border,
     BoxFit? fit,
     bool showImageError = true,
+      bool showFullImage = true,
     double? errorIconSize}) {
   print('kBuildImage $path');
-  return Container(
-    width: width ?? size ?? 40,
-    height: height ?? size ?? 40,
-    decoration: BoxDecoration(
+  return InkWell(
+    onTap: showFullImage ? () {
+        Navigator.pushNamed(
+          Get.context!,
+          Routes.filesPreviewPage,
+          arguments: [path],
+        );
+    } : null,
+    child: Container(
+      width: width ?? size ?? 40,
+      height: height ?? size ?? 40,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(borderRadius ?? 8.0),
+          border: border == 0
+              ? Border.all(style: BorderStyle.none)
+              : Border.all(color: kSilver, width: border ?? 0.0)),
+      child: ClipRRect(
         borderRadius: BorderRadius.circular(borderRadius ?? 8.0),
-        border: border == 0
-            ? Border.all(style: BorderStyle.none)
-            : Border.all(color: kSilver, width: border ?? 0.0)),
-    child: ClipRRect(
-      borderRadius: BorderRadius.circular(borderRadius ?? 8.0),
-      child: FadeInImage.assetNetwork(
-        fit: fit ?? BoxFit.fill,
-        placeholder: 'images/loading.gif',
-        image: path,
-        height: height ?? size ?? 40,
-        width: width ?? size ?? 40,
-        imageErrorBuilder: (c, o, s) {
-          // print('imageErrorBuilder error  $s ');
-          return showImageError
-              ? SizedBox(
-                  height: size ?? 40,
-                  width: size,
-                  child: Container(
-                      child: Icon(
-                    Icons.image,
-                    color: kGrey_EB,
-                    size: errorIconSize ?? 30,
-                  )),
-                )
-              : SizedBox.shrink();
-        },
+        child: FadeInImage.assetNetwork(
+          fit: fit ?? BoxFit.fill,
+          placeholder: 'images/loading.gif',
+          image: path,
+          height: height ?? size ?? 40,
+          width: width ?? size ?? 40,
+          imageErrorBuilder: (c, o, s) {
+            // print('imageErrorBuilder error  $s ');
+            return showImageError
+                ? SizedBox(
+                    height: size ?? 40,
+                    width: size,
+                    child: Container(
+                        child: Icon(
+                      Icons.image,
+                      color: kGrey_EB,
+                      size: errorIconSize ?? 30,
+                    )),
+                  )
+                : SizedBox.shrink();
+          },
+        ),
       ),
     ),
   );
@@ -127,40 +140,52 @@ Widget kBuildCircleImage(String path,
     EdgeInsetsGeometry? padding,
     EdgeInsetsGeometry? margin,
     Decoration? decoration,
+      bool showFullImage = true,
     BoxFit? fit}) {
-  return Container(
-    width: size ?? 40,
-    height: size ?? 40,
-    padding: padding ?? EdgeInsets.all(2),
-    margin: margin ?? EdgeInsets.all(0),
-    decoration: decoration ??
-        BoxDecoration(
-            color: backgroundColor,
-            shape: BoxShape.circle,
-            border: border == 0
-                ? Border.all(style: BorderStyle.none)
-                : Border.all(
-                    color: borderColor ?? kSilver, width: border ?? 0.0)),
-    child: ClipOval(
-      child: Container(
-        child: FadeInImage.assetNetwork(
-          fit: fit ?? BoxFit.fill,
-          placeholder: 'images/loading.gif',
-          image: path,
-          height: size ?? 40,
-          width: size ?? 40,
-          imageErrorBuilder: (c, o, s) {
-            //  print('imageErrorBuilder error  $s ');
-            return SizedBox(
-              height: size ?? 40,
-              width: size,
-              child: Container(
-                  child: const Icon(
-                Icons.image,
-                color: kSilverTwo,
-              )),
-            );
-          },
+  return InkWell(
+    onTap: () {
+      if (showFullImage) {
+        Navigator.pushNamed(
+          Get.context!,
+          Routes.filesPreviewPage,
+          arguments: [path],
+        );
+      }
+    },
+    child: Container(
+      width: size ?? 40,
+      height: size ?? 40,
+      padding: padding ?? EdgeInsets.all(2),
+      margin: margin ?? EdgeInsets.all(0),
+      decoration: decoration ??
+          BoxDecoration(
+              color: backgroundColor,
+              shape: BoxShape.circle,
+              border: border == 0
+                  ? Border.all(style: BorderStyle.none)
+                  : Border.all(
+                      color: borderColor ?? kSilver, width: border ?? 0.0)),
+      child: ClipOval(
+        child: Container(
+          child: FadeInImage.assetNetwork(
+            fit: fit ?? BoxFit.fill,
+            placeholder: 'images/loading.gif',
+            image: path,
+            height: size ?? 40,
+            width: size ?? 40,
+            imageErrorBuilder: (c, o, s) {
+              //  print('imageErrorBuilder error  $s ');
+              return SizedBox(
+                height: size ?? 40,
+                width: size,
+                child: Container(
+                    child: const Icon(
+                  Icons.image,
+                  color: kSilverTwo,
+                )),
+              );
+            },
+          ),
         ),
       ),
     ),

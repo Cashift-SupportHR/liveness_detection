@@ -3,3 +3,8 @@ export 'vehicle_list_of_images.dart';
 export 'vehicle_details.dart';
 export 'insurance_types.dart';
 export 'insurances.dart';
+export 'vehicle_violation.dart';
+export 'vehicle_image_face.dart';
+export 'vehicle_camera.dart';
+export 'vehicle_receive_request.dart';
+export 'covenant_vehicle.dart';

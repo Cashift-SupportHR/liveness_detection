@@ -59,9 +59,9 @@ class OverviewBloc extends Bloc<OverviewEvents, CommonState> {
         await for (final newState in event.applyAsync(currentState: state, bloc: this)) {
           emit(newState);
         }
-      } catch (_, stackTrace) {
-        // developer.log('$_',
-        //     name: 'OverviewBloc', error: _, stackTrace: stackTrace);
+      } catch (error, stackTrace) {
+        developer.log('$error',
+            name: 'OverviewBloc', error: error, stackTrace: stackTrace);
         emit(state);
       }
     });

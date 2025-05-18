@@ -24,7 +24,7 @@ class CheckFaceRecogenationCubit extends BaseCubit {
 
   fetchRegisteredFace() async {
     try {
-      emit(LoadingState());
+    //  emit(LoadingState());
       final faceRecognitionConfig = _userRepository.accountDataToggle();
       if (faceRecognitionConfig?.isAllowFaceRecognition == true) {
         final value = await repository.downloadFaceRecognition();

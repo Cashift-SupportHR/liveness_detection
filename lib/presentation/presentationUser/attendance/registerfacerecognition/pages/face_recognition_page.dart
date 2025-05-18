@@ -35,7 +35,7 @@ class FaceRecognitionPage extends BaseBlocWidget<Initialized<RegisteredFace?>,
 
   @override
   Widget buildWidget(BuildContext context, Initialized<RegisteredFace?> state) {
-    User? user = ModalRoute.of(context)!.settings.arguments as User?;
+    User? user = getArguments(context);
     return state.data == null
         ? RegisterFaceRecognitionScreen(
             onImagePicked: (file) {

@@ -5,6 +5,7 @@ import 'package:shiftapp/presentation/shared/components/index.dart';
  import 'package:shiftapp/utils/app_icons.dart';
 
 import '../../../../../../../core/services/routes.dart';
+import '../../../../../../presentationUser/vehiclesOperation/domain/entities/vehicle_violation_args.dart';
 import '../../../../domain/entities/vehicle_violation.dart';
 
 class VehicleViolationItem extends BaseStatelessWidget {
@@ -125,7 +126,9 @@ class _OptionsMenuButton extends BaseStatelessWidget {
       ],
       onSelect: (value) async {
         if (value == 0) {
-          final isRefresh = await  Navigator.pushNamed(context, Routes.addViolationVehiclePage, arguments: id);
+          final isRefresh = await  Navigator.pushNamed(context, Routes.addViolationVehiclePage, arguments: AddVehicleViolationArgs(
+            violationId: id,
+          ));
           if(isRefresh == true){
             onRefresh();
           }

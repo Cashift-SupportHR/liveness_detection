@@ -39,9 +39,21 @@ class FollowUpViolationItem extends BaseStatelessWidget {
             items: items(),
           ),
           notesWithImages(context),
-          if(code == CodesConstants.reviewed)
-          responsibleResponse(),
-          // if()
+          if (code == CodesConstants.reviewed) responsibleResponse(),
+          if (code != CodesConstants.waitingReview)
+            Column(
+              children: [
+                buildTextValue(
+                  title: strings.the_problem_causer,
+                  value: item.adminAction ?? '',
+                ),
+              ],
+            ),
+          SizedBox(height: 10),
+          buildTextValue(
+            title: strings.status,
+            value: item.importantLevel ?? '',
+          ),
           buildActionButton(context),
         ],
       ),
@@ -134,25 +146,26 @@ class FollowUpViolationItem extends BaseStatelessWidget {
       },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: item.imagesPath?.map((image) => Container(
-                  clipBehavior: Clip.antiAlias,
-                  margin: EdgeInsets.symmetric(horizontal: 5),
-                  decoration: Decorations.boxDecorationShaded(radius: 5),
-                  child: image.contains(".pdf")
-                      ? Icon(
-                          Icons.picture_as_pdf_outlined,
-                          color: kWhite,
-                          size: 40,
-                        )
-                      : kBuildImage(
-                          image,
-                          border: 0,
-                          height: 42,
-                          width: 60,
-                          borderRadius: 0,
-                        ),
-                ))
-            .toList() ??
+        children: item.imagesPath
+                ?.map((image) => Container(
+                      clipBehavior: Clip.antiAlias,
+                      margin: EdgeInsets.symmetric(horizontal: 5),
+                      decoration: Decorations.boxDecorationShaded(radius: 5),
+                      child: image.contains(".pdf")
+                          ? Icon(
+                              Icons.picture_as_pdf_outlined,
+                              color: kWhite,
+                              size: 40,
+                            )
+                          : kBuildImage(
+                              image,
+                              border: 0,
+                              height: 42,
+                              width: 60,
+                              borderRadius: 0,
+                            ),
+                    ))
+                .toList() ??
             [],
       ),
     );

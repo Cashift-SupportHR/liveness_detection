@@ -17,7 +17,7 @@ class AddAddressPage extends BaseBlocWidget<dynamic, AddAddressCubit> {
 
   @override
   Widget buildWidget(BuildContext context,  state) {
-    Address address = (ModalRoute.of(context)!.settings.arguments ?? Address()) as Address;
+    Address address = (getArguments(context) ?? Address()) as Address;
     return AppScaffold(
       title: strings.add_location,
       body: AddAddressScreen(

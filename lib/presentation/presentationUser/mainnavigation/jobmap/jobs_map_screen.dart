@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_cluster_manager_2/google_maps_cluster_manager_2.dart';
  import 'package:google_maps_flutter/google_maps_flutter.dart' hide Cluster, ClusterManager;
 import 'package:rxdart/rxdart.dart';
  import 'package:shiftapp/domain/entities/shared/date_formatter.dart';
@@ -16,7 +17,6 @@ import 'package:shiftapp/presentation/shared/components/dialogs_manager.dart';
 import 'package:shiftapp/presentation/shared/components/helper_widgets.dart';
 import 'package:sizer/sizer.dart';
 import 'dart:ui' as ui;
-import 'package:google_maps_cluster_manager_2/google_maps_cluster_manager_2.dart';
 
 import '../../../shared/components/base_stateless_widget.dart';
 import 'Place.dart';
@@ -206,7 +206,7 @@ class MapWidgetState extends State<MapWidget> {
   double initZoom = 14;
   final Completer<GoogleMapController> _controller = Completer();
 
-  ClusterManager _initClusterManager() {
+  ClusterManager<Place> _initClusterManager() {
     return ClusterManager<Place>(getPlaces(), _updateMarkers,
         markerBuilder: _markerBuilderCast);
   }

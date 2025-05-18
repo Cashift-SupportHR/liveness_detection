@@ -84,7 +84,7 @@ class _FilterVehiclesZoneScreenState extends State<CurrentTourMapScreen> {
   @override
   Widget build(BuildContext context) {
     strings = context.getStrings();
-    canPop = ModalRoute.of(context)?.canPop ?? false;
+    canPop = MyModalRoute.of(context)?.canPop ?? false;
     return Stack(
       children: [
         GoogleMap(
@@ -120,6 +120,7 @@ class _FilterVehiclesZoneScreenState extends State<CurrentTourMapScreen> {
       child: AppCupertinoButton(
         text: strings.end_field_survey,
         margin: EdgeInsets.all(16),
+        backgroundColor: kRed_01,
         onPressed: () {
           onEndRoundTripPressed();
         },
@@ -440,7 +441,15 @@ class _FilterVehiclesZoneScreenState extends State<CurrentTourMapScreen> {
                 context.getStrings().violation,
           ),
           SizedBox(height: 10),
-          addViolationButton(),
+          Row(
+            children: [
+              addViolationButton(),
+              SizedBox(
+                width: 20,
+              ),
+              addMaintenanceButton()
+            ],
+          ),
         ],
       ),
     );
@@ -485,7 +494,42 @@ class _FilterVehiclesZoneScreenState extends State<CurrentTourMapScreen> {
         ),
         onPressed: () async {
           final isRefresh = await Navigator.pushNamed(
-              context, Routes.addViolationVehiclePage);
+              context, Routes.addViolationVehiclePage, arguments: currentRoundTrip.getVehicleViolationArgs());
+          print('isRefresh $isRefresh');
+          if (isRefresh == true) {
+            widget.onRefresh();
+          }
+        },
+      ),
+    );
+  }
+
+  Padding addMaintenanceButton() {
+    return Padding(
+      padding: EdgeInsetsDirectional.only(bottom: 10, start: 5),
+      child: OutlinedButton.icon(
+        icon: Icon(
+          Icons.car_rental_outlined,
+          color: kOrange00,
+          size: 20,
+        ),
+        style: ElevatedButton.styleFrom(
+          side: BorderSide(color: kOrange00, width: 1),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+        label: Text(
+          context.getStrings().add_maintenance,
+          style: kTextRegular.copyWith(
+            color: kOrange00,
+            fontSize: 14,
+          ),
+        ),
+        onPressed: () async {
+          final isRefresh = await Navigator.pushNamed(
+              context, Routes.addMaintenanceBreakdownsPage,
+              arguments: currentRoundTrip.id);
           print('isRefresh $isRefresh');
           if (isRefresh == true) {
             widget.onRefresh();

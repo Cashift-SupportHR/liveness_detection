@@ -16,9 +16,10 @@ class IconDoubleText extends StatelessWidget {
   final CrossAxisAlignment? crossAxisAlignment;
   final bool? isSizedBox;
   final EdgeInsetsGeometry? padding;
+  final double? iconSize;
 
   const IconDoubleText(
-      {Key? key, required this.icon, required this.name, this.value, this.crossAxisAlignment, this.valueWidget, this.iconColor, this.nameStyle, this.valueStyle, this.isSizedBox, this.padding})
+      {Key? key, required this.icon, required this.name, this.value, this.crossAxisAlignment, this.valueWidget, this.iconColor, this.nameStyle, this.valueStyle, this.isSizedBox, this.padding, this.iconSize})
       : super(key: key);
 
   @override
@@ -32,8 +33,8 @@ class IconDoubleText extends StatelessWidget {
           kLoadSvgInCirclePath(
             icon,
             color: iconColor,
-            height: 20,
-            width: 20,
+            height: iconSize ?? 20,
+            width: iconSize ?? 20,
           ),
           const SizedBox(
             width: 5,

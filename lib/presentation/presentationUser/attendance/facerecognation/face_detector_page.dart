@@ -8,6 +8,7 @@ import 'package:shiftapp/presentation/shared/components/app_widgets.dart';
 import 'package:shiftapp/presentation/shared/components/base_stateful_widget.dart';
 
 import '../../../../data/models/attendance/attendance_config_dto.dart';
+import '../../../../extensions/extensions.dart';
 import '../../../../generated/assets.dart';
 import '../../../../utils/app_icons.dart';
 import '../../../shared/components/app_cupertino_button.dart';
@@ -17,10 +18,10 @@ import '../../resources/constants.dart';
 
 class FaceDetectorPage extends StatefulWidget {
   @override
-  State<FaceDetectorPage> createState() => _ExpampleScreenState();
+  State<FaceDetectorPage> createState() => _M7ExpampleScreenState();
 }
 
-class _ExpampleScreenState extends BaseState<FaceDetectorPage> {
+class _M7ExpampleScreenState extends BaseState<FaceDetectorPage> {
   //* MARK: - Private Variables
   //? =========================================================
   String? _capturedImagePath;
@@ -106,7 +107,7 @@ class _ExpampleScreenState extends BaseState<FaceDetectorPage> {
   //? =========================================================
   void _initValues() {
     AttendanceConfigDto attendanceConfigDto =
-        ModalRoute.of(context)!.settings.arguments as AttendanceConfigDto;
+        MyModalRoute.of(context)!.settings.arguments as AttendanceConfigDto;
     print('attendanceConfigDto ${attendanceConfigDto.toJson()}');
     _veificationSteps.addAll(
       [

@@ -36,6 +36,7 @@ class AppIcons {
   static const String st = 'assets/icons/st.png';
   static const String d3 = 'assets/icons/d3.svg';
   static const String d4 = 'assets/icons/d4.svg';
+  static const String carPin = 'assets/icons/car_pin.png';
   static const String availableOpportunities = 'assets/icons/services/availableOpportunities.svg';
   static const String jobReview = 'assets/icons/services/jobReview.svg';
   static const String attendanceDeparture = 'assets/icons/services/attendanceDeparture.svg';
@@ -86,6 +87,7 @@ class AppIcons {
   static const String nameProject = 'assets/icons/opportunities/name_project.svg';
   static const String building = 'assets/icons/opportunities/building.svg';
   static const String calendar = 'assets/icons/opportunities/calendar.svg';
+  static const String timeCalender = 'assets/icons/time_ca.svg';
   static const String qrCodeSearch = 'assets/icons/opportunities/qr_code.svg';
   static const String timer = 'assets/icons/opportunities/timer.svg';
   static const String menu = 'assets/icons/opportunities/menu.svg';
@@ -331,4 +333,12 @@ class AppIcons {
   static const String receiver_cashifter = 'assets/icons/receiver_cashifter.svg';
   static const String gasStations = 'assets/icons/gas_stations.svg';
   static const String work_project = 'assets/icons/work_project.svg';
+  static const String typeOperation = 'assets/icons/type_operation.svg';
+  static const String carTime = 'assets/icons/car_time.svg';
+  static const String notification = 'assets/icons/notification.png';
+  static const String speed = 'assets/icons/speed.svg';
+  static const String driver1 = 'assets/icons/driver.svg';
+  static const String camera_vehicle = 'assets/icons/camera_vehicle.svg';
+  static const String camera_vehicle_code = 'assets/icons/camera_vehicle_code.svg';
+  static const String videos_placeholder = 'assets/icons/videos_placeholder.svg';
 }

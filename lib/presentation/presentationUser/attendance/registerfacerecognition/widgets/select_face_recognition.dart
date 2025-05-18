@@ -1,3 +1,5 @@
+import 'package:shiftapp/config.dart';
+
 import '../../../../../domain/entities/account/registered_face.dart';
 import '../../../../shared/components/app_cupertino_button.dart';
 import '../../../../shared/components/base_stateless_widget.dart';
@@ -54,7 +56,7 @@ class SelectFaceRecognition extends BaseStatelessWidget {
                         : strings.scan_now,
                 radius: BorderRadius.circular(6),
                 margin: const EdgeInsets.symmetric(vertical: 16),
-                onPressed: ((registeredFace?.eligibleToUpdate ?? true)) ? () {
+                onPressed: ((registeredFace?.eligibleToUpdate ?? true)||Config.isDebuggable) ? () {
              //     print('imageFile ${imageFile.path}');
                   snapshot.data != null
                       ? onImagePicked(imageFile)

@@ -22,7 +22,7 @@ class ProjectsManagementRepository {
     return response.payload!;
   }
 
-  Future<ApiResponse<DownLoadSalaryDefinition>> downLoadQrCode(String projectCode, String projectName) async {
+  Future<ApiResponse<DownLoadFileDto>> downLoadQrCode(String projectCode, String projectName) async {
     final response = await _api.downLoadQrCodeImage(projectCode, projectName);
     return response;
   }

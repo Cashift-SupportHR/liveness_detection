@@ -67,6 +67,7 @@ class ListRowTextsIconsV2 extends StatelessWidget {
                     valueStyle: valueStyle,
                     padding: paddingItem,
                     crossAxisAlignment: CrossAxisAlignment.center,
+                    iconSize: iconSize,
                   ))
             .toList(),
       ),

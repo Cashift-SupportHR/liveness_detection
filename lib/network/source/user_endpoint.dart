@@ -56,10 +56,14 @@ import '../../presentation/presentationUser/profile/requests/data/models/terms_a
 import '../../presentation/presentationUser/profile/requests/data/models/upload_file_request_prams.dart';
 import '../../presentation/presentationUser/vehiclesOperation/data/models/add_round_trip_fill_station_prams.dart';
 import '../../presentation/presentationUser/vehiclesOperation/data/models/confirm_receive_vehicle_params.dart';
+import '../../presentation/presentationUser/vehiclesOperation/data/models/download_vehicle_violation_picture_params.dart';
+import '../../presentation/presentationUser/vehiclesOperation/data/models/driver_violation_dto.dart';
 import '../../presentation/presentationUser/vehiclesOperation/data/models/gas_station_trip_dto.dart';
 import '../../presentation/presentationUser/vehiclesOperation/data/models/index.dart';
 import '../../presentation/presentationUser/vehiclesOperation/data/models/receive_vehicle_details_dto.dart';
-import '../../presentation/presentationUser/violations/data/models/approve_reject_violation_params.dart';
+import '../../presentation/presentationUser/vehiclesOperation/data/models/vehicle_performance_dto.dart';
+import '../../presentation/presentationUser/vehiclesOperation/data/models/receive_vehicle_prams.dart';
+ import '../../presentation/presentationUser/violations/data/models/approve_reject_violation_params.dart';
 import '../../presentation/presentationUser/violations/data/models/violations_user_data_dto.dart';
 import '../../presentation/presentationUser/workHazards/data/models/index.dart';
 import '../../presentation/presentationUser/working_document/data/models/installment_with_cashift_dto.dart';
@@ -471,7 +475,7 @@ abstract class UserEndpoint {
   Future<ApiResponse<List<TypeOfCommerce>>> fetchTypeOFCommerce();
 
   @GET('/v1/EmployeeRequest/DownLoadSalaryDefinition')
-  Future<ApiResponse<DownLoadSalaryDefinition>> downLoadSalaryDefinition(
+  Future<ApiResponse<DownLoadFileDto>> downLoadSalaryDefinition(
       @Query('id') String id, @Query('type') String type);
 
   @GET('/v1/EmployeeRequest/GetResonSalary')
@@ -572,7 +576,7 @@ abstract class UserEndpoint {
       fetchEmployeesCertificates();
 
   @GET('/v1/ClearanceCertificate/DownLoadClearanceCertificateForMob')
-  Future<ApiResponse<DownLoadSalaryDefinition>> downLoadEmployeeCertificate(
+  Future<ApiResponse<DownLoadFileDto>> downLoadEmployeeCertificate(
       @Query('Id') int id);
 
   /// PledgeGeneralization
@@ -585,7 +589,7 @@ abstract class UserEndpoint {
       @Query('Id') int id);
 
   /// ReceiveVehicle
-  @GET('/v1/Vehicles/GetVehicleByCode')
+  @GET('/v2/Vehicles/GetVehicleByCode')
   Future<ApiResponse<VehicleDetailsDto>> fetchVehicleByCode(
       @Query("code") String code);
 
@@ -596,9 +600,9 @@ abstract class UserEndpoint {
   Future<ApiResponse<List<VehicleComponentsDto>>> fetchVehicleCustodies(
       @Query("vehicleId") int vehicleId);
 
-  @GET('/v1/VehicleHandovers/GetAllVehiclesHandoversByType')
-  Future<ApiResponse<List<ReceiveVehicleDto>>> fetchReceiveVehicle(
-      @Query("isComplete") bool isComplete);
+  @POST('/v2/VehicleHandovers/GetAllVehiclesHandoversByType')
+  Future<ApiResponse<ReceiveVehicleDto>> fetchReceiveVehicle(
+    @Body() ReceiveVehiclePrams receiveVehiclePrams);
 
   @POST('/v1/VehicleHandovers/CreateVehicleHandover')
   Future<ApiResponse<CreateVehicleHandoverDto>> createVehicleHandover(
@@ -626,6 +630,11 @@ abstract class UserEndpoint {
 
   @POST('/v1/VehicleCustodyHandovers/AddFalseVehicleCustodiesHandover')
   Future<ApiResponse> addCustodies(@Body() AddCustodiesPrams addCustodiesPrams);
+
+
+
+
+
 
   /// Violations
   @GET('/v3/ViolationsFreelance/GetViolationByFreelanceApply')
@@ -756,8 +765,20 @@ abstract class UserEndpoint {
   @POST('/v1/VehicleHandovers/ConfirmVehicleHandover')
   Future<ApiResponse> confirmRejectReceiveVehicle(@Body() ConfirmReceiveVehicleParams params);
 
-
   @POST('/v1/RoundTripDetails/AddRoundTripFillStationDetails')
   Future<ApiResponse> addRoundTripFillStation(@Body() AddRoundTripFillStationPrams params);
+
+  @MultiPart()
+  @POST('/v1/VehicleHandoverImages/AddVehicleHandoverImages')
+  Future<ApiResponse> addVehicleHandoverImages(@Body() FormData params);
+
+  @POST('/v1/VehicleEventsTypes/GetVehicleGPSDetails')
+  Future<ApiResponse<VehiclePerformanceDto>> fetchVehiclePerformance(@Query('vehicleHandoverId') int id);
+
+  @GET('/v1/VehicleEventsTypes/GetAllVehicleEvents')
+  Future<ApiResponse<List<DriverViolationDto>>> fetchDriverViolations(@Query('vehicleHandoverId') int id);
+
+  @GET('/v1/VehicleEventsTypes/DownloadVehicleEventPicture')
+  Future<ApiResponse<String>> downloadVehicleViolationPicture(@Queries() DownloadVehicleViolationPictureParams params);
 
 }

@@ -5,25 +5,16 @@ import 'package:shiftapp/data/models/api_response.dart';
 import 'package:shiftapp/presentation/adminFeatures/vehicles/data/models/add_covenant_vehicle_params.dart';
 import 'package:shiftapp/presentation/adminFeatures/vehicles/data/models/add_vehicle_params.dart';
 import 'package:shiftapp/presentation/adminFeatures/vehicles/data/models/vehicle_image_params.dart';
-import 'package:shiftapp/presentation/adminFeatures/vehicles/data/models/vehicle_details_dto.dart';
 import 'package:shiftapp/presentation/adminFeatures/vehicles/domain/entities/index.dart';
 
 import '../../../../../data/models/salary-definition-request/down_load_salary_definition.dart';
-import '../../../../presentationUser/vehiclesOperation/domain/entities/receive_vehicle_details.dart';
+import '../../domain/entities/vehicleTraking.dart';
+import '../models/vehicle_event_picture_prams.dart';
+import '../models/vehicle_traking_details_prams.dart';
 import '../../../../shared/models/common_list_item.dart';
-import '../../domain/entities/covenant_vehicle.dart';
-import '../../domain/entities/vehicle_image_face.dart';
-import '../../domain/entities/vehicle_receive_request.dart';
-import '../../domain/entities/vehicle_violation.dart';
+import '../../domain/entities/camera_search_results.dart';
 import '../datasource/vehicles_provider.dart';
-import '../models/action_vehicle_receive_request_params.dart';
-import '../models/add_insurance_prams.dart';
-import '../models/add_vehicle_violation_attachment_params.dart';
-import '../models/add_vehicle_violation_params.dart';
-import '../models/final_action_vehicle_receive_request_params.dart';
-import '../models/insurance_types_dto.dart';
-import '../models/insurances_dto.dart';
-import '../models/vehicles_dto.dart';
+import '../models/index.dart';
 
 @injectable
 class VehiclesRepository {
@@ -84,6 +75,7 @@ class VehiclesRepository {
       params.companyId,
       params.projectId,
       params.vehicleColorId,
+      params.mobileVehicleIndexCode,
     );
     return data.payload?.id ?? 0;
   }
@@ -126,6 +118,7 @@ class VehiclesRepository {
       params.companyId,
       params.projectId,
       params.vehicleColorId,
+      params.mobileVehicleIndexCode,
       vehicleImageFile: params.vehicleImageFile,
     );
   }
@@ -184,7 +177,8 @@ class VehiclesRepository {
     return ContractViolation.fromDto(res.payload!);
   }
 
-  Future<ApiResponse> addContractViolation(AddVehicleViolationParams params) async {
+  Future<ApiResponse> addContractViolation(
+      AddVehicleViolationParams params) async {
     return await _api.addContractViolation(params);
   }
 
@@ -193,7 +187,8 @@ class VehiclesRepository {
     return CommonListItem.fromDtoList(res.payload!);
   }
 
-  Future<ApiResponse> addContractViolationAttachments(AddVehicleViolationAttachmentParams params) async {
+  Future<ApiResponse> addContractViolationAttachments(
+      AddVehicleViolationAttachmentParams params) async {
     return await _api.addContractViolationAttachments(
       params.files ?? [],
       params.id ?? 0,
@@ -210,30 +205,74 @@ class VehiclesRepository {
     return CommonListItem.fromDtoList(res.payload!);
   }
 
-  Future<List<VehicleReceiveRequest>> fetchVehicleReceiveRequestsByType(int type) async {
+  Future<List<VehicleReceiveRequest>> fetchVehicleReceiveRequestsByType(
+      int type) async {
     final res = await _api.fetchVehicleReceiveRequestsByType(type);
-    res.payload?.sort((a, b) => a.vehicleHandoverTime!.compareTo(b.vehicleHandoverTime!));
+    res.payload?.sort(
+        (a, b) => a.vehicleHandoverTime!.compareTo(b.vehicleHandoverTime!));
     return VehicleReceiveRequest.fromDtoList(res.payload!);
   }
 
-  Future<ApiResponse> actionVehicleReceiveRequest(ActionVehicleReceiveRequestParams  params) async {
+  Future<ApiResponse> actionVehicleReceiveRequest(
+      ActionVehicleReceiveRequestParams params) async {
     final res = await _api.actionVehicleReceiveRequest(params);
     return res;
   }
 
-  Future<ApiResponse> finalActionVehicleReceiveRequest(FinalActionVehicleReceiveRequestParams  params) async {
+  Future<ApiResponse> finalActionVehicleReceiveRequest(
+      FinalActionVehicleReceiveRequestParams params) async {
     final res = await _api.finalActionVehicleReceiveRequest(params);
     return res;
   }
 
-  Future<List<CommonListItem>> fetchVehicleEmployeeByProject(int projectId) async {
+  Future<List<CommonListItem>> fetchVehicleEmployeeByProject(
+      int projectId) async {
     final res = await _api.fetchVehicleEmployeeByProject(projectId);
     return CommonListItem.fromDtoList(res.payload!);
   }
 
-  Future<ApiResponse<DownLoadSalaryDefinition>> qrCodeVehicle(int vehicleId ) async {
-    final response = await _api.qrCodeVehicle (vehicleId );
+  Future<ApiResponse<DownLoadFileDto>> qrCodeVehicle(int vehicleId) async {
+    final response = await _api.qrCodeVehicle(vehicleId);
     return response;
   }
 
+  Future<List<VehicleCamera>> fetchVehicleCameras(int vehicleId) async {
+    final response = await _api.fetchVehicleCameras(vehicleId);
+    return VehicleCamera.fromDtoList(response.payload!);
+  }
+
+  Future<VehicleCamera> fetchVehicleCameraById(int id) async {
+    final response = await _api.fetchVehicleCameraById(id);
+    return VehicleCamera.fromDto(response.payload!);
+  }
+
+  Future<ApiResponse> addVehicleCamera(AddVehicleCameraParams params) async {
+    return await _api.addVehicleCamera(params);
+  }
+
+  Future<ApiResponse> deleteVehicleCamera(int id) async {
+    return await _api.deleteVehicleCamera(id);
+  }
+
+  Future<ApiResponse> editVehicleCamera(AddVehicleCameraParams params) async {
+    return await _api.editVehicleCamera(params);
+  }
+
+  Future<CameraSearchResults> fetchVehicleVideo(
+      VehicleVideoParams params) async {
+    final date = await _api.fetchVehicleVideo(params);
+    return CameraSearchResults.fromDto(date.payload!);
+  }
+
+  Future<VehicleTrackingEntity> fetchVehicleTracingDetails(
+      VehicleTrakingDetailsPrams prams) async {
+    final res = await _api.fetchVehicleTracingDetails(prams);
+    return VehicleTrackingEntity.fromDto(res.payload!);
+  }
+
+  Future<String> fetchVehicleEventPicture(
+      VehicleEventPicturePrams prams) async {
+    final res = await _api.fetchVehicleEventPicture(prams);
+     return res.payload ?? "";
+  }
 }

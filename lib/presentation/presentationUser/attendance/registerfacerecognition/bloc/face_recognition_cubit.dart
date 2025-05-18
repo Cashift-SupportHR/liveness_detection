@@ -40,7 +40,7 @@ class FaceRecognitionCubit extends BaseCubit {
       filePath = '';
     } else {
       filePath = await FilesManager().createFileFromBase64(
-        DownLoadSalaryDefinition(
+        DownLoadFileDto(
             fileAttachment: remoteFile.fileAttachment,
             fileName: remoteFile.fileName,
             fileAttachmentType: remoteFile.fileAttachmentType),

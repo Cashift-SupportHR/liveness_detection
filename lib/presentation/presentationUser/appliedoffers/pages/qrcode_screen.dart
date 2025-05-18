@@ -226,7 +226,7 @@ class _QRViewExampleState extends State<QRViewExample> {
         controller.pauseCamera();
         controller.stopCamera();
 
-        QrCode? qrCode = ModalRoute.of(context)?.settings.arguments as QrCode?;
+        QrCode? qrCode = MyModalRoute.of(context)?.settings.arguments as QrCode?;
         if (qrCode != null && qrCode.allowFile == true) {
           setState(() {});
         } else {

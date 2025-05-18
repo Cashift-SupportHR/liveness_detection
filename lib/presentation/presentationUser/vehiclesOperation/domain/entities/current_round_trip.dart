@@ -1,5 +1,6 @@
 
 import 'package:shiftapp/presentation/adminFeatures/areapolygones/data/models/add_vehicle_zone_params.dart';
+import 'package:shiftapp/presentation/presentationUser/vehiclesOperation/domain/entities/vehicle_violation_args.dart';
 
 import '../../data/models/current_round_trip_dto.dart';
 
@@ -43,5 +44,11 @@ class CurrentRoundTrip {
      stationLatitude: json.stationLatitue,
      stationLongitude: json.stationLongtude,
   );
+
+  AddVehicleViolationArgs getVehicleViolationArgs() {
+    return AddVehicleViolationArgs(
+      roundTripId: roundTypeId,
+    );
+  }
 }
 

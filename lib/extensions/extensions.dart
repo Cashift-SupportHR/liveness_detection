@@ -10,7 +10,7 @@ import '../../../data/datasources/remote/unauthorized_exception.dart';
 import '../../../data/exceptions/app_exception.dart';
 import '../../../data/exceptions/empty_list_exception.dart';
 import '../../../domain/entities/api_code.dart';
-import '../main_index.dart';
+import '../l10n/app_localizations.dart';
 extension AppResource on BuildContext {
 
   AppLocalizations getStrings() {
@@ -40,11 +40,17 @@ extension NullOrEmpty on String? {
   bool isNullOrEmpty() {
     return this == null || this!.trim().isEmpty ;
   }
+  bool isNotNullOrEmpty() {
+    return !isNullOrEmpty();
+  }
 }
 
 extension NullOrEmptyFile on File? {
   bool isNullOrEmpty() {
     return this == null || this!.path.trim().isEmpty;
+  }
+  bool isNotNullOrEmpty() {
+    return this != null && this!.path.trim().isNotEmpty;
   }
 }
 
@@ -83,7 +89,11 @@ extension ObjectExtension on Object {
 
 extension ContextExtension on BuildContext {
   T? getArguments<T>() {
-    return MyModalRoute.of(this)?.settings.arguments as T?;
+    final args = MyModalRoute.of(this)!.settings.arguments;
+    if (args != null && args is T) {
+      return MyModalRoute.of(this)!.settings.arguments as T;
+    }
+    return null;
   }
 
   Locale getLocal() {
@@ -228,6 +238,8 @@ extension DateUtils on DateTime {
         yesterday.year == year;
   }
 }
+
+
 
 /// replace ModalRoute.of(context)
 class MyModalRoute {

@@ -19,7 +19,7 @@ class EmployeesCertificatesItemRepository {
     return response.payload!;
   }
 
-  Future<ApiResponse<DownLoadSalaryDefinition>> downLoadEmployeeCertificate(int id) async {
+  Future<ApiResponse<DownLoadFileDto>> downLoadEmployeeCertificate(int id) async {
     final response = await _api.downLoadEmployeeCertificate(id);
     return response;
   }

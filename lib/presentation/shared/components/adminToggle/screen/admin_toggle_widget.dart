@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shiftapp/presentation/adminFeatures/di/injector.dart';
-import 'package:shiftapp/presentation/presentationUser/resources/colors.dart';
+ import 'package:shiftapp/presentation/presentationUser/resources/colors.dart';
 import 'package:shiftapp/presentation/presentationUser/resources/constants.dart';
 
-import '../../../../../data/repositories/user/user_repository.dart';
-import '../../../../../domain/entities/account/user.dart';
+ import '../../../../../domain/entities/account/user.dart';
 import '../../../../../main_index.dart';
 import '../../base_stateless_widget.dart';
 
@@ -14,7 +12,6 @@ class AdminToggleWidget extends BaseStatelessWidget {
   String image;
   bool isAdmin;
   bool adminEnable;
-  bool haveAdminFeatures;
   bool isAllowFaceRecognition;
   User user;
   AdminToggleWidget(
@@ -23,7 +20,6 @@ class AdminToggleWidget extends BaseStatelessWidget {
       required this.isAllowFaceRecognition,
       required this.adminEnable,
       required this.onAction,
-      required this.haveAdminFeatures,
       required this.image,
       required this.isAdmin});
 
@@ -32,7 +28,7 @@ class AdminToggleWidget extends BaseStatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return haveAdminFeatures == true
+    return adminEnable == true
         ? Container(
             height: 25,
             decoration: BoxDecoration(

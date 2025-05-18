@@ -14,7 +14,7 @@ class EmployeesCertificatesAPI {
     return await api.fetchEmployeesCertificates();
   }
 
-  Future<ApiResponse<DownLoadSalaryDefinition>> downLoadEmployeeCertificate(int id) async {
+  Future<ApiResponse<DownLoadFileDto>> downLoadEmployeeCertificate(int id) async {
     return await api.downLoadEmployeeCertificate(id);
   }
 

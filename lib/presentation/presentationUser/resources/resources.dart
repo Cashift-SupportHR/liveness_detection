@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../main_index.dart';
+import '../../../l10n/app_localizations.dart';
 
 class AppResources {
   static AppLocalizations getStrings(BuildContext context){

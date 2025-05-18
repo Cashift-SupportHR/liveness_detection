@@ -94,7 +94,7 @@ class _DrawPolygonWithMarkersScreenState
   @override
   Widget build(BuildContext context) {
     final strings = Get.context!.getStrings();
-    args = ModalRoute.of(context)?.settings.arguments
+    args = MyModalRoute.of(context)?.settings.arguments
         as DrawPolygonWithMarkersArgs?;
     final readOnly = args?.isOnlyView == true;
     print('polygonPoints $polygonPoints');

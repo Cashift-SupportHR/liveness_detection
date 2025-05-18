@@ -27,7 +27,7 @@ class ResumePages extends BaseWidget {
 
     bloc.add(FetchComponentDataEvent());
     bool isHomePage =
-        ModalRoute.of(context)?.settings.arguments as bool? ?? false;
+    getArguments(context) ?? false;
     print('isHome $isHomePage');
     return Scaffold(
       body: BlocProvider(

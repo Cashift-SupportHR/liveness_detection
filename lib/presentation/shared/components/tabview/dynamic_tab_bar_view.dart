@@ -75,6 +75,7 @@ class _DynamicTabBarViewState extends State<DynamicTabBarView> with TickerProvid
           const SizedBox(
             height: 10,
           ),
+          if (widget.pageWidget != null || widget.children != null)
           Expanded(
             child: widget.pageWidget ??
                 TabBarView(

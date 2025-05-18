@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'dart:typed_data';
 
@@ -8,6 +7,7 @@ import 'package:livelyness_detection/livelyness_detection.dart';
 import 'package:shiftapp/extensions/extensions.dart';
 
 import '../../../../core/services/permission_detector.dart';
+import '../../../shared/components/index.dart';
 
 class FaceMatchingUtils {
   static MatchFacesImage convertImageFileToMatchable(

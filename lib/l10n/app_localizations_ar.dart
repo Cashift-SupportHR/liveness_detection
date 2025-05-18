@@ -3989,7 +3989,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get reviewed => 'تمت المراجعة';
 
   @override
-  String get take_action => 'اتخاذ اجراء';
+  String get take_action => 'اتخذ اجراء';
 
   @override
   String get vehicle_name => 'اسم المركبة';
@@ -4043,7 +4043,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get action_taken_waring_msg => 'سيتم حفظ اجراءك وارساله الي مدير المشروع لمراجعته والرد عليه';
 
   @override
-  String get final_action => 'الإجراء النهائي';
+  String get final_action => 'إتخذ إجراء نهائي';
 
   @override
   String get final_action_taken_waring_msg => 'سيتم حفظ اجراءك وارساله الي قائمة ( تمت المراجعة )';
@@ -4118,5 +4118,194 @@ class AppLocalizationsAr extends AppLocalizations {
   String get end_but => ' انتهاء ';
 
   @override
+  String get image_before_maintenance => ' صورة قبل الصيانة ';
+
+  @override
+  String get image_after_maintenance => ' صورة بعد الصيانة ';
+
+  @override
+  String get shod_image_before_maintenance => ' يرجي اختيار صورة قبل الصيانة ';
+
+  @override
+  String get shod_image_after_maintenance => 'يرجي اختيار صورة بعد الصيانة ';
+
+  @override
+  String get type_operation => 'نوع العملية';
+
+  @override
   String get verification => 'تحقق';
+
+  @override
+  String get view_maintenance => 'عرض الصيانة والأعطال';
+
+  @override
+  String get breakdown_maintenance => ' الصيانة والأعطال';
+
+  @override
+  String get waring_action_notification => ' سيتم حفظ اجراءك وارساله الي مدير المشروع لمراجعته والرد عليه ';
+
+  @override
+  String get waring_final_action_notification => 'سيتم ارساله للمشرف .';
+
+  @override
+  String get add_maintenance => 'طلب صيانة';
+
+  @override
+  String get add_breakdown => 'اضافة عطل ';
+
+  @override
+  String get driver_violations => 'مخالفات السائق';
+
+  @override
+  String get speeding_during_violation => 'السرعة أثناء المخالفة';
+
+  @override
+  String get click_here_view_violation_location => 'اضغط هنا لرؤية موقع  المخالفة';
+
+  @override
+  String get violation_time => 'وقت المخالفة';
+
+  @override
+  String get vehicle_performance => 'أداء المركبة';
+
+  @override
+  String get maximum_recorded_speed => 'أقصى سرعة مسجلة';
+
+  @override
+  String get vehicle_path => 'مسار المركبة';
+
+  @override
+  String get km_h => 'كم/س';
+
+  @override
+  String get notifications => 'الاشعارات';
+
+  @override
+  String get receive_vehicle_details => 'تفاصيل استلام المركبة';
+
+  @override
+  String get write_action_to_be_taken => 'اكتب الإجراء الذي ستتخذه';
+
+  @override
+  String get track_vehicle_on_map => 'تتبع المركبة علي الخريطة';
+
+  @override
+  String get driver_name => 'اسم السائق';
+
+  @override
+  String get select_date_from_to => 'من فضلك اختار تاريخ من إلى';
+
+  @override
+  String get play => 'تشغيل';
+
+  @override
+  String get stop => 'إيقاف';
+
+  @override
+  String get position => 'الموضع:';
+
+  @override
+  String get speed => 'السرعة:';
+
+  @override
+  String get vehicle_camera_code => 'معرف كود الكاميرا للمركبة';
+
+  @override
+  String get go_violation_site => 'توجه لموقع المخالفة';
+
+  @override
+  String get download_violation_image => 'تحميل صورة المخالفة';
+
+  @override
+  String get camera_name_ar => 'اسم الكاميرا عربي';
+
+  @override
+  String get type_camera_name_ar => 'اكتب اسم الكاميرا بالعربي';
+
+  @override
+  String get camera_name_en => 'اسم الكاميرا بالانجليزي';
+
+  @override
+  String get type_camera_name_en => 'اكتب اسم الكاميرا بالانجليزي';
+
+  @override
+  String get camera_code => 'كود الكاميرا';
+
+  @override
+  String get type_camera_code => 'اكتب كود الكاميرا';
+
+  @override
+  String get start_video => 'بدأ الفيديو';
+
+  @override
+  String get live_feed => 'بث المباشر';
+
+  @override
+  String get select_video_date => 'اختر تاريخ الفيديو';
+
+  @override
+  String get camera_name => 'اسم الكاميرا';
+
+  @override
+  String get camera_type => 'نوع الكاميرا';
+
+  @override
+  String get start_live_feed => 'بدأ البث المباشر';
+
+  @override
+  String get camera_add => 'اضافة كاميرا';
+
+  @override
+  String get cameras => 'الكاميرات';
+
+  @override
+  String get view_cameras => 'عرض الكاميرات';
+
+  @override
+  String get add_camera => 'اضافة كاميرا';
+
+  @override
+  String get edit_camera => 'تعديل كاميرا';
+
+  @override
+  String get delete_camera => 'حذف كاميرا';
+
+  @override
+  String get edit_date_time => 'تعديل التاريخ والوقت';
+
+  @override
+  String get videos => 'فيديوهات';
+
+  @override
+  String get video => 'الفيديو';
+
+  @override
+  String get live_streaming => 'بث مباشر';
+
+  @override
+  String get select_camera => 'اختر الكاميرا';
+
+  @override
+  String get date_from => 'التاريخ من';
+
+  @override
+  String get date_to => 'التاريخ الي';
+
+  @override
+  String get date_to_must_be_greater_than_date_from => 'التاريخ الي يجب ان يكون اكبر من التاريخ من';
+
+  @override
+  String get there_are_videos_yet => 'لا توجد فيديوهات بعد';
+
+  @override
+  String get videos_dates_validate_msg => 'من فضلك حدّد الوقت والتاريخ الذي تريده لعرض الفيديوهات فيه';
+
+  @override
+  String get select_date_and_time => 'اختر التاريخ والوقت';
+
+  @override
+  String get drivers => 'السائقين';
+
+  @override
+  String get maximum_speed => 'أقصي سرعة';
 }

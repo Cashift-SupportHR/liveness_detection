@@ -44,6 +44,8 @@ class VehicleDetailsDto {
   int? companyId;
   @JsonKey(name: 'projectName')
   String? projectName;
+  @JsonKey(name: 'mobileVehicleIndexCode')
+  String? mobileVehicleIndexCode;
   @JsonKey(name: 'custodies')
   List<CustodyVehicle>? custodies;
   @JsonKey(name: 'projectId')
@@ -56,6 +58,7 @@ class VehicleDetailsDto {
       this.vehicleCode,
       this.model,
       this.yearOfManufacture,
+      this.mobileVehicleIndexCode,
       this.vehicleColorName,
       this.vehicleColorId,
       this.plateNumber,

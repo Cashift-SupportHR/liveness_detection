@@ -128,9 +128,7 @@ class MapWidgetState extends State<MapWidget> {
               );
               _markers.add(buildMarker(latLng1));
 
-            List<Placemark> placemarks = await placemarkFromCoordinates(latLng1.latitude, latLng1.longitude,
-                // localeIdentifier: context.getLocal().languageCode
-            );
+            List<Placemark> placemarks = await placemarkFromCoordinates(latLng1.latitude, latLng1.longitude);
               widget.address!.name = '${placemarks.first.street}, ${placemarks.first.administrativeArea} ${placemarks.first.subAdministrativeArea}';
               address = widget.address!.name!;
               streamController.setData(true);

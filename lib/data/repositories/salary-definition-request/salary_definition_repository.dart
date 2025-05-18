@@ -29,7 +29,7 @@ class SalaryDefinitionRepository {
     return response.payload!;
   }
 
-  Future<DownLoadSalaryDefinition> downLoadSalaryDefinition({required String id, required String type}) async {
+  Future<DownLoadFileDto> downLoadSalaryDefinition({required String id, required String type}) async {
     final response = await _api.downLoadSalaryDefinition(id, type);
     return response.payload!;
   }

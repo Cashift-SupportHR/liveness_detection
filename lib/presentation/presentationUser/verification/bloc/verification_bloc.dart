@@ -19,9 +19,9 @@ class VerificationBloc extends Bloc<VerificationEvent, CommonState> {
         await for (final newState in event.applyAsync(currentState: state, bloc: this)) {
           emit(newState);
         }
-      } catch (_, stackTrace) {
-        // developer.log('$_',
-        //     name: 'VerificationBloc', error: _, stackTrace: stackTrace);
+      } catch (error, stackTrace) {
+        developer.log('$error',
+            name: 'VerificationBloc', error: error, stackTrace: stackTrace);
         emit(state);
       }
     });

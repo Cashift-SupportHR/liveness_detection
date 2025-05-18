@@ -11,6 +11,7 @@ import 'package:shiftapp/presentation/adminFeatures/employmentOfficials/presenta
 import 'package:shiftapp/presentation/adminFeatures/focusPoints/presentations/edit/edit_focus_point_data_page.dart';
 import 'package:shiftapp/presentation/adminFeatures/focusPoints/presentations/trackingFocusPoints/pages/tracking_focus_points_page.dart';
 import 'package:shiftapp/presentation/adminFeatures/jobRequirements/presentation/pages/job_requirements_page.dart';
+import 'package:shiftapp/presentation/adminFeatures/maintenanceAndBreakdowns/presentation/add_maintenance_breakdowns/pages/add_maintenance_breakdowns_page.dart';
 import 'package:shiftapp/presentation/adminFeatures/opportunity_details/pages/opportunity_details_page.dart';
 import 'package:shiftapp/presentation/adminFeatures/projectsManagement/presentation/addNewProject/main_add_new_project_page.dart';
 import 'package:shiftapp/presentation/adminFeatures/projectsManagement/presentation/addNewProject/pages/addAdditionalLocations/add_additional_locations_page.dart';
@@ -48,6 +49,7 @@ import 'package:shiftapp/presentation/presentationUser/rate/pages/rate_page.dart
 import 'package:shiftapp/presentation/presentationUser/resume/pages/resume_pages.dart';
 import 'package:shiftapp/presentation/presentationUser/salarydefinitionrequest/newrequest/pages/salary_definition_request_page.dart';
 import 'package:shiftapp/presentation/presentationUser/salarydefinitionrequest/requests/pages/salary_definition_requests_tabs_page.dart';
+import 'package:shiftapp/presentation/presentationUser/vehiclesOperation/presentation/pages/view/screen/receive_vehicles_page.dart';
 
 import 'package:shiftapp/presentation/presentationUser/verification/pages/Verification_page.dart';
 import 'package:shiftapp/presentation/presentationUser/withdraw_accounts/phone_wallets/pages/phone_wallets_page.dart';
@@ -73,26 +75,31 @@ import '../../presentation/adminFeatures/gasStations/presentation/pages/view/scr
 import '../../presentation/adminFeatures/gasStations/presentation/widgets/map_stations_wiget.dart';
 import '../../presentation/adminFeatures/generalViolations/presentation/followUpViolations/pages/follow_up_violations_page.dart';
 import '../../presentation/adminFeatures/jobUniform/presentation/pages/add_job_uniform_page.dart';
+import '../../presentation/adminFeatures/maintenanceAndBreakdowns/presentation/view/pages/maintenance_breakdowns_page.dart';
+import '../../presentation/adminFeatures/notifications/presentation/view/pages/notifications_page.dart';
 import '../../presentation/adminFeatures/trackAttendanceDeparture/presentation/details/pages/track_attendance_departure_details_page.dart';
 import '../../presentation/adminFeatures/trackAttendanceDeparture/presentation/add/pages/request_track_attendance_departure_page.dart';
 import '../../presentation/adminFeatures/trackAttendanceDeparture/presentation/view/pages/track_attendance_departure_page.dart';
 import '../../presentation/adminFeatures/usersRequests/presentation/pages/users_requests_page.dart';
+import '../../presentation/adminFeatures/vehicles/presentation/vehicleCameras/add/pages/add_vehicle_camera_page.dart';
+import '../../presentation/adminFeatures/vehicles/presentation/vehicleCameras/cameraSearchResults/pages/camera_search_results_page.dart';
+import '../../presentation/adminFeatures/vehicles/presentation/vehicleCameras/view/pages/vehicle_cameras_page.dart';
 import '../../presentation/adminFeatures/vehicles/presentation/vehicleReceiveRequests/pages/vehicle_receive_requests_page.dart';
 import '../../presentation/adminFeatures/vehicles/presentation/view/pages/qr_code/vehicle_qr_code_page.dart';
 import '../../presentation/adminFeatures/vehicles/presentation/violations/add/pages/add_violation_vehicle_page.dart';
 import '../../presentation/adminFeatures/vehicles/presentation/violations/details/pages/vehicle_violation_details_page.dart';
 import '../../presentation/adminFeatures/vehicles/presentation/violations/view/pages/vehicle/vehicle_violations_page.dart';
 import '../../presentation/presentationUser/profile/addHomeAddress/pages/add_home_address_page.dart';
- import '../../presentation/presentationUser/profile/requests/presentation/pages/add/add_file_request/screen/add_file_requests_user_page.dart';
+import '../../presentation/presentationUser/profile/requests/presentation/pages/add/add_file_request/screen/add_file_requests_user_page.dart';
 import '../../presentation/presentationUser/profile/requests/presentation/pages/add/add_request/screen/add_requests_user_page.dart';
 import '../../presentation/presentationUser/profile/requests/presentation/pages/add/confairm/screen/confirm_requests_user_page.dart';
 import '../../presentation/presentationUser/profile/requests/presentation/pages/view/screen/requests_user_page.dart';
 import '../../presentation/presentationUser/vehiclesOperation/presentation/currentTourMap/view/pages/current_tour_map_page.dart';
 import '../../presentation/presentationUser/vehiclesOperation/presentation/pages/add/main_receive_vehicle_page.dart';
-import '../../presentation/presentationUser/vehiclesOperation/presentation/pages/view/screen/receive_vehicles_tab.dart';
 import '../../presentation/presentationUser/vehiclesOperation/presentation/receiveVehicle/details/pages/receive_vehicle_details_page.dart';
 import '../../presentation/presentationUser/vehiclesOperation/presentation/startTour/pages/start_tour_page.dart';
-import '../../presentation/shared/check_face_recognation/page/check_face_recognatin_page.dart';
+import '../../presentation/adminFeatures/vehicles/presentation/vehicleTracking/pages/vehicles_tracking_page.dart';
+ import '../../presentation/shared/check_face_recognation/page/check_face_recognatin_page.dart';
 import '../../presentation/shared/components/files/file_view_from_path_pdf.dart';
 import '../../presentation/adminFeatures/employees/presentation/addNewEmployees/pages/add/emp_file/widget/file_view_pdf.dart';
 import '../../presentation/adminFeatures/employees/presentation/addNewEmployees/pages/add/main_add_emp_page.dart';
@@ -292,8 +299,8 @@ class Routes {
   static const String addInfoVehicleZonePage = '/addInfoVehicleZonePage';
   static const String mapVehicleZonePage = '/mapVehicleZonePage';
   static const String vehiclesZonePage = '/vehiclesZonePage';
-  static const String attendanceNotificationsReportsPage = '/AttendanceNotificationsReportsPage';
-
+  static const String attendanceNotificationsReportsPage =
+      '/AttendanceNotificationsReportsPage';
 
   static const String addTypeViolationPage = '/addTypeViolationPage';
   static const String addGeneralViolationPage = '/addGeneralViolationPage';
@@ -305,14 +312,18 @@ class Routes {
   static const String filterVehiclesZonePage = '/filterVehiclesZonePage';
   static const String vehicleViolationsPage = '/VehicleViolationsPage';
   static const String addViolationVehiclePage = '/AddViolationVehiclePage';
-  static const String vehicleViolationDetailsPage = '/vehicleViolationDetailsPage';
+  static const String vehicleViolationDetailsPage =
+      '/vehicleViolationDetailsPage';
   static const String receiveVehiclesTabs = '/mainReceiveVehiclePage';
   static const String mainReceiveAdd = '/mainReceiveAdd';
   static const String mainReceiveVehiclePage = '/mainReceiveVehiclePage';
   static const String addHomeAddressPage = '/UpdateFreeLancerLocation';
-  static const String viewTrackAttendanceDeparturePage = '/requestTrackAttendanceDeparturePage';
-  static const String requestTrackAttendanceDeparturePage = '/addTrackAttendanceDeparturePage';
-  static const String trackAttendanceDepartureDetailsPage = '/trackAttendanceDepartureDetailsPage';
+  static const String viewTrackAttendanceDeparturePage =
+      '/requestTrackAttendanceDeparturePage';
+  static const String requestTrackAttendanceDeparturePage =
+      '/addTrackAttendanceDeparturePage';
+  static const String trackAttendanceDepartureDetailsPage =
+      '/trackAttendanceDepartureDetailsPage';
   static const String searchEmployeeMapPage = '/searchEmployeeMapPage';
   static const String realTimeQRScanner = '/realTimeQRScanner';
   static const String startTourPage = '/startTourPage';
@@ -327,10 +338,19 @@ class Routes {
   static const String gasStationsPage = '/gasStationsPage';
   static const String mapStationsWidget = '/mapStationsWidget';
   static const String receiveVehicleDetailsPage = '/receiveVehicleDetailsPage';
-  static const String vehicleReceiveRequestsPage = '/vehicleReceiveRequestsPage';
+  static const String vehicleReceiveRequestsPage =
+      '/vehicleReceiveRequestsPage';
   static const String followUpViolationsPage = '/followUpViolationsPage';
   static const String vehicleQrCodePage = '/vehicleQrCodePage';
   static const String checkFaceRecogenationPage = '/checkFaceRecogenationPage';
+  static const String addMaintenanceBreakdownsPage =
+      '/addMaintenanceBreakdownsPage';
+  static const String maintenanceBreakdownsPage = '/maintenanceBreakdownsPage';
+  static const String vehicleNotificationPage = '/vehicleNotificationPage';
+  static const String vehiclesTrackingPage = '/vehiclesTrackingPage';
+  static const String vehicleCamerasPage = '/VehicleCamerasPage';
+  static const String addVehicleCameraPage = '/addVehicleCameraPage';
+  static const String cameraSearchResultsPage = '/cameraSearchResultsPage';
 
   static final routes = <String, Widget Function(BuildContext)>{
     login: (context) => LoginPage(),
@@ -417,7 +437,8 @@ class Routes {
     addPunishmentPage: (context) => AddPunishmentPage(),
     workingDocumentPage: (context) => WorkingDocumentPage(),
     payWithSalaryPage: (context) => PayWithSalaryPage(),
-    termsConditionsCertificatePaymentPage: (context) => TermsConditionsCertificatePaymentPage(),
+    termsConditionsCertificatePaymentPage: (context) =>
+        TermsConditionsCertificatePaymentPage(),
     classificationTabs: (context) => ClassificationTabs(),
     addClassificationPage: (context) => AddClassificationPage(),
     employeesOpportunitiesPage: (context) => EmployeesOpportunitiesPage(),
@@ -445,9 +466,12 @@ class Routes {
     employeeAttachmentPage: (context) => EmployeeAttachmentPage(),
     fileViewPdfOrImage: (context) => FileViewPdfOrImage(),
     fileViewPdfOrImageFromFile: (context) => FileViewPdfOrImageFromFile(),
-    attendanceAndDepartureNotificationsPage: (context) => AttendanceAndDepartureNotificationsPage(),
-    addAttendanceAndDepartureNotificationsPage: (context) => AddAttendanceAndDepartureNotificationsPage(),
-    attendanceNotificationsReportsPage: (context) => AttendanceNotificationsReportsPage(),
+    attendanceAndDepartureNotificationsPage: (context) =>
+        AttendanceAndDepartureNotificationsPage(),
+    addAttendanceAndDepartureNotificationsPage: (context) =>
+        AddAttendanceAndDepartureNotificationsPage(),
+    attendanceNotificationsReportsPage: (context) =>
+        AttendanceNotificationsReportsPage(),
     addTypeViolationPage: (context) => AddTypeViolationPage(),
     addGeneralViolationPage: (context) => AddGeneralViolationPage(),
     generalViolationDetailsPage: (context) => GeneralViolationDetailsPage(),
@@ -458,14 +482,17 @@ class Routes {
     addInfoVehicleZonePage: (context) => AddInfoVehicleZonePage(),
     mapVehicleZonePage: (context) => MapVehicleZonePage(),
     vehiclesZonePage: (context) => VehiclesZonePage(),
-    receiveVehiclesTabs: (context) => ReceiveVehiclesTabs(),
+    receiveVehiclesTabs: (context) => ReceiveVehiclesPage(),
     filterVehiclesZonePage: (context) => FilterVehiclesZonePage(),
     addViolationVehiclePage: (context) => AddVehicleViolationPage(),
     vehicleViolationDetailsPage: (context) => VehicleViolationDetailsPage(),
     vehicleViolationsPage: (context) => VehicleViolationsPage(),
-    requestTrackAttendanceDeparturePage: (context) => RequestTrackAttendanceDeparturePage(),
-    viewTrackAttendanceDeparturePage: (context) => TrackAttendanceDeparturePage(),
-    trackAttendanceDepartureDetailsPage: (context) => TrackAttendanceDepartureDetailsPage(),
+    requestTrackAttendanceDeparturePage: (context) =>
+        RequestTrackAttendanceDeparturePage(),
+    viewTrackAttendanceDeparturePage: (context) =>
+        TrackAttendanceDeparturePage(),
+    trackAttendanceDepartureDetailsPage: (context) =>
+        TrackAttendanceDepartureDetailsPage(),
     mainReceiveAdd: (context) => MainReceiveVehiclePage(),
     addHomeAddressPage: (context) => AddHomeAddressPage(),
     searchEmployeeMapPage: (context) => SearchEmployeeMapPage(),
@@ -485,5 +512,12 @@ class Routes {
     followUpViolationsPage: (context) => FollowUpViolationsPage(),
     vehicleQrCodePage: (context) => VehicleQrCodePage(),
     checkFaceRecogenationPage: (context) => CheckFaceRecognitionPage(),
-    };
+    addMaintenanceBreakdownsPage: (context) => AddMaintenanceBreakdownsPage(),
+    maintenanceBreakdownsPage: (context) => MaintenanceBreakdownsPage(),
+    vehicleNotificationPage: (context) => VehicleNotificationPage(),
+    vehiclesTrackingPage: (context) => VehiclesTrackingPage(),
+    vehicleCamerasPage: (context) => VehicleCamerasPage(),
+    addVehicleCameraPage: (context) => AddVehicleCameraPage(),
+    cameraSearchResultsPage: (context) => CameraSearchResultsPage(), // Add this line
+   };
 }

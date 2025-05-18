@@ -49,6 +49,13 @@ import '../../presentation/adminFeatures/generalViolations/data/models/violation
 import '../../presentation/adminFeatures/generalViolations/data/models/violation_type_dto.dart';
 import '../../presentation/adminFeatures/jobRequirements/data/models/index.dart';
 import '../../presentation/adminFeatures/jobUniform/data/models/uniform_dto.dart';
+import '../../presentation/adminFeatures/maintenanceAndBreakdowns/data/models/action_follow_up_up_maintenance_prams.dart';
+import '../../presentation/adminFeatures/maintenanceAndBreakdowns/data/models/add_maintenance_dto.dart';
+import '../../presentation/adminFeatures/maintenanceAndBreakdowns/data/models/add_maintenance_prams.dart';
+import '../../presentation/adminFeatures/maintenanceAndBreakdowns/data/models/final_action_follow_up_maintenance_prams.dart';
+import '../../presentation/adminFeatures/maintenanceAndBreakdowns/data/models/maintenance_dto.dart';
+import '../../presentation/adminFeatures/notifications/data/models/action_notifications_prams.dart';
+import '../../presentation/adminFeatures/notifications/data/models/vehicle_notifications_dto.dart';
 import '../../presentation/adminFeatures/projectsManagement/data/models/employe_point_dto.dart';
 import '../../presentation/adminFeatures/projectsManagement/data/models/index.dart';
 import '../../presentation/adminFeatures/punishments/data/models/index.dart';
@@ -65,16 +72,11 @@ import '../../presentation/adminFeatures/usersManagement/data/models/user_by_pho
 import '../../presentation/adminFeatures/usersRequests/data/models/reject_user_request_params.dart';
 import '../../presentation/adminFeatures/usersRequests/data/models/user_request_dto.dart';
 import '../../presentation/adminFeatures/usersRequests/data/models/user_request_terms_params.dart';
-import '../../presentation/adminFeatures/vehicles/data/models/action_vehicle_receive_request_params.dart';
-import '../../presentation/adminFeatures/vehicles/data/models/add_vehicle_violation_params.dart';
-import '../../presentation/adminFeatures/vehicles/data/models/covenant_vehicle_dto.dart';
-import '../../presentation/adminFeatures/vehicles/data/models/final_action_vehicle_receive_request_params.dart';
-import '../../presentation/adminFeatures/vehicles/data/models/insurances_dto.dart';
-import '../../presentation/adminFeatures/vehicles/data/models/vehicle_image_face_dto.dart';
-import '../../presentation/adminFeatures/vehicles/data/models/vehicle_receive_request_dto.dart';
-import '../../presentation/adminFeatures/vehicles/data/models/vehicle_violation_dto.dart';
-import '../../presentation/adminFeatures/vehicles/data/models/vehicles_dto.dart';
-import '../../presentation/presentationUser/vehiclesOperation/data/models/receive_vehicle_details_dto.dart';
+import '../../presentation/adminFeatures/vehicles/data/models/index.dart';
+import '../../presentation/adminFeatures/vehicles/data/models/camera_search_results_dto.dart';
+import '../../presentation/adminFeatures/vehicles/data/models/vehicle_event_picture_prams.dart';
+import '../../presentation/adminFeatures/vehicles/data/models/vehicle_traking_details_prams.dart';
+import '../../presentation/adminFeatures/vehicles/data/models/vehicle_traking_dto.dart';
 part 'admin_endpoint.g.dart';
 
 @Injectable()
@@ -354,14 +356,14 @@ abstract class AdminEndpoint {
   @GET('/v1/FreeLancerInfo/AllowEditFaceRecognition')
   Future<ApiResponse<bool>> allowEditFaceRecognition(@Query('id') int id);
 
+  @GET('/v1/RecruitmentRequirementsAttachments/GetAllAttachmentStatues')
+  Future<ApiResponse<List<TabCashifterDto>>> fetchTabAttachment();
 
- @GET('/v1/RecruitmentRequirementsAttachments/GetAllAttachmentStatues')
- Future<ApiResponse<List<TabCashifterDto>>> fetchTabAttachment();
-
-  @PUT('/v1/RecruitmentRequirementsAttachments/updateFreeLancerInfoRecruitmentRequirementAttachmentStatus')
+  @PUT(
+      '/v1/RecruitmentRequirementsAttachments/updateFreeLancerInfoRecruitmentRequirementAttachmentStatus')
   Future<ApiResponse> acceptOrRejectAttachmentEmp(
-      @Body() AcceptOrRejectAttachmentEmpPrams acceptOrRejectAttachmentEmpPrams);
-
+      @Body()
+      AcceptOrRejectAttachmentEmpPrams acceptOrRejectAttachmentEmpPrams);
 
   // Employment Officials
 
@@ -607,7 +609,7 @@ abstract class AdminEndpoint {
   Future<ApiResponse<List<ProjectManagementDto>>> fetchProjectsV3();
 
   @GET('/v2/Projects/GenerateReportForMob/{projectId}/{projectName}')
-  Future<ApiResponse<DownLoadSalaryDefinition>> downLoadQrCodeImage(
+  Future<ApiResponse<DownLoadFileDto>> downLoadQrCodeImage(
       @Path('projectId') String projectCode,
       @Path('projectName') String projectName);
 
@@ -827,8 +829,9 @@ abstract class AdminEndpoint {
           @Query('requestId') int requestId);
 
   @GET('/v1/TrackFaceRecognitionDetails/GetTrackFaceRecognitionDetailsList')
-  Future<ApiResponse< RequestAttendanceDepartureDetailsDto>> fetchTrackAttendanceDepartureRequestsDetails(@Query('requestId') int requestId);
-
+  Future<ApiResponse<RequestAttendanceDepartureDetailsDto>>
+      fetchTrackAttendanceDepartureRequestsDetails(
+          @Query('requestId') int requestId);
 
   @POST('/v1/TrackFaceRecognitionRequests/CreateTrackFaceRecognitionRequest')
   Future<ApiResponse> createRequestTrackAttendanceDeparture(
@@ -905,6 +908,7 @@ abstract class AdminEndpoint {
     @Part(name: 'CompanyId') String? companyId,
     @Part(name: 'ProjectId') String? projectId,
     @Part(name: 'VehicleColorId') int? vehicleColorId,
+    @Part(name: 'MobileVehicleIndexCode') String? mobileVehicleIndexCode,
   );
 
   @MultiPart()
@@ -945,10 +949,19 @@ abstract class AdminEndpoint {
       @Part(name: 'CompanyId') String? companyId,
       @Part(name: 'ProjectId') String? projectId,
       @Part(name: 'VehicleColorId') int? vehicleColorId,
+      @Part(name: 'MobileVehicleIndexCode') String? mobileVehicleIndexCode,
       {@Part(name: 'VehicleImageFile') File? vehicleImageFile = null});
 
   @GET('/v1/Vehicles/GetAllVehicles')
   Future<ApiResponse<List<VehiclesDto>>> fetchVehicles();
+
+  @POST('/v1/VehicleEventsTypes/GetAllVehicleEventsAndGPSDetails')
+  Future<ApiResponse<VehicleTrakingDto>> fetchVehicleTracingDetails(
+      @Body() VehicleTrakingDetailsPrams prams);
+
+  @GET('/v1/VehicleEventsTypes/DownloadVehicleEventPicture')
+  Future<ApiResponse<String>> fetchVehicleEventPicture(
+      @Queries() VehicleEventPicturePrams prams);
 
   //نوع  التامينات
   @GET('/v1/VehicleInsuranceTypes/GetAllVehicleInsuranceTypes')
@@ -1022,10 +1035,9 @@ abstract class AdminEndpoint {
     @Part(name: 'ContractViolationId') int contractViolationId,
   );
 
-
-
   @GET('/v1/Vehicles/GenerateVehicleReport/{VehicleId}')
-  Future<ApiResponse<DownLoadSalaryDefinition>> qrCodeVehicle(@Path('VehicleId') int vehicleId );
+  Future<ApiResponse<DownLoadFileDto>> qrCodeVehicle(
+      @Path('VehicleId') int vehicleId);
 
   //   emp  map
 
@@ -1066,44 +1078,127 @@ abstract class AdminEndpoint {
   Future<ApiResponse<List<CommonListItemDto>>> fetchUsersRequestTabs();
 
   @GET('/v1/CashifterRequests/GetAllCashifterRequestsByStatus')
-  Future<ApiResponse<List<UserRequestDto>>> fetchUsersRequests(@Query('statusId') int statusId);
+  Future<ApiResponse<List<UserRequestDto>>> fetchUsersRequests(
+      @Query('statusId') int statusId);
 
-  @GET('/v1/CashifterRequestsTermsAndConditions/GetAllCashifterRequestTermsAndConditionsByTypeAndStatus')
-  Future<ApiResponse<List<String>>> fetchUserRequestTerms(@Queries() UserRequestTermsParams params);
+  @GET(
+      '/v1/CashifterRequestsTermsAndConditions/GetAllCashifterRequestTermsAndConditionsByTypeAndStatus')
+  Future<ApiResponse<List<String>>> fetchUserRequestTerms(
+      @Queries() UserRequestTermsParams params);
 
   @PUT('/v1/CashifterRequests/UpdateRequestStatus')
-  Future<ApiResponse> acceptRejectUserRequest(@Body() RejectUserRequestParams params);
+  Future<ApiResponse> acceptRejectUserRequest(
+      @Body() RejectUserRequestParams params);
 
   @GET('/v1/VehicleHandovers/GetAllIssueDescriptionStatues')
-  Future<ApiResponse<List<CommonListItemDto>>> fetchActionVehicleReceiveRequestStatues();
+  Future<ApiResponse<List<CommonListItemDto>>>
+      fetchActionVehicleReceiveRequestStatues();
 
   @GET('/v1/VehicleHandovers/GetTypesTabsOfVehicleHandoverReview')
-  Future<ApiResponse<List<CommonListItemDto>>> fetchVehicleReceiveRequestTypesTabs();
+  Future<ApiResponse<List<CommonListItemDto>>>
+      fetchVehicleReceiveRequestTypesTabs();
 
   @GET('/v1/VehicleHandovers/GetAllVehicleHandoverReviewsByType')
-  Future<ApiResponse<List<VehicleReceiveRequestDto>>> fetchVehicleReceiveRequestsByType(@Query('type') int type);
+  Future<ApiResponse<List<VehicleReceiveRequestDto>>>
+      fetchVehicleReceiveRequestsByType(@Query('type') int type);
 
   @POST('/v1/VehicleHandovers/TakeActionOnVehicleComponentHandoverReview')
-  Future<ApiResponse> actionVehicleReceiveRequest(@Body() ActionVehicleReceiveRequestParams  params);
+  Future<ApiResponse> actionVehicleReceiveRequest(
+      @Body() ActionVehicleReceiveRequestParams params);
 
   @POST('/v1/VehicleHandovers/TakeFinalActionOnVehicleComponentHandoverReview')
-  Future<ApiResponse> finalActionVehicleReceiveRequest(@Body() FinalActionVehicleReceiveRequestParams  params);
+  Future<ApiResponse> finalActionVehicleReceiveRequest(
+      @Body() FinalActionVehicleReceiveRequestParams params);
 
   @GET('/v1/VehicleHandovers/GetAllVehicleHandoverEmployeeByProject')
-  Future<ApiResponse<List<CommonListItemDto>>> fetchVehicleEmployeeByProject(@Query('ProjectId') int projectId);
+  Future<ApiResponse<List<CommonListItemDto>>> fetchVehicleEmployeeByProject(
+      @Query('ProjectId') int projectId);
 
   @GET('/v1/ContractViolation/GetTypesTabsOfContractViolation')
-  Future<ApiResponse<List<CommonListItemDto>>> fetchTypesTabsOfContractViolation();
+  Future<ApiResponse<List<CommonListItemDto>>>
+      fetchTypesTabsOfContractViolation();
 
   @GET('/v1/ContractViolation/GetAllContractViolationByType')
-  Future<ApiResponse<List<FollowUpViolationDto>>> fetchFollowUpViolationsByType(@Query('type') int type);
+  Future<ApiResponse<List<FollowUpViolationDto>>> fetchFollowUpViolationsByType(
+      @Query('type') int type);
 
   @GET('/v1/ContractViolation/GetAllContractViolationImportantLevel')
   Future<ApiResponse<List<CommonListItemDto>>> fetchViolationImportantLevels();
 
   @POST('/v1/ContractViolation/TakeActionOnContractViolationReview')
-  Future<ApiResponse> actionFollowUpViolation(@Body() ActionFollowUpViolationParams  params);
+  Future<ApiResponse> actionFollowUpViolation(
+      @Body() ActionFollowUpViolationParams params);
 
   @POST('/v1/ContractViolation/TakeFinaActionOnContractViolationReview')
-  Future<ApiResponse> finalActionFollowUpViolation(@Body() FinalActionFollowUpViolationParams  params);
+  Future<ApiResponse> finalActionFollowUpViolation(
+      @Body() FinalActionFollowUpViolationParams params);
+
+  ///Maintenance and Breakdowns
+
+  @GET('/v1/FaultsMaintenance/GetTabTypeOfFaultsMaintenance')
+  Future<ApiResponse<List<CommonListItemDto>>> fetchTapsMaintenanceBreakdowns();
+
+  @GET('/v1/FaultsMaintenance/GetAllFaultsMaintenanceImportantLevel')
+  Future<ApiResponse<List<CommonListItemDto>>> fetchMaintenanceImportantLevel();
+
+  @POST('/v1/FaultsMaintenance/TakeActionOnFaultsMaintenanceReview')
+  Future<ApiResponse> actionFollowUpUpMaintenance(
+      @Body() ActionFollowUpUpMaintenancePrams params);
+
+  @POST('/v1/FaultsMaintenance/TakeFinaActionOnFaultsMaintenanceReview')
+  Future<ApiResponse> finalActionFollowUpMaintenance(
+      @Body() FinalActionFollowUpMaintenancePrams params);
+
+  @GET('/v1/FaultsMaintenance/GetAllFaultsMaintenanceByStatus')
+  Future<ApiResponse<List<MaintenanceDto>>> fetchMaintenanceBreakdowns(
+      @Query("status") int status);
+
+  @GET('/v1/FaultsMaintainceType/GetAllFaultsMaintaincetype')
+  Future<ApiResponse<List<CommonListItemDto>>> fetchTypeMaintenance();
+
+  @MultiPart()
+  @POST('/v1/FaultsMaintenance/AddEditFaultsMaintenance')
+  Future<ApiResponse<AddMaintenanceDto>> addMaintenance(
+    @Queries() AddMaintenancePrams params,
+    @Part(name: 'ImagesAfter') List<File> imagesAfter,
+    @Part(name: 'ImagesBefore') List<File> imagesBefore,
+  );
+
+  //  vehicle notifications
+
+  @GET('/v1/VehicleNotifications/GetAllNotificationsByStatus')
+  Future<ApiResponse<List<VehicleNotificationsDto>>> fetchVehicleNotifications(
+      @Query("status") int status);
+
+  @GET('/v1/VehicleNotifications/GetNotificationStatues')
+  Future<ApiResponse<List<CommonListItemDto>>> fetchTypeVehicleNotifications();
+
+  @POST('/v1/VehicleNotifications/TakeActionOnNotification')
+  Future<ApiResponse> actionNotifications(
+      @Body() ActionNotificationsPrams params);
+
+  @POST('/v1/VehicleNotifications/TakeFinalActionOnNotification')
+  Future<ApiResponse> finalActionNotifications(
+      @Body() ActionNotificationsPrams params);
+
+  @GET('/v1/VehicleCameras/GetAllVehicleCamerasByVehicleId')
+  Future<ApiResponse<List<VehicleCameraDto>>> fetchVehicleCameras(
+      @Query('vehicleId') int id);
+
+  @GET('/v1/VehicleCameras/GetVehicleCameraById')
+  Future<ApiResponse<VehicleCameraDto>> fetchVehicleCameraById(
+      @Query('id') int id);
+
+  @POST('/v1/VehicleCameras/AddNewVehicleCamera')
+  Future<ApiResponse> addVehicleCamera(@Body() AddVehicleCameraParams params);
+
+  @POST('/v1/VehicleCameras/EditVehicleCamera')
+  Future<ApiResponse> editVehicleCamera(@Body() AddVehicleCameraParams params);
+
+  @POST('/v1/VehicleCameras/DeleteVehicleCamera')
+  Future<ApiResponse> deleteVehicleCamera(@Query('id') int id);
+
+  @POST('/v1/VehicleCameras/GetVehicleVideo')
+  Future<ApiResponse<CameraSearchResultsDto>> fetchVehicleVideo(
+      @Body() VehicleVideoParams params);
 }

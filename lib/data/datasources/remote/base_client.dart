@@ -24,8 +24,12 @@ class ClientCreator {
     final dio2 = Dio();
 
     // Provide a dio instance
-    // dio2.options.connectTimeout = 60000 * 2;
-    dio2.options.connectTimeout = Duration(seconds: 60);
+    dio2.options.connectTimeout = Duration(minutes: 2);
+
+    dio2.interceptors.add(LogInterceptor(responseBody: true));
+    if (interceptor != null) {
+      dio2.interceptors.add(interceptor!);
+    }
     // Chucker api
     if (Config.isDebuggable == true || Config.isTestVersion == true) {
       dio2.interceptors.add(
@@ -33,10 +37,6 @@ class ClientCreator {
       );
     }
 
-    dio2.interceptors.add(LogInterceptor(responseBody: true));
-    if (interceptor != null) {
-      dio2.interceptors.add(interceptor!);
-    }
     print('dio2.interceptors ${dio2.interceptors}');
     return dio2;
   }
@@ -76,8 +76,9 @@ class HeaderInterceptor extends Interceptor {
     options.headers['platform'] = Config.platformName;
     options.headers['AppVersion'] = Config.AppVersion;
     options.headers[requestTypeKey] = true;
-    print('Header  Params ${options.headers}');
-    super.onRequest(options, handler);
+
+    print('Header  Params ${options.data} ${options.headers}');
+     super.onRequest(options, handler);
   }
 
   @override

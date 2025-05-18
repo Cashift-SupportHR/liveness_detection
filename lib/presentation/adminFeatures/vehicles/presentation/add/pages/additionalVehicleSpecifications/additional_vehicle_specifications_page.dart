@@ -26,7 +26,7 @@ class AdditionalVehicleSpecificationsPage
 
   @override
   String? title(context) {
-    int? id = ModalRoute.of(context)?.settings.arguments as int?;
+    int? id = getArguments(context);
     return id == null ? null : strings.edit_vehicle;
   }
 
@@ -34,12 +34,13 @@ class AdditionalVehicleSpecificationsPage
   bool detectRequiredTasks() {
     return false;
   }
-
+  List<VehicleImageFace>? vehicleImageFaces;
   @override
   Widget buildWidget(BuildContext context, Initialized<List<VehicleImageFace>> state) {
     return AdditionalVehicleSpecificationsScreen(
-      data: state.data,
-      onAddVehicle: (List<MultipartFile> files) {
+      data: vehicleImageFaces ?? state.data,
+      onAddVehicle: (List<MultipartFile> files, List<VehicleImageFace> vehicleImageFaces) {
+        this.vehicleImageFaces = vehicleImageFaces;
         bloc.addVehicleImages(
           VehicleImageParams(
             images: files,

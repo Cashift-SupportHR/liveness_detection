@@ -36,9 +36,10 @@ class VehicleImageItem extends BaseStatelessWidget {
             StreamBuilder<File>(
                 stream: streamDataStateInitial.stream,
                 builder: (context, snapshot) {
-                  return snapshot.hasData
+                  // Note: If the image is already picked then next to the next page then back to this page again we will show cached image
+                  return snapshot.hasData || !(data.imageFace ?? '').startsWith('http')
                       ? Image.file(
-                          snapshot.data!,
+                          snapshot.data ?? File(data.imageFace ?? ''),
                           height: 60,
                           width: 105,
                           fit: BoxFit.scaleDown,
@@ -51,12 +52,14 @@ class VehicleImageItem extends BaseStatelessWidget {
                         );
                 }),
             SizedBox(height: 5),
-            Text(
-              data.name ?? '',
-              style: kTextRegular.copyWith(color: kPrimary_4F, fontSize: 12),
-              textAlign: TextAlign.center,
+            Expanded(
+              child: Text(
+                data.name ?? '',
+                style: kTextRegular.copyWith(color: kPrimary_4F, fontSize: 12),
+                textAlign: TextAlign.center,
+              ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 5),
             AppCupertinoButton(
               onPressed: () {
                 AppUtils.showImagePicker(context, onPicker: (file) {

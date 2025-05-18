@@ -3989,7 +3989,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reviewed => 'تمت المراجعة';
 
   @override
-  String get take_action => 'اتخاذ اجراء';
+  String get take_action => 'اتخذ اجراء';
 
   @override
   String get vehicle_name => 'اسم المركبة';
@@ -4043,7 +4043,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get action_taken_waring_msg => 'سيتم حفظ اجراءك وارساله الي مدير المشروع لمراجعته والرد عليه';
 
   @override
-  String get final_action => 'الإجراء النهائي';
+  String get final_action => 'إتخذ إجراء نهائي';
 
   @override
   String get final_action_taken_waring_msg => 'سيتم حفظ اجراءك وارساله الي قائمة ( تمت المراجعة )';
@@ -4118,5 +4118,194 @@ class AppLocalizationsEn extends AppLocalizations {
   String get end_but => 'End';
 
   @override
+  String get image_before_maintenance => 'Image before maintenance';
+
+  @override
+  String get image_after_maintenance => 'Image after maintenance';
+
+  @override
+  String get shod_image_before_maintenance => 'Please select an image before maintenance';
+
+  @override
+  String get shod_image_after_maintenance => 'Please select an image after maintenance';
+
+  @override
+  String get type_operation => 'Operation type';
+
+  @override
   String get verification => 'Verification';
+
+  @override
+  String get view_maintenance => 'View maintenance and faults';
+
+  @override
+  String get breakdown_maintenance => 'Maintenance and Breakdowns';
+
+  @override
+  String get waring_action_notification => 'Your action will be saved and sent to the project manager for review and response.';
+
+  @override
+  String get waring_final_action_notification => 'It will be sent to the supervisor.';
+
+  @override
+  String get add_maintenance => 'Maintenance work';
+
+  @override
+  String get add_breakdown => 'add breakdown';
+
+  @override
+  String get driver_violations => 'Driver violations';
+
+  @override
+  String get speeding_during_violation => 'Speeding during the violation';
+
+  @override
+  String get click_here_view_violation_location => 'Click here to view the location of the violation';
+
+  @override
+  String get violation_time => 'Violation time';
+
+  @override
+  String get vehicle_performance => 'Vehicle performance';
+
+  @override
+  String get maximum_recorded_speed => 'Maximum recorded speed';
+
+  @override
+  String get vehicle_path => 'Vehicle path';
+
+  @override
+  String get km_h => 'km/h';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get receive_vehicle_details => 'Receive vehicle details';
+
+  @override
+  String get write_action_to_be_taken => 'Write the action to be taken';
+
+  @override
+  String get track_vehicle_on_map => 'Track vehicle on the map';
+
+  @override
+  String get driver_name => 'driver name';
+
+  @override
+  String get select_date_from_to => 'Please select a date from and to';
+
+  @override
+  String get play => 'play';
+
+  @override
+  String get stop => 'Stop';
+
+  @override
+  String get position => 'Position:';
+
+  @override
+  String get speed => 'Speed:';
+
+  @override
+  String get vehicle_camera_code => 'Vehicle camera code';
+
+  @override
+  String get go_violation_site => 'Go to the violation site';
+
+  @override
+  String get download_violation_image => 'Download violation image';
+
+  @override
+  String get camera_name_ar => 'Camera name in Arabic';
+
+  @override
+  String get type_camera_name_ar => 'Type camera name in Arabic';
+
+  @override
+  String get camera_name_en => 'Camera name in English';
+
+  @override
+  String get type_camera_name_en => 'Type camera name in English';
+
+  @override
+  String get camera_code => 'Camera code';
+
+  @override
+  String get type_camera_code => 'Type camera code';
+
+  @override
+  String get start_video => 'Start video';
+
+  @override
+  String get live_feed => 'Live feed';
+
+  @override
+  String get select_video_date => 'Select video date';
+
+  @override
+  String get camera_name => 'Camera name';
+
+  @override
+  String get camera_type => 'Camera type';
+
+  @override
+  String get start_live_feed => 'Start live feed';
+
+  @override
+  String get camera_add => 'Add camera';
+
+  @override
+  String get cameras => 'Cameras';
+
+  @override
+  String get view_cameras => 'View cameras';
+
+  @override
+  String get add_camera => 'Add camera';
+
+  @override
+  String get edit_camera => 'Edit camera';
+
+  @override
+  String get delete_camera => 'Delete camera';
+
+  @override
+  String get edit_date_time => 'Edit date and time';
+
+  @override
+  String get videos => 'Videos';
+
+  @override
+  String get video => 'video';
+
+  @override
+  String get live_streaming => 'Live streaming';
+
+  @override
+  String get select_camera => 'Select camera';
+
+  @override
+  String get date_from => 'Date from';
+
+  @override
+  String get date_to => 'Date to';
+
+  @override
+  String get date_to_must_be_greater_than_date_from => 'The date to must be greater than the date from';
+
+  @override
+  String get there_are_videos_yet => 'There are no videos yet';
+
+  @override
+  String get videos_dates_validate_msg => 'Please select the time and date you want the videos to be shown';
+
+  @override
+  String get select_date_and_time => 'Select date and time';
+
+  @override
+  String get drivers => 'Drivers';
+
+  @override
+  String get maximum_speed => 'Maximum speed';
 }

@@ -61,7 +61,7 @@ abstract class BaseStatelessWidget extends StatelessWidget {
             exception.error is TimeoutException) {
           return context.getStrings().error_internet_connection;
         } else if (exception.error is ApiException) {
-          return exception.message ?? context.getStrings().undefine_error;
+          return exception.message ?? strings.undefine_error;
         } else if (isRequireLogin()) {
           return context.getStrings().required_login;
         } else {

@@ -4,9 +4,9 @@ import 'package:shiftapp/presentation/presentationUser/vehiclesOperation/domain/
 class MainReceiveVehicleArg {
   MainReceiveVehicleArg({
     required this.isEdit,
-    this.receiveVehicle,
+    this.receiveVehicleData,
   });
 
   bool isEdit;
-  ReceiveVehicle? receiveVehicle;
+  ReceiveVehicleData? receiveVehicleData;
 }

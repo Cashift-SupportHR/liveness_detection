@@ -5,11 +5,17 @@ import 'package:dio/dio.dart';
 import '../../../../../data/models/api_response.dart';
 import '../../../../../data/models/salary-definition-request/down_load_salary_definition.dart';
 import '../../../../../network/source/admin_endpoint.dart';
-import '../../../../presentationUser/vehiclesOperation/data/models/receive_vehicle_details_dto.dart';
+  import '../models/vehicle_event_picture_prams.dart';
+import '../models/vehicle_traking_details_prams.dart';
 import '../models/action_vehicle_receive_request_params.dart';
+import '../models/add_vehicle_camera_params.dart';
 import '../models/add_vehicle_violation_params.dart';
+import '../models/camera_search_results_dto.dart';
 import '../models/final_action_vehicle_receive_request_params.dart';
+import '../models/vehicle_camera_dto.dart';
 import '../models/vehicle_receive_request_dto.dart';
+import '../models/vehicle_traking_dto.dart';
+import '../models/vehicle_video_params.dart';
 import '../models/vehicle_violation_dto.dart';
 import '../models/covenant_vehicle_dto.dart';
 import '../models/insurance_types_dto.dart';
@@ -50,7 +56,9 @@ class VehiclesAPI {
     String? vehicleBrandId,
     String? companyId,
     String? projectId,
+
     int? vehicleColorId,
+      String? mobileVehicleIndexCode,
   ) {
     return api.addVehicle(
         vehicleCode,
@@ -64,7 +72,8 @@ class VehiclesAPI {
         vehicleBrandId,
         companyId,
         projectId,
-        vehicleColorId);
+        vehicleColorId,
+        mobileVehicleIndexCode);
   }
 
   Future<ApiResponse> addInsurance(
@@ -105,7 +114,9 @@ class VehiclesAPI {
       String? vehicleBrandId,
       String? companyId,
       String? projectId,
+
       int? vehicleColorId,
+      String? mobileVehicleIndexCode,
       {File? vehicleImageFile = null}) {
     return api.editVehicle(
         id,
@@ -121,6 +132,7 @@ class VehiclesAPI {
         companyId,
         projectId,
         vehicleColorId,
+        mobileVehicleIndexCode,
         vehicleImageFile: vehicleImageFile);
   }
 
@@ -237,8 +249,40 @@ class VehiclesAPI {
     return api.fetchVehicleEmployeeByProject(id);
   }
 
-  Future<ApiResponse<DownLoadSalaryDefinition>> qrCodeVehicle(int vehicleId) {
+  Future<ApiResponse<DownLoadFileDto>> qrCodeVehicle(int vehicleId) {
     return api.qrCodeVehicle(vehicleId);
   }
 
+  Future<ApiResponse<List<VehicleCameraDto>>> fetchVehicleCameras(int vehicleId) {
+    return api.fetchVehicleCameras(vehicleId);
+  }
+
+  Future<ApiResponse<VehicleCameraDto>> fetchVehicleCameraById(int id){
+    return api.fetchVehicleCameraById(id);
+  }
+
+  Future<ApiResponse> addVehicleCamera(AddVehicleCameraParams params) {
+    return api.addVehicleCamera(params);
+  }
+
+  Future<ApiResponse> editVehicleCamera(AddVehicleCameraParams params) {
+    return api.editVehicleCamera(params);
+  }
+
+  Future<ApiResponse> deleteVehicleCamera(int id) {
+    return api.deleteVehicleCamera(id);
+  }
+
+  Future<ApiResponse<CameraSearchResultsDto>> fetchVehicleVideo(VehicleVideoParams params) {
+    return api.fetchVehicleVideo(params);
+  }
+  Future<ApiResponse<VehicleTrakingDto>> fetchVehicleTracingDetails(
+      VehicleTrakingDetailsPrams prams) {
+    return api.fetchVehicleTracingDetails(prams);
+  }
+
+  Future<ApiResponse<String>> fetchVehicleEventPicture(
+        VehicleEventPicturePrams prams){
+    return  api.fetchVehicleEventPicture(prams);
+  }
 }

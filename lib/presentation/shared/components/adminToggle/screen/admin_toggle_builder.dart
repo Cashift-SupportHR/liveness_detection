@@ -1,18 +1,12 @@
-import 'dart:io';
 
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+ import 'package:get/get.dart';
 import 'package:shiftapp/core/services/routes.dart';
 import 'package:shiftapp/data/models/attendance/attendance_config_dto.dart';
  import 'package:shiftapp/extensions/extensions.dart';
  import 'package:shiftapp/presentation/presentationUser/common/common_state.dart';
 import 'package:shiftapp/presentation/shared/components/adminToggle/screen/admin_toggle_widget.dart';
-import 'package:wakelock_plus/wakelock_plus.dart';
-import 'package:livelyness_detection/index.dart';
-import 'package:livelyness_detection/livelyness_detection.dart';
 
-import '../../../../../core/services/permission_detector.dart';
-import '../../../../presentationUser/attendance/facerecognation/faces_matching.dart';
+ import '../../../../presentationUser/attendance/facerecognation/faces_matching.dart';
 import '../../../../presentationUser/attendance/facerecognation/index.dart';
 import '../../base_widget_bloc.dart';
 import '../../dialogs_manager.dart';
@@ -39,7 +33,6 @@ class AdminToggleBuilder
       image: state.image,
       isAllowFaceRecognition: state.isAllowFaceRecognition,
       user:state.user,
-      haveAdminFeatures:state.haveAdminFeatures,
       isAdmin: state.isAdmin,
       adminEnable: state.adminEnable,
       setEnableAdmin: (isAdmin) {
@@ -109,8 +102,7 @@ class AdminToggleBuilder
       print('image bloc');
       final registeredImage =
           FaceMatchingUtils.convertBase64FileToMatchable(bloc.image ?? "");
-      print('registeredFace registeredImage $registeredImage');
-      print('registeredFace Image ${bloc.image}');
+
 
       final simi =
           await FaceMatchingUtils.matchFaces(pickedImage, registeredImage);
@@ -120,8 +112,7 @@ class AdminToggleBuilder
       print('matchingProcess ${simi}');
       return simi;
     } catch (e) {
-      print(e);
-      print("errorccc");
+
       dismissDialogs();
       handleErrorDialog(strings.face_not_matched, publicContext);
 
@@ -140,7 +131,7 @@ class AdminToggleBuilder
         isDirectDetectFace: true,
       ),)
       );
-      print('navigateToCamera image $image');
+
       if (!image.isNullOrEmpty()) {
         return image;
       }

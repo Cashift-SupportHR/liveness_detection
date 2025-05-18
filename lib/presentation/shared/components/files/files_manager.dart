@@ -13,13 +13,14 @@ import '../../../../data/models/salary-definition-request/down_load_salary_defin
 
 class FilesManager{
 
-  saveFileFromBase64(DownLoadSalaryDefinition response) async {
-    print('file data: ${response.toJson()}');
+  saveFileFromBase64(DownLoadFileDto response) async {
+    // print('file data: ${response.toJson()}');
     try {
       requestPermission();
 
       Uint8List bytes = base64.decode(response.fileAttachment ?? '');
-      final data = await FileSaver.instance.saveAs(name: response.fileName ?? '',  bytes: bytes, ext: response.fileAttachmentType ?? '',  mimeType: MimeType.other);
+      String fileName = response.fileName ?? '${DateTime.now().millisecondsSinceEpoch}';
+      final data = await FileSaver.instance.saveAs(name: fileName,  bytes: bytes, ext: response.fileAttachmentType ?? '',  mimeType: MimeType.other);
       log(data.toString());
 
     } on Exception catch (e) {
@@ -28,8 +29,8 @@ class FilesManager{
   }
 
   saveFileFromFile(String filePath) async {
-    print('file data: ${filePath}');
-    print('file data: ${filePath.split('.').last}');
+    // print('file data: ${filePath}');
+    // print('file data: ${filePath.split('.').last}');
     try {
       requestPermission();
 
@@ -89,7 +90,7 @@ class FilesManager{
     }
   }
 
-  Future<String> createFileFromBase64(DownLoadSalaryDefinition data) async {
+  Future<String> createFileFromBase64(DownLoadFileDto data) async {
     _checkPermission();
     _prepareSaveDir();
     try {
@@ -117,5 +118,4 @@ class FilesManager{
     await file.writeAsBytes(response.bodyBytes);
    return file.path;
   }
-
 }

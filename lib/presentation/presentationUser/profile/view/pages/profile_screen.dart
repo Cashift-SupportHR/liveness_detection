@@ -34,11 +34,7 @@ class ProfileScreen extends BaseStatelessWidget {
 
   Widget buildProfileUI(BuildContext context,
       {ProfileInitialize? profileData}) {
-    final localRepo = getIt.get<LocalRepository>();
-    print("jkjkjkjk");
-    print(profileData?.user.id);
-    print("jkjkjkjk");
-    final services = profileData?.accountServices;
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -224,29 +220,26 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
   File? file;
 
   pickImage() async {
-    pickedFile = await _picker.pickImage(source: ImageSource.camera,
-      imageQuality: 80,
-    );
+    pickedFile = await _picker.pickImage(source: ImageSource.camera, imageQuality: 50);
 
     if (pickedFile != null) {
-      file = File(pickedFile!.path);
-      // File compressedFile;
-      // final bytes = file!.readAsBytesSync().lengthInBytes;
-      // final kb = bytes / 1024;
-      // final mb = kb / 1024;
+      File compressedFile = File(pickedFile!.path);
+      final bytes = file!.readAsBytesSync().lengthInBytes;
+      final kb = bytes / 1024;
+      final mb = kb / 1024;
       // if (mb <= 1) {
       //   compressedFile = file!;
       // } else {
       //   compressedFile =
       //       await FlutterNativeImage.compressImage(file!.path, quality: 80);
       // }
-      // final bytes2 = compressedFile.readAsBytesSync().lengthInBytes;
-      // final kb2 = bytes2 / 1024;
-      // final mb2 = kb2 / 1024;
-      // print('IMAGE SIZE BEFORE ${mb} convert to ${mb2}');
+      final bytes2 = compressedFile.readAsBytesSync().lengthInBytes;
+      final kb2 = bytes2 / 1024;
+      final mb2 = kb2 / 1024;
+      print('IMAGE SIZE BEFORE ${mb} convert to ${mb2}');
       setState(() {
-        // file = compressedFile;
-        widget.onPickImage(file!);
+        file = compressedFile;
+        widget.onPickImage(compressedFile);
       });
     }
   }

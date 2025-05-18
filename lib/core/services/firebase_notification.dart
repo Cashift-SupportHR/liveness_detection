@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'dart:io';
 
@@ -12,7 +11,7 @@ import 'package:shiftapp/core/services/routes.dart';
 
 import '../../data/models/notification_offers/notification_offer_params.dart';
 import '../../domain/entities/shared/notification_types.dart';
-  import '../../utils/notification.dart';
+import '../../utils/notification.dart';
 
 /// Create a [AndroidNotificationChannel] for heads up notifications
 AndroidNotificationChannel? channel;
@@ -20,56 +19,77 @@ AndroidNotificationChannel? channel;
 FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;
 
 class FirebaseNotifications {
-
   static firebaseInitNotifications() async {
-
     // Set the background messaging handler early on, as a named top-level function
     FirebaseMessaging.onBackgroundMessage(
-        FirebaseNotifications.firebaseMessagingBackgroundHandler);
+      FirebaseNotifications.firebaseMessagingBackgroundHandler,
+    );
 
     if (!kIsWeb) {
       channel = const AndroidNotificationChannel(
         MESSAGE_CHANNEL_KEY, // id
         'High Importance Notifications', // title
-        description: 'This channel is used for important notifications.', // description
+        description: 'This channel is used for important notifications.',
+        // description
         importance: Importance.high,
-        enableVibration: true, enableLights: true,
-        playSound: true, showBadge: true,
+        enableVibration: true,
+        enableLights: true,
+        playSound: true,
+        showBadge: true,
       );
 
       flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
-      var initializationSettingsAndroid = const AndroidInitializationSettings('drawable/ic_cashift');
-
-      final DarwinInitializationSettings initializationSettingsIOS = const DarwinInitializationSettings(
-          requestSoundPermission: false, requestBadgePermission: false, requestAlertPermission: false,
-          // onDidReceiveLocalNotification: onDidReceiveLocalNotification
+      var initializationSettingsAndroid = const AndroidInitializationSettings(
+        'drawable/ic_cashift',
       );
-      final InitializationSettings initializationSettings = InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+
+      final DarwinInitializationSettings initializationSettingsIOS =
+          const DarwinInitializationSettings(
+            requestSoundPermission: false,
+            requestBadgePermission: false,
+            requestAlertPermission: false,
+            // onDidReceiveLocalNotification: onDidReceiveLocalNotification,
+          );
+      final InitializationSettings initializationSettings =
+          InitializationSettings(
+            android: initializationSettingsAndroid,
+            iOS: initializationSettingsIOS,
+          );
 
       /// Create an Android Notification Channel.
       ///
       /// We use this channel in the `AndroidManifest.xml` file to override the
       /// default FCM channel to enable heads up notifications.
       if (Platform.isAndroid) {
-        await flutterLocalNotificationsPlugin!.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(channel!);
+        await flutterLocalNotificationsPlugin!
+            .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin
+            >()
+            ?.createNotificationChannel(channel!);
       } else if (Platform.isIOS) {
-        await flutterLocalNotificationsPlugin!.resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()?.requestPermissions(
-          alert: true,
-          badge: true,
-          sound: true,
-        );
+        await flutterLocalNotificationsPlugin!
+            .resolvePlatformSpecificImplementation<
+              IOSFlutterLocalNotificationsPlugin
+            >()
+            ?.requestPermissions(alert: true, badge: true, sound: true);
       }
 
-      await flutterLocalNotificationsPlugin!.initialize(initializationSettings, onDidReceiveNotificationResponse: onSelectNotification);
+      await flutterLocalNotificationsPlugin!.initialize(
+        initializationSettings,
+        // onSelectNotification: onSelectNotification,
+        onDidReceiveNotificationResponse: onSelectNotification,
+        onDidReceiveBackgroundNotificationResponse: onSelectNotification,
+      );
 
       /// Update the iOS foreground notification presentationUser options to allow
       /// heads up notifications.
-      await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
-        alert: true,
-        badge: true,
-        sound: true,
-      );
+      await FirebaseMessaging.instance
+          .setForegroundNotificationPresentationOptions(
+            alert: true,
+            badge: true,
+            sound: true,
+          );
     }
   }
 
@@ -78,7 +98,10 @@ class FirebaseNotifications {
       Map valueMap = json.decode(payload);
 
       print('onSelectNotification ${valueMap}');
-      final type = valueMap.containsKey('notificationType') ? valueMap['notificationType'] : '';
+      final type =
+          valueMap.containsKey('notificationType')
+              ? valueMap['notificationType']
+              : '';
 
       if (type == NotificationTypes.CONFIRMATION) {
         Navigator.pushNamed(Get.context!, Routes.activitylog);
@@ -87,8 +110,14 @@ class FirebaseNotifications {
         final offersParamsMap = valueMap['objects'];
         Map map = json.decode(offersParamsMap);
         print('ONOFFERS ${map}');
-        final params = NotificationOfferParams.fromJson(map.map((key, value) => MapEntry(key.toString(), value)));
-        Navigator.pushNamed(Get.context!, Routes.notificationOffers, arguments: params);
+        final params = NotificationOfferParams.fromJson(
+          map.map((key, value) => MapEntry(key.toString(), value)),
+        );
+        Navigator.pushNamed(
+          Get.context!,
+          Routes.notificationOffers,
+          arguments: params,
+        );
       }
       if (type == NotificationTypes.Violations) {
         Navigator.pushNamed(Get.context!, Routes.violations);
@@ -101,7 +130,12 @@ class FirebaseNotifications {
     }
   }
 
-  static Future<dynamic> onDidReceiveLocalNotification(int id, String? title, String? body, String? payload) async {
+  static Future<dynamic> onDidReceiveLocalNotification(
+    int id,
+    String? title,
+    String? body,
+    String? payload,
+  ) async {
     try {
       String valueMap = json.encode(payload);
 
@@ -130,7 +164,8 @@ class FirebaseNotifications {
   }
 
   static Future<void> firebaseMessagingBackgroundHandler(
-      RemoteMessage message) async {
+    RemoteMessage message,
+  ) async {
     // If you're going to use other Firebase services in the background, such as Firestore,
     // make sure you call `initializeApp` before using other Firebase services.
     await Firebase.initializeApp();
@@ -188,7 +223,8 @@ class FirebaseNotifications {
           notification.body,
           NotificationDetails(
             android: AndroidNotificationDetails(
-              channel!.id, channel!.name,
+              channel!.id,
+              channel!.name,
               channelDescription: channel!.description,
               subText: notification.title,
               usesChronometer: true,
@@ -197,7 +233,9 @@ class FirebaseNotifications {
               importance: Importance.max,
               priority: Priority.high,
               //    ongoing: true,
-              styleInformation: BigTextStyleInformation(notification.body.toString()),
+              styleInformation: BigTextStyleInformation(
+                notification.body.toString(),
+              ),
             ),
           ),
           payload: valueMap,
