@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:geocoding/geocoding.dart' show Placemark, placemarkFromCoordinates;
 import 'package:geolocator/geolocator.dart' as geolocator;
 import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
@@ -122,5 +123,10 @@ static Future<Stream<LocationData>> startPositionStreamWithoutDetectPermission()
     } else {
       DialogsManager.showMessageDialog(context, e.toString(), onClickOk: () {});
     }
+  }
+
+  static Future<String> getAddressFromLatLng(double lat, double lng) async{
+    List<Placemark> placemarks = await placemarkFromCoordinates(lat, lng);
+    return '${placemarks.first.street}, ${placemarks.first.administrativeArea} ${placemarks.first.subAdministrativeArea}';
   }
 }

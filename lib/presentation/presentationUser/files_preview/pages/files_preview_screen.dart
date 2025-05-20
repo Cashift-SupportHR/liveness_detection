@@ -113,7 +113,7 @@ class FilesPreviewScreen extends BaseStatelessWidget {
   }
 
   showImage(String url) {
-       if(url.contains("http")) {
+       if(url.startsWith("http")) {
          return  kBuildImage(
            url,
            fit: BoxFit.fill,

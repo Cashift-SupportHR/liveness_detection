@@ -125,13 +125,13 @@ abstract class UserEndpoint {
 
   /// favorite addresses
   @GET('/v6/FreelancerFavoriteAddresses/GetFreelancerFavoriteAddresses')
-  Future<ApiResponse<List<Address>>> fetchFavoriteAddresses();
+  Future<ApiResponse<List<AddressDto>>> fetchFavoriteAddresses();
 
   @POST('/v6/FreelancerFavoriteAddresses/AddFreelancerFavoriteAddresses')
-  Future<ApiResponse<bool>> addFavoriteAddresses(@Body() Address address);
+  Future<ApiResponse<bool>> addFavoriteAddresses(@Body() AddressDto address);
 
   @POST('/v6/FreelancerFavoriteAddresses/EditFreelancerFavoriteAddresses')
-  Future<ApiResponse<String>> editFavoriteAddresses(@Body() Address address);
+  Future<ApiResponse<String>> editFavoriteAddresses(@Body() AddressDto address);
 
   @POST('/v1/FreeLancerInfo/UpdateFreeLancerLocation')
   Future<ApiResponse> addHomeAddress(

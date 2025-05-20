@@ -28,10 +28,14 @@ class FilesPreviewCubit extends BaseCubit {
   Future<void> downLoadFromUrl(String data) async {
     emit(LoadingStateListener());
     try {
-      String filePath = await FilesManager.downloadFileFromUrl(data);
-     ( filePath.contains("http")||  filePath.contains(".pdf")) ?  await FilesManager().saveFileFromFile(filePath):  await FilesManager().saveFileFromBase64(
-       DownLoadFileDto(fileAttachment:filePath, fileAttachmentType: 'jpg'),
-     );
+      if(data.startsWith("http")){
+        String filePath = await FilesManager.downloadFileFromUrl(data);
+        await FilesManager().saveFileFromFile(filePath);
+      } else{
+        await FilesManager().saveFileFromBase64(
+          DownLoadFileDto(fileAttachment: data,),
+        );
+      }
       emit(SuccessStateListener(
           data: Get.context!.getStrings().successfully_downloaded));
     }catch (e) {

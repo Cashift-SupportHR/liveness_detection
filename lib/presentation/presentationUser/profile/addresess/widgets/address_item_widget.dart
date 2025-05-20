@@ -7,11 +7,11 @@ import '../../../../shared/components/base_stateless_widget.dart';
 import '../../../../shared/components/image_builder.dart';
 import '../../../../shared/components/outlint_button.dart';
 import '../../../resources/constants.dart';
-import '../pages/add_address_page.dart';
 
 class AddressItemWidget extends BaseStatelessWidget {
-  final Address address;
-  AddressItemWidget({Key? key, required this.address}) : super(key: key);
+  final Function() onRefresh;
+  final AddressDto address;
+  AddressItemWidget({Key? key, required this.onRefresh, required this.address}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class AddressItemWidget extends BaseStatelessWidget {
             AppOutlineButton(
               text: strings.open_map,
               onClick: () {
-                Navigator.pushNamed(context, Routes.addAddress, arguments: address);
+                onEditAddress(context);
               },
               borderWidth: 0.8,
               radius: 10,
@@ -51,6 +51,12 @@ class AddressItemWidget extends BaseStatelessWidget {
         ),
       ),
     );
+  }
+  onEditAddress(BuildContext context) async {
+   final isRefresh = await Navigator.pushNamed(context, Routes.addAddress, arguments: address);
+    if (isRefresh == true) {
+      onRefresh();
+    }
   }
 }
 

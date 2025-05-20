@@ -445,12 +445,12 @@ class _UserEndpoint implements UserEndpoint {
   }
 
   @override
-  Future<ApiResponse<List<Address>>> fetchFavoriteAddresses() async {
+  Future<ApiResponse<List<AddressDto>>> fetchFavoriteAddresses() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<ApiResponse<List<Address>>>(Options(
+    final _options = _setStreamType<ApiResponse<List<AddressDto>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -467,14 +467,14 @@ class _UserEndpoint implements UserEndpoint {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ApiResponse<List<Address>> _value;
+    late ApiResponse<List<AddressDto>> _value;
     try {
-      _value = ApiResponse<List<Address>>.fromJson(
+      _value = ApiResponse<List<AddressDto>>.fromJson(
         _result.data!,
         (json) => json is List<dynamic>
             ? json
-                .map<Address>(
-                    (i) => Address.fromJson(i as Map<String, dynamic>))
+                .map<AddressDto>(
+                    (i) => AddressDto.fromJson(i as Map<String, dynamic>))
                 .toList()
             : List.empty(),
       );
@@ -486,7 +486,7 @@ class _UserEndpoint implements UserEndpoint {
   }
 
   @override
-  Future<ApiResponse<bool>> addFavoriteAddresses(Address address) async {
+  Future<ApiResponse<bool>> addFavoriteAddresses(AddressDto address) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -523,7 +523,7 @@ class _UserEndpoint implements UserEndpoint {
   }
 
   @override
-  Future<ApiResponse<String>> editFavoriteAddresses(Address address) async {
+  Future<ApiResponse<String>> editFavoriteAddresses(AddressDto address) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

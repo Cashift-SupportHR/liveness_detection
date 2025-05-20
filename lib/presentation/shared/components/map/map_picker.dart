@@ -31,7 +31,7 @@ Future<MapPickerItem> navigatorMapPicker(BuildContext context, {LatLng? displayL
   MapPickerItem result = await Navigator.of(context).push(MaterialPageRoute(
        builder: (context) =>
            MapPickerPage(
-           //  displayLocation: displayLocation,
+             initialLatLng: displayLocation,
            )));
    return result;
  }

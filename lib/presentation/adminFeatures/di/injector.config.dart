@@ -169,6 +169,10 @@ import '../../presentationUser/mainnavigation/wallet/user_qrcode/bloc/qrcode_blo
 import '../../presentationUser/mainnavigation/wallet/withdraw/bloc/withdraw_cubit.dart'
     as _i68;
 import '../../presentationUser/map_picker/bloc/map_picker_cubit.dart' as _i66;
+import '../../presentationUser/map_picker/data/datasource/map_picker_provider.dart'
+    as _i249;
+import '../../presentationUser/map_picker/data/repositories/map_picker_repository.dart'
+    as _i735;
 import '../../presentationUser/notificationOffers/bloc/notification_offers_cubit.dart'
     as _i745;
 import '../../presentationUser/pledgesAndGeneralization/data/datasource/pledges_and_generalization_provider.dart'
@@ -592,7 +596,6 @@ Future<_i174.GetIt> $initGetIt(
     preResolve: true,
   );
   gh.factory<_i810.FilesPreviewCubit>(() => _i810.FilesPreviewCubit());
-  gh.factory<_i66.MapPickerCubit>(() => _i66.MapPickerCubit());
   gh.factory<_i616.CollectionDataCubit>(() => _i616.CollectionDataCubit());
   gh.factory<_i1033.LocalRepository>(
       () => _i1033.LocalRepository(preferences: gh<_i460.SharedPreferences>()));
@@ -601,6 +604,7 @@ Future<_i174.GetIt> $initGetIt(
   gh.factory<_i307.ConfigurationEndpoint>(
       () => _i307.ConfigurationEndpoint(gh<_i361.Dio>()));
   gh.factory<_i1029.UserEndpoint>(() => _i1029.UserEndpoint(gh<_i361.Dio>()));
+  gh.factory<_i249.MapPickerAPI>(() => _i249.MapPickerAPI());
   gh.factory<_i870.TodayOpportunityApiProvider>(
       () => _i870.TodayOpportunityApiProvider(gh<_i281.AdminEndpoint>()));
   gh.factory<_i1035.TodayOpportunityRepository>(() =>
@@ -677,6 +681,8 @@ Future<_i174.GetIt> $initGetIt(
       () => _i825.ActivityLogRepository(gh<_i882.ActivityLogAPI>()));
   gh.factory<_i304.CollectCashRepository>(
       () => _i304.CollectCashRepository(gh<_i9.CollectCashAPI>()));
+  gh.factory<_i735.MapPickerRepository>(
+      () => _i735.MapPickerRepository(gh<_i249.MapPickerAPI>()));
   gh.factory<_i52.AbsenceNoticeRepository>(
       () => _i52.AbsenceNoticeRepository(gh<_i420.AbsenceNoticeAPI>()));
   gh.factory<_i430.AddOpportunityAPI>(
@@ -830,6 +836,8 @@ Future<_i174.GetIt> $initGetIt(
       () => _i443.UsersRequestsRepository(gh<_i164.UsersRequestsAPI>()));
   gh.factory<_i1005.AddOpportunityRepository>(
       () => _i1005.AddOpportunityRepository(gh<_i430.AddOpportunityAPI>()));
+  gh.factory<_i66.MapPickerCubit>(
+      () => _i66.MapPickerCubit(gh<_i735.MapPickerRepository>()));
   gh.factory<_i367.TermandConditionRepository>(
       () => _i367.TermandConditionRepository(gh<_i805.TermandConditionAPI>()));
   gh.factory<_i366.WorkingDocumentRepository>(
@@ -1126,7 +1134,8 @@ Future<_i174.GetIt> $initGetIt(
         gh<_i605.ProjectsManagementRepository>(),
       ));
   gh.factory<_i453.AddAddressCubit>(
-      () => _i453.AddAddressCubit(gh<_i431.AddAddressRepository>()));
+      () => _i453.AddAddressCubit(gh<_i431.AddAddressRepository>(),
+            gh<_i735.MapPickerRepository>()));
   gh.factory<_i844.AbsenceNoticeCubit>(() => _i844.AbsenceNoticeCubit(
         gh<_i52.AbsenceNoticeRepository>(),
         gh<_i339.AttendanceRepository>(),

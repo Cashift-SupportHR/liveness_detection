@@ -1,3 +1,5 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 class MapPickerItem{
   String? formattedAddress;
   MapPickerGeometry? geometry;
@@ -17,6 +19,13 @@ class MapPickerItem{
     data['geometry'] = this.geometry;
     data['place_id'] = this.placeId;
     return data;
+  }
+
+  LatLng getLatLng() {
+    return LatLng(
+      double.parse(geometry?.location?.lat?.toString() ?? '0.0'),
+      double.parse(geometry?.location?.lng?.toString() ?? '0.0'),
+    );
   }
 }
 class MapPickerGeometry {
