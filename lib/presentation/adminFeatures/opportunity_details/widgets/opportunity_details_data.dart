@@ -8,7 +8,9 @@ import 'package:shiftapp/utils/app_icons.dart';
 import '../../../../domain/entities/shared/date_formatter.dart';
 import '../../../shared/components/base_stateless_widget.dart';
 import '../../../shared/components/circular_percent_widget.dart';
+import '../../../shared/components/curancy_widget.dart';
 import '../../../shared/components/decorations/decorations.dart';
+import '../../../shared/components/texts/icon_double_text.dart';
 import '../../../shared/components/texts/list_row_texts_icons_v2.dart';
 import '../../shared/domain/entities/opportunities/OpportunityDetailsData.dart';
 import '../applied_details/pages/Applicants/applied_page.dart';
@@ -17,7 +19,8 @@ import 'applied_opportunity_details_widget.dart';
 class OpportunityDetailsWidget extends BaseStatelessWidget {
   final OpportunityDetailsData opportunityDetails;
 
-  OpportunityDetailsWidget({Key? key, required this.opportunityDetails}) : super(key: key);
+  OpportunityDetailsWidget({Key? key, required this.opportunityDetails})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,29 +31,36 @@ class OpportunityDetailsWidget extends BaseStatelessWidget {
           IntrinsicHeight(
             child: Container(
               margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              decoration: Decorations.shapeDecoration(radius: 12, color: kBackground),
+              decoration: Decorations.shapeDecoration(
+                radius: 12,
+                color: kBackground,
+              ),
               child: Column(
                 children: [
                   ListRowTextsIconsV2(
                     isMark: true,
                     iconSize: 18,
                     // iconColor: kPrimary,
-                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 14),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 16,
+                      horizontal: 14,
+                    ),
                     crossAxisAlignment: CrossAxisAlignment.start,
                     items: getListData(context),
                   ),
+
                   footer(),
                 ],
               ),
             ),
           ),
-          AppliedOpportunityDatailsWidget(opportunityDetails: opportunityDetails,),
+          AppliedOpportunityDatailsWidget(
+            opportunityDetails: opportunityDetails,
+          ),
         ],
       ),
     );
   }
-
-
 
   List<ListRowTextItem> getListData(BuildContext context) {
     return [
@@ -67,7 +77,12 @@ class OpportunityDetailsWidget extends BaseStatelessWidget {
       ListRowTextItem(
         icon: AppIcons.opportunityValue,
         title: strings.opportunity_value,
-        value: opportunityDetails.salaries.toString() + ' ' + strings.saudi_riyals,
+        valueWidget: Expanded(
+          flex: 3,
+          child: CurancyWidget(
+            valuePrice: opportunityDetails.salaries.toString(),
+          ),
+        ),
       ),
       ListRowTextItem(
         icon: AppIcons.startTime1,
@@ -82,18 +97,30 @@ class OpportunityDetailsWidget extends BaseStatelessWidget {
       ListRowTextItem(
         icon: AppIcons.star,
         title: strings.opportunity_classification,
-        value: opportunityDetails.completeFreeLanceInfoByCompanyAprovelLevelName ?? '-',
+        value:
+            opportunityDetails.completeFreeLanceInfoByCompanyAprovelLevelName ??
+            '-',
       ),
     ];
   }
 
   String getDate(String date) {
-    return DateFormatter.formatDateString(date, DateFormatter.DAY_MONTH_YEAR, DateFormatter.WORKING_DATE_TIME_UI);
+    return DateFormatter.formatDateString(
+      date,
+      DateFormatter.DAY_MONTH_YEAR,
+      DateFormatter.WORKING_DATE_TIME_UI,
+    );
   }
 
   Widget footer() {
-    TextStyle titleStyle = kTextSemiBold.copyWith(fontSize: 20, color: kPrimary);
-    TextStyle subTitleStyle = kTextSemiBold.copyWith(fontSize: 24, color: kRateBarIconColor);
+    TextStyle titleStyle = kTextSemiBold.copyWith(
+      fontSize: 20,
+      color: kPrimary,
+    );
+    TextStyle subTitleStyle = kTextSemiBold.copyWith(
+      fontSize: 24,
+      color: kRateBarIconColor,
+    );
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -108,11 +135,10 @@ class OpportunityDetailsWidget extends BaseStatelessWidget {
             subTitleStyle: subTitleStyle,
           ),
           SizedBox(
-              width: 1,
-              height: 20,
-              child: VerticalDivider(
-                color: kGray_C6,
-              )),
+            width: 1,
+            height: 20,
+            child: VerticalDivider(color: kGray_C6),
+          ),
           CustomRichText(
             title: strings.remaining_number,
             subTitle: opportunityDetails.actualNumber.toString() ?? '',

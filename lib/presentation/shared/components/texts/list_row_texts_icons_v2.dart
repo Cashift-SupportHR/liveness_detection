@@ -54,6 +54,7 @@ class ListRowTextsIconsV2 extends StatelessWidget {
                     value: e.value,
                     nameStyle: titleStyle,
                     valueStyle: valueStyle,
+                    valueWidget: e.valueWidget,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     maxLines: maxLines,
                     iconSize: iconSize,
@@ -63,6 +64,7 @@ class ListRowTextsIconsV2 extends StatelessWidget {
                     iconColor: iconColor,
                     name: isMark ? '${e.title} :' : e.title,
                     value: e.value,
+                    valueWidget: e.valueWidget,
                     nameStyle: titleStyle,
                     valueStyle: valueStyle,
                     padding: paddingItem,
@@ -78,7 +80,8 @@ class ListRowTextsIconsV2 extends StatelessWidget {
 class ListRowTextItem {
   String? icon;
   final String title;
-  final String value;
+    String ?value;
+    Widget? valueWidget;
 
-  ListRowTextItem({this.icon, required this.title, required this.value});
+  ListRowTextItem({this.valueWidget, this.icon, required this.title,   this.value});
 }

@@ -76,7 +76,6 @@ class HeaderInterceptor extends Interceptor {
     options.headers['platform'] = Config.platformName;
     options.headers['AppVersion'] = Config.AppVersion;
     options.headers[requestTypeKey] = true;
-
     print('Header  Params ${options.data} ${options.headers}');
      super.onRequest(options, handler);
   }

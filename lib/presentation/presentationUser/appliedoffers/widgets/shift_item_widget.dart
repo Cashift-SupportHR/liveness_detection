@@ -12,7 +12,8 @@ import 'package:shiftapp/presentation/shared/components/material_text.dart';
 import 'package:shiftapp/presentation/shared/components/outlint_button.dart';
 
 import '../../../../utils/app_icons.dart';
- import '../../../shared/components/decorations/decorations.dart';
+ import '../../../shared/components/curancy_widget.dart';
+import '../../../shared/components/decorations/decorations.dart';
 import '../../mainnavigation/overview/widgets/current_shift_widget.dart';
 
 class ShiftItemWidget extends BaseStatelessWidget {
@@ -272,13 +273,18 @@ class ShiftItemWidget extends BaseStatelessWidget {
   }
 
   Widget buildShiftPrice(AppliedOffer job) {
-    return MaterialText(
-      job.salary.toString() + ' ${strings.sar}',
-      style: kTextMedium.copyWith(fontSize: 12, color: kDarkGrey),
-      startIconPadding: const EdgeInsetsDirectional.only(end: 16),
-      startIcon: kLoadSvgInCirclePath(AppIcons.opportunityValue),
-      endIconPadding: const EdgeInsetsDirectional.only(start: 20),
-    );
+    return
+     Row(
+       children: [
+         Padding(
+           padding: const EdgeInsetsDirectional.only(end: 16),
+           child: kLoadSvgInCirclePath(AppIcons.opportunityValue),
+         ),
+         CurancyWidget(valuePrice:   job.salary.toString() ,valueStyle:  kTextMedium.copyWith(fontSize: 12, color: kDarkGrey)),
+       SizedBox(width: 20,),
+       ],
+     );
+
   }
 
   Widget buildShiftDate(AppliedOffer job) {
