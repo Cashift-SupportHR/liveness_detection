@@ -249,5 +249,9 @@ flutter:
       fonts:
         - asset: fonts/Somar-SemiBold.otf
           weight: 900
+    - family: fontIcon
+      fonts:
+        - asset: fonts/saudi_riyal.ttf
+          weight: 900
 flutter_intl:
   enabled: true

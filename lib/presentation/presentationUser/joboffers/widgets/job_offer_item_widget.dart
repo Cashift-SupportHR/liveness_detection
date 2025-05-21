@@ -779,6 +779,8 @@ Widget favoriteIcon({double? sizeIcon}){
   Widget buttonText(BuildContext context) {
     return
       Row(
+        crossAxisAlignment:CrossAxisAlignment.center ,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(strings.earning_now,style:kTextRegular.copyWith(fontSize: 14, color: Colors.white) ,),
           if(jobOffer.showPrice == true)

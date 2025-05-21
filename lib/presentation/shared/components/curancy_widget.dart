@@ -11,15 +11,29 @@ class CurancyWidget extends BaseStatelessWidget {
     : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Text(
-      "${valuePrice} ${strings.saudi_riyals}",
-      style:
-          valueStyle ??
-          kTextRegular.copyWith(
-            color: kBlack.withOpacity(0.8),
-            fontSize: 12,
-            overflow: TextOverflow.ellipsis,
-          ),
+    return Row(
+      children: [
+        SizedBox(width: 3,),
+        Text(
+          "${valuePrice} ",
+          style:
+              valueStyle ??
+              kTextRegular.copyWith(
+                color: kBlack.withOpacity(0.8),
+                fontSize: 12,
+                overflow: TextOverflow.ellipsis,
+              ),
+        ),
+
+        Text(
+          "\uE900",
+          style:
+              fontIcon.copyWith(
+                fontSize: valueStyle?.fontSize ?? 14,
+                color: valueStyle?.color ?? kBlack.withOpacity(0.8),
+              ),
+        ),
+      ],
     );
   }
 }
