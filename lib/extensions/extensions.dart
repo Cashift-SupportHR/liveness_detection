@@ -242,18 +242,30 @@ extension DateUtils on DateTime {
 
 
 /// replace ModalRoute.of(context)
+@pragma('vm:entry-point')
 class MyModalRoute {
-
-  static ModalRoute<dynamic>? of(BuildContext context) {
-    ModalRoute<dynamic>? route;
+  /// Finds the nearest ancestor InheritedWidget that has a `route` property
+  /// of type [ModalRoute<T>] and returns it.
+  @pragma('vm:entry-point')
+  static ModalRoute<T>? of<T>(BuildContext context) {
+    ModalRoute<T>? found;
     context.visitAncestorElements((element) {
-      if(element.widget.runtimeType.toString() == '_ModalScopeStatus') {
-        dynamic widget = element.widget;
-        route = widget.route as ModalRoute;
-        return false;
+      final widget = element.widget;
+      // Only InheritedWidgets can be ancestor Route-carriers
+      if (widget is InheritedWidget) {
+        try {
+          // `as dynamic` so we can test for a `route` field at runtime
+          final candidate = (widget as dynamic).route;
+          if (candidate is ModalRoute<T>) {
+            found = candidate;
+            return false; // stop walking
+          }
+        } catch (_) {
+          // no `.route` field, or not the right type
+        }
       }
-      return true;
+      return true; // keep walking
     });
-    return route;
+    return found;
   }
 }

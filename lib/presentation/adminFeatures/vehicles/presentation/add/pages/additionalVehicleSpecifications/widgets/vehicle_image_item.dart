@@ -21,7 +21,6 @@ class VehicleImageItem extends BaseStatelessWidget {
   Widget build(BuildContext context) {
     StreamStateInitial<File> streamDataStateInitial =
         StreamStateInitial<File>();
-    File? image = null;
     return DottedBorder(
       radius: Radius.circular(12),
       padding: EdgeInsets.all(10),
@@ -67,6 +66,7 @@ class VehicleImageItem extends BaseStatelessWidget {
                   onUploadImage?.call(file);
                 });
               },
+              height: 30,
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
