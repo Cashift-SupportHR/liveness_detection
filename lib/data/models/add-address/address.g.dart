@@ -14,7 +14,8 @@ AddressDto _$AddressDtoFromJson(Map<String, dynamic> json) => AddressDto(
       name: json['name'] as String?,
     );
 
-Map<String, dynamic> _$AddressDtoToJson(AddressDto instance) => <String, dynamic>{
+Map<String, dynamic> _$AddressDtoToJson(AddressDto instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'langitude': instance.langitude,
       'latitude': instance.latitude,

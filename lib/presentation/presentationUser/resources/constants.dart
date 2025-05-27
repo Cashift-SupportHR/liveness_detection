@@ -134,6 +134,9 @@ const kTextBodyBold = TextStyle(
   fontFamily: 'Bold',
 );
 
+const kTextFontIcon = TextStyle(fontFamily: 'fontIcon');
+TextStyle get fontIcon =>kTextFontIcon;
+
 const kTextExtraBold = TextStyle(
   color: kFontDarkGreen,
   fontSize: 18.0,
@@ -170,6 +173,7 @@ const kTextFieldProfileItemDecoration = InputDecoration(
       borderRadius: BorderRadius.all(Radius.circular(8)),
       borderSide: BorderSide.none,
     ));
+
 
 const kTextDescriptionFieldDecoration = InputDecoration(
     filled: true,
