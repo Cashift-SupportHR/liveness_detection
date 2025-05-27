@@ -1392,7 +1392,7 @@
   "show_cashifter_data": "إظهار بيانات الكاشيفتر",
   "user_request_reject_title": "هل انت متأكد من الرفض؟",
   "user_request_reject_subtitle": "اذا كنت ترفض طلب الكاشفتر عليك كتابة السبب",
-   "user_request_accept_title": "هل انت متأكد من الموافقة علي تغيير رقم جوال الكاشفتر؟",
+   "user_request_accept_title": "هل انت متأكد من الموافقة؟",
   "user_request_accept_subtitle_msg": "اذا كنت توافق علي طلب الكاشفتر سينتقل الطلب الي قائمة الموافقة ويتحول الطلب الي الادارة",
   "cashifters_requests": "طلبات الكاشفترز",
   "it_will_sent_supervisor": "سيتم ارساله للمشرف.",

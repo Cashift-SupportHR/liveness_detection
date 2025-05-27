@@ -222,6 +222,7 @@ const kRed_00 = Color(0xFFFF0000);
 const kRed_07 = Color(0xFF24D407);
 const kGray_70 = Color(0xFF81818170);
 const kGray_88 = Color(0xFF888888);
+const kGray_41 = Color(0xFF414141);
 
 Color kColorFromHex(String hexColor) {
   final hexCode = hexColor.replaceAll('#', '');

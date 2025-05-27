@@ -41,10 +41,13 @@ class LoginScreen extends BaseWidget {
       // phone = '559135678';
       // phoneController.text = '559135678';
       // passwordController.text = '123456';
-      phone = '0582708625';
-      phoneController.text = '0582708625';
-      passwordController.text = 'Asdf@123';
-      phoneStream.setData(true);
+      phone = '559135678';
+      phoneController.text = '559135678';
+      passwordController.text = '123456';
+      // phone = '0582708625';
+      // phoneController.text = '0582708625';
+      // passwordController.text = 'Asdf@123';
+      // phoneStream.setData(true);
     }
     getFcmToken();
     return createUI(context);

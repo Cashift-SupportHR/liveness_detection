@@ -1954,8 +1954,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "user_account": MessageLookupByLibrary.simpleMessage("حساب المستخدم"),
         "user_request_accept_subtitle_msg": MessageLookupByLibrary.simpleMessage(
             "اذا كنت توافق علي طلب الكاشفتر سينتقل الطلب الي قائمة الموافقة ويتحول الطلب الي الادارة"),
-        "user_request_accept_title": MessageLookupByLibrary.simpleMessage(
-            "هل انت متأكد من الموافقة علي تغيير رقم جوال الكاشفتر؟"),
+        "user_request_accept_title":
+            MessageLookupByLibrary.simpleMessage("هل انت متأكد من الموافقة؟"),
         "user_request_reject_subtitle": MessageLookupByLibrary.simpleMessage(
             "اذا كنت ترفض طلب الكاشفتر عليك كتابة السبب"),
         "user_request_reject_title":

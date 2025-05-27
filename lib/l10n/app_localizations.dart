@@ -8210,7 +8210,7 @@ abstract class AppLocalizations {
   /// No description provided for @user_request_accept_title.
   ///
   /// In ar, this message translates to:
-  /// **'هل انت متأكد من الموافقة علي تغيير رقم جوال الكاشفتر؟'**
+  /// **'هل انت متأكد من الموافقة؟'**
   String get user_request_accept_title;
 
   /// No description provided for @user_request_accept_subtitle_msg.
