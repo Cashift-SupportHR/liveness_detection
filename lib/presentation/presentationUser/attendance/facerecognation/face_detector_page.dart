@@ -131,6 +131,20 @@ class _M7ExpampleScreenState extends BaseState<FaceDetectorPage> {
           ),
       ],
     );
+    if(_veificationSteps.isEmpty) {
+      _veificationSteps.add(
+        LivelynessStepItem(
+          step: LivelynessStep.blink,
+          title: strings.blink_your_eyes,
+          isCompleted: false,
+        ),
+      );
+      LivelynessStepItem(
+        step: LivelynessStep.smile,
+        title: strings.smil,
+        isCompleted: false,
+      );
+    }
     LivelynessDetection.instance.configure(
       dotColor: Colors.white,
       thresholds: [
