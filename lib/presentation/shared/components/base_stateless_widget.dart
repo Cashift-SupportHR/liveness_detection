@@ -205,4 +205,6 @@ abstract class BaseStatelessWidget extends StatelessWidget {
     DialogsManager.showErrorDialog(
         context, context.handleApiErrorMessage(exception: error));
   }
+
+
 }

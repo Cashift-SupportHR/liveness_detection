@@ -70,9 +70,7 @@ class ViolationsUserItem extends BaseStatelessWidget {
                   ],
                   values: [
                     violation.typesOfViolationName ?? '',
-                    (violation.amountViolation?.toString() ?? '0.0') +
-                        ' ' +
-                        strings.sar,
+                    (violation.amountViolation?.toString() ?? '0.0') ,
                     violation.companyName ?? '',
                     violation.projectName ?? '',
                     dateTime(),

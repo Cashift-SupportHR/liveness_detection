@@ -58,10 +58,10 @@ CompletedOpportunityData _$CompletedOpportunityDataFromJson(
       startShiftTime: json['startShiftTime'] as String?,
       oppId: (json['oppId'] as num?)?.toInt(),
       isAllowUpdateStatus: json['isAllowUpdateStatus'] as bool?,
-      deservedAmount: (json['deservedAmount'] as num?)?.toInt(),
+      deservedAmount: json['deservedAmount'] as num?,
       totalDeductMoneyClearanceCertificate:
-          (json['totalDeductMoneyClearanceCertificate'] as num?)?.toInt(),
-      ammountViolations: (json['ammountViolations'] as num?)?.toInt(),
+          json['totalDeductMoneyClearanceCertificate'] as num?,
+      ammountViolations: json['ammountViolations'] as num?,
     );
 
 Map<String, dynamic> _$CompletedOpportunityDataToJson(

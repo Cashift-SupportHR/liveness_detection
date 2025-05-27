@@ -596,7 +596,10 @@ Future<_i174.GetIt> $initGetIt(
     preResolve: true,
   );
   gh.factory<_i810.FilesPreviewCubit>(() => _i810.FilesPreviewCubit());
+  gh.factory<_i249.MapPickerAPI>(() => _i249.MapPickerAPI());
   gh.factory<_i616.CollectionDataCubit>(() => _i616.CollectionDataCubit());
+  gh.factory<_i735.MapPickerRepository>(
+      () => _i735.MapPickerRepository(gh<_i249.MapPickerAPI>()));
   gh.factory<_i1033.LocalRepository>(
       () => _i1033.LocalRepository(preferences: gh<_i460.SharedPreferences>()));
   gh.factory<_i903.LoggerAPI>(() => _i903.LoggerAPI(gh<_i361.Dio>()));
@@ -604,7 +607,8 @@ Future<_i174.GetIt> $initGetIt(
   gh.factory<_i307.ConfigurationEndpoint>(
       () => _i307.ConfigurationEndpoint(gh<_i361.Dio>()));
   gh.factory<_i1029.UserEndpoint>(() => _i1029.UserEndpoint(gh<_i361.Dio>()));
-  gh.factory<_i249.MapPickerAPI>(() => _i249.MapPickerAPI());
+  gh.factory<_i66.MapPickerCubit>(
+      () => _i66.MapPickerCubit(gh<_i735.MapPickerRepository>()));
   gh.factory<_i870.TodayOpportunityApiProvider>(
       () => _i870.TodayOpportunityApiProvider(gh<_i281.AdminEndpoint>()));
   gh.factory<_i1035.TodayOpportunityRepository>(() =>
@@ -681,8 +685,6 @@ Future<_i174.GetIt> $initGetIt(
       () => _i825.ActivityLogRepository(gh<_i882.ActivityLogAPI>()));
   gh.factory<_i304.CollectCashRepository>(
       () => _i304.CollectCashRepository(gh<_i9.CollectCashAPI>()));
-  gh.factory<_i735.MapPickerRepository>(
-      () => _i735.MapPickerRepository(gh<_i249.MapPickerAPI>()));
   gh.factory<_i52.AbsenceNoticeRepository>(
       () => _i52.AbsenceNoticeRepository(gh<_i420.AbsenceNoticeAPI>()));
   gh.factory<_i430.AddOpportunityAPI>(
@@ -836,8 +838,6 @@ Future<_i174.GetIt> $initGetIt(
       () => _i443.UsersRequestsRepository(gh<_i164.UsersRequestsAPI>()));
   gh.factory<_i1005.AddOpportunityRepository>(
       () => _i1005.AddOpportunityRepository(gh<_i430.AddOpportunityAPI>()));
-  gh.factory<_i66.MapPickerCubit>(
-      () => _i66.MapPickerCubit(gh<_i735.MapPickerRepository>()));
   gh.factory<_i367.TermandConditionRepository>(
       () => _i367.TermandConditionRepository(gh<_i805.TermandConditionAPI>()));
   gh.factory<_i366.WorkingDocumentRepository>(
@@ -1133,9 +1133,6 @@ Future<_i174.GetIt> $initGetIt(
         gh<_i579.JobUniformRepository>(),
         gh<_i605.ProjectsManagementRepository>(),
       ));
-  gh.factory<_i453.AddAddressCubit>(
-      () => _i453.AddAddressCubit(gh<_i431.AddAddressRepository>(),
-            gh<_i735.MapPickerRepository>()));
   gh.factory<_i844.AbsenceNoticeCubit>(() => _i844.AbsenceNoticeCubit(
         gh<_i52.AbsenceNoticeRepository>(),
         gh<_i339.AttendanceRepository>(),
@@ -1167,6 +1164,10 @@ Future<_i174.GetIt> $initGetIt(
       () => _i227.UserRequestTermsCubit(gh<_i443.UsersRequestsRepository>()));
   gh.factory<_i867.OvertimeAttendanceCubit>(
       () => _i867.OvertimeAttendanceCubit(gh<_i339.AttendanceRepository>()));
+  gh.factory<_i453.AddAddressCubit>(() => _i453.AddAddressCubit(
+        gh<_i431.AddAddressRepository>(),
+        gh<_i735.MapPickerRepository>(),
+      ));
   gh.factory<_i277.EmployeeCertificateDetailsCubit>(() =>
       _i277.EmployeeCertificateDetailsCubit(
           gh<_i1070.EmployeesCertificatesItemRepository>()));

@@ -6,6 +6,7 @@ import 'package:shiftapp/presentation/presentationUser/joboffers/widgets/job_off
 import 'package:shiftapp/presentation/presentationUser/resources/colors.dart';
 import 'package:shiftapp/presentation/presentationUser/resources/constants.dart';
 import 'package:shiftapp/presentation/shared/components/app_cupertino_button.dart';
+import 'package:shiftapp/presentation/shared/components/curancy_widget.dart';
 import 'package:shiftapp/presentation/shared/components/image_builder.dart';
 import 'package:shiftapp/presentation/shared/components/material_text.dart';
 import 'package:shiftapp/presentation/shared/components/outlint_button.dart';
@@ -769,31 +770,25 @@ Widget favoriteIcon({double? sizeIcon}){
           style: kTextRegularPrimary.copyWith(fontSize: 12),
         ),
         if(jobOffer.showPrice == true)
-        Text(
-          jobOffer.salary.toString().addCurrency(context) ?? "",
-          style: kTextRegularGrey.copyWith(fontSize: 12),
-        ),
+          CurancyWidget(valuePrice:  jobOffer.salary.toString(),valueStyle:  kTextRegularGrey.copyWith(fontSize: 12),)
+
       ],
     );
   }
 
   Widget buttonText(BuildContext context) {
-    return RichText(
-      text: TextSpan(children: [
-        TextSpan(
-            text: strings.earning_now,
-            style: kTextRegular.copyWith(fontSize: 14, color: Colors.white)),
+    return
+      Row(
+        crossAxisAlignment:CrossAxisAlignment.center ,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(strings.earning_now,style:kTextRegular.copyWith(fontSize: 14, color: Colors.white) ,),
+          if(jobOffer.showPrice == true)
+          CurancyWidget(valuePrice: jobOffer.salary.toString(),valueStyle:  kTextRegular.copyWith(color: kButterScotch, fontSize: 14),)
+        ],
+      );
 
-        if(jobOffer.showPrice == true)
-        TextSpan(
-            text: jobOffer.salary.toString(),
-            style: kTextMedium.copyWith(color: kButterScotch, fontSize: 14)),
-        if(jobOffer.showPrice == true)
-        TextSpan(
-            text: ''.addCurrency(context),
-            style: kTextRegular.copyWith(color: kButterScotch, fontSize: 14))
-      ]),
-    );
+
   }
 
   Widget buildProjectLogo() {
