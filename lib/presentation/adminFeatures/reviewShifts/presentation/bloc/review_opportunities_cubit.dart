@@ -60,7 +60,7 @@ class ReviewOpportunitiesCubit extends BaseCubit{
       allOpportunity.addAll(opportunityes);
       opportunityStream.setData(allOpportunity);
 
-    } on Exception catch (e) {
+    } catch (e) {
       print(e);
       print("erroruhjhjhjhj");
       opportunityStream.setError(e);
