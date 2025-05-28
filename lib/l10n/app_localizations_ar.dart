@@ -4073,7 +4073,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get user_request_reject_subtitle => 'اذا كنت ترفض طلب الكاشفتر عليك كتابة السبب';
 
   @override
-  String get user_request_accept_title => 'هل انت متأكد من الموافقة علي تغيير رقم جوال الكاشفتر؟';
+  String get user_request_accept_title => 'هل انت متأكد من الموافقة؟';
 
   @override
   String get user_request_accept_subtitle_msg => 'اذا كنت توافق علي طلب الكاشفتر سينتقل الطلب الي قائمة الموافقة ويتحول الطلب الي الادارة';

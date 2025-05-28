@@ -5,11 +5,9 @@ part 'user_request_terms_params.g.dart';
 @JsonSerializable(ignoreUnannotated: false)
 class UserRequestTermsParams {
   @JsonKey(name: 'requestTypeCode')
-  int? requestTypeCode;
-  @JsonKey(name: 'requestStatusCode')
-  int? requestStatusCode;
+  String? requestTypeCode;
 
-  UserRequestTermsParams({this.requestTypeCode, this.requestStatusCode});
+  UserRequestTermsParams({this.requestTypeCode});
 
    factory UserRequestTermsParams.fromJson(Map<String, dynamic> json) => _$UserRequestTermsParamsFromJson(json);
 

@@ -9909,7 +9909,7 @@ class _AdminEndpoint implements AdminEndpoint {
   }
 
   @override
-  Future<ApiResponse<List<String>>> fetchUserRequestTerms(
+  Future<ApiResponse<List<CommonListItemDto>>> fetchUserRequestTerms(
       UserRequestTermsParams params) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -9923,7 +9923,7 @@ class _AdminEndpoint implements AdminEndpoint {
     )
         .compose(
           _dio.options,
-          '/v1/CashifterRequestsTermsAndConditions/GetAllCashifterRequestTermsAndConditionsByTypeAndStatus',
+          '/v1/CashifterRequestsTermsAndConditions/GetAllCashifterRequestTermsAndConditionsByRequestType',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -9933,12 +9933,15 @@ class _AdminEndpoint implements AdminEndpoint {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ApiResponse<List<String>> _value;
+    late ApiResponse<List<CommonListItemDto>> _value;
     try {
-      _value = ApiResponse<List<String>>.fromJson(
+      _value = ApiResponse<List<CommonListItemDto>>.fromJson(
         _result.data!,
-        (json) => json is List<dynamic>
-            ? json.map<String>((i) => i as String).toList()
+            (json) => json is List<dynamic>
+            ? json
+            .map<CommonListItemDto>((i) =>
+            CommonListItemDto.fromJson(i as Map<String, dynamic>))
+            .toList()
             : List.empty(),
       );
     } on Object catch (e, s) {

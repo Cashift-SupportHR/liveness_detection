@@ -1081,9 +1081,8 @@ abstract class AdminEndpoint {
   Future<ApiResponse<List<UserRequestDto>>> fetchUsersRequests(
       @Query('statusId') int statusId);
 
-  @GET(
-      '/v1/CashifterRequestsTermsAndConditions/GetAllCashifterRequestTermsAndConditionsByTypeAndStatus')
-  Future<ApiResponse<List<String>>> fetchUserRequestTerms(
+  @GET('/v1/CashifterRequestsTermsAndConditions/GetAllCashifterRequestTermsAndConditionsByRequestType')
+  Future<ApiResponse<List<CommonListItemDto>>> fetchUserRequestTerms(
       @Queries() UserRequestTermsParams params);
 
   @PUT('/v1/CashifterRequests/UpdateRequestStatus')
