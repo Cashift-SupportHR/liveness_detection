@@ -4,6 +4,7 @@ import 'package:shiftapp/presentation/presentationUser/common/common_state.dart'
  import '../../../../shared/components/base/stream_state_widget_v2.dart';
 import '../../../../shared/components/pagination/custom_footer_builder.dart';
 import '../../../../shared/components/search_widget.dart';
+import '../../../../shared/components/stream/stream_data_state_widget.dart';
 import '../../data/models/complet_opportunity_dto.dart';
  import '../../data/models/review_shiftsprams.dart';
  import '../bloc/review_opportunities_cubit.dart';
@@ -60,12 +61,11 @@ class ReviewOpportunitiesPage extends BaseBlocWidget<
   @override
   Widget buildWidget(
       BuildContext context, UnInitState state) {
-    return StreamStateWidgetV2<List<CompletedOpportunityData>?>(
+    return StreamDataStateWidget<List<CompletedOpportunityData>?>(
         stream: bloc.opportunityStream,
-        initialData: state.data,
-        onReload: () {
+         onReload: () {
           onRefresh();
-          //   controller.clear();
+
         },
         builder: (context, snapshot) {
           return SmartRefresher(

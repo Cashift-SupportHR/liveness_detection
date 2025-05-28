@@ -11,6 +11,7 @@ import 'build_text_field_item.dart';
 
 class DateTimeTextFieldPicker extends StatelessWidget {
   final String? hintText;
+  final String? title;
   final String? inaialValue;
 
   Function(String date) onTap;
@@ -18,6 +19,7 @@ class DateTimeTextFieldPicker extends StatelessWidget {
   DateTimeTextFieldPicker({
     this.hintText,
     this.inaialValue,
+    this.title,
     required this.onTap,
   });
   String? text;
@@ -63,23 +65,38 @@ class DateTimeTextFieldPicker extends StatelessWidget {
             }
           }
         },
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-          decoration:
-              Decorations.decorationOnlyRadius(color: kWhite, radius: 5),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SvgPicture.asset(AppIcons.timeCalender, width: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+
+            if(title != null) ...[
               Text(
-                text ?? hintText ?? "",
-                style: kTextRegular.copyWith(color: kAlmostBlack, fontSize: 11),
+                title ?? '',
+                style:  kTextMedium.copyWith(fontSize: 14, color: kPrimary),
               ),
-              Icon(Icons.keyboard_arrow_down_outlined,
-                  color: kPrimary, size: 15),
-            ],
-          ),
+              SizedBox(
+                height:5,
+              ),
+        ],
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+              decoration:
+                  Decorations.decorationTabBarView(  radius: 5),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SvgPicture.asset(AppIcons.timeCalender, width: 20),
+                  Text(
+                    text ?? hintText ?? "",
+                    style: kTextRegular.copyWith(color: kAlmostBlack, fontSize: 11),
+                  ),
+                  Icon(Icons.keyboard_arrow_down_outlined,
+                      color: kPrimary, size: 15),
+                ],
+              ),
+            ),
+          ],
         ),
       );
     });

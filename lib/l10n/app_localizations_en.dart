@@ -4308,4 +4308,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get maximum_speed => 'Maximum speed';
+
+  @override
+  String get transactions => 'transactions';
+
+  @override
+  String get view_transactions => 'view transactions';
+
+  @override
+  String get add_transactions => 'add transactions';
+
+  @override
+  String get update_transactions => 'update transactions';
+
+  @override
+  String get completed_tasks => 'Completed Tasks';
+
+  @override
+  String get in_progress => 'In Progress';
+
+  @override
+  String get reschedule => 'Reschedule';
+
+  @override
+  String get delivery_date => 'Delivery Date';
+
+  @override
+  String get entity => 'Entity';
 }

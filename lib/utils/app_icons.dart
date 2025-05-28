@@ -228,6 +228,10 @@ class AppIcons {
   static const String projectName = 'assets/icons/project_name.svg';
   static const String startTime1 = 'assets/icons/start_time1.svg';
   static const String endTime1 = 'assets/icons/end_time1.svg';
+  static const String diract = 'assets/icons/diract.svg';
+  static const String calender8 = 'assets/icons/calender8.svg';
+  static const String desc = 'assets/icons/desc.svg';
+  static const String time8 = 'assets/icons/time8.svg';
 
   static const String scan_face = 'assets/icons/scan_face.svg';
   static const String scan_qrcode_phone = 'assets/icons/scan_qrcode_phone.svg';
@@ -338,6 +342,7 @@ class AppIcons {
   static const String notification = 'assets/icons/notification.png';
   static const String speed = 'assets/icons/speed.svg';
   static const String driver1 = 'assets/icons/driver.svg';
+  static const String reschedule = 'assets/icons/reschedule.svg';
   static const String camera_vehicle = 'assets/icons/camera_vehicle.svg';
   static const String camera_vehicle_code = 'assets/icons/camera_vehicle_code.svg';
   static const String videos_placeholder = 'assets/icons/videos_placeholder.svg';

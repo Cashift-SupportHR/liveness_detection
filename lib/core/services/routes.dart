@@ -94,6 +94,8 @@ import '../../presentation/presentationUser/profile/requests/presentation/pages/
 import '../../presentation/presentationUser/profile/requests/presentation/pages/add/add_request/screen/add_requests_user_page.dart';
 import '../../presentation/presentationUser/profile/requests/presentation/pages/add/confairm/screen/confirm_requests_user_page.dart';
 import '../../presentation/presentationUser/profile/requests/presentation/pages/view/screen/requests_user_page.dart';
+import '../../presentation/presentationUser/transactions/presentation/add/pages/add_transactions_page.dart';
+import '../../presentation/presentationUser/transactions/presentation/view/pages/transactions_page.dart';
 import '../../presentation/presentationUser/vehiclesOperation/presentation/currentTourMap/view/pages/current_tour_map_page.dart';
 import '../../presentation/presentationUser/vehiclesOperation/presentation/pages/add/main_receive_vehicle_page.dart';
 import '../../presentation/presentationUser/vehiclesOperation/presentation/receiveVehicle/details/pages/receive_vehicle_details_page.dart';
@@ -351,6 +353,8 @@ class Routes {
   static const String vehicleCamerasPage = '/VehicleCamerasPage';
   static const String addVehicleCameraPage = '/addVehicleCameraPage';
   static const String cameraSearchResultsPage = '/cameraSearchResultsPage';
+  static const String addTransactionsPage = '/addTransactionsPage';
+  static const String transactionsPage = '/transactionsPage';
 
   static final routes = <String, Widget Function(BuildContext)>{
     login: (context) => LoginPage(),
@@ -519,5 +523,7 @@ class Routes {
     vehicleCamerasPage: (context) => VehicleCamerasPage(),
     addVehicleCameraPage: (context) => AddVehicleCameraPage(),
     cameraSearchResultsPage: (context) => CameraSearchResultsPage(), // Add this line
+    addTransactionsPage: (context) => AddTransactionsPage(), // Add this line
+    transactionsPage: (context) => TransactionsPage(), // Add this line
    };
 }

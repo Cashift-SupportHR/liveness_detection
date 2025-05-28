@@ -9916,32 +9916,33 @@ class _AdminEndpoint implements AdminEndpoint {
     queryParameters.addAll(params.toJson());
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<ApiResponse<List<String>>>(Options(
+    final _options =
+        _setStreamType<ApiResponse<List<CommonListItemDto>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          '/v1/CashifterRequestsTermsAndConditions/GetAllCashifterRequestTermsAndConditionsByRequestType',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
+            .compose(
+              _dio.options,
+              '/v1/CashifterRequestsTermsAndConditions/GetAllCashifterRequestTermsAndConditionsByRequestType',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<List<CommonListItemDto>> _value;
     try {
       _value = ApiResponse<List<CommonListItemDto>>.fromJson(
         _result.data!,
-            (json) => json is List<dynamic>
+        (json) => json is List<dynamic>
             ? json
-            .map<CommonListItemDto>((i) =>
-            CommonListItemDto.fromJson(i as Map<String, dynamic>))
-            .toList()
+                .map<CommonListItemDto>((i) =>
+                    CommonListItemDto.fromJson(i as Map<String, dynamic>))
+                .toList()
             : List.empty(),
       );
     } on Object catch (e, s) {

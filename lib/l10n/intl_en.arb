@@ -1426,5 +1426,14 @@
   "videos_dates_validate_msg": "Please select the time and date you want the videos to be shown",
   "select_date_and_time": "Select date and time",
   "drivers": "Drivers",
-  "maximum_speed": "Maximum speed"
+  "maximum_speed": "Maximum speed",
+  "transactions": "transactions",
+  "view_transactions": "view transactions",
+  "add_transactions": "add transactions",
+  "completed_tasks": "Completed Tasks",
+  "in_progress": "In Progress",
+  "update_transactions": "update transactions",
+  "reschedule": "Reschedule",
+  "delivery_date": "Delivery Date",
+  "entity": "Entity"
 }
