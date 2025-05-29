@@ -30,7 +30,9 @@ abstract class BaseCubit extends BlocBase<CommonState> {
       {bool isRefresh = true,required ValueChanged<T> onSuccess, ValueChanged? onError}) async {
     try {
       if (isRefresh) {
-      emit(LoadingState());}
+        emit(LoadingState());
+      }
+
       final response = await invoke();
       onSuccess(response);
     } catch (e) {

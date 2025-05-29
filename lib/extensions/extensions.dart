@@ -136,7 +136,7 @@ extension ContextExtension on BuildContext {
         print('handleApiError whenApiException is dio   $message');
       } else if (isRequireLogin(exception)) {
         message = getStrings().required_login;
-      } else {
+      }  else {
         message = getStrings().undefine_error;
       }
     }
