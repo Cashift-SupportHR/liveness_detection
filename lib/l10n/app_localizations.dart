@@ -8680,6 +8680,60 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'أقصي سرعة'**
   String get maximum_speed;
+
+  /// No description provided for @transactions.
+  ///
+  /// In ar, this message translates to:
+  /// **'المعاملات'**
+  String get transactions;
+
+  /// No description provided for @view_transactions.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض المعاملات'**
+  String get view_transactions;
+
+  /// No description provided for @add_transactions.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضافة  معاملة'**
+  String get add_transactions;
+
+  /// No description provided for @update_transactions.
+  ///
+  /// In ar, this message translates to:
+  /// **' تحديث المعاملة'**
+  String get update_transactions;
+
+  /// No description provided for @completed_tasks.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاسكات المنتهية'**
+  String get completed_tasks;
+
+  /// No description provided for @in_progress.
+  ///
+  /// In ar, this message translates to:
+  /// **'جاري المعالجة'**
+  String get in_progress;
+
+  /// No description provided for @reschedule.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة جدولة'**
+  String get reschedule;
+
+  /// No description provided for @delivery_date.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ الاستلام'**
+  String get delivery_date;
+
+  /// No description provided for @entity.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجهة'**
+  String get entity;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

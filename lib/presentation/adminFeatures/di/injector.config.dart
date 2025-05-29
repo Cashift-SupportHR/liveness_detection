@@ -216,6 +216,14 @@ import '../../presentationUser/salarydefinitionrequest/newrequest/bloc/salary_de
     as _i476;
 import '../../presentationUser/salarydefinitionrequest/requests/bloc/salary_definition_request_cubit.dart'
     as _i907;
+import '../../presentationUser/transactions/data/data_sources/transactions_provider.dart'
+    as _i408;
+import '../../presentationUser/transactions/data/repositories/transactions_repository.dart'
+    as _i297;
+import '../../presentationUser/transactions/presentation/add/cubit/add_transactions_cubit.dart'
+    as _i1072;
+import '../../presentationUser/transactions/presentation/view/cubit/transactions_cubit.dart'
+    as _i319;
 import '../../presentationUser/vehiclesOperation/data/datasource/vehicles_operation_provider.dart'
     as _i199;
 import '../../presentationUser/vehiclesOperation/data/repositories/vehicles_operation_repository.dart'
@@ -663,6 +671,8 @@ Future<_i174.GetIt> $initGetIt(
       () => _i1021.EmployeesCertificatesAPI(gh<_i1029.UserEndpoint>()));
   gh.factory<_i809.PledgesAndGeneralizationAPI>(
       () => _i809.PledgesAndGeneralizationAPI(gh<_i1029.UserEndpoint>()));
+  gh.factory<_i408.TransactionsAPI>(
+      () => _i408.TransactionsAPI(gh<_i1029.UserEndpoint>()));
   gh.factory<_i199.ReceiveVehiclesAPI>(
       () => _i199.ReceiveVehiclesAPI(gh<_i1029.UserEndpoint>()));
   gh.factory<_i771.ViolationsUserAPI>(
@@ -754,6 +764,8 @@ Future<_i174.GetIt> $initGetIt(
       () => _i639.BanEmployeesRepository(gh<_i586.BanEmployeesAPI>()));
   gh.factory<_i690.PunishmentsRepository>(
       () => _i690.PunishmentsRepository(gh<_i1070.PunishmentsAPI>()));
+  gh.factory<_i297.TransactionsRepository>(
+      () => _i297.TransactionsRepository(gh<_i408.TransactionsAPI>()));
   gh.factory<_i815.VehiclesRepository>(
       () => _i815.VehiclesRepository(gh<_i474.VehiclesAPI>()));
   gh.factory<_i454.BailRequestsRepository>(
@@ -836,6 +848,10 @@ Future<_i174.GetIt> $initGetIt(
       () => _i536.WalletRepository(gh<_i341.WalletAPI>()));
   gh.factory<_i443.UsersRequestsRepository>(
       () => _i443.UsersRequestsRepository(gh<_i164.UsersRequestsAPI>()));
+  gh.factory<_i1072.AddTransactionsCubit>(
+      () => _i1072.AddTransactionsCubit(gh<_i297.TransactionsRepository>()));
+  gh.factory<_i319.TransactionsCubit>(
+      () => _i319.TransactionsCubit(gh<_i297.TransactionsRepository>()));
   gh.factory<_i1005.AddOpportunityRepository>(
       () => _i1005.AddOpportunityRepository(gh<_i430.AddOpportunityAPI>()));
   gh.factory<_i367.TermandConditionRepository>(

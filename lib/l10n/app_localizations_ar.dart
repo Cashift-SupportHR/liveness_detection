@@ -4308,4 +4308,31 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get maximum_speed => 'أقصي سرعة';
+
+  @override
+  String get transactions => 'المعاملات';
+
+  @override
+  String get view_transactions => 'عرض المعاملات';
+
+  @override
+  String get add_transactions => 'اضافة  معاملة';
+
+  @override
+  String get update_transactions => ' تحديث المعاملة';
+
+  @override
+  String get completed_tasks => 'التاسكات المنتهية';
+
+  @override
+  String get in_progress => 'جاري المعالجة';
+
+  @override
+  String get reschedule => 'إعادة جدولة';
+
+  @override
+  String get delivery_date => 'تاريخ الاستلام';
+
+  @override
+  String get entity => 'الجهة';
 }

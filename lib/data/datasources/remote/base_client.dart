@@ -73,6 +73,7 @@ class HeaderInterceptor extends Interceptor {
     options.headers[keyApiKey] = apiKeyValue;
     options.headers[deviceIdKey] = device.id;
     // options.headers[deviceInfoKey] =device.info;
+
     options.headers['platform'] = Config.platformName;
     options.headers['AppVersion'] = Config.AppVersion;
     options.headers[requestTypeKey] = true;

@@ -1470,6 +1470,14 @@
   "videos_dates_validate_msg": "من فضلك حدّد الوقت والتاريخ الذي تريده لعرض الفيديوهات فيه",
   "select_date_and_time": "اختر التاريخ والوقت",
   "drivers": "السائقين",
-  "maximum_speed": "أقصي سرعة"
-
+  "maximum_speed": "أقصي سرعة",
+  "transactions": "المعاملات",
+  "view_transactions": "عرض المعاملات",
+  "add_transactions": "اضافة  معاملة",
+  "update_transactions": " تحديث المعاملة",
+  "completed_tasks": "التاسكات المنتهية",
+  "in_progress": "جاري المعالجة",
+  "reschedule": "إعادة جدولة",
+  "delivery_date": "تاريخ الاستلام",
+  "entity": "الجهة"
 }

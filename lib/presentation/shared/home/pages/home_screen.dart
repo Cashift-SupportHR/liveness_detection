@@ -27,6 +27,7 @@ import '../../../presentationUser/mainnavigation/jobmap/jobs_map_page.dart';
 import '../../../presentationUser/mainnavigation/overview/overview_page.dart';
 import '../../../presentationUser/mainnavigation/wallet/pages/wallet_page.dart';
 import '../../../presentationUser/resources/colors.dart';
+import '../../../presentationUser/transactions/presentation/view/pages/transactions_page.dart';
 import '../../../presentationUser/vehiclesOperation/presentation/currentTourMap/view/bloc/current_tour_map_state.dart';
 import '../../../presentationUser/vehiclesOperation/presentation/pages/view/screen/receive_vehicles_page.dart';
 import '../../../adminFeatures/vehicles/presentation/vehicleTracking/pages/vehicles_tracking_page.dart';
@@ -56,7 +57,7 @@ class _MyHomeScreenState extends BaseState<MyHomeScreen> {
     final List<BottomNavigationWidgetModel> _widgetOptions =
         <BottomNavigationWidgetModel>[
       BottomNavigationWidgetModel(
-          widget: OverviewPage(),
+          widget: TransactionsPage(),
           label: strings.home,
           iconPath: 'images/home.svg'),
       BottomNavigationWidgetModel(
