@@ -59,6 +59,7 @@ class ShiftPaymentRequestBuilder
     return ShiftPaymentRequestBody(
       requestState: state,
       onSubmit: (ConfirmShiftPaymentRequest params) {
+        Navigator.pop(context);
         bloc.submitRequestConfirmation(params);
       },
     );
