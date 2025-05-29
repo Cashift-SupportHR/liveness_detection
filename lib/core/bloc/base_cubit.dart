@@ -27,9 +27,10 @@ abstract class BaseCubit extends BlocBase<CommonState> {
   }
 
   executeBuilder<T>(Future<T> Function() invoke,
-      {required ValueChanged<T> onSuccess, ValueChanged? onError}) async {
+      {bool isRefresh = true,required ValueChanged<T> onSuccess, ValueChanged? onError}) async {
     try {
-      emit(LoadingState());
+      if (isRefresh) {
+      emit(LoadingState());}
       final response = await invoke();
       onSuccess(response);
     } catch (e) {
@@ -42,6 +43,8 @@ abstract class BaseCubit extends BlocBase<CommonState> {
       rethrow;
     }
   }
+
+
 
   executeListener<T>(Future<T> Function() invoke,
       {required ValueChanged<T> onSuccess, bool showLoading = true}) async {

@@ -77,6 +77,7 @@ import '../../presentation/adminFeatures/generalViolations/presentation/followUp
 import '../../presentation/adminFeatures/jobUniform/presentation/pages/add_job_uniform_page.dart';
 import '../../presentation/adminFeatures/maintenanceAndBreakdowns/presentation/view/pages/maintenance_breakdowns_page.dart';
 import '../../presentation/adminFeatures/notifications/presentation/view/pages/notifications_page.dart';
+import '../../presentation/adminFeatures/reviewShifts/presentation/pages/review_opportunities_page.dart';
 import '../../presentation/adminFeatures/trackAttendanceDeparture/presentation/details/pages/track_attendance_departure_details_page.dart';
 import '../../presentation/adminFeatures/trackAttendanceDeparture/presentation/add/pages/request_track_attendance_departure_page.dart';
 import '../../presentation/adminFeatures/trackAttendanceDeparture/presentation/view/pages/track_attendance_departure_page.dart';
@@ -120,8 +121,7 @@ import '../../presentation/adminFeatures/generalViolations/presentation/view/pag
 import '../../presentation/adminFeatures/generalViolations/presentation/viewTypesViolations/pages/general_types_violations_page.dart';
 import '../../presentation/adminFeatures/opportunity_details/applied_details/pages/Applicants/applied_page.dart';
 import '../../presentation/adminFeatures/projectsManagement/presentation/addNewProject/pages/map_project_gates/map_project_gates_page.dart';
-import '../../presentation/adminFeatures/reviewShifts/presentation/pages/review_opportunities_tabs_page.dart';
-import '../../presentation/adminFeatures/vehicles/presentation/add/main_add_vehicle_page.dart';
+ import '../../presentation/adminFeatures/vehicles/presentation/add/main_add_vehicle_page.dart';
 import '../../presentation/adminFeatures/vehicles/presentation/add/pages/covenantsVehicles/view/covenants_vehicles_page.dart';
 import '../../presentation/adminFeatures/vehicles/presentation/view/pages/insurance/add/add_insurance_page.dart';
 import '../../presentation/adminFeatures/vehicles/presentation/view/pages/insurance/view/insurance_page.dart';

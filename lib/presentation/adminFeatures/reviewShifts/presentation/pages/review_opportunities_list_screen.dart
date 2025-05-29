@@ -21,8 +21,7 @@ class ReviewOpportunitiesListScreen extends BaseStatelessWidget{
 List<int> selectedIndexes=[];
   @override
   Widget build(BuildContext context) {
-    print(data.length);
-    print("jkjkjkjkjk");
+
     return StatefulBuilder(
       builder: (context,setState) {
         return ListView.builder(

@@ -1,116 +1,113 @@
- import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
- import 'package:shiftapp/presentation/presentationUser/attendance/facerecognation/index.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
+import 'package:shiftapp/presentation/presentationUser/attendance/facerecognation/index.dart';
 import 'package:shiftapp/presentation/presentationUser/common/common_state.dart';
- import '../../../../shared/components/base/stream_state_widget_v2.dart';
-import '../../../../shared/components/pagination/custom_footer_builder.dart';
-import '../../../../shared/components/search_widget.dart';
-import '../../../../shared/components/stream/stream_data_state_widget.dart';
+import '../../../../presentationUser/advancedFilter/widgets/text_field_search_job.dart';
+  import '../../../../shared/components/pagination/pagination_widget.dart';
+import '../../../../shared/components/tabview/dynamic_tab_bar_view.dart';
 import '../../data/models/complet_opportunity_dto.dart';
- import '../../data/models/review_shiftsprams.dart';
- import '../bloc/review_opportunities_cubit.dart';
+import '../../data/models/review_shiftsprams.dart';
+import '../bloc/review_opportunities_cubit.dart';
 import 'review_opportunities_list_screen.dart';
 import 'package:shiftapp/presentation/shared/components/base_widget_bloc.dart';
 
-
-class ReviewOpportunitiesPage extends BaseBlocWidget<
-    UnInitState, ReviewOpportunitiesCubit> {
-  final int status;
-
-  ReviewOpportunitiesPage({required this.status});
+class ReviewOpportunitiesTabsPage
+    extends BaseBlocWidget<Initialized<List<CompletedOpportunityData>>, ReviewOpportunitiesCubit> {
+  int status = 0;
 
   @override
   void loadInitialData(BuildContext context) {
     bloc.fetchOpportunityDataPagination(
-        params:
-            ReviewShiftsprams(pageNumber: 1, statusId: status, pageSize: 10));
+      params: ReviewShiftsprams(statusId: status),
+    );
   }
 
   @override
-  bool detectRequiredTasks() {
-    return false;
+  String? title(BuildContext context) {
+    return strings.opportunities_review;
   }
+
   @override
   Widget build(BuildContext context) {
-    return  Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          SearchWidget(
-            search: (String value) {
-              bloc.fetchOpportunityDataPagination(
-                  params: ReviewShiftsprams(
-                      pageNumber: 1,
+    return mainFrame(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: DynamicTabBarView(
+          isSeparate: true,
+          margin: const EdgeInsets.all(0),
+          padding: const EdgeInsets.all(0),
+          marginTabs: const EdgeInsets.symmetric(horizontal: 16),
+          tabs: [
+            DynamicItem(name: strings.waiting_approval, id: 0),
+            DynamicItem(name: strings.approved, id: 22),
+            DynamicItem(name: strings.rejected, id: 20),
+          ],
+          onTap: (index) {
+            status = index;
+            bloc.fetchOpportunityDataPagination(
+              params: ReviewShiftsprams(
+                statusId: status,
+                pageNumber: 1,
+                pageSize: 10,
+              ),
+            );
+          },
+          pageWidget: Column(
+            children: [
+              TextFieldSearchJob(
+                title: strings.search,
+                readOnly: false,
+                onTap: () {
+
+                },
+                onChanged: (value) {
+                  bloc.fetchOpportunityDataPagination(
+                    isRefresh: true,
+                    params: ReviewShiftsprams(
                       statusId: status,
+                      pageNumber: 1,
                       pageSize: 10,
-                      searchString: value));
-            },
+                      searchString: value,
+                    ),
+                  );
+                },
+                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+              ),
+
+              Expanded(child: buildConsumer(context)),
+            ],
           ),
-          SizedBox(
-            height: 12,
-          ),
-          Expanded(child: buildConsumer(context)),
-        ],
+        ),
       ),
     );
   }
 
-  final RefreshController _refreshController =
-      RefreshController(initialRefresh: false);
+  final RefreshController _refreshController = RefreshController(
+    initialRefresh: false,
+  );
   ScrollController _scrollController = ScrollController();
 
   @override
-  Widget buildWidget(
-      BuildContext context, UnInitState state) {
-    return StreamDataStateWidget<List<CompletedOpportunityData>?>(
-        stream: bloc.opportunityStream,
-         onReload: () {
-          onRefresh();
-
-        },
-        builder: (context, snapshot) {
-          return SmartRefresher(
-            enablePullUp: true,
-            footer: CustomFooterBuilder(),
-            controller: _refreshController,
-            onRefresh: () => onRefresh(),
-            scrollController: _scrollController,
-            onLoading: status != 0 ? () => onLoading(snapshot!) : null,
-            child: ReviewOpportunitiesListScreen(
-              data: snapshot! ,
-              selectable: false,
-              onUpdate: () {
-                loadInitialData(context);
-              },
-            ),
-          );
-        });
-
-  }
-
-  void onRefresh() {
-    bloc.fetchOpportunityDataPagination(
-      isRefresh: true,
-      params: ReviewShiftsprams(
-        statusId: status,
-        pageSize: 10,
-      ),
-    );
-    _refreshController.refreshCompleted();
-    _refreshController.loadComplete();
-  }
-
-  void onLoading(List<CompletedOpportunityData> state) async {
-    await bloc.fetchOpportunityDataPagination(
-      params: ReviewShiftsprams(
-        statusId: status,
-        pageSize: 10,
+  Widget buildWidget(BuildContext context, Initialized<List<CompletedOpportunityData>> state) {
+    return PaginationWidget(
+      refreshController: bloc.refreshController,
+      onLoading: () {
+        bloc.fetchOpportunityDataPagination(
+          isRefresh: false,
+          params: ReviewShiftsprams(statusId: status, pageSize: 10),
+        );
+      },
+      onRefresh: () {
+        bloc.fetchOpportunityDataPagination(
+          params: ReviewShiftsprams(statusId: status, pageSize: 10),
+        );
+      },
+      child: ReviewOpportunitiesListScreen(
+        data: state.data ?? [],
+        onUpdate: () => loadInitialData(context),
       ),
     );
 
-    if (bloc.opportunityes.isEmpty) {
-      _refreshController.loadNoData();
-    } else {
-      _refreshController.loadComplete();
-    }
+
   }
+
 }
