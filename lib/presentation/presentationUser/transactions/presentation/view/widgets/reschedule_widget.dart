@@ -35,7 +35,9 @@ class RescheduleWidget extends BaseStatelessWidget {
                       child: DateTimeTextFieldPicker(
                         hintText: strings.select,
                         title: strings.from,
-                        onTap: (date) {},
+                        onTap: (date) {
+                          from = date;
+                        },
                       ),
                     ),
                     SizedBox(width: 10),
@@ -43,7 +45,9 @@ class RescheduleWidget extends BaseStatelessWidget {
                       child: DateTimeTextFieldPicker(
                         hintText: strings.select,
                         title: strings.to,
-                        onTap: (date) {},
+                        onTap: (date) {
+                          to = date;
+                        },
                       ),
                     ),
                   ],

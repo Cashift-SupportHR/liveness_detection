@@ -57,7 +57,7 @@ class _MyHomeScreenState extends BaseState<MyHomeScreen> {
     final List<BottomNavigationWidgetModel> _widgetOptions =
         <BottomNavigationWidgetModel>[
       BottomNavigationWidgetModel(
-          widget: TransactionsPage(),
+          widget: OverviewPage(),
           label: strings.home,
           iconPath: 'images/home.svg'),
       BottomNavigationWidgetModel(

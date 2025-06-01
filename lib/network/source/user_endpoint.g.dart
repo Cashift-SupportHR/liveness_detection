@@ -7122,13 +7122,42 @@ class _UserEndpoint implements UserEndpoint {
 
   @override
   Future<ApiResponse<List<TransactionsDto>>> fetchTransactions(
-      String status) async {
+    String? status,
+    String? endDateTime,
+    String? startDateTime,
+    String? searchString,
+  ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'status': status};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final _data = FormData();
+    if (status != null) {
+      _data.fields.add(MapEntry(
+        'Status',
+        status,
+      ));
+    }
+    if (endDateTime != null) {
+      _data.fields.add(MapEntry(
+        'EndDateTime',
+        endDateTime,
+      ));
+    }
+    if (startDateTime != null) {
+      _data.fields.add(MapEntry(
+        'StartDateTime',
+        startDateTime,
+      ));
+    }
+    if (searchString != null) {
+      _data.fields.add(MapEntry(
+        'SearchString',
+        searchString,
+      ));
+    }
     final _options = _setStreamType<ApiResponse<List<TransactionsDto>>>(Options(
-      method: 'GET',
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )

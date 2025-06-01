@@ -10,7 +10,7 @@ RescheduleTransactionsPrams _$RescheduleTransactionsPramsFromJson(
         Map<String, dynamic> json) =>
     RescheduleTransactionsPrams(
       id: (json['id'] as num?)?.toInt(),
-       description: json['description'] as String?,
+      description: json['description'] as String?,
       startDateTime: json['startDateTime'] as String?,
       endDateTime: json['endDateTime'] as String?,
     );
@@ -19,7 +19,7 @@ Map<String, dynamic> _$RescheduleTransactionsPramsToJson(
         RescheduleTransactionsPrams instance) =>
     <String, dynamic>{
       'id': instance.id,
-       'description': instance.description,
+      'description': instance.description,
       'startDateTime': instance.startDateTime,
       'endDateTime': instance.endDateTime,
     };

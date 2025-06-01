@@ -894,7 +894,10 @@ abstract class UserEndpoint {
   ////  transactions
   @POST('/v1/CashifterTasks/GetAllCashifterTasksByStatus')
   Future<ApiResponse<List<TransactionsDto>>> fetchTransactions(
-    @Body()TransactionsPrams prams,
+      @Part(name: 'Status') String? status,
+      @Part(name: 'EndDateTime') String? endDateTime,
+      @Part(name: 'StartDateTime') String? startDateTime,
+      @Part(name: 'SearchString') String? searchString,
   );
 
   @POST('/v1/CashifterTasks/AddNewCashifterTask')

@@ -10,6 +10,8 @@ TransactionsDto _$TransactionsDtoFromJson(Map<String, dynamic> json) =>
     TransactionsDto(
       id: (json['id'] as num?)?.toInt(),
       destination: json['destination'] as String?,
+      freelancerProfileImage: json['freelancerProfileImage'] as String?,
+      freelancerPhoneNumber: json['freelancerPhoneNumber'] as String?,
       description: json['description'] as String?,
       startDateTime: json['startDateTime'] as String?,
       endDateTime: json['endDateTime'] as String?,
@@ -18,16 +20,12 @@ TransactionsDto _$TransactionsDtoFromJson(Map<String, dynamic> json) =>
       finalSummary: json['finalSummary'] as String?,
       freelancerId: (json['freelancerId'] as num?)?.toInt(),
       freelancerName: json['freelancerName'] as String?,
-          freelancerProfileImage: json['freelancerProfileImage'] as String?,
-          freelancerPhoneNumber: json['freelancerPhoneNumber'] as String?,
     );
 
 Map<String, dynamic> _$TransactionsDtoToJson(TransactionsDto instance) =>
     <String, dynamic>{
       'id': instance.id,
       'destination': instance.destination,
-      'freelancerPhoneNumber': instance.freelancerPhoneNumber,
-      'freelancerProfileImage': instance.freelancerProfileImage,
       'description': instance.description,
       'startDateTime': instance.startDateTime,
       'endDateTime': instance.endDateTime,
@@ -36,4 +34,6 @@ Map<String, dynamic> _$TransactionsDtoToJson(TransactionsDto instance) =>
       'finalSummary': instance.finalSummary,
       'freelancerId': instance.freelancerId,
       'freelancerName': instance.freelancerName,
+      'freelancerPhoneNumber': instance.freelancerPhoneNumber,
+      'freelancerProfileImage': instance.freelancerProfileImage,
     };

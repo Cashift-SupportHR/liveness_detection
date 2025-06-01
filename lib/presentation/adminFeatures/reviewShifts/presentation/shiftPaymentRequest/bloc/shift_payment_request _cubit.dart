@@ -27,7 +27,7 @@ class ShiftPaymentCubitCubit extends BaseCubit {
       final blocCases = await _repository.fetchBlockTypes();
       emit(ShiftPaymentRequestState(
           evaluations: evaluations,
-          blocCases: blocCases.listBlockType??[],
+          blocCases: blocCases.listBlockType ?? [],
           freelancerId: freelancerId));
     } catch (e) {
       emit(ErrorState(e));

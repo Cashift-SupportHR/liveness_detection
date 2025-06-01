@@ -5,6 +5,7 @@ import '../../../../../network/source/user_endpoint.dart';
 import '../models/add_transactions_prams.dart';
 import '../models/reschedule_transactions_prams.dart';
 import '../models/transactions_dto.dart';
+import '../models/transactions_prams.dart';
 import '../models/update_transactions_prams.dart';
 
 @Injectable()
@@ -16,7 +17,13 @@ class TransactionsAPI {
   Future<ApiResponse<List<TransactionsDto>>> fetchTransactions(
       TransactionsPrams prams,
   ) async {
-    return await api.fetchTransactions(prams);
+    return await api.fetchTransactions(
+
+        prams.status,
+        prams.endDateTime,
+        prams.startDateTime,
+        prams.searchString,
+    );
   }
 
   Future<ApiResponse> addTransactions(AddTransactionsPrams prams) async {
