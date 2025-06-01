@@ -1,10 +1,22 @@
 import 'package:shiftapp/presentation/shared/components/index.dart';
 import '../../../../../shared/components/text_field/build_text_field_item.dart';
 import '../../../../../shared/components/text_field/date_time_text_field_picker.dart';
+import '../../../data/models/reschedule_transactions_prams.dart';
+import '../../../data/models/update_transactions_prams.dart';
+import '../../../domain/entities/transaction_data.dart';
 
 class RescheduleWidget extends BaseStatelessWidget {
   final bool isReschedule;
-  RescheduleWidget({required this.isReschedule});
+  Transactions data;
+  Function(UpdateTransactionsPrams update) onUpdate;
+  Function(RescheduleTransactionsPrams update) onReschedule;
+  RescheduleWidget({
+    required this.isReschedule,
+    required this.data,
+    required this.onUpdate,
+    required this.onReschedule,
+  });
+
   TextEditingController descrtiptionController = TextEditingController();
   final keyForm = GlobalKey<FormState>();
   String? from;
@@ -36,15 +48,7 @@ class RescheduleWidget extends BaseStatelessWidget {
                     ),
                   ],
                 )
-                : BottomSheetTextFieldRectangle(
-                  title: strings.status,
-
-                  hintText: strings.select,
-                  isScrollControlled: true,
-                  setSearch: false,
-                  items: [],
-                  onSelectItem: (items) async {},
-                ),
+                : SizedBox(),
             if (isReschedule == true) SizedBox(height: 16),
             BuildTextFieldItem(
               title: strings.description,
@@ -59,9 +63,29 @@ class RescheduleWidget extends BaseStatelessWidget {
               onCancel: () => Navigator.pop(context),
               onSave: () {
                 if (keyForm.currentState!.validate()) {
-                  if (from == null || to == null) {
-                    showErrorDialog(strings.select_date_from_to, context);
-                  } else {}
+                  if (isReschedule == true) {
+                    if (from == null || to == null) {
+                      showErrorDialog(strings.select_date_from_to, context);
+                    } else {
+                      Navigator.pop(context);
+                      onReschedule(
+                        RescheduleTransactionsPrams(
+                          startDateTime: from,
+                          endDateTime: to,
+                          id: data.id,
+                          description: descrtiptionController.text,
+                        ),
+                      );
+                    }
+                  } else {
+                    Navigator.pop(context);
+                    onUpdate(
+                      UpdateTransactionsPrams(
+                        id: data.id,
+                        finalSummary: descrtiptionController.text,
+                      ),
+                    );
+                  }
                 }
               },
             ),
