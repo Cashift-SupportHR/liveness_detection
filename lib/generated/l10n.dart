@@ -13892,6 +13892,96 @@ class S {
       args: [],
     );
   }
+
+  /// `transactions`
+  String get transactions {
+    return Intl.message(
+      'transactions',
+      name: 'transactions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `view transactions`
+  String get view_transactions {
+    return Intl.message(
+      'view transactions',
+      name: 'view_transactions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `add transactions`
+  String get add_transactions {
+    return Intl.message(
+      'add transactions',
+      name: 'add_transactions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completed Tasks`
+  String get completed_tasks {
+    return Intl.message(
+      'Completed Tasks',
+      name: 'completed_tasks',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `In Progress`
+  String get in_progress {
+    return Intl.message(
+      'In Progress',
+      name: 'in_progress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `update transactions`
+  String get update_transactions {
+    return Intl.message(
+      'update transactions',
+      name: 'update_transactions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reschedule`
+  String get reschedule {
+    return Intl.message(
+      'Reschedule',
+      name: 'reschedule',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delivery Date`
+  String get delivery_date {
+    return Intl.message(
+      'Delivery Date',
+      name: 'delivery_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Entity`
+  String get entity {
+    return Intl.message(
+      'Entity',
+      name: 'entity',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -151,6 +151,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اضافة شروط واحكام الفرص"),
         "add_tracking_request":
             MessageLookupByLibrary.simpleMessage("اضافة طلب تتبع"),
+        "add_transactions":
+            MessageLookupByLibrary.simpleMessage("اضافة  معاملة"),
         "add_vehicle": MessageLookupByLibrary.simpleMessage("اضافة مركبة"),
         "add_vehicles": MessageLookupByLibrary.simpleMessage("اضافة مركبة"),
         "add_violation": MessageLookupByLibrary.simpleMessage("اضافة مخالفة"),
@@ -474,6 +476,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "completed": MessageLookupByLibrary.simpleMessage("إكتمل"),
         "completed_gates":
             MessageLookupByLibrary.simpleMessage("تم الانتهاء منها"),
+        "completed_tasks":
+            MessageLookupByLibrary.simpleMessage("التاسكات المنتهية"),
         "condition_ar":
             MessageLookupByLibrary.simpleMessage("كتابه الشرط باللغه العربيه"),
         "condition_ar_validation":
@@ -588,6 +592,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("حذف العقوبة"),
         "delete_time": MessageLookupByLibrary.simpleMessage("حذف الوقت"),
         "delete_user": MessageLookupByLibrary.simpleMessage("حذف المستخدم"),
+        "delivery_date": MessageLookupByLibrary.simpleMessage("تاريخ الاستلام"),
         "denied_camera_permission": MessageLookupByLibrary.simpleMessage(
             "عذرًا ، يجب عليك الانتقال إلى إعدادات التطبيق والسماح بالوصول إلى الكاميرا حتى تتمكن من مسح رمز qr ضوئيًا"),
         "departure_registration":
@@ -754,6 +759,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enter_your_phone_number_retrieve_password":
             MessageLookupByLibrary.simpleMessage(
                 "ادخل رقم الهاتف الخاص بك لاسترجاع كلمة المرور"),
+        "entity": MessageLookupByLibrary.simpleMessage("الجهة"),
         "error_internet_connection":
             MessageLookupByLibrary.simpleMessage("خطأ في الاتصال بالشبكة"),
         "error_qr": MessageLookupByLibrary.simpleMessage(
@@ -877,6 +883,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(" صورة قبل الصيانة "),
         "important_disclosure":
             MessageLookupByLibrary.simpleMessage("توضيح هام"),
+        "in_progress": MessageLookupByLibrary.simpleMessage("جاري المعالجة"),
         "in_work": MessageLookupByLibrary.simpleMessage("علي رأس العمل"),
         "inactive": MessageLookupByLibrary.simpleMessage("غير نشط"),
         "inactive_f": MessageLookupByLibrary.simpleMessage("غير نشطه"),
@@ -1460,6 +1467,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("العدد المطلوب"),
         "required_reason_refuse":
             MessageLookupByLibrary.simpleMessage("سبب الرفض مطلوب"),
+        "reschedule": MessageLookupByLibrary.simpleMessage("إعادة جدولة"),
         "resend_code": MessageLookupByLibrary.simpleMessage("إعادة إرسال"),
         "reserved_opportunities":
             MessageLookupByLibrary.simpleMessage("الفرص المحجوزة"),
@@ -1861,6 +1869,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tracking_period": MessageLookupByLibrary.simpleMessage("فترة التتبُع"),
         "transaction_history":
             MessageLookupByLibrary.simpleMessage("سجل المعاملات"),
+        "transactions": MessageLookupByLibrary.simpleMessage("المعاملات"),
         "transfer": MessageLookupByLibrary.simpleMessage("تحويل"),
         "transfer_amount": MessageLookupByLibrary.simpleMessage("مبلغ المحول"),
         "transfer_balance": MessageLookupByLibrary.simpleMessage("رصيد محول"),
@@ -1947,6 +1956,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تغير الحالة الي نشط"),
         "update_status_unActive":
             MessageLookupByLibrary.simpleMessage("تغير الحالة الي غير نشط"),
+        "update_transactions":
+            MessageLookupByLibrary.simpleMessage(" تحديث المعاملة"),
         "upload_image": MessageLookupByLibrary.simpleMessage("رفع صورة"),
         "upload_pdf_image":
             MessageLookupByLibrary.simpleMessage("رفع صورة او ملف PDF"),
@@ -2036,6 +2047,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("الاطلاع علي الشروط والاحكام"),
         "view_tracking_requests":
             MessageLookupByLibrary.simpleMessage("عرض طلبات التتبع"),
+        "view_transactions":
+            MessageLookupByLibrary.simpleMessage("عرض المعاملات"),
         "view_work_hazards":
             MessageLookupByLibrary.simpleMessage("عرض مخاطر العمل"),
         "violation": MessageLookupByLibrary.simpleMessage("مخالفة "),

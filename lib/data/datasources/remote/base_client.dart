@@ -62,13 +62,13 @@ class HeaderInterceptor extends Interceptor {
 
   HeaderInterceptor(this.userRepository, this.localRepository,
       {this.isRequiredAuth,
-      required this.device,
-      required this.loggerRepository});
+        required this.device,
+        required this.loggerRepository});
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     options.headers[keyAuthorization] =
-        'Bearer ${userRepository.getAccessToken()}';
+    'Bearer ${userRepository.getAccessToken()}';
     options.headers[keyLanguage] = Get.locale?.languageCode.toString();
     options.headers[keyApiKey] = apiKeyValue;
     options.headers[deviceIdKey] = device.id;
@@ -78,63 +78,78 @@ class HeaderInterceptor extends Interceptor {
     options.headers['AppVersion'] = Config.AppVersion;
     options.headers[requestTypeKey] = true;
     print('Header  Params ${options.data} ${options.headers}');
-     super.onRequest(options, handler);
+    // 2) forward to next interceptor
+    handler.next(options);
+  }
+  @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    final data = response.data;
+    if (data is Map<String, dynamic>) {
+      final status = data['status'] as String? ?? '';
+      if (status != 'success') {
+        final message = data['message'] as String? ?? 'Unknown error';
+        final code = data['code'] as String? ?? 'E';
+        final apiEx = ApiException(message, code);
+        final dioErr = DioException(
+          requestOptions: response.requestOptions,
+          response: response,
+          type: DioErrorType.badResponse,
+          message: message,
+          error: apiEx,
+        );
+        return handler.reject(dioErr, true);
+      }
+    }
+    handler.next(response);
   }
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
-    print(
-        'DIO ERROR onError ${err.response != null} =>error message is  ${err.error}');
     if (err.response != null) {
-      //print('DIO ERROR onError known ${(err.response!.statusCode==401 && isRequiredAuth==true) || err.response!.statusCode == 500}');
-
-      if ((err.response!.statusCode == 401 && isRequiredAuth == true) ||
-          err.response!.statusCode == 500) {
+      final statusCode = err.response!.statusCode;
+      // Log only on errors: 401 if required, 403, 500
+      if ((statusCode == 401 && isRequiredAuth == true) ||
+          statusCode == 403 ||
+          statusCode == 500) {
         final params = LoggerParams(
-            tagName: err.requestOptions.path,
-            description:
-                "HeaderInterceptor get error ${err.response?.statusCode}",
-            object: err.requestOptions.data.toString(),
-            error: err.error.toString(),
-            phoneNumber: userRepository.getUser()?.phone.toString());
+          tagName: err.requestOptions.path,
+          description: 'HeaderInterceptor get error $statusCode',
+          object: err.requestOptions.data.toString(),
+          error: err.error.toString(),
+          phoneNumber: userRepository.getUser()?.phone.toString(),
+        );
         loggerRepository.sendLog(params);
       }
 
-      if (err.response!.statusCode == 401 && isRequiredAuth == true) {
-        throw UnAuthorizedException();
+      if (statusCode == 401 && isRequiredAuth == true) {
+        handler.reject(
+          DioError(
+            requestOptions: err.requestOptions,
+            response: err.response,
+            type: err.type,
+            error: UnAuthorizedException(),
+          ),
+        );
+        return;
       } else {
-        Map<String, dynamic> data = json.decode(err.response.toString());
-        print('DIO ERROR Response ${data}');
-
-        final message = data.containsKey('message') ? data['message'] : "Error";
-        final status = data.containsKey('status') ? data['status'] : "Error";
-        String code = data.containsKey('code') ? data['code'] : "E";
-        throw ApiException(message, code);
+        final errorData = err.response!.data;
+        final parsed = errorData is String
+            ? json.decode(errorData) as Map<String, dynamic>
+            : errorData as Map<String, dynamic>;
+        final message = parsed['message']?.toString() ?? 'Error';
+        final code = parsed['code']?.toString() ?? 'E';
+        handler.reject(
+          DioException(
+            requestOptions: err.requestOptions,
+            response: err.response,
+            type: err.type,
+            message: message,
+            error: ApiException(message, code),
+          ),
+        );
+        return;
       }
-    } else {
-      print('DIO ERROR Unknown${err.error} => ${err.message}');
-
-      /*  final params = LoggerParams(
-          tagName: err.requestOptions.path, description: "HeaderInterceptor get error ${err.response?.statusCode}" ,
-          object: err.requestOptions.data.toString(), error: err.error.toString());
-
-        loggerRepository.sendLog(params);*/
-
-      super.onError(err, handler);
     }
-  }
-
-  @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
-    super.onResponse(response, handler);
-    Map<String, dynamic> data = response.data;
-    final message = data.containsKey('message') ? data['message'] : "Error";
-    final status = data.containsKey('status') ? data['status'] : "Error";
-    String code = data.containsKey('code') ? response.data['code'] : "E";
-    debugPrint('onResponse  => ${code != 'Ok'}');
-    if (status != 'success') {
-      print('IS ERROR ${message}');
-      throw ApiException(message, code);
-    }
+    handler.next(err);
   }
 }

@@ -150,6 +150,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Add terms and conditions of the opportunity"),
         "add_tracking_request":
             MessageLookupByLibrary.simpleMessage("Add tracking request"),
+        "add_transactions":
+            MessageLookupByLibrary.simpleMessage("add transactions"),
         "add_vehicle": MessageLookupByLibrary.simpleMessage("Add vehicle"),
         "add_vehicles": MessageLookupByLibrary.simpleMessage("add vehicles"),
         "add_violation": MessageLookupByLibrary.simpleMessage("Add violation"),
@@ -487,6 +489,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Complete service"),
         "completed": MessageLookupByLibrary.simpleMessage("Completed"),
         "completed_gates": MessageLookupByLibrary.simpleMessage("Completed"),
+        "completed_tasks":
+            MessageLookupByLibrary.simpleMessage("Completed Tasks"),
         "condition_ar": MessageLookupByLibrary.simpleMessage(
             "Write the condition in Arabic"),
         "condition_ar_validation": MessageLookupByLibrary.simpleMessage(
@@ -608,6 +612,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Delete Punishment"),
         "delete_time": MessageLookupByLibrary.simpleMessage("Delete time"),
         "delete_user": MessageLookupByLibrary.simpleMessage("Delete user"),
+        "delivery_date": MessageLookupByLibrary.simpleMessage("Delivery Date"),
         "denied_camera_permission": MessageLookupByLibrary.simpleMessage(
             "Sorry, you have to go to the application settings and allow permission to access the camera so that you can scan qr code "),
         "departure_registration":
@@ -775,6 +780,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enter_your_phone_number_retrieve_password":
             MessageLookupByLibrary.simpleMessage(
                 "Enter your phone number to retrieve your password"),
+        "entity": MessageLookupByLibrary.simpleMessage("Entity"),
         "error_internet_connection":
             MessageLookupByLibrary.simpleMessage("Error internet connection!"),
         "error_qr": MessageLookupByLibrary.simpleMessage(
@@ -905,6 +911,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Image before maintenance"),
         "important_disclosure":
             MessageLookupByLibrary.simpleMessage("Important Disclosure"),
+        "in_progress": MessageLookupByLibrary.simpleMessage("In Progress"),
         "in_work": MessageLookupByLibrary.simpleMessage("on the job"),
         "inactive": MessageLookupByLibrary.simpleMessage("Inactive"),
         "inactive_f": MessageLookupByLibrary.simpleMessage("Inactive"),
@@ -1515,6 +1522,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "required_number": MessageLookupByLibrary.simpleMessage("required.No"),
         "required_reason_refuse":
             MessageLookupByLibrary.simpleMessage("Required reason refuse"),
+        "reschedule": MessageLookupByLibrary.simpleMessage("Reschedule"),
         "resend_code": MessageLookupByLibrary.simpleMessage("Resend code"),
         "reserved_opportunities":
             MessageLookupByLibrary.simpleMessage("Reserved opportunities"),
@@ -1937,6 +1945,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tracking period"),
         "transaction_history":
             MessageLookupByLibrary.simpleMessage("transaction history"),
+        "transactions": MessageLookupByLibrary.simpleMessage("transactions"),
         "transfer": MessageLookupByLibrary.simpleMessage("Transfer"),
         "transfer_amount":
             MessageLookupByLibrary.simpleMessage("Transfer amount"),
@@ -2032,6 +2041,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Status changed to active"),
         "update_status_unActive":
             MessageLookupByLibrary.simpleMessage("Status changed to inactive"),
+        "update_transactions":
+            MessageLookupByLibrary.simpleMessage("update transactions"),
         "upload_image": MessageLookupByLibrary.simpleMessage("Upload image"),
         "upload_pdf_image":
             MessageLookupByLibrary.simpleMessage("Upload a PDF or image"),
@@ -2124,6 +2135,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("View terms and conditions"),
         "view_tracking_requests":
             MessageLookupByLibrary.simpleMessage("View tracking requests"),
+        "view_transactions":
+            MessageLookupByLibrary.simpleMessage("view transactions"),
         "view_work_hazards":
             MessageLookupByLibrary.simpleMessage("View Work Hazards"),
         "violation": MessageLookupByLibrary.simpleMessage("violation"),

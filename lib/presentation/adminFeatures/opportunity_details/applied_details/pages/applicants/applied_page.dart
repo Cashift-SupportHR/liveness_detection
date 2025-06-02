@@ -94,4 +94,9 @@ class AppliedPage
       opportunityDetails: opportunityDetails,
     );
   }
+
+  @override
+  void onSuccessDismissed() {
+    loadInitialData(context);
+  }
 }
