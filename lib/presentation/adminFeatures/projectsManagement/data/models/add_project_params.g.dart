@@ -10,7 +10,7 @@ AddProjectParams _$AddProjectParamsFromJson(Map<String, dynamic> json) =>
     AddProjectParams(
       id: (json['id'] as num?)?.toInt(),
       brandId: (json['brandId'] as num?)?.toInt(),
-      companyId: (json['CompanyId'] as num?)?.toInt(),
+      companyId: (json['companyId'] as num?)?.toInt(),
       cityId: (json['cityId'] as num?)?.toInt(),
       brandName: json['brandName'] as String?,
       cityName: json['cityName'] as String?,
@@ -33,7 +33,7 @@ AddProjectParams _$AddProjectParamsFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$AddProjectParamsToJson(AddProjectParams instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'CompanyId': instance.companyId,
+      'companyId': instance.companyId,
       'brandId': instance.brandId,
       'cityId': instance.cityId,
       'cityName': instance.cityName,

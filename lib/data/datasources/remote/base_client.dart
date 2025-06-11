@@ -53,6 +53,7 @@ class HeaderInterceptor extends Interceptor {
   final apiKeyValue = "Nas@manpoweragent";
   final keyLanguage = "Language";
   final requestTypeKey = "IsAndroidRequest";
+  final keyContentType = "content-type";
 
   final UserRepository userRepository;
   final LocalRepository localRepository;
@@ -72,11 +73,13 @@ class HeaderInterceptor extends Interceptor {
     options.headers[keyLanguage] = Get.locale?.languageCode.toString();
     options.headers[keyApiKey] = apiKeyValue;
     options.headers[deviceIdKey] = device.id;
+    options.headers[keyContentType] = keyJson;
     // options.headers[deviceInfoKey] =device.info;
 
     options.headers['platform'] = Config.platformName;
     options.headers['AppVersion'] = Config.AppVersion;
     options.headers[requestTypeKey] = true;
+
     print('Header  Params ${options.data} ${options.headers}');
     // 2) forward to next interceptor
     handler.next(options);

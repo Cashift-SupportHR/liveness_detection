@@ -8,7 +8,7 @@ part 'add_project_params.g.dart';
 class AddProjectParams {
   @JsonKey(name: 'id')
   int? id;
-  @JsonKey(name: 'CompanyId')
+  @JsonKey(name: 'companyId')
   int? companyId;
   @JsonKey(name: 'brandId')
   int? brandId;
