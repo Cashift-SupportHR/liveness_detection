@@ -14,17 +14,20 @@ import 'shift_payment_request_body.dart';
 
 class ShiftPaymentRequestBuilder
     extends BaseBlocWidget<ShiftPaymentRequestState, ShiftPaymentCubitCubit> {
-  ShiftPaymentRequestBuilder(this.shift);
+  ShiftPaymentRequestBuilder(this.shift,this.onRefrash);
+
+  Function ()?onRefrash;
 
   static Future push(BuildContext context,
-      {required CompletedOpportunityData shift}) {
-    // final
+      {required CompletedOpportunityData shift,required Function ()onRefrash}) {
+
     return showAppModalBottomSheet(
         context: context,
-        child: ShiftPaymentRequestBuilder(shift),
+
+        child: ShiftPaymentRequestBuilder(shift,() => onRefrash( )),
         isDivider: false,
         radius: 16,
-        topMargin: 16,
+        topMargin: 60,
         padding: EdgeInsets.zero,
         titleWidget: Text(
             context.getStrings().order_status,
@@ -59,7 +62,7 @@ class ShiftPaymentRequestBuilder
     return ShiftPaymentRequestBody(
       requestState: state,
       onSubmit: (ConfirmShiftPaymentRequest params) {
-        Navigator.pop(context);
+        Navigator.pop(context, true);
         bloc.submitRequestConfirmation(params);
       },
     );
@@ -68,7 +71,9 @@ class ShiftPaymentRequestBuilder
   @override
   void onRequestSuccess(String? message) {
     showSuccessMessage(message!, onDismiss: () {
+
       Navigator.pop(context, true);
+      onRefrash?.call( );
     });
   }
 }

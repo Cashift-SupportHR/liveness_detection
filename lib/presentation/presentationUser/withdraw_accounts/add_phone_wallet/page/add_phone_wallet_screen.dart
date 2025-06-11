@@ -18,6 +18,7 @@ import 'package:shiftapp/presentation/shared/components/material_text_field.dart
 import 'package:shiftapp/presentation/presentationUser/withdraw_accounts/widgets/disclosureText.dart';
 import 'package:shiftapp/presentation/presentationUser/withdraw_accounts/widgets/item_field_screen.dart';
 
+import '../../../../../utils/app_utils.dart';
 import '../../../../shared/components/list_picker_item_widget.dart';
 
 class AddPhoneWalletScreen extends BaseStatelessWidget{
@@ -77,6 +78,7 @@ class AddPhoneWalletScreen extends BaseStatelessWidget{
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+
           Directionality(
             textDirection: TextDirection.ltr,
             child: MaterialTextField(
@@ -93,10 +95,9 @@ class AddPhoneWalletScreen extends BaseStatelessWidget{
                 FilteringTextInputFormatter.digitsOnly,
               ],
               validator: (value) {
-                if (value?.isNullOrEmpty() == true) {
-                  return strings.please_fill_iban;
-                }
-                if (!Validation.isValidPhone(value!)) {
+                if (value!.isNullOrEmpty()) {
+                  return strings.please_entry_phone;
+                } else if (!Validation.isValidPhone(AppUtils.replaceArabicNumber(value))) {
                   return strings.invalid_phone;
                 }
                 return null;

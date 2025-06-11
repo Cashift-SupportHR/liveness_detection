@@ -37,6 +37,7 @@ class PhoneWalletItemWidget extends BaseStatelessWidget {
             ),
             style: kTextRegular.copyWith(color: kGreyishBrown),
             startIcon: kBuildCircleImage(wallet.providerImage.toString(),
+                showFullImage:false,
                 placeHolder: 'images/bank.png'),
             startIconPadding: EdgeInsets.only(left: 8, right: 8),
           )),

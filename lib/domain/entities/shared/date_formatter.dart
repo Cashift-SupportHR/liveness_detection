@@ -13,6 +13,7 @@ class DateFormatter{
   static const DATE_TIME_API ='MM/dd/yyyy HH:mm:ss' ;
   static const DATE_TIME_UI ='EEE ,d MMM  yyyy , hh:mm a' ;
   static const DATE_TIME_UI_2 ='d MMM  yyyy , hh:mm a' ;
+  static const DATE_TIME_UI_3 ='d MMM , hh:mm a' ;
   static const WORKING_DATE_TIME_UI ='dd-MM-yyyy HH:mm a' ;
   static const DATE_TIME_UI_HOUR_MINUT_12 ='dd/MM/yyyy h:mm a' ;
   static const  DATE_TIME_UIF ="MM/dd/yyyy HH:mm" ;
