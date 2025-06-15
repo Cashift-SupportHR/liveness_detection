@@ -11,7 +11,7 @@ CameraSearchResultsDto _$CameraSearchResultsDtoFromJson(
     CameraSearchResultsDto(
       cameraName: json['cameraName'] as String?,
       vehiclePlatNo: json['vehiclePlatNo'] as String?,
-      videoUrl: json['videoUrl'] as String?,
+      url: json['url'] as String?,
     );
 
 Map<String, dynamic> _$CameraSearchResultsDtoToJson(
@@ -19,5 +19,5 @@ Map<String, dynamic> _$CameraSearchResultsDtoToJson(
     <String, dynamic>{
       'cameraName': instance.cameraName,
       'vehiclePlatNo': instance.vehiclePlatNo,
-      'videoUrl': instance.videoUrl,
+      'url': instance.url,
     };

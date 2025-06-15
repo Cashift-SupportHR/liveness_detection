@@ -11113,7 +11113,7 @@ class _AdminEndpoint implements AdminEndpoint {
     )
             .compose(
               _dio.options,
-              '/v1/VehicleCameras/GetVehicleVideo',
+              '/v1/VehicleCameras/GetVehicleVideoPlayback',
               queryParameters: queryParameters,
               data: _data,
             )

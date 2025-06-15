@@ -10,12 +10,10 @@ class VehicleVideoParams {
   bool? isVideoStream;
   @JsonKey(name: 'beginTime')
   String? beginTime;
-  @JsonKey(name: 'endTime')
-  String? endTime;
   @JsonKey(name: 'cameraIndexCode')
   String? cameraIndexCode;
 
-  VehicleVideoParams({this.vehicleId, this.isVideoStream, this.beginTime, this.endTime, this.cameraIndexCode});
+  VehicleVideoParams({this.vehicleId, this.isVideoStream, this.beginTime, this.cameraIndexCode});
 
    factory VehicleVideoParams.fromJson(Map<String, dynamic> json) => _$VehicleVideoParamsFromJson(json);
 

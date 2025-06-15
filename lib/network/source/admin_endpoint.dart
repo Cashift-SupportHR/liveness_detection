@@ -1197,7 +1197,7 @@ abstract class AdminEndpoint {
   @POST('/v1/VehicleCameras/DeleteVehicleCamera')
   Future<ApiResponse> deleteVehicleCamera(@Query('id') int id);
 
-  @POST('/v1/VehicleCameras/GetVehicleVideo')
+  @POST('/v1/VehicleCameras/GetVehicleVideoPlayback')
   Future<ApiResponse<CameraSearchResultsDto>> fetchVehicleVideo(
       @Body() VehicleVideoParams params);
 }

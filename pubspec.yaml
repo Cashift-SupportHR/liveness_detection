@@ -162,6 +162,7 @@ dependencies:
   platform_device_id_platform_interface: ^1.0.0
   chewie: ^1.11.3
   hikvision: ^0.0.2
+  flutter_inappwebview: ^6.1.5
 
 #dependency_overrides:
 #  rxdart: ^0.27.0

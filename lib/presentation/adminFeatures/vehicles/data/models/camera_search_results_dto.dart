@@ -8,10 +8,10 @@ class CameraSearchResultsDto {
   String? cameraName;
   @JsonKey(name: 'vehiclePlatNo')
   String? vehiclePlatNo;
-  @JsonKey(name: 'videoUrl')
-  String? videoUrl;
+  @JsonKey(name: 'url')
+  String? url;
 
-  CameraSearchResultsDto({this.cameraName, this.vehiclePlatNo, this.videoUrl});
+  CameraSearchResultsDto({this.cameraName, this.vehiclePlatNo, this.url});
 
    factory CameraSearchResultsDto.fromJson(Map<String, dynamic> json) => _$CameraSearchResultsDtoFromJson(json);
 

@@ -8,55 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
 
-// class HLSPlayerWidget extends StatefulWidget {
-//   final String url;
-//   const HLSPlayerWidget({required this.url, super.key});
-//
-//   @override
-//   State<HLSPlayerWidget> createState() => _HLSPlayerWidgetState();
-// }
-//
-// class _HLSPlayerWidgetState extends State<HLSPlayerWidget> {
-//   late VideoPlayerController _controller;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     _controller = VideoPlayerController.networkUrl(Uri.parse(widget.url))
-//       ..initialize().then((_) {
-//         setState(() {});
-//         _controller.play();
-//       });
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Center(
-//         child: _controller.value.isInitialized
-//             ? AspectRatio(
-//           aspectRatio: _controller.value.aspectRatio,
-//           child: VideoPlayer(_controller),
-//         )
-//             : const CircularProgressIndicator(),
-//       ),
-//     );
-//   }
-//
-//   @override
-//   void dispose() {
-//     _controller.dispose();
-//     super.dispose();
-//   }
-// }
-
-
-
-
 
 class HLSPlayerWidget extends StatefulWidget {
   final String url;
-  const HLSPlayerWidget({Key? key, required this.url}) : super(key: key);
+  final Function()? onTenSecondsRemaining;
+  const HLSPlayerWidget({Key? key, required this.url, this.onTenSecondsRemaining}) : super(key: key);
 
   @override
   State<HLSPlayerWidget> createState() => _HLSPlayerWidgetState();
@@ -67,13 +23,18 @@ class _HLSPlayerWidgetState extends State<HLSPlayerWidget> {
   ChewieController? _chewieController;
   double _bufferedPercent = 0.0;
 
+  // 1) fire only once
+  bool _hasScheduledNext = false;
+
   @override
   void initState() {
     super.initState();
 
     _videoPlayerController = VideoPlayerController.networkUrl(
       Uri.parse(widget.url),
-    )..addListener(_updateBufferingInfo);
+    )
+    // 2) call our combined listener instead of just _updateBufferingInfo
+      ..addListener(_onPlayerUpdated);
 
     _videoPlayerController.initialize().then((_) {
       setState(() {
@@ -92,14 +53,29 @@ class _HLSPlayerWidgetState extends State<HLSPlayerWidget> {
     });
   }
 
+  // new combined listener
+  void _onPlayerUpdated() {
+    _updateBufferingInfo();
+
+    final val = _videoPlayerController.value;
+    if (!_hasScheduledNext && val.isInitialized) {
+      final remaining = val.duration - val.position;
+      if (remaining <= const Duration(seconds: 1)) {
+        _hasScheduledNext = true;
+        if (widget.onTenSecondsRemaining != null) {
+          widget.onTenSecondsRemaining!();
+        }
+      }
+    }
+  }
+
+  // your existing buffering logic stays the same
   void _updateBufferingInfo() {
     final video = _videoPlayerController.value;
     final buffered = video.buffered;
-
     if (buffered.isNotEmpty && video.duration.inMilliseconds > 0) {
       final lastBuffered = buffered.last.end.inMilliseconds;
       final total = video.duration.inMilliseconds;
-
       setState(() {
         _bufferedPercent = (lastBuffered / total).clamp(0.0, 1.0);
       });
@@ -122,34 +98,37 @@ class _HLSPlayerWidgetState extends State<HLSPlayerWidget> {
           ? Stack(
         alignment: Alignment.center,
         children: [
-          Chewie(controller: _chewieController!,),
-          if (_bufferedPercent < 1.0 ||
-              _videoPlayerController.value.isBuffering)
-             Center(
-               child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: CircularProgressIndicator(
-                      value: _bufferedPercent,
-                      backgroundColor: Colors.grey.withOpacity(0.3),
-                      valueColor: const AlwaysStoppedAnimation<Color>(kPrimary),
-                      strokeWidth: 6,
-                    ),
-                  ),
-                  Text(
-                    '${(_bufferedPercent * 100).toStringAsFixed(0)}%',
-                    style: const TextStyle(
-                      color: kWhite,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-
-                         ),
-             ),
+          SizedBox(
+              width: 500,
+              height: 500,
+              child: Chewie(controller: _chewieController!,)),
+          // if (_bufferedPercent < 1.0 ||
+          //     _videoPlayerController.value.isBuffering)
+          //    Center(
+          //      child: Stack(
+          //       alignment: Alignment.center,
+          //       children: [
+          //         SizedBox(
+          //           width: 50,
+          //           height: 50,
+          //           child: CircularProgressIndicator(
+          //             value: _bufferedPercent,
+          //             backgroundColor: Colors.grey.withOpacity(0.3),
+          //             valueColor: const AlwaysStoppedAnimation<Color>(kPrimary),
+          //             strokeWidth: 6,
+          //           ),
+          //         ),
+          //         Text(
+          //           '${(_bufferedPercent * 100).toStringAsFixed(0)}%',
+          //           style: const TextStyle(
+          //             color: kWhite,
+          //             fontWeight: FontWeight.bold,
+          //           ),
+          //         ),
+          //       ],
+          //
+          //                ),
+          //    ),
         ],
       )
           : const Center(child: CircularProgressIndicator()),

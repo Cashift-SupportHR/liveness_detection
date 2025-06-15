@@ -1,3 +1,4 @@
+import '../../../../../data/datasources/remote/remote_constants.dart';
 import '../../../../../main_index.dart';
 import '../../../../../utils/app_icons.dart';
 import '../../../../shared/components/texts/list_row_texts_icons_v2.dart';
@@ -6,18 +7,22 @@ import '../../data/models/camera_search_results_dto.dart';
 class CameraSearchResults {
   String? cameraName;
   String? vehiclePlatNo;
-  String? videoUrl;
+  String? url;
 
-  CameraSearchResults({this.cameraName, this.vehiclePlatNo, this.videoUrl});
+  CameraSearchResults({this.cameraName, this.vehiclePlatNo, this.url});
 
   factory CameraSearchResults.fromDto(CameraSearchResultsDto dto) =>
       CameraSearchResults(
         cameraName: dto.cameraName,
         vehiclePlatNo: dto.vehiclePlatNo,
-        videoUrl: dto.videoUrl,
+        url: dto.url,
       );
 
   bool get isValidValid{
-    return videoUrl.isNotNullOrEmpty() && (videoUrl?.startsWith('http') ?? false);
+    return url.isNotNullOrEmpty() && (url?.startsWith('http') ?? false);
+  }
+
+  String getVideoStream(int id, String cameraIndexCode) {
+   return '${kSERVER_URL}vehicleVideoStream?id=$id&cameraIndexCode=$cameraIndexCode';
   }
 }

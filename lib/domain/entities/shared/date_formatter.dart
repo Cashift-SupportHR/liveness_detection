@@ -236,4 +236,18 @@ class DateFormatter{
       return DateTime.now();
     }
   }
+
+  static String plusOneMinute(String date) {
+    try {
+      // 1. Parse your string into a DateTime
+      final original = DateTime.parse(date);
+
+      // 2. Add one minute
+      final plusOneMinute = original.add(const Duration(minutes: 1));
+      return plusOneMinute.toIso8601String();
+    } catch (e) {
+      print('formatDateTimeError $e');
+      return '';
+    }
+  }
 }

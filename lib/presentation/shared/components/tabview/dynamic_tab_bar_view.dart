@@ -58,7 +58,7 @@ class _DynamicTabBarViewState extends State<DynamicTabBarView> with TickerProvid
                   labelPadding: const EdgeInsets.only(bottom: 0),
                   onTap: (idTap) {
                     if (widget.onTap != null) {
-                      widget.onTap!(widget.tabs[idTap].id);
+                      widget.onTap?.call(widget.tabs[idTap].id);
                     }
                   },
                   tabs: widget.tabs
