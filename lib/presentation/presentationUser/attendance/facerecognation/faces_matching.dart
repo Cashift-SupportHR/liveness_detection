@@ -2,51 +2,46 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:flutter_face_api/face_api.dart';
+import 'package:flutter_face_api/flutter_face_api.dart';
 import 'package:livelyness_detection/index.dart';
 import 'package:livelyness_detection/livelyness_detection.dart';
 import 'package:shiftapp/extensions/extensions.dart';
 
 import '../../../../core/services/permission_detector.dart';
-
+import 'dart:convert';
+import 'dart:typed_data';
 class FaceMatchingUtils {
   static MatchFacesImage convertImageFileToMatchable(
-    Uint8List imageUint,
+    Uint8List imageUint,ImageType type
   ) {
-    final matchImg = MatchFacesImage();
-    matchImg.bitmap = base64Encode(imageUint);
-    matchImg.imageType = ImageType.PRINTED;
+    final matchImg = MatchFacesImage(imageUint, type);
     return matchImg;
   }
-  static MatchFacesImage convertBase64FileToMatchable(
-    String base64Encode,
-  ) {
-    final matchImg = MatchFacesImage();
-    matchImg.bitmap = base64Encode;
-    matchImg.imageType = ImageType.PRINTED;
-    return matchImg;
+
+
+  static Uint8List base64ToUint8List(String base64String) {
+    return base64Decode(base64String);
   }
 
   static Future<double> matchFaces(
-      MatchFacesImage image1, MatchFacesImage image2) async {
-    if (image1.bitmap == null ||
-        image1.bitmap == "" ||
-        image2.bitmap == null ||
-        image2.bitmap == "") return Future.error('error');
-    var request = new MatchFacesRequest();
-    request.images = [image1, image2];
-    final matching = await FaceSDK.matchFaces(jsonEncode(request));
-    try {
-      var response = MatchFacesResponse.fromJson(json.decode(matching));
-      final str = await FaceSDK.matchFacesSimilarityThresholdSplit(
-          jsonEncode(response!.results), 0.75);
+      Uint8List liveImageUint, String refImageBase64) async {
+    var faceSdk = FaceSDK.instance;
 
-      var split = MatchFacesSimilarityThresholdSplit.fromJson(json.decode(str));
-      final simi = await split!.matchedFaces[0]?.similarity;
-      print('matchFaces simi ${simi}');
+    final liveImage=convertImageFileToMatchable(liveImageUint,ImageType.LIVE);
+    final refImage=convertImageFileToMatchable(base64ToUint8List(refImageBase64),ImageType.PRINTED);
 
-      if (simi != null) return (simi * 100);
-      else return Future.error('error');
+    var request = MatchFacesRequest([liveImage, refImage]);
+    var response = await faceSdk.matchFaces(request);
+    var split = await faceSdk.splitComparedFaces(response.results, 0.75);
+    var match = split.matchedFaces;
+    try{
+    if (match.isNotEmpty) {
+      final similarity = (match[0].similarity * 100) ;
+      return (similarity * 100);
+    }else{
+      return Future.error('unable to matching');
+    }
+
     } catch (e) {
       print('matchFaces catch ${e}');
       return Future.error(e);
@@ -84,4 +79,19 @@ class FaceMatchingUtils {
     final file = File(_capturedImagePath.toString());
     return file;
   }
+
+  startLiveness() async {
+    var faceSdk = FaceSDK.instance;
+
+    var result = await faceSdk.startLiveness(
+      config: LivenessConfig(skipStep: [LivenessSkipStep.ONBOARDING_STEP]),
+      notificationCompletion: (notification) {
+        print(notification.status);
+      },
+    );
+    if (result.image == null) return;
+    final file = File(result.image!.toString());
+    return file;
+  }
+
 }

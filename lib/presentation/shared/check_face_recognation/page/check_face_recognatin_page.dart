@@ -122,17 +122,9 @@ class CheckFaceRecognitionPage
       showDialogs();
       DialogsManager.createProgressWithMessage(context);
       final pickedUintList = pickedFile.readAsBytesSync();
-      final pickedImage =
-          FaceMatchingUtils.convertImageFileToMatchable(pickedUintList);
-      print(bloc.image);
-      print('image bloc');
-      final registeredImage =
-          FaceMatchingUtils.convertBase64FileToMatchable(bloc.image ?? "");
-      print('registeredFace registeredImage $registeredImage');
-      print('registeredFace Image ${bloc.image}');
 
       final simi =
-          await FaceMatchingUtils.matchFaces(pickedImage, registeredImage);
+          await FaceMatchingUtils.matchFaces(pickedUintList, bloc.image ?? "");
 
       dismissDialogs();
 
