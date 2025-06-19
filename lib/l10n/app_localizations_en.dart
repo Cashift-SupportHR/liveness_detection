@@ -4335,4 +4335,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get entity => 'Entity';
+
+  @override
+  String get reload => 'Reload';
 }

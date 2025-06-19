@@ -35,6 +35,7 @@ class FilesPreviewScreen extends BaseStatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("FilesPreviewScreen build called with data: $data");
     selectedUrl = data.first;
     return Padding(
       padding: const EdgeInsets.all(10),

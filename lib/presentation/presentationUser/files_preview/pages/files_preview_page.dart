@@ -23,8 +23,9 @@ class FilesPreviewPage extends BaseBlocWidget<UnInitState, FilesPreviewCubit> {
 
   @override
   Widget buildWidget(BuildContext context, UnInitState state) {
+    List<String>? args = getArguments(context);
     return FilesPreviewScreen(
-      data: getArguments(context) ?? [],
+      data: args ?? [],
       onDownload: (link) {
         bloc.downLoadFromUrl(link);
       },

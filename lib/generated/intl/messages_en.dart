@@ -1493,6 +1493,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reject_service_permission_message": MessageLookupByLibrary.simpleMessage(
             "*If you do not agree to enable the program to work to correctly prove the time of attendance and departure, your status will be considered as an absence."),
         "rejected": MessageLookupByLibrary.simpleMessage("Rejected"),
+        "reload": MessageLookupByLibrary.simpleMessage("Reload"),
         "remaining": MessageLookupByLibrary.simpleMessage("remaining"),
         "remaining_balance":
             MessageLookupByLibrary.simpleMessage("Remaining Balance"),

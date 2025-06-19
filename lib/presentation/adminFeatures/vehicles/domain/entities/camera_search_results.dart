@@ -1,3 +1,4 @@
+import '../../../../../config.dart';
 import '../../../../../data/datasources/remote/remote_constants.dart';
 import '../../../../../main_index.dart';
 import '../../../../../utils/app_icons.dart';
@@ -23,6 +24,6 @@ class CameraSearchResults {
   }
 
   String getVideoStream(int id, String cameraIndexCode) {
-   return '${kSERVER_URL}vehicleVideoStream?id=$id&cameraIndexCode=$cameraIndexCode';
+   return '${Config.isTestVersion ? kTESTServerUrl : kCashiftURL}vehicleVideoStream?id=$id&cameraIndexCode=$cameraIndexCode';
   }
 }

@@ -8734,6 +8734,12 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'الجهة'**
   String get entity;
+
+  /// No description provided for @reload.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة تحميل'**
+  String get reload;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

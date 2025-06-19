@@ -1439,6 +1439,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reject_service_permission_message": MessageLookupByLibrary.simpleMessage(
             "*وفي حالة عدم الموافقة على تمكين البرنامج بالعمل لاثبات وقت الحضور والإنصراف بشكل صحيح تعتبر حالتك غياب."),
         "rejected": MessageLookupByLibrary.simpleMessage("تم الرفض"),
+        "reload": MessageLookupByLibrary.simpleMessage("إعادة تحميل"),
         "remaining": MessageLookupByLibrary.simpleMessage("متبقي"),
         "remaining_balance":
             MessageLookupByLibrary.simpleMessage("الرصيد المتبقي"),

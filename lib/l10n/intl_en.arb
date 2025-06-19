@@ -1435,5 +1435,6 @@
   "update_transactions": "update transactions",
   "reschedule": "Reschedule",
   "delivery_date": "Delivery Date",
-  "entity": "Entity"
+  "entity": "Entity",
+  "reload": "Reload"
 }

@@ -222,14 +222,11 @@ class DateFormatter{
   static DateTime parseDateAndTimeOfDay(String date, {String? pattern}) {
     //  print('parseTimeOfDay $time');
     try {
-      date = date
-        .replaceAll('\u00A0', ' ').trim();
-
-      // 2️⃣ Convert Arabic AM/PM → English AM/PM
+      // Convert Arabic AM/PM → English AM/PM
       date = date
           .replaceAll('ص', 'AM')
-          .replaceAll('م', 'PM');
-
+          .replaceAll('م', 'PM').replaceAll('  ', ' ');
+      print('parseDateAndTimeOfDay $date');
       return  DateFormat('dd/M/yyyy hh:mm a').parse(date);
     } catch(e){
       print('parseTimeOfDayError $e');

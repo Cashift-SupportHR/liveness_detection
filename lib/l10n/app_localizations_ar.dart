@@ -4335,4 +4335,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get entity => 'الجهة';
+
+  @override
+  String get reload => 'إعادة تحميل';
 }

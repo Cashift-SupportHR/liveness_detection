@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shiftapp/presentation/presentationUser/vehiclesOperation/presentation/receiveVehicle/details/pages/receive_vehicle_details_screen.dart';
+import '../../../../../../../core/services/routes.dart';
 import '../../../../../../shared/components/base_widget_bloc.dart';
 import '../../../../../common/common_state.dart';
 import '../../../../data/models/download_vehicle_violation_picture_params.dart';
@@ -29,6 +30,17 @@ class ReceiveVehicleDetailsPage
       onDownloadViolationPicture: (DownloadVehicleViolationPictureParams params){
         bloc.downloadVehicleViolationPicture(params);
       }
+    );
+  }
+
+  @override
+  void onSuccessDataState(data) {
+    print('onSuccessDataState: $data');
+    String img64 = data as String;
+    Navigator.pushNamed(
+      context,
+      Routes.filesPreviewPage,
+      arguments: [img64],
     );
   }
 }

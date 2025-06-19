@@ -1,137 +1,249 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:shiftapp/extensions/extensions.dart';
-import 'package:shiftapp/presentation/presentationUser/resources/colors.dart';
-import 'package:shiftapp/presentation/shared/components/app_widgets.dart';
-import 'package:video_player/video_player.dart';
-import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
+import 'package:flutter/services.dart';
 import 'package:chewie/chewie.dart';
-
+import 'package:video_player/video_player.dart';
+import '../../../presentationUser/common/stream_data_state.dart';
 
 class HLSPlayerWidget extends StatefulWidget {
   final String url;
+  final StreamDataStateInitial<String>? streamNextVideoUrl;
   final Function()? onTenSecondsRemaining;
-  const HLSPlayerWidget({Key? key, required this.url, this.onTenSecondsRemaining}) : super(key: key);
+  final bool isLive;
+  final bool isFullScreen;
+  final Duration initialPosition;
+
+  HLSPlayerWidget({
+    Key? key,
+    required this.url,
+    this.streamNextVideoUrl,
+    this.onTenSecondsRemaining,
+    required this.isLive,
+    this.isFullScreen = false,
+    this.initialPosition = Duration.zero,
+  }) : super(key: key);
 
   @override
   State<HLSPlayerWidget> createState() => _HLSPlayerWidgetState();
 }
 
 class _HLSPlayerWidgetState extends State<HLSPlayerWidget> {
-  late VideoPlayerController _videoPlayerController;
-  ChewieController? _chewieController;
-  double _bufferedPercent = 0.0;
+  late VideoPlayerController _currentVideoController;
+  ChewieController? _currentChewie;
+  String _currentVideoUrl = '';
 
-  // 1) fire only once
-  bool _hasScheduledNext = false;
+  VideoPlayerController? _nextVideoController;
+  ChewieController? _nextChewie;
+  bool _isNextPreloaded = false;
+
+  bool _hasTenSecCallback = false;
+  bool _hasFinished = false;
+  bool _isRetrying = false;
+
+  StreamSubscription? _eventSub;
+  String nextVideo = '';
 
   @override
   void initState() {
     super.initState();
-
-    _videoPlayerController = VideoPlayerController.networkUrl(
-      Uri.parse(widget.url),
-    )
-    // 2) call our combined listener instead of just _updateBufferingInfo
-      ..addListener(_onPlayerUpdated);
-
-    _videoPlayerController.initialize().then((_) {
-      setState(() {
-        _chewieController = ChewieController(
-          videoPlayerController: _videoPlayerController,
-          autoPlay: true,
-          looping: false,
-          allowMuting: true,
-          allowFullScreen: true,
-          placeholder: const SizedBox.shrink(),
-          allowPlaybackSpeedChanging: true,
-        );
-      });
-    }).catchError((error) {
-      print("Error initializing video: $error");
-    });
+    _currentVideoUrl = widget.url;
+    _listenForNextUrl();
+    _initializePlayer(_currentVideoUrl, isCurrent: true);
   }
 
-  // new combined listener
-  void _onPlayerUpdated() {
-    _updateBufferingInfo();
-
-    final val = _videoPlayerController.value;
-    if (!_hasScheduledNext && val.isInitialized) {
-      final remaining = val.duration - val.position;
-      if (remaining <= const Duration(seconds: 1)) {
-        _hasScheduledNext = true;
-        if (widget.onTenSecondsRemaining != null) {
-          widget.onTenSecondsRemaining!();
+  void _listenForNextUrl() {
+    if (widget.streamNextVideoUrl != null) {
+      widget.streamNextVideoUrl!.stream.listen((state) {
+        if (state.data != null && state.data!.isNotEmpty) {
+          nextVideo = state.data!;
+          _isNextPreloaded = false;
         }
-      }
+      });
     }
   }
 
-  // your existing buffering logic stays the same
-  void _updateBufferingInfo() {
-    final video = _videoPlayerController.value;
-    final buffered = video.buffered;
-    if (buffered.isNotEmpty && video.duration.inMilliseconds > 0) {
-      final lastBuffered = buffered.last.end.inMilliseconds;
-      final total = video.duration.inMilliseconds;
+  Future<void> _initializePlayer(String url, {required bool isCurrent}) async {
+    try {
+      final vp = VideoPlayerController.networkUrl(Uri.parse(url));
+      await vp.initialize();
+
+      if (isCurrent) {
+        if (widget.initialPosition > Duration.zero) {
+          await vp.seekTo(widget.initialPosition);
+        }
+        await _eventSub?.cancel();
+        _eventSub = EventChannel('flutter.io/videoPlayer/videoEvents${vp.textureId}')
+            .receiveBroadcastStream()
+            .listen(_handleVideoEvent);
+      }
+
+      final cw = ChewieController(
+        videoPlayerController: vp,
+        autoPlay: isCurrent,
+        looping: false,
+        allowMuting: true,
+        allowFullScreen: false,
+        allowPlaybackSpeedChanging: false,
+        showOptions: false,
+        isLive: widget.isLive,
+        placeholder: SizedBox.shrink(),
+        bufferingBuilder: (BuildContext context) => const Center(
+          child: SizedBox.shrink(),
+        ),
+      );
+
       setState(() {
-        _bufferedPercent = (lastBuffered / total).clamp(0.0, 1.0);
+        if (isCurrent) {
+          _currentVideoController = vp..addListener(_onPlayerUpdated);
+          _currentChewie = cw;
+          _hasFinished = false;
+          _hasTenSecCallback = false;
+        } else {
+          _nextVideoController = vp;
+          _nextChewie = cw;
+          _isNextPreloaded = true;
+        }
       });
+    } catch (_) {
+      widget.onTenSecondsRemaining?.call();
+    }
+  }
+
+  void _handleVideoEvent(dynamic rawEvent) {
+    final Map<dynamic, dynamic> event = rawEvent;
+    if (event['event'] == 'error') _retryCurrentVideo();
+  }
+
+  void _onPlayerUpdated() {
+    final val = _currentVideoController.value;
+    if (!val.isInitialized) return;
+
+    final remaining = val.duration - val.position;
+
+    if (!_hasTenSecCallback && remaining <= const Duration(seconds: 10)) {
+      _hasTenSecCallback = true;
+      widget.onTenSecondsRemaining?.call();
+      if (!_isNextPreloaded && nextVideo.isNotEmpty) {
+        _initializePlayer(nextVideo, isCurrent: false);
+      }
+    }
+
+    if (!_hasFinished && val.position >= val.duration) {
+      _hasFinished = true;
+      _swapToNext();
+    }
+  }
+
+  Future<void> _retryCurrentVideo() async {
+    if (_isRetrying) return;
+    _isRetrying = true;
+    _currentVideoController
+      ..removeListener(_onPlayerUpdated)
+      ..dispose();
+    _currentChewie?.dispose();
+    await Future.delayed(const Duration(seconds: 1));
+    await _initializePlayer(_currentVideoUrl, isCurrent: true);
+    _isRetrying = false;
+  }
+
+  void _swapToNext() {
+    _currentVideoController
+      ..removeListener(_onPlayerUpdated)
+      ..pause();
+    _currentChewie?.dispose();
+
+    if (_isNextPreloaded && _nextVideoController != null) {
+      setState(() {
+        _currentVideoController = _nextVideoController!;
+        _currentChewie = _nextChewie!;
+        _nextVideoController = null;
+        _nextChewie = null;
+        _isNextPreloaded = false;
+        _hasFinished = false;
+        _hasTenSecCallback = false;
+        _currentVideoUrl = nextVideo;
+      });
+      _currentVideoController
+        ..addListener(_onPlayerUpdated)
+        ..play();
+    } else if (nextVideo.isNotEmpty) {
+      _initializePlayer(nextVideo, isCurrent: true);
+    } else {
+      _hasTenSecCallback = false;
+      widget.onTenSecondsRemaining?.call();
     }
   }
 
   @override
   void dispose() {
-    _chewieController?.dispose();
-    _videoPlayerController.removeListener(_updateBufferingInfo);
-    _videoPlayerController.dispose();
+    _eventSub?.cancel();
+    _currentChewie?.dispose();
+    _currentVideoController
+      ..removeListener(_onPlayerUpdated)
+      ..dispose();
+    _nextChewie?.dispose();
+    _nextVideoController?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget content = _currentChewie != null && _currentVideoController.value.isInitialized
+        ? Stack(
+      alignment: Alignment.center,
+      children: [
+        SizedBox(
+          width: widget.isFullScreen ? double.infinity : 500,
+          height: widget.isFullScreen ? double.infinity : 500,
+          child: Chewie(controller: _currentChewie!),
+        ),
+        if (!widget.isFullScreen)
+          Positioned(
+            right: 16,
+            bottom: 16,
+            child: IconButton(
+              icon: const Icon(Icons.fullscreen, color: Colors.white),
+              onPressed: () async {
+                final currentPos = _currentVideoController.value.position;
+                await _currentVideoController.pause();
+                final returnedPos = await Navigator.of(context).push<Duration>(
+                  MaterialPageRoute(
+                    builder: (_) => HLSPlayerWidget(
+                      url: _currentVideoUrl,
+                      streamNextVideoUrl: widget.streamNextVideoUrl,
+                      onTenSecondsRemaining: widget.onTenSecondsRemaining,
+                      isLive: widget.isLive,
+                      isFullScreen: true,
+                      initialPosition: currentPos,
+                    ),
+                  ),
+                );
+                final resumePos = returnedPos ?? currentPos;
+                await _currentVideoController.seekTo(resumePos);
+                await _currentVideoController.play();
+              },
+            ),
+          ),
+      ],
+    )
+        : const Center(child: CircularProgressIndicator());
+
+    if (widget.isFullScreen) {
+      return WillPopScope(
+        onWillPop: () async {
+          final pos = _currentVideoController.value.position;
+          Navigator.of(context).pop(pos);
+          return false;
+        },
+        child: Scaffold(
+          backgroundColor: Colors.black,
+          body: content,
+        ),
+      );
+    }
+
     return Scaffold(
-      body: _chewieController != null &&
-          _chewieController!.videoPlayerController.value.isInitialized
-          ? Stack(
-        alignment: Alignment.center,
-        children: [
-          SizedBox(
-              width: 500,
-              height: 500,
-              child: Chewie(controller: _chewieController!,)),
-          // if (_bufferedPercent < 1.0 ||
-          //     _videoPlayerController.value.isBuffering)
-          //    Center(
-          //      child: Stack(
-          //       alignment: Alignment.center,
-          //       children: [
-          //         SizedBox(
-          //           width: 50,
-          //           height: 50,
-          //           child: CircularProgressIndicator(
-          //             value: _bufferedPercent,
-          //             backgroundColor: Colors.grey.withOpacity(0.3),
-          //             valueColor: const AlwaysStoppedAnimation<Color>(kPrimary),
-          //             strokeWidth: 6,
-          //           ),
-          //         ),
-          //         Text(
-          //           '${(_bufferedPercent * 100).toStringAsFixed(0)}%',
-          //           style: const TextStyle(
-          //             color: kWhite,
-          //             fontWeight: FontWeight.bold,
-          //           ),
-          //         ),
-          //       ],
-          //
-          //                ),
-          //    ),
-        ],
-      )
-          : const Center(child: CircularProgressIndicator()),
+      body: content,
     );
   }
 }

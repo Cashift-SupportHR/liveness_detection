@@ -1479,5 +1479,6 @@
   "in_progress": "جاري المعالجة",
   "reschedule": "إعادة جدولة",
   "delivery_date": "تاريخ الاستلام",
-  "entity": "الجهة"
+  "entity": "الجهة",
+  "reload": "إعادة تحميل"
 }

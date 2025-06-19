@@ -64,8 +64,11 @@ class DateTimeTextFields extends BaseStatelessWidget {
   }
 
   String getDateTimeFromString(String date, String time) {
-    print('getDateTimeFromString $date $time');
-    DateTime dateTime = DateFormatter.parseDateAndTimeOfDay('$date$time');
+    print('getDateTimeFromString $date$time');
+    // remove any non-digit characters except spaces and dashes
+    date = date.replaceAll(' ', '');
+    print('getDateTimeFromString $date$time');
+    DateTime dateTime = DateFormatter.parseDateAndTimeOfDay('${date} $time');
     return dateTime.toIso8601String();
   }
 }

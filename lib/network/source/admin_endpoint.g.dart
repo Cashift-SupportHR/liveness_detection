@@ -14,7 +14,7 @@ class _AdminEndpoint implements AdminEndpoint {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'http://85.184.232.39:8080/api/';
+    baseUrl ??= 'https://cashift.com.sa/api/';
   }
 
   final Dio _dio;
@@ -11113,7 +11113,7 @@ class _AdminEndpoint implements AdminEndpoint {
     )
             .compose(
               _dio.options,
-              '/v1/VehicleCameras/GetVehicleVideoPlayback',
+              '/v1/VehicleCameras/GetVehicleVideoPlaybackOrStream',
               queryParameters: queryParameters,
               data: _data,
             )

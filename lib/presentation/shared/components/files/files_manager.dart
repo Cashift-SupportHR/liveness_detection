@@ -109,13 +109,24 @@ class FilesManager{
   }
 
   static Future<String> downloadFileFromUrl(imageUrl) async {
-    final response = await http.get(Uri.parse(imageUrl));
-    final appDirectory = await getApplicationDocumentsDirectory();
-    String fileName = imageUrl.split('/').last;
-    // check if the file name is too long and truncate it
-    fileName = fileName.length > 255 ? fileName.substring(0, 255) : fileName;
-    final file = File('${appDirectory.path}/$fileName');
-    await file.writeAsBytes(response.bodyBytes);
-   return file.path;
+    bool is64 = !imageUrl.startsWith('http');
+    if (is64) {
+      // convert to from base64 to file
+      Uint8List bytes = base64.decode(imageUrl);
+      final appDirectory = await getApplicationDocumentsDirectory();
+      String fileName = 'downloaded_image_${DateTime.now().millisecondsSinceEpoch}.png';
+      final file = File('${appDirectory.path}/$fileName');
+      await file.writeAsBytes(bytes);
+      return file.path;
+    } else{
+      final response = await http.get(Uri.parse(imageUrl));
+      final appDirectory = await getApplicationDocumentsDirectory();
+      String fileName = imageUrl.split('/').last;
+      // check if the file name is too long and truncate it
+      fileName = fileName.length > 255 ? fileName.substring(0, 255) : fileName;
+      final file = File('${appDirectory.path}/$fileName');
+      await file.writeAsBytes(response.bodyBytes);
+      return file.path;
+    }
   }
 }

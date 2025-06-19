@@ -58,10 +58,7 @@ class ReceiveVehicleDetailsCubit extends BaseCubit {
       DownloadVehicleViolationPictureParams params) {
     executeListener(() => repository.downloadVehicleViolationPicture(params),
         onSuccess: (ApiResponse api) async {
-      await FilesManager().saveFileFromBase64(
-        DownLoadFileDto(fileAttachment: api.payload, fileAttachmentType: 'jpg'),
-      );
-      emit((SuccessStateListener(data: api.message.toString())));
+      emit((SuccessStateListener(data: api.payload.toString())));
     });
   }
 }
