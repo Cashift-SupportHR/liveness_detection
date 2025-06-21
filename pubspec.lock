@@ -38,14 +38,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.0"
-  animate_do:
-    dependency: transitive
-    description:
-      name: animate_do
-      sha256: b6ff08dc6cf3cb5586a86d7f32a3b5f45502d2e08e3fb4f5a484c8421c9b3fc0
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.3.9"
   animation_wrappers:
     dependency: "direct main"
     description:
@@ -214,14 +206,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.5"
-  camerawesome:
-    dependency: transitive
-    description:
-      name: camerawesome
-      sha256: "8e7f61ac78d4e58f1b198d6baa74b8af931819843e5247262c79539fb2f9949c"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.5.0"
   card_swiper:
     dependency: "direct main"
     description:
@@ -318,14 +302,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.19.1"
-  colorfilter_generator:
-    dependency: transitive
-    description:
-      name: colorfilter_generator
-      sha256: ccc2995e440b1d828d55d99150e7cad64624f3cb4a1e235000de3f93cf10d35c
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.8"
   connectivity_plus:
     dependency: transitive
     description:
@@ -707,6 +683,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.1.267"
+  flutter_face_core_match:
+    dependency: "direct main"
+    description:
+      name: flutter_face_core_match
+      sha256: "6564ae998b53d2bdbeaf1190b42d0b2144b1aeef6628831f0e71bcc38bb36ec6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.1.148"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
@@ -1026,22 +1010,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.12"
-  google_mlkit_commons:
-    dependency: transitive
-    description:
-      name: google_mlkit_commons
-      sha256: "9990a65f407a3ef6bae646bf10143faa93fec126683771465bc6c0b43fb0e6e9"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.8.1"
-  google_mlkit_face_detection:
-    dependency: transitive
-    description:
-      name: google_mlkit_face_detection
-      sha256: "0aeab4f39204f7a235ed4cccedfe7e61401b43f4ef139a868c01fa29fdc225ab"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.11.1"
   graphs:
     dependency: transitive
     description:
@@ -1282,14 +1250,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.1.1"
-  livelyness_detection:
-    dependency: "direct main"
-    description:
-      name: livelyness_detection
-      sha256: "163f5058a47372115722255f269c893e7e5e3af960b04cb6aea891a4c75ac432"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.1+5"
   local_auth:
     dependency: "direct main"
     description:
@@ -1371,7 +1331,7 @@ packages:
     source: hosted
     version: "1.3.0"
   lottie:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: lottie
       sha256: c5fa04a80a620066c15cf19cc44773e19e9b38e989ff23ea32e5903ef1015950
@@ -1402,14 +1362,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.11.1"
-  matrix2d:
-    dependency: transitive
-    description:
-      name: matrix2d
-      sha256: "188718dd3bc2a31e372cfd0791b0f77f4f13ea76164147342cc378d9132949e7"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.4"
   meta:
     dependency: transitive
     description:

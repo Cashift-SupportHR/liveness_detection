@@ -1,18 +1,14 @@
+import 'dart:io';
+
 import 'package:geolocator/geolocator.dart';
-import 'package:livelyness_detection/index.dart';
-import 'package:livelyness_detection/livelyness_detection.dart';
-import 'package:shiftapp/main_index.dart';
 import 'package:shiftapp/presentation/presentationUser/resources/colors.dart';
-import 'package:shiftapp/presentation/shared/components/app_widgets.dart';
-import 'package:shiftapp/presentation/shared/components/base_stateful_widget.dart';
 
 import '../../../../data/models/attendance/attendance_config_dto.dart';
 import '../../../../generated/assets.dart';
 import '../../../../utils/app_icons.dart';
+import '../../../presentationUser/attendance/facerecognation/faces_matching.dart';
 import '../../../presentationUser/resources/constants.dart';
-import '../../../shared/components/app_cupertino_button.dart';
-import '../../../shared/components/image_builder.dart';
-import '../../../shared/components/outlint_button.dart';
+import '../../components/index.dart';
 
 class FaceDetectorWidget extends StatefulWidget {
   final AttendanceConfigDto attendanceConfigDto;
@@ -27,10 +23,7 @@ class _ExpampleScreenState extends BaseState<FaceDetectorWidget> {
   //* MARK: - Private Variables
   //? =========================================================
   String? _capturedImagePath;
-  final List<LivelynessStepItem> _veificationSteps = [];
 
-  //* MARK: - Life Cycle Methods
-  //? =========================================================
   @override
   void initState() {
     print('FaceDetectorPage initState');
@@ -102,35 +95,6 @@ class _ExpampleScreenState extends BaseState<FaceDetectorWidget> {
   //* MARK: - Private Methods for Business Logic
   //? =========================================================
   void _initValues() {
-    print('widget.attendanceConfigDto ${widget.attendanceConfigDto.toJson()}');
-    _veificationSteps.addAll(
-      [
-        if (widget.attendanceConfigDto.eyeCheck == true)
-          LivelynessStepItem(
-            step: LivelynessStep.blink,
-            title: strings.blink_your_eyes,
-            isCompleted: false,
-          ),
-        if (widget.attendanceConfigDto.moveFace == true)
-          LivelynessStepItem(
-            step: LivelynessStep.turnLeft,
-            title: strings.turn_right,
-            isCompleted: false,
-          ),
-        if (widget.attendanceConfigDto.smile == true)
-          LivelynessStepItem(
-            step: LivelynessStep.smile,
-            title: strings.smil,
-            isCompleted: false,
-          ),
-      ],
-    );
-    LivelynessDetection.instance.configure(
-      dotColor: Colors.white,
-      thresholds: [
-        SmileDetectionThreshold(),
-      ],
-    );
     bool isDirectDetectFace = widget.attendanceConfigDto.isDirectDetectFace ?? false;
     if (isDirectDetectFace) {
       Future.delayed(Duration(milliseconds: 500), () {
@@ -141,20 +105,8 @@ class _ExpampleScreenState extends BaseState<FaceDetectorWidget> {
 
   void _onStartLivelyness() async {
     setState(() => _capturedImagePath = null);
-    final response = await LivelynessDetection.instance.detectLivelyness(
-      context,
-      config: DetectionConfig(
-        steps: _veificationSteps,
-        startWithInfoScreen: false,
-        maxSecToDetect: 60,
-        allowAfterMaxSec: false,
-        captureButtonColor: Colors.red,
-      ),
-    );
-    if (response?.imgPath == null) {
-      return;
-    }
-    _capturedImagePath = response?.imgPath;
+    final response = await FaceMatchingUtils.startLiveness();
+    _capturedImagePath = response.path;
     setState(() {});
     if (isDirectDetectFace) {
       confirmAction();

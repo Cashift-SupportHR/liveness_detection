@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import '../../../../../domain/entities/account/registered_face.dart';
 import '../../../../shared/components/app_cupertino_button.dart';
 import '../../../../shared/components/base_stateless_widget.dart';
@@ -81,7 +83,8 @@ class SelectFaceRecognition extends BaseStatelessWidget {
 
   navigateToCamera(BuildContext context) async {
     try {
-      imageFile = await FaceMatchingUtils.startLivelyness(context);
+      imageFile = await FaceMatchingUtils.startLiveness();
+      print('SelectFaceRecognition imageFile ${imageFile.path}');
       pickedImageStream.setData(imageFile);
     } catch (e) {}
   }

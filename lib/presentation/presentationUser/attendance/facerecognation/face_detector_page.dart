@@ -1,8 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:livelyness_detection/index.dart';
-import 'package:livelyness_detection/livelyness_detection.dart';
 import 'package:shiftapp/presentation/presentationUser/resources/colors.dart';
 import 'package:shiftapp/presentation/shared/components/app_widgets.dart';
 import 'package:shiftapp/presentation/shared/components/base_stateful_widget.dart';
@@ -14,6 +14,7 @@ import '../../../shared/components/app_cupertino_button.dart';
 import '../../../shared/components/image_builder.dart';
 import '../../../shared/components/outlint_button.dart';
 import '../../resources/constants.dart';
+import 'faces_matching.dart';
 
 class FaceDetectorPage extends StatefulWidget {
   @override
@@ -24,11 +25,6 @@ class _ExpampleScreenState extends BaseState<FaceDetectorPage> {
   //* MARK: - Private Variables
   //? =========================================================
   String? _capturedImagePath;
-  final bool _isLoading = false;
-  bool _startWithInfo = true;
-  bool _allowAfterTimeOut = false;
-  final List<LivelynessStepItem> _veificationSteps = [];
-  int _timeOutDuration = 30;
 
   //* MARK: - Life Cycle Methods
   //? =========================================================
@@ -107,35 +103,7 @@ class _ExpampleScreenState extends BaseState<FaceDetectorPage> {
   void _initValues() {
     AttendanceConfigDto attendanceConfigDto =
         ModalRoute.of(context)!.settings.arguments as AttendanceConfigDto;
-    print('attendanceConfigDto ${attendanceConfigDto.toJson()}');
-    _veificationSteps.addAll(
-      [
-        if (attendanceConfigDto.eyeCheck == true)
-          LivelynessStepItem(
-            step: LivelynessStep.blink,
-            title: strings.blink_your_eyes,
-            isCompleted: false,
-          ),
-        if (attendanceConfigDto.moveFace == true)
-          LivelynessStepItem(
-            step: LivelynessStep.turnLeft,
-            title: strings.turn_right,
-            isCompleted: false,
-          ),
-        if (attendanceConfigDto.smile == true)
-          LivelynessStepItem(
-            step: LivelynessStep.smile,
-            title: strings.smil,
-            isCompleted: false,
-          ),
-      ],
-    );
-    LivelynessDetection.instance.configure(
-      dotColor: Colors.white,
-      thresholds: [
-        SmileDetectionThreshold(),
-      ],
-    );
+
     bool isDirectDetectFace = attendanceConfigDto.isDirectDetectFace ?? false;
     if (isDirectDetectFace) {
       Future.delayed(Duration(milliseconds: 500), () {
@@ -146,20 +114,12 @@ class _ExpampleScreenState extends BaseState<FaceDetectorPage> {
 
   void _onStartLivelyness() async {
     setState(() => _capturedImagePath = null);
-    final response = await LivelynessDetection.instance.detectLivelyness(
-      context,
-      config: DetectionConfig(
-        steps: _veificationSteps,
-        startWithInfoScreen: false,
-        maxSecToDetect: 60,
-        allowAfterMaxSec: false,
-        captureButtonColor: Colors.red,
-      ),
-    );
-    if (response?.imgPath == null) {
+    final response = await FaceMatchingUtils.startLiveness();
+    print('response _capturedImagePath $response');
+    if (response == null) {
       return;
     }
-    _capturedImagePath = response?.imgPath;
+    _capturedImagePath = response.path;
     setState(() {});
     if (isDirectDetectFace) {
       confirmAction();
@@ -196,7 +156,7 @@ class _ExpampleScreenState extends BaseState<FaceDetectorPage> {
   confirmAction() {
     print('confirmAction');
     if (_capturedImagePath != null) {
-      Future.delayed(Duration(milliseconds: 500), () {
+      Future.delayed(Duration(milliseconds: 600), () {
         Navigator.pop(context, _capturedImagePath);
       });
     } else {

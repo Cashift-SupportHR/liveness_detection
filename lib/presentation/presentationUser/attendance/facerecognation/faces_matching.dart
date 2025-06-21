@@ -1,15 +1,20 @@
 
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter/services.dart';
 import 'package:flutter_face_api/flutter_face_api.dart';
-import 'package:livelyness_detection/index.dart';
-import 'package:livelyness_detection/livelyness_detection.dart';
+import 'package:path_provider/path_provider.dart';
+
 import 'package:shiftapp/extensions/extensions.dart';
 
 import '../../../../core/services/permission_detector.dart';
 import 'dart:convert';
 import 'dart:typed_data';
+import 'dart:async';
+
+import '../../../shared/components/index.dart' show BuildContext;
 class FaceMatchingUtils {
   static MatchFacesImage convertImageFileToMatchable(
     Uint8List imageUint,ImageType type
@@ -47,41 +52,61 @@ class FaceMatchingUtils {
       return Future.error(e);
     }
   }
+  //
+  // static Future<File> startLivelyness(BuildContext context, {List<LivelynessStepItem>? list}) async {
+  //   final granted =await  PermissionDetector . detectCameraAndStoragePermission(context);
+  //   if(granted==false) return Future.error('Permission not allowed');;
+  //   String _capturedImagePath = "";
+  //   final _veificationSteps = list ?? [
+  //     LivelynessStepItem(
+  //       step: LivelynessStep.smile,
+  //       title: context.getStrings().smil,
+  //       isCompleted: false,
+  //     ),
+  //   ];
+  //
+  //   final response = await LivelynessDetection.instance.detectLivelyness(
+  //     context,
+  //     config: DetectionConfig(
+  //       steps: _veificationSteps,
+  //       startWithInfoScreen: false,
+  //       maxSecToDetect: 20,
+  //       allowAfterMaxSec: false,
+  //       captureButtonColor: Colors.red,
+  //     ),
+  //   );
+  //
+  //   if (response!.imgPath.isNullOrEmpty()) {
+  //     return Future.error('error');
+  //   }
+  //   _capturedImagePath = response.imgPath;
+  //   print('_capturedImagePath $_capturedImagePath');
+  //   final file = File(_capturedImagePath.toString());
+  //   return file;
+  // }
 
-  static Future<File> startLivelyness(BuildContext context, {List<LivelynessStepItem>? list}) async {
-    final granted =await  PermissionDetector . detectCameraAndStoragePermission(context);
-    if(granted==false) return Future.error('Permission not allowed');;
-    String _capturedImagePath = "";
-    final _veificationSteps = list ?? [
-      LivelynessStepItem(
-        step: LivelynessStep.smile,
-        title: context.getStrings().smil,
-        isCompleted: false,
-      ),
-    ];
+  static var faceSdk = FaceSDK.instance;
 
-    final response = await LivelynessDetection.instance.detectLivelyness(
-      context,
-      config: DetectionConfig(
-        steps: _veificationSteps,
-        startWithInfoScreen: false,
-        maxSecToDetect: 20,
-        allowAfterMaxSec: false,
-        captureButtonColor: Colors.red,
-      ),
-    );
-
-    if (response!.imgPath.isNullOrEmpty()) {
-      return Future.error('error');
+  static Future<bool> initialize() async {
+    var license = await loadAssetIfExists("assets/regula.license");
+    InitConfig? config = null;
+    if (license != null) config = InitConfig(license);
+    var (success, error) = await faceSdk.initialize(config: config);
+    if (!success) {
+      print("${error?.code}: ${error?.message}");
     }
-    _capturedImagePath = response.imgPath;
-    print('_capturedImagePath $_capturedImagePath');
-    final file = File(_capturedImagePath.toString());
-    return file;
+    return success;
   }
 
-  startLiveness() async {
-    var faceSdk = FaceSDK.instance;
+  static Future<ByteData?> loadAssetIfExists(String path) async {
+    try {
+      return await rootBundle.load(path);
+    } catch (_) {
+      return null;
+    }
+  }
+  static Future<File> startLiveness() async {
+    await initialize();
 
     var result = await faceSdk.startLiveness(
       config: LivenessConfig(skipStep: [LivenessSkipStep.ONBOARDING_STEP]),
@@ -89,8 +114,14 @@ class FaceMatchingUtils {
         print(notification.status);
       },
     );
-    if (result.image == null) return;
-    final file = File(result.image!.toString());
+    if (result == null) {
+      print('startLiveness result is null');
+      return Future.error('Liveness detection failed');
+    }
+    final tempDir = await getTemporaryDirectory();
+    File file = await File('${tempDir.path}/${DateTime.now().millisecondsSinceEpoch}.png').create();
+    file.writeAsBytesSync(result.image ?? []);
+    print('startLiveness result file path: ${file.path}');
     return file;
   }
 

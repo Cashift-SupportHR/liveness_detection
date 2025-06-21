@@ -8,8 +8,6 @@ import 'package:shiftapp/data/models/attendance/attendance_config_dto.dart';
  import 'package:shiftapp/presentation/presentationUser/common/common_state.dart';
 import 'package:shiftapp/presentation/shared/components/adminToggle/screen/admin_toggle_widget.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
-import 'package:livelyness_detection/index.dart';
-import 'package:livelyness_detection/livelyness_detection.dart';
 
 import '../../../../../core/services/permission_detector.dart';
 import '../../../../presentationUser/attendance/facerecognation/faces_matching.dart';
@@ -123,14 +121,7 @@ class AdminToggleBuilder
   Future<File?> navigateToCamera(BuildContext context) async {
     try {
       final data = bloc.getDataToggle();
-      final image = await FaceMatchingUtils.startLivelyness(context,
-      list: stepsList( AttendanceConfigDto(
-        eyeCheck: data?.eyeCheck,
-        moveFace: data?.moveFace,
-        smile: data?.smile,
-        isDirectDetectFace: true,
-      ),)
-      );
+      final image = await FaceMatchingUtils.startLiveness();
       print('navigateToCamera image $image');
       if (!image.isNullOrEmpty()) {
         return image;
@@ -139,30 +130,5 @@ class AdminToggleBuilder
     } catch (e) {
       return null;
     }
-  }
-
-
-  List<LivelynessStepItem> stepsList(AttendanceConfigDto attendanceConfigDto) {
-   return
-     [
-       if (attendanceConfigDto.eyeCheck == true)
-         LivelynessStepItem(
-           step: LivelynessStep.blink,
-           title: strings.blink_your_eyes,
-           isCompleted: false,
-         ),
-       if (attendanceConfigDto.moveFace == true)
-         LivelynessStepItem(
-           step: LivelynessStep.turnLeft,
-           title: strings.turn_right,
-           isCompleted: false,
-         ),
-       if (attendanceConfigDto.smile == true)
-         LivelynessStepItem(
-           step: LivelynessStep.smile,
-           title: strings.smil,
-           isCompleted: false,
-         ),
-     ];
   }
 }
