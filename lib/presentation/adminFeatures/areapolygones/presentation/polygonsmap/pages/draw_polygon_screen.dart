@@ -146,7 +146,7 @@ class _DrawPolygonWithMarkersScreenState
             // Display markers on the map
             onTap: readOnly ? null : _onTap, // Register tap events
           ),
-          if (args != null && args!.isOnlyView != true) searchWidget(),
+          if (args?.isOnlyView != true) searchWidget(),
           _detectMyLocationButton(),
         ],
       ),
