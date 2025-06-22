@@ -1,3 +1,6 @@
+import '../../../../../l10n/app_localizations.dart';
+import '../../../../../utils/app_icons.dart';
+import '../../../../shared/components/texts/list_row_texts_icons_v2.dart';
 import '../../data/models/vehicles_dto.dart';
 
 /// id : 1
@@ -83,5 +86,27 @@ class Vehicle {
 
   static List<Vehicle> fromListDto(List<VehiclesDto> json) {
     return json.map((e) => Vehicle.fromDto(e)).toList();
+  }
+
+
+
+  List<ListRowTextItem> toListRowTextItems(AppLocalizations strings) {
+    return [
+      ListRowTextItem(
+        title: strings.company_name,
+        value: companyName ?? '',
+        icon: AppIcons.buildingsOutline,
+      ),
+      ListRowTextItem(
+        title: strings.project_name,
+        value: projectName ?? '',
+        icon: AppIcons.projectName,
+      ),
+      ListRowTextItem(
+        title: strings.vehicle_number,
+        value: plateNumber ?? '',
+        icon: AppIcons.vehicle_number,
+      ),
+    ];
   }
 }

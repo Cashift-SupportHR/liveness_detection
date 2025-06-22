@@ -10,13 +10,14 @@ class DynamicTabBarView extends StatefulWidget {
   final List<Widget>? children;
   final EdgeInsetsGeometry? margin;
   final EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry? labelPadding;
   final EdgeInsetsGeometry? marginTabs;
   final bool? isSeparate;
   final Widget? pageWidget;
   final Function(int)? onTap;
   final bool isScrollable;
 
-  DynamicTabBarView({Key? key, required this.tabs, this.children, this.margin, this.isSeparate = false, this.padding, this.marginTabs, this.pageWidget, this.onTap, this.initialIndex, this.isScrollable = false})
+  DynamicTabBarView({Key? key, required this.tabs, this.children, this.margin, this.isSeparate = false, this.padding, this.labelPadding, this.marginTabs, this.pageWidget, this.onTap, this.initialIndex, this.isScrollable = false})
       : super(key: key);
   @override
   State<StatefulWidget> createState() {
@@ -55,7 +56,8 @@ class _DynamicTabBarViewState extends State<DynamicTabBarView> with TickerProvid
                   indicatorPadding: EdgeInsets.zero,
                   unselectedLabelColor: kGreen_2,
                   indicatorSize: TabBarIndicatorSize.tab,
-                  labelPadding: const EdgeInsets.only(bottom: 0),
+                  labelPadding: widget.labelPadding ?? const EdgeInsets.only(bottom: 0),
+                  tabAlignment:  widget.isScrollable ? TabAlignment.start : null,
                   onTap: (idTap) {
                     if (widget.onTap != null) {
                       widget.onTap?.call(widget.tabs[idTap].id);

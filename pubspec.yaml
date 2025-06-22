@@ -163,7 +163,6 @@ dependencies:
   chewie: ^1.11.3
   hikvision: ^0.0.2
   flutter_inappwebview: ^6.1.5
-  last_pod_player: ^0.0.7
 
 #dependency_overrides:
 #  rxdart: ^0.27.0
