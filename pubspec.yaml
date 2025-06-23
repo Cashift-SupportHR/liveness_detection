@@ -159,7 +159,7 @@ dependencies:
   permission_handler: ^12.0.0+1
   floor: ^1.5.0
   store_redirect: ^2.0.4
-  video_player: ^2.10.0
+  video_player: ^2.9.3
   wakelock_plus: ^1.3.2
   share_plus: ^11.0.0
   geolocator: ^14.0.1
