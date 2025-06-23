@@ -45,6 +45,7 @@ class _DrawPolygonWithMarkersScreenState
   Set<Marker> markers = Set<Marker>();
   bool readOnly = false;
   bool isFirstTap = true;
+  TextEditingController searchController = TextEditingController();
 
   DrawPolygonWithMarkersArgs? args;
   StreamStateInitial<bool> isSaveData = StreamStateInitial<bool>();
@@ -203,10 +204,9 @@ class _DrawPolygonWithMarkersScreenState
         onSearch: (value) {
           widget.onFetchAutoComplete(value);
         },
+        searchController: searchController,
         predictionsSearchStream: widget.predictionsSearchStream,
         onSelectPlace: (item) {
-          print('onSelectPlace ${item.toJson()}');
-          //onZoom(item);
           widget.onFetchPlaceDetails(item.placeId ?? '');
           placeDetailsStream();
         },

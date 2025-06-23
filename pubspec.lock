@@ -1373,10 +1373,9 @@ packages:
   livelyness_detection:
     dependency: "direct main"
     description:
-      name: livelyness_detection
-      sha256: "163f5058a47372115722255f269c893e7e5e3af960b04cb6aea891a4c75ac432"
-      url: "https://pub.dev"
-    source: hosted
+      path: "modules/livelyness_detection"
+      relative: true
+    source: path
     version: "0.0.1+5"
   local_auth:
     dependency: "direct main"

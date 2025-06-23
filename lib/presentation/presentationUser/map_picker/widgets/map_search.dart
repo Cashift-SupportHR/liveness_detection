@@ -14,6 +14,7 @@ class MapSearch extends BaseStatelessWidget {
   final GestureTapCallback? onClearTextFieldSearch;
   final StreamStateInitial<List<MapPrediction>?> predictionsSearchStream;
   Function(MapPrediction) onSelectPlace;
+  TextEditingController? searchController;
 
   MapSearch(
       {Key? key,
@@ -21,12 +22,13 @@ class MapSearch extends BaseStatelessWidget {
       this.onTapTextFieldSearch,
       this.onClearTextFieldSearch,
       required this.predictionsSearchStream,
-      required this.onSelectPlace})
+      required this.onSelectPlace, this.searchController,
+      })
       : super(key: key);
-  TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    searchController = searchController ?? TextEditingController();
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -54,7 +56,7 @@ class MapSearch extends BaseStatelessWidget {
                         onTap: () {
                           FocusScope.of(context).unfocus();
                           onClearTextFieldSearch!();
-                          searchController.clear();
+                          searchController?.clear();
                           predictionsSearchStream.setData([]);
                         },
                       ),
@@ -85,7 +87,7 @@ class MapSearch extends BaseStatelessWidget {
                                 child: InkWell(
                                   onTap: () {
                                     FocusScope.of(context).unfocus();
-                                    searchController.text = item.description!;
+                                    searchController?.text = item.description!;
                                     predictionsSearchStream.setData([]);
                                     onSelectPlace(item);
                                   },
