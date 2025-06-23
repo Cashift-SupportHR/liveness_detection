@@ -12,6 +12,7 @@ import 'package:shiftapp/data/repositories/local/local_repository.dart';
 import 'package:shiftapp/data/repositories/logger/logger_repository.dart';
 import 'package:shiftapp/data/repositories/user/user_repository.dart';
 import 'package:shiftapp/domain/entities/shared/device.dart';
+import '../../../network/interceptor/logging_interceptor.dart';
 import 'api_exception.dart';
 import 'remote_constants.dart';
 
@@ -23,21 +24,27 @@ class ClientCreator {
   Dio create() {
     final dio2 = Dio();
 
-    // Provide a dio instance
-    dio2.options.connectTimeout = Duration(minutes: 2);
+    // Set timeouts
+    dio2.options.connectTimeout = Duration(seconds: 60); // Connection timeout
+    dio2.options.receiveTimeout = Duration(seconds: 60); // Receive timeout
+    dio2.options.sendTimeout = Duration(seconds: 60);    // Send timeout
 
-    dio2.interceptors.add(LogInterceptor(responseBody: true));
+    // Set base URL
+    dio2.options.baseUrl =kBASE_URL;  // Replace with your base URL
+
+
+
+    // Add custom interceptor if provided
     if (interceptor != null) {
       dio2.interceptors.add(interceptor!);
     }
-    // Chucker api
-    if (Config.isDebuggable == true || Config.isTestVersion == true) {
+    dio2.interceptors.add(LoggingInterceptor());
+    // Add ChuckerDioInterceptor for debug/test environments
+    if (Config.isDebuggable || Config.isTestVersion) {
       dio2.interceptors.add(
         ChuckerDioInterceptor(),
       );
     }
-
-    print('dio2.interceptors ${dio2.interceptors}');
     return dio2;
   }
 }
