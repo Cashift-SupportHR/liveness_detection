@@ -13,9 +13,7 @@ class _ConfigurationEndpoint implements ConfigurationEndpoint {
     this._dio, {
     this.baseUrl,
     this.errorLogger,
-  }) {
-    baseUrl ??= 'https://cashift.com.sa/api/';
-  }
+  });
 
   final Dio _dio;
 
