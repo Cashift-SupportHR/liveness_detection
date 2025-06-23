@@ -76,7 +76,7 @@ class RegisterFaceRecognitionScreen extends BaseStatelessWidget {
 
   navigateToCamera(BuildContext context) async {
     try {
-      final imageFile = await FaceMatchingUtils.startLiveness();
+      final imageFile = await FaceMatchingUtils.startLivelyness(context);
         pickedImage.setData(imageFile);
     } catch (e) {}
   }

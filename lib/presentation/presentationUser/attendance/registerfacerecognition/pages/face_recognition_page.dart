@@ -5,7 +5,6 @@ import '../../../../../data/repositories/profile/profile_repository.dart';
 import '../../../../../data/repositories/user/user_repository.dart';
 import '../../../../../domain/entities/account/registered_face.dart';
 import '../../../../../domain/entities/account/user.dart';
-import '../../../../../main_index.dart';
 import '../../../../adminFeatures/di/injector.dart';
 import '../../../../shared/components/adminToggle/cubit/admin_toggle_cubit.dart';
 import '../../../../shared/components/base_widget_bloc.dart';
@@ -54,7 +53,7 @@ class FaceRecognitionPage extends BaseBlocWidget<Initialized<RegisteredFace?>,
 
   navigateToCamera(BuildContext context) async {
     try {
-      final imageFile = await FaceMatchingUtils.startLiveness();
+      final imageFile = await FaceMatchingUtils.startLivelyness(context);
       bloc.saveFace(imageFile);
     } catch (e) {}
   }
