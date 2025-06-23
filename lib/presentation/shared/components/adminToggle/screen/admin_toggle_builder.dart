@@ -1,5 +1,8 @@
 
- import 'package:get/get.dart';
+ import 'dart:io';
+
+import 'package:get/get.dart';
+import 'package:livelyness_detection/livelyness_detection.dart';
 import 'package:shiftapp/core/services/routes.dart';
 import 'package:shiftapp/data/models/attendance/attendance_config_dto.dart';
  import 'package:shiftapp/extensions/extensions.dart';
@@ -96,16 +99,10 @@ class AdminToggleBuilder
       showDialogs();
       DialogsManager.createProgressWithMessage(context);
       final pickedUintList = pickedFile.readAsBytesSync();
-      final pickedImage =
-          FaceMatchingUtils.convertImageFileToMatchable(pickedUintList);
-      print(bloc.image);
-      print('image bloc');
-      final registeredImage =
-          FaceMatchingUtils.convertBase64FileToMatchable(bloc.image ?? "");
 
 
       final simi =
-          await FaceMatchingUtils.matchFaces(pickedImage, registeredImage);
+          await FaceMatchingUtils.matchFaces(pickedUintList, bloc.image ?? "");
 
       dismissDialogs();
 
