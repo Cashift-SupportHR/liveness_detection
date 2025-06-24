@@ -149,16 +149,7 @@ abstract class BaseCubit extends BlocBase<CommonState> {
     } catch (e) {}
   }
 
-  Future<bool> checkFaceRecognition() async {
-    bool isCheckFaceRecognition =
-        await CheckFaceRecognitionPage.pushIsDetectedSuccess();
-    if (!isCheckFaceRecognition) {
-      emit(ErrorState(VerificationFaceException()));
-      return false;
-    } else {
-      return true;
-    }
-  }
+
   emitVerificationFaceException(){
     emit(ErrorState(VerificationFaceException()));
   }

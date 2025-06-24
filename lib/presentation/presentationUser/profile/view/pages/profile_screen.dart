@@ -86,21 +86,13 @@ class ProfileScreen extends BaseStatelessWidget {
           SizedBox(
             height: 66,
             width: double.infinity,
-            child:    RequestItemBuilder(),
+            child:    RequestItemBuilder(faceDetectionEnabled: profileData?.accountServices.isAllowFaceRecognition==true,),
           ),
 
           const SizedBox(
             height: 20,
           ),
           sectionTile(strings.general_settings),
-          // buildProfileItem(strings.change_language_label,
-          //     icon: loadSvgIconAsset('global'), onTap: () async {
-          //   DialogsManager.showLanguageDialog(context, onSelectLocal: (local) {
-          //     Navigator.of(context).pop();
-          //     localRepo.toggleLanguage();
-          //     RestartWidget.restartApp(context);
-          //   });
-          // }),
           buildProfileItem(strings.logout,
               icon: loadSvgIconAsset('logout', color: kLipStick),
               onTap: () async {

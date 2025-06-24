@@ -15,6 +15,7 @@ import 'package:shiftapp/presentation/presentationUser/joboffers/widgets/job_off
 import 'package:shiftapp/presentation/presentationUser/locationservice/locationservice.dart';
 import '../../adminFeatures/di/injector.dart';
 import '../../presentationUser/common/common_state.dart';
+import '../check_face_recognation/page/check_face_recognatin_page.dart';
 import 'datepicker/hijri_calendar.dart';
 import 'dialogs_manager.dart';
 import 'progress/progress_dialog.dart';
@@ -205,6 +206,13 @@ abstract class BaseStatelessWidget extends StatelessWidget {
     DialogsManager.showErrorDialog(
         context, context.handleApiErrorMessage(exception: error));
   }
-
+  Future<bool> checkFaceRecognition(BuildContext context) async {
+    bool isCheckFaceRecognition = await CheckFaceRecognitionPage.start(context);
+    if (!isCheckFaceRecognition) {
+      return false;
+    }else{
+      return true;
+    }
+  }
 
 }

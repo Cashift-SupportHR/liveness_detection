@@ -13,10 +13,11 @@ import '../../../../../../core/services/permission_detector.dart';
 import '../../../presentationUser/attendance/facerecognation/faces_matching.dart';
 import '../../components/dialogs_manager.dart';
 import '../cubit/check_face_recognation_cubit.dart';
+import '../cubit/face_detection_intialize_state.dart';
 import '../widgets/face_detector_widget.dart';
 
 class CheckFaceRecognitionPage
-    extends BaseBlocWidget<InitializedFaceRecognitionData, CheckFaceRecogenationCubit> {
+    extends BaseBlocWidget<FaceDetectionInitializeState, CheckFaceRecogenationCubit> {
   @override
   bool detectRequiredTasks() {
     return false;
@@ -27,13 +28,6 @@ class CheckFaceRecognitionPage
     bloc.fetchRegisteredFace();
   }
 
-  static Future<bool> pushIsDetectedSuccess() async {
-    final isChecked = await Navigator.pushNamed(
-      Get.context!,
-      Routes.checkFaceRecogenationPage,
-    );
-    return isChecked is bool ? isChecked : false;
-  }
   static Future<bool> start(BuildContext context) async {
     final isChecked = await Navigator.pushNamed(
       context,
@@ -48,21 +42,21 @@ class CheckFaceRecognitionPage
 
   }
   @override
-  Widget buildWidget(BuildContext context, InitializedFaceRecognitionData state) {
-    checkAllowFaceRecognition(state.faceRecognitionConfig?.isAllowFaceRecognition??false);
+  Widget buildWidget(BuildContext context, FaceDetectionInitializeState state) {
+    checkAllowFaceRecognition(state.faceRecognitionConfig.isAllowFaceRecognition??false);
 
     return FaceDetectorWidget(
       attendanceConfigDto: AttendanceConfigDto(
-        eyeCheck: state.faceRecognitionConfig?.eyeCheck,
-        moveFace: state.faceRecognitionConfig?.moveFace,
-        smile: state.faceRecognitionConfig?.smile,
+        eyeCheck: state.faceRecognitionConfig.eyeCheck,
+        moveFace: state.faceRecognitionConfig.moveFace,
+        smile: state.faceRecognitionConfig.smile,
       ),
       onFaceDetection: ( matched) async {
         if(matched) {
           backAction();
         }
         },
-      refImageBase64: state.image,
+      refImageBase64: state.base64Image,
     );
   }
 
