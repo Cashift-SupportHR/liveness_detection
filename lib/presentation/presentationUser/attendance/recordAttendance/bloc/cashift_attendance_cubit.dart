@@ -40,51 +40,15 @@ class CashiftAttendanceCubit extends BaseCubit {
       emit(Initialized<String?>(data: null));
       return;
     }
-    if (isFromCash) {
-      fetchFileFromCash();
-    } else {
-      executeBuilder(
-        () => repository.downloadFaceRecognition(),
-        onSuccess: (value) async {
-          final file = await _createFileFromString(value.payload!);
-          Uint8List data = File(file).readAsBytesSync();
-          int sizeInBytes = data.length;
-          double sizeInMb = sizeInBytes / (1024 * 1024);
-          print('sizeInMb ${sizeInMb} => ${value.payload?.fileAttachment}');
-          emit(Initialized<String?>(
-              data: value.payload?.fileAttachment.toString()));
-        },
-        //     onError: (e) async {
-        //   emit(Initialized<String?>(data: null));
-        // }
-      );
-    }
+    executeBuilder(
+          () => repository.getFaceImageBase64(),
+      onSuccess: (value) async {
+        emit(Initialized<String?>(
+            data: value));
+      },
+    );
   }
 
-  Future<void> fetchFileFromCash() async {
-    try {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? filePath =
-          prefs.getString(LocalConstants.RecognitionEncryptedFilePATH);
-      Uint8List data = File(filePath ?? '').readAsBytesSync();
-      final imageEncoded = base64.encode(data);
-      print('fetchFileFromCash ${imageEncoded}');
-      emit(Initialized<String?>(data: imageEncoded));
-    } on Exception catch (e) {
-      print('fetchFileFromCash ${e}');
-      emit(ErrorState(EmptyFaceException()));
-    }
-  }
-
-  Future<String> _createFileFromString(RemoteFile remote) async {
-    Uint8List bytes = base64.decode(remote.fileAttachment.toString());
-    String dir = (await getApplicationDocumentsDirectory()).path;
-    File file = File("$dir/" +
-        DateTime.now().millisecondsSinceEpoch.toString() +
-        ".${remote.fileAttachmentType.toString()}");
-    await file.writeAsBytes(bytes);
-    return file.path;
-  }
 
 
   registerAttendanceOffline({required AttendanceOfflineQuery query}) async {

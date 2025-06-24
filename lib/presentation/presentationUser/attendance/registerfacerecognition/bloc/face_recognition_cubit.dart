@@ -26,8 +26,6 @@ class FaceRecognitionCubit extends BaseCubit {
     executeBuilder(() => repository.downloadFaceRecognition(),
         onSuccess: (remoteFile) async {
       final face = await mapRemoteFileToFace(remoteFile.payload);
-      print('isEdit ${face.eligibleToUpdate}');
-      saveFaceRecognitionEncryptedFile(remoteFile.payload!);
       emit(Initialized<RegisteredFace>(data: face));
     }, onError: (e) {
       emit(Initialized<RegisteredFace?>(data: null));
@@ -47,25 +45,5 @@ class FaceRecognitionCubit extends BaseCubit {
       );
     }
     return RegisteredFace(filePath, remoteFile?.allowedEdit == true, remoteFile?.notes ?? "");
-  }
-
-  Future<void> saveFaceRecognitionEncryptedFile(RemoteFile remoteFile ) async {
-    try {
-      // String ext = remoteFile.fileAttachmentType ?? 'png';
-      final dir = await getApplicationDocumentsDirectory();
-      final path = '${dir.path}/${remoteFile.fileName}';
-      saveFilePath(path);
-      File file = File(path);
-      final decodedBytes = base64Decode(remoteFile.fileAttachment ?? '');
-      file.writeAsBytesSync(decodedBytes);
-      print('saveFaceRecognitionEncryptedFile path $path');
-    } on Exception catch (e) {
-      print('saveFaceRecognitionEncryptedFile Error $e');
-    }
-  }
-
-  saveFilePath(String path) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString(LocalConstants.RecognitionEncryptedFilePATH, path);
   }
 }

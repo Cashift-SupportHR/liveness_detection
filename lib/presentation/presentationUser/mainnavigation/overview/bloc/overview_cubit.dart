@@ -308,27 +308,7 @@ class OverviewCubit extends BaseCubit {
     return data.payload;
   }
 
-  Future<void> saveFaceRecognitionEncryptedFile() async {
-    try {
-      final response = await profileRepository.downloadFaceRecognition();
-      RemoteFile remoteFile = response.payload!;
-      // String ext = remoteFile.fileAttachmentType ?? 'png';
-      final dir = await getApplicationDocumentsDirectory();
-      final path = '${dir.path}/${remoteFile.fileName}';
-      saveFilePath(path);
-      File file = File(path);
-      final decodedBytes = base64Decode(remoteFile.fileAttachment ?? '');
-      file.writeAsBytesSync(decodedBytes);
-      print('saveFaceRecognitionEncryptedFile path $path');
-    } on Exception catch (e) {
-      print('saveFaceRecognitionEncryptedFile Error $e');
-    }
-  }
 
-  void saveFilePath(String path) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString(LocalConstants.RecognitionEncryptedFilePATH, path);
-  }
 
   void loadInitialData() async {
     emit(LoadingState());
@@ -419,7 +399,7 @@ class OverviewCubit extends BaseCubit {
         fetchSpecialOpportunities();
         fetchVipOpportunities();
         fetchFavoritesOpportunities();
-        saveFaceRecognitionEncryptedFile();
+
       } else {
         await fetchJobOffersSliders();
         await fetchOpportunitiesUnAuth();
