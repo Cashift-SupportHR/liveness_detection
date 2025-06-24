@@ -57,30 +57,15 @@ class CheckFaceRecognitionPage
         moveFace: state.faceRecognitionConfig?.moveFace,
         smile: state.faceRecognitionConfig?.smile,
       ),
-      onFaceDetection: (String path) async {
-        onFaceDetection(context, path);
-      },
+      onFaceDetection: ( matched) async {
+        if(matched) {
+          backAction();
+        }
+        },
+      refImageBase64: state.image,
     );
   }
 
-  double? simi;
-  File? face;
-
-  bool isShowDialogs = false;
-  final CustomProgressDialog dialogs =
-      DialogsManager.createProgressWithMessage(Get.context!);
-
-  showDialogs() {
-    if (!isShowDialogs) {
-      dialogs.show();
-      isShowDialogs = true;
-    }
-  }
-
-  dismissDialogs() {
-    dialogs.dismiss();
-    isShowDialogs = false;
-  }
 
   buildProfileItem(String data,
       {required Widget icon,
@@ -97,49 +82,8 @@ class CheckFaceRecognitionPage
         : Container();
   }
 
-  Future<void> onFaceDetection(
-    BuildContext context,
-    String path,
-  ) async {
-    try {
-      simi = null;
-      final pickedFile = File(path);
-      if (pickedFile != null) {
-        simi = await detectFaceSimilitry(pickedFile);
-        if (simi != null && simi! > 60) {
-          face = pickedFile;
-          backAction();
-        }
-      }
-    } catch (e) {
-      handleErrorDialog(strings.undefine_error, context);
-    }
-  }
-
-  Future<double?> detectFaceSimilitry(File pickedFile) async {
-    print('detectFaceSimilitry');
-    try {
-      showDialogs();
-      DialogsManager.createProgressWithMessage(context);
-      final pickedUintList = pickedFile.readAsBytesSync();
 
 
-      final simi =
-          await FaceMatchingUtils.matchFaces(pickedUintList, bloc.image ?? "");
-
-      dismissDialogs();
-
-      print('matchingProcess ${simi}');
-      return simi;
-    } catch (e) {
-      print(e);
-      print("errorccc");
-      dismissDialogs();
-      handleErrorDialog(strings.face_not_matched, publicContext);
-
-      return null;
-    }
-  }
 
 
   void checkAllowFaceRecognition(bool isAllowFaceRecognition) {

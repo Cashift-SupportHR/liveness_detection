@@ -9,6 +9,7 @@ import 'package:shiftapp/domain/entities/resume/resume.dart';
 import 'package:shiftapp/domain/entities/account/user.dart';
 
 import '../../models/account/feature_app_dto.dart';
+import '../profile/face_image_cach_utils.dart';
 @injectable
 class UserRepository {
   final SharedPreferences? preferences;
@@ -101,6 +102,8 @@ class UserRepository {
     preferences!.remove(key);
     preferences!.remove(adminKey);
     preferences!.remove( LocalConstants.RESUME_KEY);
+    ImageCacheUtil.deleteCachedImage();
+
     print('user jsoin after ${getUser()?.toJson()}');
   }
   clearAll() {

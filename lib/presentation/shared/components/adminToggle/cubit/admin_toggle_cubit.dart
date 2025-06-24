@@ -25,18 +25,17 @@ class AdminToggleCubit extends BaseCubit {
     this._userRepository,
     this._profileRepository,
   );
-  String? image;
+
 
   fetchRegisteredFace() async {
     try {
       final dataToggle = _userRepository.accountDataToggle();
       bool inAdminMode = _userRepository.isEnableAdmin();
       bool? adminEnable = _userRepository.accountServices()?.adminEnable;
-      if (adminEnable == true && image.isNullOrEmpty()) {
-        final value = await repository.downloadFaceRecognition();
-        image = value.payload?.fileAttachment;
-      }
+
+
       if (adminEnable == true && dataToggle?.isAllowFaceRecognition == true) {
+        final image = await repository.getFaceImageBase64();
         emit(InitializedToggleData(
           image: image ?? "",
           isAdmin: inAdminMode,
@@ -46,7 +45,7 @@ class AdminToggleCubit extends BaseCubit {
         ));
       } else {
         emit(InitializedToggleData(
-          image: image ?? "",
+          image:"",
           isAdmin: inAdminMode,
           adminEnable: adminEnable ?? false,
           isAllowFaceRecognition: false,
@@ -59,7 +58,7 @@ class AdminToggleCubit extends BaseCubit {
       bool isAdmin = _userRepository.isEnableAdmin();
       bool? adminEnable = _userRepository.accountServices()?.adminEnable;
       final user = _userRepository.getUser();
-      final haveAdminFeatures = await isHaveAdminFeatures();
+
 
       if (isAdmin == true) {
          emit(FailureStateListener(e));

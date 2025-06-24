@@ -51,17 +51,10 @@ class FaceRecognitionPage extends BaseBlocWidget<Initialized<RegisteredFace?>,
           );
   }
 
-  navigateToCamera(BuildContext context) async {
-    try {
-      final imageFile = await FaceMatchingUtils.startLivelyness(context);
-      bloc.saveFace(imageFile);
-    } catch (e) {}
-  }
 
   @override
   void onSuccessDismissed() {
     loadInitialData(context);
-      getIt.get<AdminToggleCubit>()..image="";
   }
 
   @override

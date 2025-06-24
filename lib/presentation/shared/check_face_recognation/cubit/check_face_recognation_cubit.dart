@@ -20,21 +20,15 @@ class CheckFaceRecogenationCubit extends BaseCubit {
     this.repository,
     this._userRepository,
   );
-  String? image;
+
 
   fetchRegisteredFace() async {
     try {
-    //  emit(LoadingState());
+
       final faceRecognitionConfig = _userRepository.accountDataToggle();
       if (faceRecognitionConfig?.isAllowFaceRecognition == true) {
-        final value = await repository.downloadFaceRecognition();
-        final file = await _createFileFromString(value.payload!);
-        Uint8List data = File(file).readAsBytesSync();
-        int sizeInBytes = data.length;
-        double sizeInMb = sizeInBytes / (1024 * 1024);
-        print('sizeInMb ${sizeInMb} => ${value.payload?.fileAttachment}');
-        image = value.payload?.fileAttachment;
-        print(image);
+        final image = await repository.getFaceImageBase64();
+
         emit(InitializedFaceRecognitionData(
           image: image ?? "",
         faceRecognitionConfig: faceRecognitionConfig ?? FaceRecognitionConfig(),
@@ -47,40 +41,11 @@ class CheckFaceRecogenationCubit extends BaseCubit {
         ));
       }
     } catch (e) {
-      // print('fetchRegisteredFace error: $e');
-      // final faceRecognitionConfig = _userRepository.accountDataToggle();
-        bool isAdmin = _userRepository.isEnableAdmin();
-      // bool? adminEnable = _userRepository.accountServices()?.adminEnable;
-      // final user = _userRepository.getUser();
-      //
-      // emit(InitializedToggleData(
-      //   image: "",
-      //   isAdmin: isAdmin,
-      //   adminEnable: adminEnable ?? false,
-      //   isAllowFaceRecognition: faceRecognitionConfig?.isAllowFaceRecognition ?? false,
-      //   faceRecognitionConfig: faceRecognitionConfig ?? FaceRecognitionConfig(),
-      //   user: user ?? User(),
-      // ));
+       bool isAdmin = _userRepository.isEnableAdmin();
         if(isAdmin==true){
           emit(FailureStateListener(e));
         }
-
     }
   }
 
-  Future<String> _createFileFromString(RemoteFile remote) async {
-    Uint8List bytes = base64.decode(remote.fileAttachment.toString());
-    String dir = (await getApplicationDocumentsDirectory()).path;
-    File file = File("$dir/" +
-        DateTime.now().millisecondsSinceEpoch.toString() +
-        ".${remote.fileAttachmentType.toString()}");
-    await file.writeAsBytes(bytes);
-    return file.path;
-  }
-
-
-  FaceRecognitionConfig? getDataFaceRecognition() {
-    final data = _userRepository.accountDataToggle();
-    return data;
-  }
 }

@@ -72,7 +72,7 @@ class _HLSPlayerWidgetState extends State<HLSPlayerWidget> {
           await vp.seekTo(widget.initialPosition);
         }
         await _eventSub?.cancel();
-        _eventSub = EventChannel('flutter.io/videoPlayer/videoEvents')
+          _eventSub = EventChannel('flutter.io/videoPlayer/videoEvents${vp.textureId}')
             .receiveBroadcastStream()
             .listen(_handleVideoEvent);
       }

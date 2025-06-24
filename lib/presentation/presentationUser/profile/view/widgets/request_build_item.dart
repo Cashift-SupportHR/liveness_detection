@@ -23,16 +23,12 @@ class RequestItemBuilder
 
   @override
   void loadInitialData(BuildContext context) {
-    if (bloc.image == null) {
       bloc.fetchRegisteredFace();
-    }
   }
 
   @override
   Widget buildWidget(BuildContext context, InitializedToggleData state) {
-    print("AdminTogglePage state");
 
-    print("AdminTogglePage state");
     return buildProfileItem(strings.requests,
         icon: kLoadSvgInCircle("requests"), onTap: () async {
 
@@ -43,7 +39,10 @@ class RequestItemBuilder
             : Navigator.pushNamed(context, Routes.requestsUserPage);
         ;
       } else {
-        onFaceDetection(context);
+        final matching = await checkFaceRecognition(context);
+        if(matching){
+          Navigator.pushNamed(context, Routes.requestsUserPage);
+        }
       }
     });
   }
@@ -106,7 +105,7 @@ class RequestItemBuilder
       DialogsManager.createProgressWithMessage(context);
       final pickedUintList = pickedFile.readAsBytesSync();
       final simi =
-          await FaceMatchingUtils.matchFaces(pickedUintList, bloc.image??'');
+          await FaceMatchingUtils.matchFaces(pickedUintList, '');
 
       dismissDialogs();
 

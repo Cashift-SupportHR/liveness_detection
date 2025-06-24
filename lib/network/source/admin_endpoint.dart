@@ -80,7 +80,7 @@ import '../../presentation/adminFeatures/vehicles/data/models/vehicle_traking_dt
 part 'admin_endpoint.g.dart';
 
 @Injectable()
-@RestApi(baseUrl: kBASE_URL)
+@RestApi()
 abstract class AdminEndpoint {
   @factoryMethod
   factory AdminEndpoint(Dio dio) = _AdminEndpoint;
