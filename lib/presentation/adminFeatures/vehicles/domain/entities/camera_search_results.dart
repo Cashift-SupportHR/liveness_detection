@@ -9,14 +9,16 @@ class CameraSearchResults {
   String? cameraName;
   String? vehiclePlatNo;
   String? url;
+  String? endTime;
 
-  CameraSearchResults({this.cameraName, this.vehiclePlatNo, this.url});
+  CameraSearchResults({this.cameraName, this.vehiclePlatNo, this.url, this.endTime});
 
   factory CameraSearchResults.fromDto(CameraSearchResultsDto dto) =>
       CameraSearchResults(
         cameraName: dto.cameraName,
         vehiclePlatNo: dto.vehiclePlatNo,
         url: dto.url,
+        endTime: dto.endTime,
       );
 
   bool get isValidValid{

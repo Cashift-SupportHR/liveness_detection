@@ -50,8 +50,10 @@ class FaceMatchingUtils {
 
   static Future<File> startLivelyness(BuildContext context,
       {List<LivelynessStepItem>? list}) async {
-    // final granted =await  PermissionDetector . detectCameraAndStoragePermission(context);
-    //  if(granted==false) return Future.error('Permission not allowed');;
+    if (Platform.isAndroid) {
+      final granted =await  PermissionDetector.detectCameraAndStoragePermission(context);
+       if(granted==false) return Future.error('Permission not allowed');;
+    }
     String _capturedImagePath = "";
     final _veificationSteps = list ??
         [
@@ -86,8 +88,10 @@ class FaceMatchingUtils {
 
   static Future<FaceMatchingResult> startMatching(BuildContext context,
       {AttendanceConfigDto ?config, required String refImageBase64}) async {
-    // final granted =await  PermissionDetector . detectCameraAndStoragePermission(context);
-    //  if(granted==false) return Future.error('Permission not allowed');;
+    if (Platform.isAndroid) {
+      final granted =await  PermissionDetector . detectCameraAndStoragePermission(context);
+       if(granted==false) return Future.error('Permission not allowed');;
+    }
     String _capturedImagePath = "";
 
     final _veificationSteps = config != null ? stepsList(context, config) :

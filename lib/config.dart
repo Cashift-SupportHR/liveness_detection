@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 class Config {
 
   static const isTestVersion = false;
-  static const isDebuggable = kDebugMode;
+  static const isDebuggable = true;
   static const AppStoreId = '1593657179';
   static final AppVersion = Platform.isIOS ? '1.7.6' : '1.8.1';
   static final platformName = Platform.isIOS ? 'IOS' : 'Android';

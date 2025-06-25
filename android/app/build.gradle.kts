@@ -45,34 +45,7 @@ flutter {
     source = "../.."
 }
 
-val cameraxVersion = "1.3.4"       // or "1.4.2" if you upgrade EVERYTHING
-
-// -------------------------------------------------------------
-// ❷ Force every configuration to use that exact version
-// -------------------------------------------------------------
-configurations.all {
-    resolutionStrategy {
-        force(
-            "androidx.camera:camera-core:$cameraxVersion",
-            "androidx.camera:camera-camera2:$cameraxVersion",
-            "androidx.camera:camera-lifecycle:$cameraxVersion",
-            "androidx.camera:camera-video:$cameraxVersion",
-            "androidx.camera:camera-view:$cameraxVersion",
-            "androidx.camera:camera-extensions:$cameraxVersion"
-        )
-    }
-}
-
-// -------------------------------------------------------------
-// ❸ Explicitly pull the same coordinates into this module
-// -------------------------------------------------------------
 dependencies {
-    implementation("androidx.camera:camera-core:$cameraxVersion")
-    implementation("androidx.camera:camera-camera2:$cameraxVersion")
-    implementation("androidx.camera:camera-lifecycle:$cameraxVersion")
-    implementation("androidx.camera:camera-video:$cameraxVersion")
-    implementation("androidx.camera:camera-view:$cameraxVersion")
-    implementation("androidx.camera:camera-extensions:$cameraxVersion")
 
     // ─── NEW: runtime that L8 needs when desugaring ───────────
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
