@@ -43,7 +43,10 @@ import '../../domain/entities/terms/terms_item.dart';
 import '../../domain/entities/wallet/index.dart';
 import '../../presentation/adminFeatures/employees/data/models/emp_attandance_prams.dart';
 import '../../presentation/adminFeatures/employees/data/models/emp_attendance_dto.dart';
+import '../../presentation/adminFeatures/maintenanceAndBreakdowns/data/models/maintenance_dto.dart';
 import '../../presentation/adminFeatures/vehicles/data/models/vehicle_details_dto.dart';
+import '../../presentation/adminFeatures/vehicles/data/models/vehicle_violation_dto.dart';
+import '../../presentation/adminFeatures/vehicles/domain/entities/vehicle_violation.dart';
 import '../../presentation/presentationUser/AttendanceAndDepartureNotifications/data/models/index.dart';
 import '../../presentation/presentationUser/employeesCertificates/data/models/index.dart';
 import '../../presentation/presentationUser/pledgesAndGeneralization/data/models/pledge_generalization_dto.dart';
@@ -809,6 +812,16 @@ abstract class UserEndpoint {
   @GET('/v1/RoundTripDetails/GetRoundTRipDetailsByTripId')
   Future<ApiResponse<List<RoundTripDetailsDto>>> fetchRoundTripDetails(
     @Query('RoundTripId') int roundTripId,
+  );
+
+  @GET('/v1/ContractViolation/GetAllContractViolationByRoundTrip')
+  Future<ApiResponse<List<ContractViolationDto>>> fetchRoundViolation (
+    @Query('roundTripId') int roundTripId,
+  );
+
+  @GET('/v1/FaultsMaintenance/GetAllFaultsMaintenanceByRoundTrip')
+  Future<ApiResponse<List<MaintenanceDto>>> fetchRoundsMaintenance(
+    @Query('roundTripId') int roundTripId,
   );
 
   //  request

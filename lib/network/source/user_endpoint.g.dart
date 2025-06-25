@@ -6468,6 +6468,91 @@ class _UserEndpoint implements UserEndpoint {
   }
 
   @override
+  Future<ApiResponse<List<ContractViolationDto>>> fetchRoundViolation(
+      int roundTripId) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'roundTripId': roundTripId};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options =
+        _setStreamType<ApiResponse<List<ContractViolationDto>>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/v1/ContractViolation/GetAllContractViolationByRoundTrip',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponse<List<ContractViolationDto>> _value;
+    try {
+      _value = ApiResponse<List<ContractViolationDto>>.fromJson(
+        _result.data!,
+        (json) => json is List<dynamic>
+            ? json
+                .map<ContractViolationDto>((i) =>
+                    ContractViolationDto.fromJson(i as Map<String, dynamic>))
+                .toList()
+            : List.empty(),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ApiResponse<List<MaintenanceDto>>> fetchRoundsMaintenance(
+      int roundTripId) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'roundTripId': roundTripId};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<ApiResponse<List<MaintenanceDto>>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/v1/FaultsMaintenance/GetAllFaultsMaintenanceByRoundTrip',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponse<List<MaintenanceDto>> _value;
+    try {
+      _value = ApiResponse<List<MaintenanceDto>>.fromJson(
+        _result.data!,
+        (json) => json is List<dynamic>
+            ? json
+                .map<MaintenanceDto>(
+                    (i) => MaintenanceDto.fromJson(i as Map<String, dynamic>))
+                .toList()
+            : List.empty(),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<ApiResponse<List<RequestsUserDto>>> fetchRequestsUser() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

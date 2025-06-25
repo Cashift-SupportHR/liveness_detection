@@ -445,11 +445,10 @@ class InitializedAddNewUser<T> extends CommonStateFBuilder {
 
 class InitializedGasStations<T> extends CommonStateFBuilder {
   List<Company> companies;
-  List<ProjectManagementDto> project;
 
   InitializedGasStations({
     required this.companies,
-    required this.project,
+
   });
 }
 
