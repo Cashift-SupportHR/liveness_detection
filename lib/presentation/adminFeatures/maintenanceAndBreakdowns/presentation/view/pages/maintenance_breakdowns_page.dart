@@ -84,6 +84,7 @@ class MaintenanceBreakdownsPage extends BaseBlocWidget<
               builder: (context, data) {
                 return MaintenanceBreakdownsScreen(
                   code: code,
+                  isPlan: false,
                   tapId:tapId,
                   data: data ?? [],
                   onAction: (Maintenance item) {

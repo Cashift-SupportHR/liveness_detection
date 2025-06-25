@@ -47,7 +47,7 @@ class CurrentRoundTrip {
 
   AddVehicleViolationArgs getVehicleViolationArgs() {
     return AddVehicleViolationArgs(
-      roundTripId: roundTypeId,
+      roundTripId: id,
     );
   }
 }

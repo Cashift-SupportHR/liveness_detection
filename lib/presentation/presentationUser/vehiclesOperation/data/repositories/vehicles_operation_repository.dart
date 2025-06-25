@@ -3,8 +3,10 @@ import 'dart:io';
  import 'package:injectable/injectable.dart';
 
 import '../../../../../data/models/api_response.dart';
+import '../../../../adminFeatures/maintenanceAndBreakdowns/domain/entities/maintenance.dart';
 import '../../../../adminFeatures/vehicles/data/models/vehicle_details_dto.dart';
-  import '../../../../shared/models/common_list_item.dart';
+  import '../../../../adminFeatures/vehicles/domain/entities/vehicle_violation.dart';
+import '../../../../shared/models/common_list_item.dart';
 import '../../domain/entities/driver_violation.dart';
 import '../../domain/entities/gas_station_trip.dart';
 import '../../domain/entities/index.dart';
@@ -156,6 +158,15 @@ class ReceiveVehiclesRepository {
   Future<List<DriverViolation>> fetchDriverViolations(int id) async {
     final res = await _api.fetchDriverViolations(id);
     return DriverViolation.fromDtoList(res.payload!);
+  }
+
+  Future<List<ContractViolation>> fetchRoundViolation(int id) async {
+    final res = await _api.fetchRoundViolation(id);
+    return ContractViolation.fromDtoList(res.payload!);
+  }
+  Future<List<Maintenance>> fetchRoundsMaintenance(int id) async {
+    final res = await _api.fetchRoundsMaintenance(id);
+    return Maintenance.fromDtoList(res.payload!);
   }
 
 

@@ -11,6 +11,7 @@ class MaintenanceBreakdownsItem extends BaseStatelessWidget {
   final String code;
   final int tapId;
   final Maintenance item;
+  bool isPlan;
   final Function() onAction;
 
   //
@@ -18,6 +19,7 @@ class MaintenanceBreakdownsItem extends BaseStatelessWidget {
     Key? key,
     required this.code,
     required this.item,
+    required this.isPlan,
     required this.tapId,
     required this.onAction,
   }) : super(key: key);
@@ -64,19 +66,22 @@ class MaintenanceBreakdownsItem extends BaseStatelessWidget {
           ),
           imagesBefore(context),
           imagesAfter(context),
-          SizedBox(
-            height: 5,
-          ),
-          if (tapId != 1)
-            ListRowTextsV2(
-              isExpanded: false,
-              titleStyle: titleStyle,
-              valueStyle: valueStyle,
-              isMark: true,
-              items: items2(),
+      if(isPlan==false)    ...[
+            SizedBox(
+              height: 5,
             ),
-          if (code == CodesConstants.reviewed) responsibleResponse(context),
-          if (code != CodesConstants.reviewed) buildActionButton(context),
+            if (tapId != 1)
+              ListRowTextsV2(
+                isExpanded: false,
+                titleStyle: titleStyle,
+                valueStyle: valueStyle,
+                isMark: true,
+                items: items2(),
+              ),
+            if (code == CodesConstants.reviewed) responsibleResponse(context),
+            if (code != CodesConstants.reviewed) buildActionButton(context),
+          ]
+
         ],
       ),
     );

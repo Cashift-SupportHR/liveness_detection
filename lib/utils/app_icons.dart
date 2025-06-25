@@ -346,4 +346,6 @@ class AppIcons {
   static const String camera_vehicle = 'assets/icons/camera_vehicle.svg';
   static const String camera_vehicle_code = 'assets/icons/camera_vehicle_code.svg';
   static const String videos_placeholder = 'assets/icons/videos_placeholder.svg';
+  static const String maintenances = 'assets/icons/maintenances.svg';
+  static const String factoryViolations = 'assets/icons/factoryViolations.svg';
 }
