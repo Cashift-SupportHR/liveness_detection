@@ -87,7 +87,7 @@ class LocationService {
     return Geolocator.getPositionStream(
       locationSettings: const LocationSettings(
         accuracy: geolocator.LocationAccuracy.best,
-        timeLimit: Duration(seconds: 1),
+        // timeLimit: Duration(seconds: 1),
         distanceFilter: 2, // Update only if the user moves 10 meters
       ),
     );
