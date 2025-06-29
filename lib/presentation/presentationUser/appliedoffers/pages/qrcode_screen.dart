@@ -7,6 +7,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
 import 'package:shiftapp/presentation/presentationUser/common/extensions.dart';
 import 'package:shiftapp/presentation/presentationUser/resources/colors.dart';
+import 'package:shiftapp/presentation/presentationUser/resources/constants.dart';
 import 'package:shiftapp/presentation/shared/components/app_cupertino_button.dart';
 import 'package:shiftapp/presentation/shared/components/app_widgets.dart';
 import 'package:shiftapp/presentation/shared/components/outlint_button.dart';
@@ -148,7 +149,9 @@ class _QRViewExampleState extends State<QRViewExample> {
                                   return Text(
                                       snapshot.data == CameraFacing.front
                                           ? strings.front_camera
-                                          : strings.back_camera);
+                                          : strings.back_camera,
+                                  style: kTextMedium.copyWith(color: kWhite),
+                                  );
                                 } else {
                                   return const Text('loading');
                                 }

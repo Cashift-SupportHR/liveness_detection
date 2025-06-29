@@ -66,7 +66,8 @@ class _BuildItem extends StatelessWidget {
             kBuildCircleImage(
               presentType.icon ?? '',
               size: 45,
-              border: 0
+              border: 0,
+              showFullImage: false,
             ),
             const SizedBox(
               height: 10,

@@ -262,10 +262,10 @@ class RecordAttendanceScreenV2 extends BaseStatelessWidget {
   }
 
   Future scanQr(BuildContext context) async {
-    if (Config.isDebuggable) {
-      File? file;
-      return Future.value(QrCode('shift',file,allowFile: registerAttendanceRequest.allowToTrack()),);
-    }
+    // if (Config.isDebuggable) {
+    //   File? file;
+    //   return Future.value(QrCode('shift',file,allowFile: registerAttendanceRequest.allowToTrack()),);
+    // }
     return await Navigator.pushNamed(context, Routes.qrScanner,arguments: QrCode('',null,allowFile: registerAttendanceRequest.allowToTrack()),) as QrCode;
 
   }

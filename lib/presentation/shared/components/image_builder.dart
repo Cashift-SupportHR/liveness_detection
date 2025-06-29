@@ -143,15 +143,14 @@ Widget kBuildCircleImage(String path,
       bool showFullImage = true,
     BoxFit? fit}) {
   return InkWell(
-    onTap: () {
-      if (showFullImage) {
+    onTap: showFullImage ?
+        () {
         Navigator.pushNamed(
           Get.context!,
           Routes.filesPreviewPage,
           arguments: [path],
         );
-      }
-    },
+    } : null,
     child: Container(
       width: size ?? 40,
       height: size ?? 40,
