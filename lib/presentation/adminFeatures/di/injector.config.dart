@@ -232,8 +232,12 @@ import '../../presentationUser/vehiclesOperation/presentation/currentTourMap/chn
     as _i841;
 import '../../presentationUser/vehiclesOperation/presentation/currentTourMap/chnage_operating_plane/bloc/tour_history_cubit.dart'
     as _i414;
+import '../../presentationUser/vehiclesOperation/presentation/currentTourMap/factory_violations/bloc/factory_violations_plane_cubit.dart'
+    as _i285;
 import '../../presentationUser/vehiclesOperation/presentation/currentTourMap/gasStationsPlan/cubit/gas_stations_plane_cubit.dart'
     as _i206;
+import '../../presentationUser/vehiclesOperation/presentation/currentTourMap/maintenance_breakdowns_plane/bloc/maintenance_breakdowns_plane_cubit.dart'
+    as _i190;
 import '../../presentationUser/vehiclesOperation/presentation/currentTourMap/tour_history/bloc/tour_history_cubit.dart'
     as _i418;
 import '../../presentationUser/vehiclesOperation/presentation/currentTourMap/view/bloc/current_tour_map_cubit.dart'
@@ -914,6 +918,11 @@ Future<_i174.GetIt> $initGetIt(
       () => _i158.ReceiveVehiclesCubit(gh<_i61.ReceiveVehiclesRepository>()));
   gh.factory<_i712.StartTourCubit>(
       () => _i712.StartTourCubit(gh<_i61.ReceiveVehiclesRepository>()));
+  gh.factory<_i285.FactoryViolationsPlaneCubit>(() =>
+      _i285.FactoryViolationsPlaneCubit(gh<_i61.ReceiveVehiclesRepository>()));
+  gh.factory<_i190.MaintenanceBreakdownsPlaneCubit>(() =>
+      _i190.MaintenanceBreakdownsPlaneCubit(
+          gh<_i61.ReceiveVehiclesRepository>()));
   gh.factory<_i1020.PunishmentsCubit>(
       () => _i1020.PunishmentsCubit(gh<_i690.PunishmentsRepository>()));
   gh.factory<_i688.EvaluationCubit>(
@@ -1378,6 +1387,7 @@ Future<_i174.GetIt> $initGetIt(
         gh<_i415.GasStationsRepository>(),
         gh<_i219.ProjectsUseCase>(),
         gh<_i870.CompaniesUseCase>(),
+        gh<_i471.UsersManagementRepository>(),
       ));
   return getIt;
 }

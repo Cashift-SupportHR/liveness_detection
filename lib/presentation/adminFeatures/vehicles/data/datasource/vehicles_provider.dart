@@ -334,7 +334,7 @@ class VehiclesAPI {
   }
 
   Future<ApiResponse<VehicleLocationDto>> fetchVehicleLocation(
-    int cameraIndexCode,
+      String cameraIndexCode,
   ) {
     return api.fetchVehicleLocation(cameraIndexCode);
   }

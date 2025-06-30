@@ -279,7 +279,7 @@ class VehiclesRepository {
 
 
   Future<VehicleLocation> fetchVehicleLocation(
-      int cameraIndexCode) async {
+      String cameraIndexCode) async {
     final res = await _api.fetchVehicleLocation(cameraIndexCode);
     return VehicleLocation.fromDto(res.payload!);
   }

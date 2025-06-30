@@ -980,7 +980,7 @@ abstract class AdminEndpoint {
 
   @GET('/v1/VehiclesZone/GetVehicleZoneAndCurrentLocation')
   Future<ApiResponse< VehicleLocationDto >> fetchVehicleLocation(
-      @Query("cameraIndexCode") int cameraIndexCode);
+      @Query("cameraIndexCode") String cameraIndexCode);
 
 
 

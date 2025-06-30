@@ -8927,7 +8927,7 @@ class _AdminEndpoint implements AdminEndpoint {
 
   @override
   Future<ApiResponse<VehicleLocationDto>> fetchVehicleLocation(
-      int cameraIndexCode) async {
+      String cameraIndexCode) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'cameraIndexCode': cameraIndexCode
