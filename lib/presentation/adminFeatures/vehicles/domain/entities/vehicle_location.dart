@@ -37,8 +37,8 @@ class ZoneEntity {
 }
 
 class CurrentLocationEntity {
-  final int? lat;
-  final int? lng;
+  final double? lat;
+  final double? lng;
 
   CurrentLocationEntity({
     this.lat,

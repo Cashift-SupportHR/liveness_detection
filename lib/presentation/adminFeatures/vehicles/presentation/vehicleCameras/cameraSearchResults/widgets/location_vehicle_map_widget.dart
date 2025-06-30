@@ -16,10 +16,8 @@ import '../../../../domain/entities/vehicle_location.dart';
 class CurrentLocationVehicleMapWidget extends StatefulWidget {
   final VehicleLocation state;
 
-  const CurrentLocationVehicleMapWidget({
-    Key? key,
-    required this.state,
-  }) : super(key: key);
+  const CurrentLocationVehicleMapWidget({Key? key, required this.state})
+    : super(key: key);
 
   @override
   _CurrentLocationVehicleMapWidgetState createState() =>
@@ -50,7 +48,8 @@ class _CurrentLocationVehicleMapWidgetState
 
     final oldLocation = oldWidget.state.currentLocation;
     final newLocation = widget.state.currentLocation;
-
+print('oldLocation: $oldLocation');
+print('newLocation: ${newLocation?.lng}');
     if (_vehicleIcon == null) return;
 
     if (newLocation != null &&
@@ -59,8 +58,8 @@ class _CurrentLocationVehicleMapWidgetState
         (oldLocation?.lat != newLocation.lat ||
             oldLocation?.lng != newLocation.lng)) {
       final position = LatLng(
-        newLocation.lat!.toDouble(),
-        newLocation.lng!.toDouble(),
+        newLocation.lat??0,
+        newLocation.lng??0,
       );
       _updateVehicleMarker(position);
     }
@@ -73,9 +72,9 @@ class _CurrentLocationVehicleMapWidgetState
 
   Future<void> _initVehicleIcon() async {
     final Uint8List iconData = await loadAndResizePng(
-      "assets/icons/car_orange.png",
-      width: 50,
-      height: 50,
+      "assets/icons/car_pin.png",
+      width: 100,
+      height: 100,
     );
     _vehicleIcon = BitmapDescriptor.fromBytes(iconData);
 
@@ -109,19 +108,21 @@ class _CurrentLocationVehicleMapWidgetState
     final strings = context.getStrings();
 
     return Container(
-      height: 350,
+      height: 250,
       width: double.infinity,
       clipBehavior: Clip.hardEdge,
-      padding: const EdgeInsets.all(2),
+      padding: const EdgeInsets.all(10),
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: Decorations.shapeDecorationShadow(),
       child: Stack(
         children: [
           GoogleMap(
             onMapCreated: _onMapCreated,
-            myLocationEnabled: true,
+            myLocationEnabled: false,
             myLocationButtonEnabled: false,
-            buildingsEnabled:true ,
+            buildingsEnabled: false,
+            zoomControlsEnabled: false,
+
             initialCameraPosition: CameraPosition(
               target: LatLng(37.7749, -122.4194),
               zoom: 16,
@@ -157,18 +158,19 @@ class _CurrentLocationVehicleMapWidgetState
     if (polygonPoints.isEmpty) return {};
 
     Uint8List iconData = await loadAndResizePng(
-      Assets.imagesLocation,
-      width: 50,
-      height: 50,
+      "assets/icons/pin_icon.png",
+      width: 20,
+      height: 20,
     );
 
-    final list = polygonPoints.map((e) {
-      return Marker(
-        markerId: MarkerId('marker_${e}'),
-        position: e,
-        icon: BitmapDescriptor.fromBytes(iconData),
-      );
-    }).toList();
+    final list =
+        polygonPoints.map((e) {
+          return Marker(
+            markerId: MarkerId('marker_${e}'),
+            position: e,
+            icon: BitmapDescriptor.fromBytes(iconData),
+          );
+        }).toList();
 
     return Set<Marker>.of(list);
   }
@@ -188,9 +190,10 @@ class _CurrentLocationVehicleMapWidgetState
   }
 
   Future<void> displayPolygonPoints() async {
-    List<LatLng> polygonPoints = widget.state.zone
-        ?.map((e) => LatLng(e.lat ?? 0, e.lng ?? 0))
-        .toList() ??
+    List<LatLng> polygonPoints =
+        widget.state.zone
+            ?.map((e) => LatLng(e.lat ?? 0, e.lng ?? 0))
+            .toList() ??
         [];
 
     if (polygonPoints.isNotEmpty) {
@@ -199,7 +202,7 @@ class _CurrentLocationVehicleMapWidgetState
       Set<Marker> zoneMarkers = await mapPointsMarkers(polygonPoints);
 
       Marker? vehicleMarker = markers.firstWhere(
-            (m) => m.markerId.value == 'vehicle_marker',
+        (m) => m.markerId.value == 'vehicle_marker',
         orElse: () => Marker(markerId: MarkerId('invalid')),
       );
 
@@ -229,8 +232,11 @@ class _CurrentLocationVehicleMapWidgetState
     });
   }
 
-  Future<Uint8List> loadAndResizePng(String assetPath,
-      {int width = 100, int height = 100}) async {
+  Future<Uint8List> loadAndResizePng(
+    String assetPath, {
+    int width = 100,
+    int height = 100,
+  }) async {
     final ByteData data = await rootBundle.load(assetPath);
 
     ui.Codec codec = await ui.instantiateImageCodec(
@@ -240,8 +246,9 @@ class _CurrentLocationVehicleMapWidgetState
     );
     ui.FrameInfo frameInfo = await codec.getNextFrame();
 
-    final ByteData? byteData =
-    await frameInfo.image.toByteData(format: ui.ImageByteFormat.png);
+    final ByteData? byteData = await frameInfo.image.toByteData(
+      format: ui.ImageByteFormat.png,
+    );
     return byteData!.buffer.asUint8List();
   }
 }

@@ -35,8 +35,8 @@ Map<String, dynamic> _$ZoneToJson(Zone instance) => <String, dynamic>{
 
 CurrentLocation _$CurrentLocationFromJson(Map<String, dynamic> json) =>
     CurrentLocation(
-      lat: (json['lat'] as num?)?.toInt(),
-      lng: (json['lng'] as num?)?.toInt(),
+      lat: (json['lat'] as num?)?.toDouble(),
+      lng: (json['lng'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$CurrentLocationToJson(CurrentLocation instance) =>

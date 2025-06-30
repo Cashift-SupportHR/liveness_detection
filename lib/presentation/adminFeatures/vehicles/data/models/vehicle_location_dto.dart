@@ -47,9 +47,9 @@ class Zone {
 @JsonSerializable()
 class CurrentLocation {
   @JsonKey(name: "lat")
-  final int? lat;
+  final double? lat;
   @JsonKey(name: "lng")
-  final int? lng;
+  final double? lng;
 
   CurrentLocation ({
     this.lat,
