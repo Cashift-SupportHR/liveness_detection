@@ -984,6 +984,12 @@ abstract class AdminEndpoint {
 
 
 
+  @GET('/v1/VehiclesZone/GetVehicleZoneAndCurrentLocation')
+  Future<ApiResponse< VehicleLocationDto >> fetchVehicleLocation(
+      @Query("cameraIndexCode") int cameraIndexCode);
+
+
+
   @MultiPart()
   @POST('/v1/VehicleImages/AddVehicleImages')
   Future<ApiResponse> addVehicleImages(
