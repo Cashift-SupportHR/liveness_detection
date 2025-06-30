@@ -9,6 +9,7 @@ import 'package:shiftapp/presentation/adminFeatures/vehicles/domain/entities/ind
 
 import '../../../../../data/models/salary-definition-request/down_load_salary_definition.dart';
 import '../../domain/entities/vehicleTraking.dart';
+import '../../domain/entities/vehicle_location.dart';
 import '../models/vehicle_event_picture_prams.dart';
 import '../models/vehicle_traking_details_prams.dart';
 import '../../../../shared/models/common_list_item.dart';
@@ -274,5 +275,12 @@ class VehiclesRepository {
       VehicleEventPicturePrams prams) async {
     final res = await _api.fetchVehicleEventPicture(prams);
      return res.payload ?? "";
+  }
+
+
+  Future<VehicleLocation> fetchVehicleLocation(
+      int cameraIndexCode) async {
+    final res = await _api.fetchVehicleLocation(cameraIndexCode);
+    return VehicleLocation.fromDto(res.payload!);
   }
 }
