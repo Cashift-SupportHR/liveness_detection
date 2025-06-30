@@ -6,5 +6,5 @@ Future<void> initializeFirebase({bool isLive = true}) async {
       .platformConfig
       .currentConfig;
 
-  await Firebase.initializeApp(options: config.toFirebaseOptions());
+  await Firebase.initializeApp(name:'doubleshift', options: config.toFirebaseOptions());
 }
