@@ -75,6 +75,7 @@ import '../../presentation/adminFeatures/usersRequests/data/models/user_request_
 import '../../presentation/adminFeatures/vehicles/data/models/index.dart';
 import '../../presentation/adminFeatures/vehicles/data/models/camera_search_results_dto.dart';
 import '../../presentation/adminFeatures/vehicles/data/models/vehicle_event_picture_prams.dart';
+import '../../presentation/adminFeatures/vehicles/data/models/vehicle_location_dto.dart';
 import '../../presentation/adminFeatures/vehicles/data/models/vehicle_traking_details_prams.dart';
 import '../../presentation/adminFeatures/vehicles/data/models/vehicle_traking_dto.dart';
 part 'admin_endpoint.g.dart';
@@ -976,6 +977,15 @@ abstract class AdminEndpoint {
   @GET('/v1/VehicleInsurances/GetAllVehicleInsurancesByVehicleId')
   Future<ApiResponse<List<InsurancesDto>>> fetchInsurancesByVehicleId(
       @Query("vehicleId") int vehicleId);
+
+  @GET('/v1/VehiclesZone/GetVehicleZoneAndCurrentLocation')
+  Future<ApiResponse< VehicleLocationDto >> fetchVehicleLocation(
+      @Query("cameraIndexCode") String cameraIndexCode);
+
+
+
+
+
 
   @MultiPart()
   @POST('/v1/VehicleImages/AddVehicleImages')
