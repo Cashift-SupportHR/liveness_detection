@@ -10,6 +10,7 @@ class ReceiveVehicleDetails {
   List<CustodyHandover>? vehiclesCustodiesHandovers;
   int? id;
   int? vehicleId;
+  int? roundTripId;
   String? vehicleBrand;
   String? vehicleModel;
   String? vehiclePlateNumber;
@@ -33,6 +34,7 @@ class ReceiveVehicleDetails {
     this.vehiclesCustodiesHandovers,
     this.id,
     this.vehicleId,
+    this.roundTripId,
     this.vehicleBrand,
     this.vehicleModel,
     this.vehiclePlateNumber,
@@ -60,6 +62,7 @@ class ReceiveVehicleDetails {
             CustodyHandover.fromDtoList(json.vehiclesCustodiesHandovers ?? []),
         id: json.id,
         vehicleId: json.vehicleId,
+        roundTripId: json.roundTripId,
         vehicleBrand: json.vehicleBrand,
         vehicleModel: json.vehicleModel,
         vehiclePlateNumber: json.vehiclePlateNumber,

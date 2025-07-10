@@ -8740,6 +8740,18 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'إعادة تحميل'**
   String get reload;
+
+  /// No description provided for @violations_of_operation.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخالفات التشغيل'**
+  String get violations_of_operation;
+
+  /// No description provided for @violations_of_factory.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخالفات المصانع'**
+  String get violations_of_factory;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
