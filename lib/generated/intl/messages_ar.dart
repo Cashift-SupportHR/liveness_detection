@@ -2070,6 +2070,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("قيمة المخالفه"),
         "violations": MessageLookupByLibrary.simpleMessage("المخالفات"),
         "violations_num": MessageLookupByLibrary.simpleMessage("عدد المخالفات"),
+        "violations_of_factory":
+            MessageLookupByLibrary.simpleMessage("مخالفات المصانع"),
+        "violations_of_operation":
+            MessageLookupByLibrary.simpleMessage("مخالفات التشغيل"),
         "violations_types":
             MessageLookupByLibrary.simpleMessage("انواع المخالفات"),
         "vip_offers": MessageLookupByLibrary.simpleMessage("فرص لا تفوتك"),

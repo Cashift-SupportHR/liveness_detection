@@ -2161,6 +2161,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "violations": MessageLookupByLibrary.simpleMessage("violations"),
         "violations_num":
             MessageLookupByLibrary.simpleMessage("Number of violations"),
+        "violations_of_factory":
+            MessageLookupByLibrary.simpleMessage("Violations of factory"),
+        "violations_of_operation":
+            MessageLookupByLibrary.simpleMessage("Violations of operation"),
         "violations_types":
             MessageLookupByLibrary.simpleMessage("Violations types"),
         "vip_offers": MessageLookupByLibrary.simpleMessage("Vip offers"),
