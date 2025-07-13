@@ -25,6 +25,7 @@ class ReceiveVehicleDetailsPage
   Widget buildWidget(BuildContext context, ReceiveVehicleDetailsState state) {
     return ReceiveVehicleDetailsScreen(
       state: state,
+
       onFetchViolationsFactory: (id) => bloc.fetchViolationsFactory(id),
       onFetchVehiclePerformance: (id) => bloc.fetchVehiclePerformance(id),
       onFetchRoundsMaintenance: (id) => bloc.fetchRoundsMaintenance(id),
