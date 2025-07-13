@@ -52,6 +52,7 @@ class ReceiveVehicleDetailsScreen extends BaseStatelessWidget {
           vehiclePerformance(),
           vehicleViolations(),
           violationsFactory(),
+          maintenanceBreakdowns(),
         ],
       ),
     );
@@ -353,9 +354,10 @@ class ReceiveVehicleDetailsScreen extends BaseStatelessWidget {
                 child: Column(
                   children: [
                     ListRowTextsIconsV2(
-                      titleStyle: titleStyle,
+                      titleStyle: titleStyle.copyWith(color:kPrimary,),
                       valueStyle: valueStyle,
                       isExpanded: false,
+                      iconColor: kPrimary,
                       paddingItem: EdgeInsets.only(bottom: 10),
                       items: [
                         ListRowTextItem(
@@ -430,9 +432,10 @@ class ReceiveVehicleDetailsScreen extends BaseStatelessWidget {
                 child: Column(
                   children: [
                     ListRowTextsIconsV2(
-                      titleStyle: titleStyle,
+                      titleStyle: titleStyle.copyWith(color:kPrimary,),
                       valueStyle: valueStyle,
                       isExpanded: false,
+                      iconColor: kPrimary,
                       paddingItem: EdgeInsets.only(bottom: 10),
                       items: [
                         ListRowTextItem(
@@ -459,6 +462,7 @@ class ReceiveVehicleDetailsScreen extends BaseStatelessWidget {
                       item.faultMaintenanceImagesAfter,
                       strings.image_after_maintenance,
                     ),
+                    SizedBox(height: 10),
                     imagesMaintenance(
                       context,
                       item.faultMaintenanceImagesBefore,
@@ -626,7 +630,7 @@ class ReceiveVehicleDetailsScreen extends BaseStatelessWidget {
       decoration: Decorations.shapeDecorationShadow(),
       child: ExpansionTile(
         title: Text(title, style: kTextMedium),
-        leading: kLoadSvgInCirclePath(icon, height: 30, width: 30),
+        leading: kLoadSvgInCirclePath(icon, height: 30, width: 30,color: Colors.black.withOpacity(.5)),
         tilePadding: EdgeInsets.symmetric(horizontal: 10),
         childrenPadding: EdgeInsets.all(0),
         onExpansionChanged: onExpansionChanged,
@@ -663,10 +667,7 @@ class ReceiveVehicleDetailsScreen extends BaseStatelessWidget {
       child: Container(
         height: 60,
         width: double.infinity,
-        decoration: Decorations.boxDecorationBorder(
-          borderColor: kGray_A5,
-          radius: 2,
-        ),
+
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           padding: const EdgeInsets.all(5),
@@ -718,7 +719,7 @@ class ReceiveVehicleDetailsScreen extends BaseStatelessWidget {
     return Column(
       children: [
         buildIconText(icon: AppIcons.attachments_hazard, title: title),
-        SizedBox(height: 10),
+
         showImagesList(context: context, images: images),
       ],
     );
@@ -730,11 +731,12 @@ class ReceiveVehicleDetailsScreen extends BaseStatelessWidget {
     Color? colorText,
   }) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 5),
       child: IconText(
         icon: icon,
         text: title + ' :',
-        textStyle: titleStyle,
+
+        textStyle: titleStyle.copyWith(color:kPrimary,),
         crossAxisAlignment: CrossAxisAlignment.start,
       ),
     );

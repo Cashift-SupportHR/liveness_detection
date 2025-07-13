@@ -11,11 +11,13 @@ AddRoundTripParams _$AddRoundTripParamsFromJson(Map<String, dynamic> json) =>
       id: (json['id'] as num?)?.toInt(),
       vehiclesZoneId: (json['vehiclesZoneId'] as num?)?.toInt(),
       roundTypeId: (json['roundTyepId'] as num?)?.toInt(),
+      vehicleHandoverId: (json['vehicleHandoverId'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$AddRoundTripParamsToJson(AddRoundTripParams instance) =>
     <String, dynamic>{
       'id': instance.id,
       'vehiclesZoneId': instance.vehiclesZoneId,
+      'vehicleHandoverId': instance.vehicleHandoverId,
       'roundTyepId': instance.roundTypeId,
     };
