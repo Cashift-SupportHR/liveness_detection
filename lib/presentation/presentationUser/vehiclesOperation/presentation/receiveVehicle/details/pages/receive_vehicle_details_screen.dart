@@ -354,7 +354,7 @@ class ReceiveVehicleDetailsScreen extends BaseStatelessWidget {
                 child: Column(
                   children: [
                     ListRowTextsIconsV2(
-                      titleStyle: titleStyle.copyWith(color:kPrimary,),
+                      titleStyle: titleStyle.copyWith(color: kPrimary),
                       valueStyle: valueStyle,
                       isExpanded: false,
                       iconColor: kPrimary,
@@ -432,7 +432,7 @@ class ReceiveVehicleDetailsScreen extends BaseStatelessWidget {
                 child: Column(
                   children: [
                     ListRowTextsIconsV2(
-                      titleStyle: titleStyle.copyWith(color:kPrimary,),
+                      titleStyle: titleStyle.copyWith(color: kPrimary),
                       valueStyle: valueStyle,
                       isExpanded: false,
                       iconColor: kPrimary,
@@ -507,6 +507,9 @@ class ReceiveVehicleDetailsScreen extends BaseStatelessWidget {
     return customExpansionTile(
       title: title,
       icon: icon,
+
+      isShowWarning: true,
+      warningCount: 2,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:
@@ -620,8 +623,10 @@ class ReceiveVehicleDetailsScreen extends BaseStatelessWidget {
   Container customExpansionTile({
     required String title,
     required String icon,
+    int? warningCount,
     required Widget child,
     bool isShowBorder = true,
+    bool isShowWarning = false,
     void Function(bool)? onExpansionChanged,
   }) {
     return Container(
@@ -630,8 +635,52 @@ class ReceiveVehicleDetailsScreen extends BaseStatelessWidget {
       decoration: Decorations.shapeDecorationShadow(),
       child: ExpansionTile(
         title: Text(title, style: kTextMedium),
-        leading: kLoadSvgInCirclePath(icon, height: 30, width: 30,color: Colors.black.withOpacity(.5)),
+        leading: kLoadSvgInCirclePath(
+          icon,
+          height: 30,
+          width: 30,
+          color: Colors.black.withOpacity(.5),
+        ),
         tilePadding: EdgeInsets.symmetric(horizontal: 10),
+        trailing: SizedBox(
+          width: isShowWarning?57:25,
+          height: 40,
+          child: Row(
+            children: [
+              if (isShowWarning)
+                SizedBox(
+                  height: 40,
+                  child: Stack(
+                    alignment: Alignment.topRight,
+                    children: [
+                      kLoadSvgInCirclePath(
+                        AppIcons.waring,
+                        height: 30,
+                        width: 30,
+                      ),
+
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: CircleAvatar(
+                          backgroundColor: Color(0xffFFDADA),
+                          radius: 8,
+                          child: Text(
+                            "${warningCount ?? "0"}",
+                            style: kTextRegular.copyWith(
+                              color: Colors.black,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              Icon(Icons.keyboard_arrow_down, color: Colors.black),
+            ],
+          ),
+        ),
         childrenPadding: EdgeInsets.all(0),
         onExpansionChanged: onExpansionChanged,
         children: [
@@ -736,7 +785,7 @@ class ReceiveVehicleDetailsScreen extends BaseStatelessWidget {
         icon: icon,
         text: title + ' :',
 
-        textStyle: titleStyle.copyWith(color:kPrimary,),
+        textStyle: titleStyle.copyWith(color: kPrimary),
         crossAxisAlignment: CrossAxisAlignment.start,
       ),
     );
