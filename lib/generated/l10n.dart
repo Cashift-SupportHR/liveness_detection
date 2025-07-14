@@ -13992,6 +13992,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Violations of factory`
+  String get violations_of_factory {
+    return Intl.message(
+      'Violations of factory',
+      name: 'violations_of_factory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Violations of operation`
+  String get violations_of_operation {
+    return Intl.message(
+      'Violations of operation',
+      name: 'violations_of_operation',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

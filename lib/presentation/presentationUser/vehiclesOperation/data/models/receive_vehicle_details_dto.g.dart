@@ -9,6 +9,7 @@ part of 'receive_vehicle_details_dto.dart';
 ReceiveVehicleDetailsDto _$ReceiveVehicleDetailsDtoFromJson(
         Map<String, dynamic> json) =>
     ReceiveVehicleDetailsDto(
+      roundTripId: (json['roundTripId'] as num?)?.toInt(),
       vehicleHandoverImages: (json['vehicleHandoverImages'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
@@ -61,6 +62,7 @@ Map<String, dynamic> _$ReceiveVehicleDetailsDtoToJson(
       'companyId': instance.companyId,
       'companyName': instance.companyName,
       'projectId': instance.projectId,
+      'roundTripId': instance.roundTripId,
       'projectName': instance.projectName,
       'licenseExpiryDate': instance.licenseExpiryDate,
       'licenseNumber': instance.licenseNumber,

@@ -41,6 +41,8 @@ class ReceiveVehicleDetailsDto {
   String? companyName;
   @JsonKey(name: 'projectId')
   int? projectId;
+  @JsonKey(name: 'roundTripId')
+  int? roundTripId;
   @JsonKey(name: 'projectName')
   String? projectName;
   @JsonKey(name: 'licenseExpiryDate')
@@ -50,7 +52,7 @@ class ReceiveVehicleDetailsDto {
   @JsonKey(name: 'specifications')
   String? specifications;
 
-  ReceiveVehicleDetailsDto({this.vehicleHandoverImages, this.vehiclesComponentsHandovers, this.vehiclesCustodiesHandovers, this.id, this.vehicleId, this.vehicleBrand, this.vehicleModel, this.vehiclePlateNumber, this.vehicleHandoverDate, this.vehicleHandoverTime, this.freelancerInfoId, this.freelancerName, this.vehicleImage, this.isComplete, this.companyId, this.companyName, this.projectId, this.projectName, this.licenseExpiryDate, this.licenseNumber, this.specifications});
+  ReceiveVehicleDetailsDto({this.roundTripId, this.vehicleHandoverImages, this.vehiclesComponentsHandovers, this.vehiclesCustodiesHandovers, this.id, this.vehicleId, this.vehicleBrand, this.vehicleModel, this.vehiclePlateNumber, this.vehicleHandoverDate, this.vehicleHandoverTime, this.freelancerInfoId, this.freelancerName, this.vehicleImage, this.isComplete, this.companyId, this.companyName, this.projectId, this.projectName, this.licenseExpiryDate, this.licenseNumber, this.specifications});
 
    factory ReceiveVehicleDetailsDto.fromJson(Map<String, dynamic> json) => _$ReceiveVehicleDetailsDtoFromJson(json);
 
