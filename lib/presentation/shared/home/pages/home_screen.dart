@@ -51,7 +51,7 @@ class MyHomeScreen extends StatefulWidget {
 
 class _MyHomeScreenState extends BaseState<MyHomeScreen> {
   late HomeBloc homeBloc;
-  FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
+  // FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
 
   List<BottomNavigationWidgetModel> getNavigationItemsList() {
     final List<BottomNavigationWidgetModel> _widgetOptions =
@@ -110,22 +110,22 @@ class _MyHomeScreenState extends BaseState<MyHomeScreen> {
     return _widgetOptions;
   }
 
-  Future<void> initDynamicLinks(BuildContext context) async {
-    final PendingDynamicLinkData? data =
-        await FirebaseDynamicLinks.instance.getInitialLink();
-
-    handleLink(data, context);
-
-    dynamicLinks.onLink.listen((dynamicLinkData) {
-      handleLink(dynamicLinkData, context);
-    });
-    FirebaseMessaging.instance.getInitialMessage().then((value) async {
-      if (value != null) {
-        String valueMap = json.encode(value.data);
-        onSelectNotification(valueMap, context);
-      }
-    });
-  }
+  // Future<void> initDynamicLinks(BuildContext context) async {
+  //   final PendingDynamicLinkData? data =
+  //       await FirebaseDynamicLinks.instance.getInitialLink();
+  //
+  //   handleLink(data, context);
+  //
+  //   dynamicLinks.onLink.listen((dynamicLinkData) {
+  //     handleLink(dynamicLinkData, context);
+  //   });
+  //   FirebaseMessaging.instance.getInitialMessage().then((value) async {
+  //     if (value != null) {
+  //       String valueMap = json.encode(value.data);
+  //       onSelectNotification(valueMap, context);
+  //     }
+  //   });
+  // }
 
   handleLink(PendingDynamicLinkData? pendingDynamicLinkData,
       BuildContext context) async {
@@ -155,7 +155,7 @@ class _MyHomeScreenState extends BaseState<MyHomeScreen> {
       print('checkUserRolePrivilege initState');
       homeBloc.checkUserRolePrivilege();
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        initDynamicLinks(context);
+        // initDynamicLinks(context);
       });
     }
     homeBloc.fetchCurrentTrip();

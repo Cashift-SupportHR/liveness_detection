@@ -1480,5 +1480,7 @@
   "reschedule": "إعادة جدولة",
   "delivery_date": "تاريخ الاستلام",
   "entity": "الجهة",
-  "reload": "إعادة تحميل"
+  "reload": "إعادة تحميل",
+  "violations_of_operation": "مخالفات التشغيل",
+  "violations_of_factory": "مخالفات المصانع"
 }

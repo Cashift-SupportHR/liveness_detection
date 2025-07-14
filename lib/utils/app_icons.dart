@@ -348,4 +348,6 @@ class AppIcons {
   static const String videos_placeholder = 'assets/icons/videos_placeholder.svg';
   static const String maintenances = 'assets/icons/maintenances.svg';
   static const String factoryViolations = 'assets/icons/factoryViolations.svg';
+  static const String factoryViolationsv2 = 'assets/icons/factoryViolationsv2.svg';
+  static const String maintenancev2 = 'assets/icons/maintenancev2.svg';
 }

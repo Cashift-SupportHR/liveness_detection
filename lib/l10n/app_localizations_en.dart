@@ -4338,4 +4338,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reload => 'Reload';
+
+  @override
+  String get violations_of_operation => 'Violations of operation';
+
+  @override
+  String get violations_of_factory => 'Violations of factory';
 }

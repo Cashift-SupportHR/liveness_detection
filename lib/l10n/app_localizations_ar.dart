@@ -4338,4 +4338,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get reload => 'إعادة تحميل';
+
+  @override
+  String get violations_of_operation => 'مخالفات التشغيل';
+
+  @override
+  String get violations_of_factory => 'مخالفات المصانع';
 }
