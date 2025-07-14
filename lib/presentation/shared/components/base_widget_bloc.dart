@@ -329,12 +329,5 @@ abstract class BaseBlocWidget<T, B extends BaseCubit>
   List<Widget>? appBarActions(BuildContext context) {
     return null;
   }
-  Future<bool> checkFaceRecognition(BuildContext context) async {
-    bool isCheckFaceRecognition = await CheckFaceRecognitionPage.start(context);
-    if (!isCheckFaceRecognition) {
-      return false;
-    }else{
-      return true;
-    }
-  }
+
 }

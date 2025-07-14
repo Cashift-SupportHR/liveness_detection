@@ -31,9 +31,9 @@ class AdminOverviewCubit extends BaseCubit {
       StreamStateInitial();
 
   loadInitial() async {
-    await fetchTabWithOpportunities();
     try {
       emit(LoadingState());
+      await fetchTabWithOpportunities();
       try {
         final requiredTasksData = await _requiredTasksUseCase.call();
         inAppNotificationStream.setData(requiredTasksData);

@@ -63,6 +63,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_area": MessageLookupByLibrary.simpleMessage("Add area"),
         "add_bank_account":
             MessageLookupByLibrary.simpleMessage("Add Bank Account"),
+        "add_breakdown": MessageLookupByLibrary.simpleMessage("add breakdown"),
+        "add_camera": MessageLookupByLibrary.simpleMessage("Add camera"),
         "add_cashifters":
             MessageLookupByLibrary.simpleMessage("Add a new cashifters"),
         "add_classification":
@@ -101,6 +103,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_loans": MessageLookupByLibrary.simpleMessage("Add loans"),
         "add_location": MessageLookupByLibrary.simpleMessage("Add location"),
         "add_logo": MessageLookupByLibrary.simpleMessage("Add a logo"),
+        "add_maintenance":
+            MessageLookupByLibrary.simpleMessage("Maintenance work"),
         "add_mobile_new": MessageLookupByLibrary.simpleMessage(
             "You must enter the new mobile number to send you the verification code to your mobile"),
         "add_more_the_work_periods":
@@ -146,6 +150,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Add terms and conditions of the opportunity"),
         "add_tracking_request":
             MessageLookupByLibrary.simpleMessage("Add tracking request"),
+        "add_transactions":
+            MessageLookupByLibrary.simpleMessage("add transactions"),
         "add_vehicle": MessageLookupByLibrary.simpleMessage("Add vehicle"),
         "add_vehicles": MessageLookupByLibrary.simpleMessage("add vehicles"),
         "add_violation": MessageLookupByLibrary.simpleMessage("Add violation"),
@@ -343,9 +349,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "body_mass": MessageLookupByLibrary.simpleMessage("Body Mass"),
         "brand_name": MessageLookupByLibrary.simpleMessage("Brand name"),
         "brand_type": MessageLookupByLibrary.simpleMessage("Brand type"),
+        "breakdown_maintenance":
+            MessageLookupByLibrary.simpleMessage("Maintenance and Breakdowns"),
         "calculation_method":
             MessageLookupByLibrary.simpleMessage("calculation method"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
+        "camera_add": MessageLookupByLibrary.simpleMessage("Add camera"),
+        "camera_code": MessageLookupByLibrary.simpleMessage("Camera code"),
+        "camera_name": MessageLookupByLibrary.simpleMessage("Camera name"),
+        "camera_name_ar":
+            MessageLookupByLibrary.simpleMessage("Camera name in Arabic"),
+        "camera_name_en":
+            MessageLookupByLibrary.simpleMessage("Camera name in English"),
+        "camera_type": MessageLookupByLibrary.simpleMessage("Camera type"),
+        "cameras": MessageLookupByLibrary.simpleMessage("Cameras"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cancel_button": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cancel_message_opportunity": MessageLookupByLibrary.simpleMessage(
@@ -420,6 +437,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "click_access_account": MessageLookupByLibrary.simpleMessage(
             "Click here to access your account"),
         "click_here": MessageLookupByLibrary.simpleMessage("Click here"),
+        "click_here_view_violation_location":
+            MessageLookupByLibrary.simpleMessage(
+                "Click here to view the location of the violation"),
         "click_to_reload": MessageLookupByLibrary.simpleMessage("reload"),
         "clicking_check_mark_means_you_agree":
             MessageLookupByLibrary.simpleMessage(
@@ -469,6 +489,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Complete service"),
         "completed": MessageLookupByLibrary.simpleMessage("Completed"),
         "completed_gates": MessageLookupByLibrary.simpleMessage("Completed"),
+        "completed_tasks":
+            MessageLookupByLibrary.simpleMessage("Completed Tasks"),
         "condition_ar": MessageLookupByLibrary.simpleMessage(
             "Write the condition in Arabic"),
         "condition_ar_validation": MessageLookupByLibrary.simpleMessage(
@@ -547,10 +569,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "date_absence": MessageLookupByLibrary.simpleMessage("date absence"),
         "date_create": MessageLookupByLibrary.simpleMessage("Date created"),
         "date_dispose": MessageLookupByLibrary.simpleMessage("date dispose"),
+        "date_from": MessageLookupByLibrary.simpleMessage("Date from"),
         "date_opportunity_offered":
             MessageLookupByLibrary.simpleMessage("Date opportunity offered"),
         "date_pledge": MessageLookupByLibrary.simpleMessage("Date pledge"),
         "date_request": MessageLookupByLibrary.simpleMessage("Date request"),
+        "date_to": MessageLookupByLibrary.simpleMessage("Date to"),
+        "date_to_must_be_greater_than_date_from":
+            MessageLookupByLibrary.simpleMessage(
+                "The date to must be greater than the date from"),
         "dates_not_set": MessageLookupByLibrary.simpleMessage("dates not set"),
         "day": MessageLookupByLibrary.simpleMessage("Day"),
         "days": MessageLookupByLibrary.simpleMessage("Days"),
@@ -574,6 +601,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Are you sure you want to delete your account ? "),
         "delete_all": MessageLookupByLibrary.simpleMessage("Delete all"),
         "delete_area": MessageLookupByLibrary.simpleMessage("Delete area"),
+        "delete_camera": MessageLookupByLibrary.simpleMessage("Delete camera"),
         "delete_custody": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to delete this Custody ? "),
         "delete_employment_official_data": MessageLookupByLibrary.simpleMessage(
@@ -584,6 +612,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Delete Punishment"),
         "delete_time": MessageLookupByLibrary.simpleMessage("Delete time"),
         "delete_user": MessageLookupByLibrary.simpleMessage("Delete user"),
+        "delivery_date": MessageLookupByLibrary.simpleMessage("Delivery Date"),
         "denied_camera_permission": MessageLookupByLibrary.simpleMessage(
             "Sorry, you have to go to the application settings and allow permission to access the camera so that you can scan qr code "),
         "departure_registration":
@@ -630,6 +659,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Download an image file"),
         "download_qr_code":
             MessageLookupByLibrary.simpleMessage("Download Qr Code"),
+        "download_violation_image":
+            MessageLookupByLibrary.simpleMessage("Download violation image"),
+        "driver_name": MessageLookupByLibrary.simpleMessage("driver name"),
+        "driver_violations":
+            MessageLookupByLibrary.simpleMessage("Driver violations"),
+        "drivers": MessageLookupByLibrary.simpleMessage("Drivers"),
         "dta_service": MessageLookupByLibrary.simpleMessage("attendance"),
         "duration_monthly":
             MessageLookupByLibrary.simpleMessage("duration_monthly"),
@@ -638,6 +673,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit_additional_sites":
             MessageLookupByLibrary.simpleMessage("Edit additional sites"),
         "edit_area": MessageLookupByLibrary.simpleMessage("edit area"),
+        "edit_camera": MessageLookupByLibrary.simpleMessage("Edit camera"),
         "edit_cashifters":
             MessageLookupByLibrary.simpleMessage("edit cashifters "),
         "edit_classification":
@@ -650,6 +686,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit_data": MessageLookupByLibrary.simpleMessage("Edit data"),
         "edit_data_vehicles":
             MessageLookupByLibrary.simpleMessage("Edit vehicle data"),
+        "edit_date_time":
+            MessageLookupByLibrary.simpleMessage("Edit date and time"),
         "edit_employee": MessageLookupByLibrary.simpleMessage("edit employee"),
         "edit_employment_official_data": MessageLookupByLibrary.simpleMessage(
             "Edit Employment Official Data"),
@@ -742,6 +780,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enter_your_phone_number_retrieve_password":
             MessageLookupByLibrary.simpleMessage(
                 "Enter your phone number to retrieve your password"),
+        "entity": MessageLookupByLibrary.simpleMessage("Entity"),
         "error_internet_connection":
             MessageLookupByLibrary.simpleMessage("Error internet connection!"),
         "error_qr": MessageLookupByLibrary.simpleMessage(
@@ -832,6 +871,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Generalization"),
         "get_me_on_your_way":
             MessageLookupByLibrary.simpleMessage("Get me on your way"),
+        "go_violation_site":
+            MessageLookupByLibrary.simpleMessage("Go to the violation site"),
         "good_evening": MessageLookupByLibrary.simpleMessage("Good evening"),
         "good_morning": MessageLookupByLibrary.simpleMessage("Good morning"),
         "goto_map":
@@ -864,8 +905,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "id_number": MessageLookupByLibrary.simpleMessage("Id Number"),
         "id_number_recipient_account":
             MessageLookupByLibrary.simpleMessage("ID number recipient account"),
+        "image_after_maintenance":
+            MessageLookupByLibrary.simpleMessage("Image after maintenance"),
+        "image_before_maintenance":
+            MessageLookupByLibrary.simpleMessage("Image before maintenance"),
         "important_disclosure":
             MessageLookupByLibrary.simpleMessage("Important Disclosure"),
+        "in_progress": MessageLookupByLibrary.simpleMessage("In Progress"),
         "in_work": MessageLookupByLibrary.simpleMessage("on the job"),
         "inactive": MessageLookupByLibrary.simpleMessage("Inactive"),
         "inactive_f": MessageLookupByLibrary.simpleMessage("Inactive"),
@@ -935,6 +981,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(" offers waiting you"),
         "jobs_review": MessageLookupByLibrary.simpleMessage("Jobs review"),
         "join": MessageLookupByLibrary.simpleMessage("Join"),
+        "km_h": MessageLookupByLibrary.simpleMessage("km/h"),
         "landing_page_desc1": MessageLookupByLibrary.simpleMessage(
             "The first electronic platform registered with the Intellectual Property Authority that provides opportunities on a daily basis on an hourly basis and immediate payment immediately after the end of your working hours using the latest payment methods"),
         "landing_page_desc2": MessageLookupByLibrary.simpleMessage(
@@ -970,6 +1017,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "list_empty": MessageLookupByLibrary.simpleMessage("list empty"),
         "list_gates_added":
             MessageLookupByLibrary.simpleMessage("List of gates added"),
+        "live_feed": MessageLookupByLibrary.simpleMessage("Live feed"),
+        "live_streaming":
+            MessageLookupByLibrary.simpleMessage("Live streaming"),
         "load_failed_refresh_data":
             MessageLookupByLibrary.simpleMessage("Load failed, refresh data"),
         "load_more": MessageLookupByLibrary.simpleMessage("Load more"),
@@ -1012,6 +1062,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "mark_box_map":
             MessageLookupByLibrary.simpleMessage("Mark the area on the map"),
         "maximum": MessageLookupByLibrary.simpleMessage("Maximum"),
+        "maximum_recorded_speed":
+            MessageLookupByLibrary.simpleMessage("Maximum recorded speed"),
+        "maximum_speed": MessageLookupByLibrary.simpleMessage("Maximum speed"),
         "menu_applicants":
             MessageLookupByLibrary.simpleMessage("List of applicants"),
         "method_accept_employees":
@@ -1126,6 +1179,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Notice of receipt and delivery"),
         "notice_receipt_delivery_desc": MessageLookupByLibrary.simpleMessage(
             "You must check the condition of the contract first before receiving it"),
+        "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "num": MessageLookupByLibrary.simpleMessage("Num"),
         "num_accepted": MessageLookupByLibrary.simpleMessage("No.Accepted"),
         "num_applicants": MessageLookupByLibrary.simpleMessage("No.Applicants"),
@@ -1250,6 +1304,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "plate_number": MessageLookupByLibrary.simpleMessage("Plate number"),
         "platform_description": MessageLookupByLibrary.simpleMessage(
             "This platform is registered with the Saudi Authority for Intellectual Property"),
+        "play": MessageLookupByLibrary.simpleMessage("play"),
         "please_add_all":
             MessageLookupByLibrary.simpleMessage("Please complete the options"),
         "please_add_logo":
@@ -1333,6 +1388,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "point": MessageLookupByLibrary.simpleMessage("point"),
         "point_type": MessageLookupByLibrary.simpleMessage("Point type"),
         "points": MessageLookupByLibrary.simpleMessage("points"),
+        "position": MessageLookupByLibrary.simpleMessage("Position:"),
         "power": MessageLookupByLibrary.simpleMessage("Power"),
         "previous": MessageLookupByLibrary.simpleMessage("Previous"),
         "previous_button": MessageLookupByLibrary.simpleMessage("Previous"),
@@ -1410,6 +1466,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Receipt status : "),
         "receive_vehicle":
             MessageLookupByLibrary.simpleMessage("receive vehicle"),
+        "receive_vehicle_details":
+            MessageLookupByLibrary.simpleMessage("Receive vehicle details"),
         "record_attendance":
             MessageLookupByLibrary.simpleMessage("Record attendance"),
         "record_attendance_scan_description_face_print":
@@ -1435,6 +1493,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reject_service_permission_message": MessageLookupByLibrary.simpleMessage(
             "*If you do not agree to enable the program to work to correctly prove the time of attendance and departure, your status will be considered as an absence."),
         "rejected": MessageLookupByLibrary.simpleMessage("Rejected"),
+        "reload": MessageLookupByLibrary.simpleMessage("Reload"),
         "remaining": MessageLookupByLibrary.simpleMessage("remaining"),
         "remaining_balance":
             MessageLookupByLibrary.simpleMessage("Remaining Balance"),
@@ -1464,6 +1523,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "required_number": MessageLookupByLibrary.simpleMessage("required.No"),
         "required_reason_refuse":
             MessageLookupByLibrary.simpleMessage("Required reason refuse"),
+        "reschedule": MessageLookupByLibrary.simpleMessage("Reschedule"),
         "resend_code": MessageLookupByLibrary.simpleMessage("Resend code"),
         "reserved_opportunities":
             MessageLookupByLibrary.simpleMessage("Reserved opportunities"),
@@ -1577,6 +1637,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Select brand name"),
         "select_brand_type":
             MessageLookupByLibrary.simpleMessage("Select brand type"),
+        "select_camera": MessageLookupByLibrary.simpleMessage("Select camera"),
         "select_cashifter":
             MessageLookupByLibrary.simpleMessage("Select cashifter"),
         "select_city": MessageLookupByLibrary.simpleMessage("Select City"),
@@ -1598,6 +1659,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Select your current situation"),
         "select_date_absence":
             MessageLookupByLibrary.simpleMessage("Select the date of absence"),
+        "select_date_and_time":
+            MessageLookupByLibrary.simpleMessage("Select date and time"),
+        "select_date_from_to": MessageLookupByLibrary.simpleMessage(
+            "Please select a date from and to"),
         "select_day": MessageLookupByLibrary.simpleMessage("select day "),
         "select_degree_importance": MessageLookupByLibrary.simpleMessage(
             "Select the degree of importance"),
@@ -1685,6 +1750,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Select vehicle type"),
         "select_vehicles":
             MessageLookupByLibrary.simpleMessage("Select vehicles"),
+        "select_video_date":
+            MessageLookupByLibrary.simpleMessage("Select video date"),
         "select_violation_name":
             MessageLookupByLibrary.simpleMessage("Select violation name"),
         "select_wallet": MessageLookupByLibrary.simpleMessage("Select wallet"),
@@ -1717,6 +1784,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "shift_hours": MessageLookupByLibrary.simpleMessage("working hours"),
         "shift_name": MessageLookupByLibrary.simpleMessage("Shift Name"),
         "shift_times": MessageLookupByLibrary.simpleMessage("Shift times"),
+        "shod_image_after_maintenance": MessageLookupByLibrary.simpleMessage(
+            "Please select an image after maintenance"),
+        "shod_image_before_maintenance": MessageLookupByLibrary.simpleMessage(
+            "Please select an image before maintenance"),
         "show_cashifter_data":
             MessageLookupByLibrary.simpleMessage("Show Cashifter data"),
         "show_cashifter_images":
@@ -1741,6 +1812,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Special offers (soon)"),
         "specialization":
             MessageLookupByLibrary.simpleMessage("Specialization"),
+        "speed": MessageLookupByLibrary.simpleMessage("Speed:"),
+        "speeding_during_violation": MessageLookupByLibrary.simpleMessage(
+            "Speeding during the violation"),
         "sponsor_data": MessageLookupByLibrary.simpleMessage("Sponsor data"),
         "sponsor_mobile":
             MessageLookupByLibrary.simpleMessage("Sponsor mobile"),
@@ -1753,6 +1827,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "start_date": MessageLookupByLibrary.simpleMessage("start date"),
         "start_date_blocking":
             MessageLookupByLibrary.simpleMessage("Blocking start date:"),
+        "start_live_feed":
+            MessageLookupByLibrary.simpleMessage("Start live feed"),
         "start_overtime":
             MessageLookupByLibrary.simpleMessage("start overtime"),
         "start_shift_label":
@@ -1762,6 +1838,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Before starting the tour, you must select the type of tour in order to receive the vehicle."),
         "start_typing_search":
             MessageLookupByLibrary.simpleMessage("Start typing to search"),
+        "start_video": MessageLookupByLibrary.simpleMessage("Start video"),
         "state_emp": MessageLookupByLibrary.simpleMessage("employee state"),
         "statistic_emp":
             MessageLookupByLibrary.simpleMessage("Employee Statistics"),
@@ -1770,6 +1847,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Infringement status"),
         "status_request":
             MessageLookupByLibrary.simpleMessage("Request status"),
+        "stop": MessageLookupByLibrary.simpleMessage("Stop"),
         "street_name": MessageLookupByLibrary.simpleMessage("Street name"),
         "submission_date":
             MessageLookupByLibrary.simpleMessage("Submission date"),
@@ -1815,6 +1893,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("There are no notes"),
         "there_are_notes":
             MessageLookupByLibrary.simpleMessage("There are notes"),
+        "there_are_videos_yet":
+            MessageLookupByLibrary.simpleMessage("There are no videos yet"),
         "there_many_ways_pay":
             MessageLookupByLibrary.simpleMessage("There are many ways to pay"),
         "there_many_ways_pay_desc": MessageLookupByLibrary.simpleMessage(
@@ -1858,12 +1938,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Total loan value"),
         "tour_history": MessageLookupByLibrary.simpleMessage("Tour history"),
         "tour_type": MessageLookupByLibrary.simpleMessage("Tour type"),
+        "track_vehicle_on_map":
+            MessageLookupByLibrary.simpleMessage("Track vehicle on the map"),
         "tracking_focus_points":
             MessageLookupByLibrary.simpleMessage("Tracking focus points"),
         "tracking_period":
             MessageLookupByLibrary.simpleMessage("Tracking period"),
         "transaction_history":
             MessageLookupByLibrary.simpleMessage("transaction history"),
+        "transactions": MessageLookupByLibrary.simpleMessage("transactions"),
         "transfer": MessageLookupByLibrary.simpleMessage("Transfer"),
         "transfer_amount":
             MessageLookupByLibrary.simpleMessage("Transfer amount"),
@@ -1889,6 +1972,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Type the area name"),
         "type_back_up_number":
             MessageLookupByLibrary.simpleMessage("Type the backup number"),
+        "type_camera_code":
+            MessageLookupByLibrary.simpleMessage("Type camera code"),
+        "type_camera_name_ar":
+            MessageLookupByLibrary.simpleMessage("Type camera name in Arabic"),
+        "type_camera_name_en":
+            MessageLookupByLibrary.simpleMessage("Type camera name in English"),
         "type_contractual_power_number": MessageLookupByLibrary.simpleMessage(
             "Type the contractual power number"),
         "type_covenant_desc":
@@ -1917,6 +2006,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "type_number_required_for_opportunity":
             MessageLookupByLibrary.simpleMessage(
                 "Type the number required for the opportunity"),
+        "type_operation":
+            MessageLookupByLibrary.simpleMessage("Operation type"),
         "type_opportunities_number":
             MessageLookupByLibrary.simpleMessage("Write the required number"),
         "type_opportunity_value":
@@ -1951,6 +2042,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Status changed to active"),
         "update_status_unActive":
             MessageLookupByLibrary.simpleMessage("Status changed to inactive"),
+        "update_transactions":
+            MessageLookupByLibrary.simpleMessage("update transactions"),
         "upload_image": MessageLookupByLibrary.simpleMessage("Upload image"),
         "upload_pdf_image":
             MessageLookupByLibrary.simpleMessage("Upload a PDF or image"),
@@ -2000,6 +2093,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "value_total":
             MessageLookupByLibrary.simpleMessage("Total value recovered"),
         "vehicle": MessageLookupByLibrary.simpleMessage("Vehicle"),
+        "vehicle_camera_code":
+            MessageLookupByLibrary.simpleMessage("Vehicle camera code"),
         "vehicle_color": MessageLookupByLibrary.simpleMessage("Vehicle color"),
         "vehicle_components":
             MessageLookupByLibrary.simpleMessage("vehicle components"),
@@ -2009,6 +2104,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Vehicle insurance"),
         "vehicle_note": MessageLookupByLibrary.simpleMessage(
             "Click (No) when there are no notes on the vehicle or (Yes) if it is not working or has notes with an explanation."),
+        "vehicle_path": MessageLookupByLibrary.simpleMessage("Vehicle path"),
+        "vehicle_performance":
+            MessageLookupByLibrary.simpleMessage("Vehicle performance"),
         "vehicle_specifications":
             MessageLookupByLibrary.simpleMessage("Vehicle Specifications"),
         "vehicle_type": MessageLookupByLibrary.simpleMessage("Vehicle Type"),
@@ -2022,15 +2120,24 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Verification code"),
         "verification_code_sent_desc": MessageLookupByLibrary.simpleMessage(
             "A verification code will be sent to your old mobile number. You must review it now"),
+        "video": MessageLookupByLibrary.simpleMessage("video"),
+        "videos": MessageLookupByLibrary.simpleMessage("Videos"),
+        "videos_dates_validate_msg": MessageLookupByLibrary.simpleMessage(
+            "Please select the time and date you want the videos to be shown"),
         "view_all": MessageLookupByLibrary.simpleMessage("view all"),
         "view_areas": MessageLookupByLibrary.simpleMessage("View areas"),
+        "view_cameras": MessageLookupByLibrary.simpleMessage("View cameras"),
         "view_details": MessageLookupByLibrary.simpleMessage("View details"),
+        "view_maintenance":
+            MessageLookupByLibrary.simpleMessage("View maintenance and faults"),
         "view_search_results":
             MessageLookupByLibrary.simpleMessage("View search results"),
         "view_terms_conditions":
             MessageLookupByLibrary.simpleMessage("View terms and conditions"),
         "view_tracking_requests":
             MessageLookupByLibrary.simpleMessage("View tracking requests"),
+        "view_transactions":
+            MessageLookupByLibrary.simpleMessage("view transactions"),
         "view_work_hazards":
             MessageLookupByLibrary.simpleMessage("View Work Hazards"),
         "violation": MessageLookupByLibrary.simpleMessage("violation"),
@@ -2045,6 +2152,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "violation_name_en":
             MessageLookupByLibrary.simpleMessage("Violation name in English"),
         "violation_repeated": MessageLookupByLibrary.simpleMessage("repeated"),
+        "violation_time":
+            MessageLookupByLibrary.simpleMessage("Violation time"),
         "violation_type":
             MessageLookupByLibrary.simpleMessage("violation type"),
         "violation_value":
@@ -2069,6 +2178,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Waiting for review"),
         "wallet": MessageLookupByLibrary.simpleMessage("Wallet"),
         "wanted_number": MessageLookupByLibrary.simpleMessage("Wanted Number"),
+        "waring_action_notification": MessageLookupByLibrary.simpleMessage(
+            "Your action will be saved and sent to the project manager for review and response."),
+        "waring_final_action_notification":
+            MessageLookupByLibrary.simpleMessage(
+                "It will be sent to the supervisor."),
         "ways_accept_job":
             MessageLookupByLibrary.simpleMessage("ways_accept_job"),
         "weight": MessageLookupByLibrary.simpleMessage("Weight"),
@@ -2142,6 +2256,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "working_period":
             MessageLookupByLibrary.simpleMessage("Working period"),
         "working_time": MessageLookupByLibrary.simpleMessage("Working time"),
+        "write_action_to_be_taken": MessageLookupByLibrary.simpleMessage(
+            "Write the action to be taken"),
         "write_address": MessageLookupByLibrary.simpleMessage("Write Address"),
         "write_body_mass":
             MessageLookupByLibrary.simpleMessage("Write Body Mass"),

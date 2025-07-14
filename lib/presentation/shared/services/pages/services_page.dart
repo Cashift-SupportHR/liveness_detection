@@ -23,7 +23,10 @@ class ServicesPage extends BaseBlocWidget<Initialized, ServicesCubit> {
   void loadInitialData(BuildContext context) {
     bloc.fetchAppService();
   }
-
+  @override
+  bool detectRequiredTasks() {
+    return false;
+  }
 
   @override
   List<Widget>? appBarActions(BuildContext context) {

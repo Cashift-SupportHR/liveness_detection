@@ -5,6 +5,7 @@ import 'custody_handover.dart';
 import 'vehicle_component_handover.dart';
 
 class ReceiveVehicleDetails {
+  List<String>? vehicleHandoverImages;
   List<VehicleComponentHandover>? vehiclesComponentsHandovers;
   List<CustodyHandover>? vehiclesCustodiesHandovers;
   int? id;
@@ -24,31 +25,35 @@ class ReceiveVehicleDetails {
   String? projectName;
   String? licenseExpiryDate;
   String? licenseNumber;
+  String? specifications;
 
-  ReceiveVehicleDetails(
-      {this.vehiclesComponentsHandovers,
-      this.vehiclesCustodiesHandovers,
-      this.id,
-      this.vehicleId,
-      this.vehicleBrand,
-      this.vehicleModel,
-      this.vehiclePlateNumber,
-      this.vehicleHandoverDate,
-      this.vehicleHandoverTime,
-      this.freelancerInfoId,
-      this.freelancerName,
-      this.vehicleImage,
-      this.isComplete,
-      this.companyId,
-      this.companyName,
-      this.projectId,
-      this.projectName,
-      this.licenseExpiryDate,
-      this.licenseNumber,
-      });
+  ReceiveVehicleDetails({
+    this.vehicleHandoverImages,
+    this.vehiclesComponentsHandovers,
+    this.vehiclesCustodiesHandovers,
+    this.id,
+    this.vehicleId,
+    this.vehicleBrand,
+    this.vehicleModel,
+    this.vehiclePlateNumber,
+    this.vehicleHandoverDate,
+    this.vehicleHandoverTime,
+    this.freelancerInfoId,
+    this.freelancerName,
+    this.vehicleImage,
+    this.isComplete,
+    this.companyId,
+    this.companyName,
+    this.projectId,
+    this.projectName,
+    this.licenseExpiryDate,
+    this.licenseNumber,
+    this.specifications,
+  });
 
   factory ReceiveVehicleDetails.fromDto(ReceiveVehicleDetailsDto json) =>
       ReceiveVehicleDetails(
+        vehicleHandoverImages: json.vehicleHandoverImages,
         vehiclesComponentsHandovers: VehicleComponentHandover.fromDtoList(
             json.vehiclesComponentsHandovers ?? []),
         vehiclesCustodiesHandovers:
@@ -70,6 +75,7 @@ class ReceiveVehicleDetails {
         projectName: json.projectName,
         licenseExpiryDate: json.licenseExpiryDate,
         licenseNumber: json.licenseNumber,
+        specifications: json.specifications,
       );
 
   static List<ReceiveVehicleDetails> fromDtoList(
@@ -115,6 +121,15 @@ class ReceiveVehicleDetails {
       ListRowTextItem(
         title: strings.license_expiry_date,
         value: licenseExpiryDate ?? '',
+      ),
+    ];
+  }
+
+  List<ListRowTextItem> additionalSpecifications(AppLocalizations strings) {
+    return [
+      ListRowTextItem(
+        title: strings.additional_specifications,
+        value: specifications ?? '',
       ),
     ];
   }

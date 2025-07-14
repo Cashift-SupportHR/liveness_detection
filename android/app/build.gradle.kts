@@ -45,13 +45,9 @@ flutter {
     source = "../.."
 }
 
-
 dependencies {
-    // Example dependency; adjust as needed
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("com.android.support:multidex:2.0.1")
-    implementation("androidx.appcompat:appcompat:1.7.0")
 
-    // Add the core library desugaring dependency
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.2.2")
+    // ─── NEW: runtime that L8 needs when desugaring ───────────
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+    // 2.1.4 is the version the plugin docs show; 2.1.5 is the latest preview. :contentReference[oaicite:0]{index=0}
 }

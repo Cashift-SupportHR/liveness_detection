@@ -3,29 +3,32 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../common/common_state.dart';
 import '../../resources/colors.dart';
+import 'map_picker_item.dart';
 import 'map_prediction.dart';
 import 'map_search.dart';
 
 ///  Created by harbey on 9/11/2023.
 class MapWidgetPicker extends StatefulWidget {
+  final LatLng? initialLatLng;
   GoogleMapController? mapController;
   final Function(GoogleMapController) onMapCreated;
   final Function(LatLng)? onTap;
   final Function(LatLng)? onCreatedLocation;
   final StreamStateInitial<List<MapPrediction>?> predictionsSearchStream;
-  final StreamStateInitial<LatLng?> latLngSearchStream;
+  StreamStateInitial<MapPickerItem?> placeDetailsStream;
   final Function(String) onSearch;
   final Function(MapPrediction) onSelectPlace;
   MapWidgetPicker(
       {Key? key,
+        this.initialLatLng,
         required this.onMapCreated,
         this.onTap,
         this.onCreatedLocation,
         this.mapController,
         required this.predictionsSearchStream,
+        required this.placeDetailsStream,
         required this.onSearch,
         required this.onSelectPlace,
-         required this.latLngSearchStream,
       })
       : super(key: key);
   @override
@@ -42,6 +45,11 @@ class MapWidgetState extends State<MapWidgetPicker> {
   LatLng? lastUserLocation;
   var locationFeched = false;
   double initZoom = 14;
+
+  @override
+  initState() {
+    super.initState();
+  }
 
 
   Future<Position> _determinePosition() async {
@@ -85,6 +93,7 @@ class MapWidgetState extends State<MapWidgetPicker> {
   }
 
   detectMyLocation() async {
+    lastUserLocation = widget.initialLatLng ?? lastUserLocation;
     if (lastUserLocation != null) {
       final p = CameraPosition(
           target:
@@ -118,13 +127,14 @@ class MapWidgetState extends State<MapWidgetPicker> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        StreamBuilder<LatLng?>(
-            stream: widget.latLngSearchStream.stream,
+        StreamBuilder<MapPickerItem?>(
+            stream: widget.placeDetailsStream.stream,
             builder: (context, snapshot) {
               if(snapshot.data!=null){
-                print('snapshot.data ${snapshot.data} ${snapshot.data!.latitude} ${snapshot.data!.longitude}');
+                LatLng latLng = snapshot.data!.getLatLng();
                 _markers.clear();
-                _markers.add(buildMarker(snapshot.data!));
+                _markers.add(buildMarker(latLng));
+                onZoom(latLng);
               }
             return GoogleMap(
               compassEnabled: true,
@@ -164,7 +174,6 @@ class MapWidgetState extends State<MapWidgetPicker> {
           predictionsSearchStream: widget.predictionsSearchStream,
           onSelectPlace: (item) {
             print('onSelectPlace ${item.toJson()}');
-            //onZoom(item);
             widget.onSelectPlace(item);
           },
         ),
@@ -187,6 +196,7 @@ class MapWidgetState extends State<MapWidgetPicker> {
       ],
     );
   }
+
   buildMarker(LatLng location, {BitmapDescriptor? icon}) {
     print('location $location');
     return icon != null
@@ -208,6 +218,13 @@ class MapWidgetState extends State<MapWidgetPicker> {
 
     widget.onTap!(latLng);
     setState(() {});
+  }
+
+  onZoom(LatLng? latLng) {
+    if (latLng == null) return;
+    widget.mapController?.animateCamera(
+      CameraUpdate.newCameraPosition(CameraPosition(target: latLng, zoom: 18)),
+    );
   }
 
   String? getMapStyle() {

@@ -47,11 +47,13 @@ class VehicleCovenantPage extends BaseBlocWidget<
   @override
   Widget buildWidget(
       BuildContext context, Initialized<List<VehicleComponents>> state) {
+    print('onInitialDataCallbackHandoverId: ${onInitialDataCallbackHandoverId()}');
     return VehicleCovenantScreen(
       vehicleComponents: state.data,
       addStream: bloc.addStream,
       isEdit: isEdit,
-      onNext: (params) async {
+      onNext: (params, vehicleComponentsUpdated) async {
+        bloc.vehicleComponents = vehicleComponentsUpdated;
         showReceiveVehicleDialog(context, addCustodiesPrams: params);
       },
       onAddYes: (addImageAndDescriptionsComponentsPrams, file) =>
@@ -59,7 +61,10 @@ class VehicleCovenantPage extends BaseBlocWidget<
               addImageAndDescriptionsComponentsPrams:
                   addImageAndDescriptionsComponentsPrams,
               file: file),
-      onCancel: () => onCancel(),
+      onCancel: (vehicleComponentsUpdated) {
+        bloc.vehicleComponents = vehicleComponentsUpdated;
+        onCancel();
+      },
       handoverId: onInitialDataCallbackHandoverId(),
     );
   }

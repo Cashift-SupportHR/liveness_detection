@@ -59,9 +59,9 @@ class OverviewBloc extends Bloc<OverviewEvents, CommonState> {
         await for (final newState in event.applyAsync(currentState: state, bloc: this)) {
           emit(newState);
         }
-      } catch (_, stackTrace) {
-        // developer.log('$_',
-        //     name: 'OverviewBloc', error: _, stackTrace: stackTrace);
+      } catch (error, stackTrace) {
+        developer.log('$error',
+            name: 'OverviewBloc', error: error, stackTrace: stackTrace);
         emit(state);
       }
     });
@@ -336,23 +336,11 @@ class OverviewBloc extends Bloc<OverviewEvents, CommonState> {
 
   Future<void> saveFaceRecognitionEncryptedFile() async {
     try {
-      final response = await profileRepository.downloadFaceRecognition();
-      RemoteFile remoteFile = response.payload!;
-      // String ext = remoteFile.fileAttachmentType ?? 'png';
-      final dir = await getApplicationDocumentsDirectory();
-      final path = '${dir.path}/${remoteFile.fileName}';
-      saveFilePath(path);
-       File file = File(path);
-      final decodedBytes = base64Decode(remoteFile.fileAttachment ?? '');
-      file.writeAsBytesSync(decodedBytes);
+    await profileRepository.getFaceImageBase64();
     } on Exception catch (e) {
       print('saveFaceRecognitionEncryptedFile Error $e');
     }
   }
 
-  saveFilePath(String path) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString(LocalConstants.RecognitionEncryptedFilePATH, path);
-  }
 
 }

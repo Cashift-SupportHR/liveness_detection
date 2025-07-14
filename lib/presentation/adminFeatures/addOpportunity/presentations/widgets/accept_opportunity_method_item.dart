@@ -21,7 +21,7 @@ class AcceptOpportunityMethodItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            kBuildImage(data?.icon ?? '', size: 80, border: 0),
+            kBuildImage(data?.icon ?? '', size: 80, border: 0,showFullImage:false,),
             SizedBox(width: 10),
             Expanded(
               child: Column(

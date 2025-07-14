@@ -118,6 +118,9 @@ class Assets {
   static const String imagesChangePassword = 'images/change_password.png';
   static const String face_recognition = 'images/face_recognition.gif';
   static const String vehiclesZone = 'images/vehicles_zone.png';
+  static const String vehicleSpeed = 'images/vehicle_speed.png';
+  static const String dot = 'images/dot.png';
+  static const String pinIcon = 'assets/icons/pin_icon.png';
 
 
 }

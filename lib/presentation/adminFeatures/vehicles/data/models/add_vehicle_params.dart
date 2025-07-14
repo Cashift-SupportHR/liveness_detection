@@ -13,6 +13,8 @@ class AddVehicleParams {
   int? vehicleCode;
   @JsonKey(name: 'Model')
   String? model;
+  @JsonKey(name: 'MobileVehicleIndexCode')
+  String? mobileVehicleIndexCode;
   @JsonKey(name: 'YearOfManufacture')
   String? yearOfManufacture;
   @JsonKey(name: 'PlateNumber')
@@ -41,6 +43,7 @@ class AddVehicleParams {
     this.id,
     this.vehicleCode,
     this.model,
+    this.mobileVehicleIndexCode,
     this.yearOfManufacture,
     this.plateNumber,
     this.licenseNumber,

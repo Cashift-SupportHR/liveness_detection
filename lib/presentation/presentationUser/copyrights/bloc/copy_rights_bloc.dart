@@ -17,9 +17,8 @@ class CopyRightsBloc extends Bloc<CopyRightsEvent, CommonState> {
         await for (final newState in event.applyAsync(currentState: state, bloc: this)) {
           emit(newState);
         }
-      } catch (_, stackTrace) {
-        // developer.log('$_',
-        //     name: 'CopyRightsBloc', error: _, stackTrace: stackTrace);
+      } catch (error, stackTrace) {
+        developer.log('$error', name: 'CopyRightsBloc', error: error, stackTrace: stackTrace);
         emit(state);
       }
     });

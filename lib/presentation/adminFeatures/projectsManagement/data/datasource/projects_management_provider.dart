@@ -20,7 +20,7 @@ class ProjectsManagementAPI {
     return api.fetchProjectsV3();
   }
 
-  Future<ApiResponse<DownLoadSalaryDefinition>> downLoadQrCodeImage(
+  Future<ApiResponse<DownLoadFileDto>> downLoadQrCodeImage(
       String projectCode, String projectName) {
     return api.downLoadQrCodeImage(projectCode, projectName);
   }

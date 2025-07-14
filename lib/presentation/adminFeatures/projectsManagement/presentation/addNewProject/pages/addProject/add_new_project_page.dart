@@ -25,7 +25,7 @@ class AddNewProjectPage
 
   @override
   String? title(context) {
-    int? id = ModalRoute.of(context)?.settings.arguments as int?;
+    int? id = getArguments(context);
     return id == null ? null : strings.edit_project_data;
   }
 
@@ -37,7 +37,7 @@ class AddNewProjectPage
       projectId: getProjectId(context),
       state: state,
       onAddProject: (params) {
-        int? id = ModalRoute.of(context)?.settings.arguments as int?;
+        int? id = getArguments(context);
         // isEdit attribute is used to determine if the project in edit mode or back from next page
         params.id = getProjectId(context);
         companyId = params.companyId ?? 0;
@@ -63,7 +63,7 @@ class AddNewProjectPage
 
   int getProjectId(BuildContext context) {
     int? id =
-        (ModalRoute.of(context)?.settings.arguments ?? idCallback!()) as int?;
+        (getArguments(context) ?? idCallback!()) as int?;
     return id ?? 0;
   }
 }

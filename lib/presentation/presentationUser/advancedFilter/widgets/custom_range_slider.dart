@@ -33,10 +33,20 @@ class CustomRangeSlider extends BaseStatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          TextSliderWidget(
-            minimum: strings.minimum,
-            maximum: strings.maximum,
-          ),
+
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              strings.minimum,
+              style: kTextSemiBold.copyWith(color: kBattleShipGrey2, fontSize: 16),
+            ),
+            Text(
+              strings.maximum,
+              style: kTextSemiBold.copyWith(color: kBattleShipGrey2, fontSize: 16),
+            ),
+          ],
+        ),
           StatefulBuilder(builder: (context, setState) {
             return SfRangeSliderTheme(
               data: SfRangeSliderThemeData(
@@ -66,8 +76,8 @@ class CustomRangeSlider extends BaseStatelessWidget {
             );
           }),
           TextSliderWidget(
-            minimum: '20 ' + strings.sar,
-            maximum: '2000 ' + strings.sar,
+            minimum: '20 '  ,
+            maximum: '2000 ',
           ),
         ],
       ),

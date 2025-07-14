@@ -5,8 +5,9 @@ class CommonListItemDto {
   String? name;
   String? icon;
   String? code;
+  bool? isShowActionButton;
 
-  CommonListItemDto({this.id, this.employeeId, this.name, this.icon, this.code});
+  CommonListItemDto({this.id, this.employeeId, this.name, this.icon, this.code, this.isShowActionButton});
 
    factory CommonListItemDto.fromJson(Map<String, dynamic> json) {
     return CommonListItemDto(
@@ -15,6 +16,7 @@ class CommonListItemDto {
       name: json['name'],
       icon: json['icon'],
       code: json['code'],
+      isShowActionButton: json['isAcceptReject'],
     );}
 
     Map<String, dynamic> toJson() => {
@@ -23,6 +25,7 @@ class CommonListItemDto {
       'employeeId': employeeId,
       'icon': icon,
       'code': code,
+      'isAcceptReject': isShowActionButton,
     };
 }
 

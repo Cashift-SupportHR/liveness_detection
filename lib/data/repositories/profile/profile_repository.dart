@@ -8,8 +8,14 @@ import 'package:shiftapp/data/models/auth/change_password_params.dart';
 import 'package:shiftapp/data/repositories/user/user_repository.dart';
 import 'package:shiftapp/domain/entities/account/index.dart';
 import 'package:shiftapp/domain/entities/account/remote_file.dart';
+import 'package:shiftapp/extensions/extensions.dart';
 
 import '../../models/api_response.dart';
+import 'dart:convert';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
+
+import 'face_image_cach_utils.dart';
 
 @Injectable()
 class ProfileRepository {
@@ -79,6 +85,7 @@ class ProfileRepository {
 
   Future<ApiResponse<String>> updateFaceRecognition(File file) async {
     final response = await _api.updateFaceRecognition(file);
+    ImageCacheUtil.deleteCachedImage();
     return response;
   }
 
@@ -103,6 +110,28 @@ class ProfileRepository {
 
   Future<ApiResponse<RemoteFile>> downloadFaceRecognition() async {
     final response = await _api.downloadFaceRecognition();
+    final fileBase64 = response.payload?.fileAttachment;
+    if(fileBase64!=null){
+      ImageCacheUtil.saveOrUpdateBase64Image(fileBase64);
+    }
     return response;
   }
+
+  Future<String?> getFaceImageBase64() async {
+    final cached = await ImageCacheUtil.isImageCached();
+    print('getFaceImageBase64 $cached');
+    if(cached){
+      return await  ImageCacheUtil.getCachedImageAsBase64();
+    }else {
+      final response = await _api.downloadFaceRecognition();
+      final fileBase64 = response.payload?.fileAttachment;
+      if(fileBase64!=null){
+        ImageCacheUtil.saveOrUpdateBase64Image(fileBase64);
+      }
+      return response.payload?.fileAttachment;
+    }
+  }
+
+
+
 }

@@ -20,41 +20,40 @@ class VehiclesComponentsCubit extends BaseCubit {
 
   VehiclesComponentsCubit(this._repository);
 
-  fetchVehicleComponents(CreateVehicleHandoverPrams? createVehicleHandoverPrams,
-      int? receiveVehicleId) async {
+
+  ReceiveVehicleDetails? receiveVehicleDetails;
+  List<VehicleComponents>? vehicleComponents;
+
+  fetchVehicleComponents(int? receiveVehicleId) async {
+    if (vehicleComponents == null) {
+      fetchAllData(receiveVehicleId);
+    } else {
+      emit(InitializedVehiclesComponents(
+          vehicleComponents: vehicleComponents ?? [],
+          receiveVehicleDetails: receiveVehicleDetails));
+    }
+  }
+
+ Future<void> fetchAllData(int? receiveVehicleId) async {
     try {
       emit(LoadingState());
-      CreateVehicleHandover? handover;
-      ReceiveVehicleDetails? receiveVehicleDetails;
-      List<VehicleComponents>? vehicleComponents;
 
-      if (createVehicleHandoverPrams?.vehicleId != null) {
-        handover = await createVehicleHandover(createVehicleHandoverPrams!);
-      }
       if (receiveVehicleId == null || receiveVehicleId == 0) {
         vehicleComponents = await _repository.fetchVehicleComponents();
       } else {
         receiveVehicleDetails =
             await _repository.fetchReceiveVehicleDetails(receiveVehicleId);
         vehicleComponents = VehicleComponentHandover.toVehicleComponents(
-            receiveVehicleDetails.vehiclesComponentsHandovers ?? []);
+            receiveVehicleDetails?.vehiclesComponentsHandovers ?? []);
       }
 
       emit(InitializedVehiclesComponents(
           vehicleComponents: vehicleComponents ?? [],
-          createVehicleHandover: handover ?? CreateVehicleHandover(),
           receiveVehicleDetails: receiveVehicleDetails));
     } catch (e) {
       emit(ErrorState(e));
       rethrow;
     }
-  }
-
-  Future<CreateVehicleHandover> createVehicleHandover(
-      CreateVehicleHandoverPrams createVehicleHandoverPrams) async {
-    final val =
-        await _repository.createVehicleHandover(createVehicleHandoverPrams);
-    return CreateVehicleHandover.fromDto(val);
   }
 
   addComponents(AddComponentsPrams addComponentsPrams) {

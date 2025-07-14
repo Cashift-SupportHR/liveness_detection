@@ -17,19 +17,25 @@ class VehiclesCustodiesCubit extends BaseCubit {
 
   VehiclesCustodiesCubit(this._repository);
 
+  List<VehicleComponents> vehicleComponents = [];
+
   fetchVehicleCustodie(
       int vehicleId, List<CustodyHandover>? initialData) async {
     // initialData comes from VehicleComponentsPage
-    if (initialData == null || initialData.isEmpty) {
-      executeBuilder(() => _repository.fetchVehicleCustodies(vehicleId),
-          onSuccess: (data) async {
-        emit(Initialized<List<VehicleComponents>>(data: data));
-      });
+    if (vehicleComponents.isEmpty) {
+      if (initialData == null || initialData.isEmpty) {
+        executeBuilder(() => _repository.fetchVehicleCustodies(vehicleId),
+            onSuccess: (data) async {
+          emit(Initialized<List<VehicleComponents>>(data: data));
+        });
+      } else {
+        print(
+            "fetchVehicleCustodie ${initialData.map((e) => print(e.custodyStatus)).toList()}");
+        emit(Initialized<List<VehicleComponents>>(
+            data: CustodyHandover.toVehicleComponents(initialData)));
+      }
     } else {
-      print(
-          "fetchVehicleCustodie ${initialData.map((e) => print(e.custodyStatus)).toList()}");
-      emit(Initialized<List<VehicleComponents>>(
-          data: CustodyHandover.toVehicleComponents(initialData)));
+      emit(Initialized<List<VehicleComponents>>(data: vehicleComponents));
     }
   }
 

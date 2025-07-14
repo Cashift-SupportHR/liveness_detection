@@ -50,6 +50,7 @@ class UploadFilesList extends BaseStatelessWidget {
                 const SizedBox(height: 5),
                 uploadedFiles(
                   images,
+
                   onDelete: (file) {
                     images.remove(file);
                     onPicker?.call(images);

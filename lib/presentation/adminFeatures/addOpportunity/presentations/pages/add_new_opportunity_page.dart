@@ -58,7 +58,7 @@ class AddNewOpportunityPage extends BaseBlocWidget<InitializedOpportunity, AddOp
 
   @override
   String? title(BuildContext context) {
-    final opportunityItem = (ModalRoute.of(context)?.settings.arguments ?? Opportunity.fromDto(OpportunityDto())) as Opportunity;
+    final opportunityItem = (getArguments(context) ?? Opportunity.fromDto(OpportunityDto())) as Opportunity;
     return opportunityItem.id == null ? strings.add_new_opportunity : strings.edit_opportunity;
   }
 }

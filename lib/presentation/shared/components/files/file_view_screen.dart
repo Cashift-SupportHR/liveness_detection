@@ -13,7 +13,7 @@ import 'custom_p_d_f_view.dart';
 import 'files_manager.dart';
 
 class FileViewScreen extends BaseStatelessWidget {
-  final DownLoadSalaryDefinition data;
+  final DownLoadFileDto data;
   final bool? isShowShareAndDownloadButtons;
   final Function()? onDownload;
   final Function()? onShare;

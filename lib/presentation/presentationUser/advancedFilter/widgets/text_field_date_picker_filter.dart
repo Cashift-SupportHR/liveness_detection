@@ -16,9 +16,12 @@ import '../../resources/constants.dart';
 class TextFieldDatePicker extends BaseStatelessWidget {
   final String? fromDate;
   final String? toDate;
+  final String? title;
   final Function(String, String)? onChanged;
 
-  TextFieldDatePicker({Key? key, this.onChanged, this.fromDate, this.toDate}) : super(key: key);
+  TextFieldDatePicker(
+      {Key? key, this.title, this.onChanged, this.fromDate, this.toDate})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +32,23 @@ class TextFieldDatePicker extends BaseStatelessWidget {
       _controller.text = '$fromDate - $toDate';
     }
 
-    PickerDateRange? dateRange = PickerDateRange(DateTime.now(), DateTime.now());
+    PickerDateRange? dateRange =
+        PickerDateRange(DateTime.now(), DateTime.now());
     final now = DateTime.now();
     DateTime dateFrom7Da = now.subtract(const Duration(days: 7));
     DateTime dateFrom14Da = now.subtract(const Duration(days: 14));
     DateTime dateFromMonth = now.subtract(const Duration(days: 30));
-    String dateNow = DateFormatter.getCurrentDate(pattern: DateFormatter.DAY_MONTH_YEAR, local: "en");
-    String date7 = DateFormatter.formatDate(dateFrom7Da, DateFormatter.DAY_MONTH_YEAR, local: "en");
-    String date14 = DateFormatter.formatDate(dateFrom14Da, DateFormatter.DAY_MONTH_YEAR, local: "en");
-    String dateMonth = DateFormatter.formatDate(dateFromMonth, DateFormatter.DAY_MONTH_YEAR, local: "en");
+    String dateNow = DateFormatter.getCurrentDate(
+        pattern: DateFormatter.DAY_MONTH_YEAR, local: "en");
+    String date7 = DateFormatter.formatDate(
+        dateFrom7Da, DateFormatter.DAY_MONTH_YEAR,
+        local: "en");
+    String date14 = DateFormatter.formatDate(
+        dateFrom14Da, DateFormatter.DAY_MONTH_YEAR,
+        local: "en");
+    String dateMonth = DateFormatter.formatDate(
+        dateFromMonth, DateFormatter.DAY_MONTH_YEAR,
+        local: "en");
     List<RadioItem> dataRadio = [
       RadioItem(value: dateNow, title: strings.current),
       RadioItem(value: date7, title: strings.from_week),
@@ -46,12 +57,12 @@ class TextFieldDatePicker extends BaseStatelessWidget {
     ];
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            strings.date_opportunity_offered,
+            title ?? strings.date_opportunity_offered,
             style: kTextSemiBold.copyWith(color: kPrimary),
           ),
           const SizedBox(
@@ -69,23 +80,36 @@ class TextFieldDatePicker extends BaseStatelessWidget {
                       child: SfDateRangePicker(
                         view: DateRangePickerView.month,
                         selectionMode: DateRangePickerSelectionMode.range,
-                        onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
+                        onSelectionChanged:
+                            (DateRangePickerSelectionChangedArgs args) {
                           dateRange = args.value;
                         },
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 20, right: 10, left: 10),
+                      padding: const EdgeInsets.only(
+                          bottom: 20, right: 10, left: 10),
                       child: AppCupertinoButton(
                         text: strings.save_button,
                         onPressed: () {
-                          String startDateLangCode = DateFormatter.formatDateStringNoPattern(dateRange!.startDate.toString());
-                          String endDateLangCode = DateFormatter.formatDateStringNoPattern(dateRange!.endDate.toString());
-                          String startDate = DateFormatter.formatDateStringNoLangCode(
+                          String startDateLangCode =
+                              DateFormatter.formatDateStringNoPattern(
+                                  dateRange!.startDate.toString(),
+                                  local: "en");
+                          String endDateLangCode =
+                              DateFormatter.formatDateStringNoPattern(
+                                  dateRange!.endDate.toString(),
+                                  local: "en");
+                          String startDate =
+                              DateFormatter.formatDateStringNoLangCode(
                             dateRange!.startDate.toString(),
                           );
-                          String endDate = DateFormatter.formatDateStringNoLangCode(dateRange!.endDate.toString());
-                          _controller.text = '$startDateLangCode - $endDateLangCode';
+                          String endDate =
+                              DateFormatter.formatDateStringNoLangCode(
+                                  dateRange!.endDate.toString(),
+                                  local: "en");
+                          _controller.text =
+                              '$startDateLangCode - $endDateLangCode';
                           isDeleteStream.setData(true);
                           onChanged?.call(startDate, endDate);
                           Navigator.pop(context);
@@ -100,7 +124,8 @@ class TextFieldDatePicker extends BaseStatelessWidget {
             controller: _controller,
             inputDecoration: kRequestTextFieldDecoration.copyWith(
               hintText: strings.write_date,
-              hintStyle: kTextSemiBold.copyWith(color: kBattleShipGrey2, fontSize: 16),
+              hintStyle:
+                  kTextSemiBold.copyWith(color: kBattleShipGrey2, fontSize: 16),
               suffixIcon: Padding(
                 padding: const EdgeInsets.all(12),
                 child: StreamBuilder<bool>(
@@ -112,7 +137,11 @@ class TextFieldDatePicker extends BaseStatelessWidget {
                         onChanged?.call('', '');
                         isDeleteStream.setData(false);
                       },
-                      child: kLoadSvgInCirclePath((snapshot.data ?? false) ? AppIcons.removeCircle : AppIcons.calendar2, color: kPrimary),
+                      child: kLoadSvgInCirclePath(
+                          (snapshot.data ?? false)
+                              ? AppIcons.removeCircle
+                              : AppIcons.calendar2,
+                          color: kPrimary),
                     );
                   },
                 ),
@@ -122,29 +151,27 @@ class TextFieldDatePicker extends BaseStatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          Container(
-            height: 30,
-            child: RadioGridList(
-              crossAxisCount: 4,
-              color: Colors.black,
-              items: dataRadio,
-              groupValue: dataRadio.first.value,
-              onChanged: (item) {
-                print(item.value);
-                print("jhbekvd");
+          RadioGridList(
+            crossAxisCount: 4,
+            color: Colors.black,
+            items: dataRadio,
+            groupValue: dataRadio.first.value,
+            onChanged: (item) {
+              print(item.value);
+              print("jhbekvd");
 
-                String startDate = DateFormatter.formatDateStringNoLangCode(
-                  dateNow,
-                );
-                String endDate = DateFormatter.formatDateStringNoLangCode(item.value);
-                print(startDate);
-                print(startDate);
-                print(endDate);
-                _controller.text = '$dateNow - ${item.value}';
-                isDeleteStream.setData(true);
-                onChanged?.call(dateNow, item.value);
-              },
-            ),
+              String startDate = DateFormatter.formatDateStringNoLangCode(
+                item.value  ,
+              );
+              String endDate =
+                  DateFormatter.formatDateStringNoLangCode(dateNow);
+              print(startDate);
+              print(startDate);
+              print(endDate);
+              _controller.text = '$dateNow - ${item.value}';
+              isDeleteStream.setData(true);
+              onChanged?.call( item.value,dateNow);
+            },
           ),
         ],
       ),

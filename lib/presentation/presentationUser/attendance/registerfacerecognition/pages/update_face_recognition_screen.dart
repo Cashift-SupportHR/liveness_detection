@@ -138,12 +138,5 @@ class UpdateFaceRecognitionScreen extends BaseStatelessWidget {
     );
   }
 
-  navigateToCamera(BuildContext context) async {
-    try {
-      imageFile = await FaceMatchingUtils.startLivelyness(context);
-
-      pickedImageStream.setData(imageFile);
-    } catch (e) {}
-  }
 
 }

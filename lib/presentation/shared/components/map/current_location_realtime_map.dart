@@ -61,11 +61,23 @@ class CurrentLocationRealtimeMap extends BaseStatelessWidget {
                   builder: (context, snapshot) {
                     print(
                         'snapshot.data accuracy ${snapshot.data} ${snapshot.data?.accuracy}');
-                    return Text(
-                      '${snapshot.data?.accuracy?.round()??'UnKnown'} ${strings.metre}' ??
-                          '',
-                      style: kTextRegular.copyWith(
-                          fontSize: 14, color: isActive ? kBlack : kGray_AC),
+                    return Center(
+                      key: UniqueKey(),
+                      child: snapshot.data?.accuracy == null
+                          ? CircularProgressIndicator(padding: EdgeInsets.all(5),
+                        constraints: const BoxConstraints(
+                            minHeight: 20, minWidth: 20, maxHeight: 20, maxWidth: 20),
+                        color: kPrimary,
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(kPrimary),
+                      )
+                          :
+                      Text(
+                        '${snapshot.data?.accuracy?.round()??'UnKnown'} ${strings.metre}' ??
+                            '',
+                        style: kTextRegular.copyWith(
+                            fontSize: 14, color: isActive ? kBlack : kGray_AC),
+                      ),
                     );
                   }),
             ],
@@ -81,6 +93,7 @@ class CurrentLocationRealtimeMap extends BaseStatelessWidget {
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(8)),
                               child: StaticMapWidget(
+                                key: UniqueKey(),
                                 location: LatLng(snapshot.data?.latitude ?? 24.0,
                                     snapshot.data?.longitude ?? 46.0),
                                 title: '',

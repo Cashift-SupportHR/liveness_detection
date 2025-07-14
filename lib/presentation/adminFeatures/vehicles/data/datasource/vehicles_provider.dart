@@ -5,11 +5,18 @@ import 'package:dio/dio.dart';
 import '../../../../../data/models/api_response.dart';
 import '../../../../../data/models/salary-definition-request/down_load_salary_definition.dart';
 import '../../../../../network/source/admin_endpoint.dart';
-import '../../../../presentationUser/vehiclesOperation/data/models/receive_vehicle_details_dto.dart';
+import '../models/vehicle_event_picture_prams.dart';
+import '../models/vehicle_location_dto.dart';
+import '../models/vehicle_traking_details_prams.dart';
 import '../models/action_vehicle_receive_request_params.dart';
+import '../models/add_vehicle_camera_params.dart';
 import '../models/add_vehicle_violation_params.dart';
+import '../models/camera_search_results_dto.dart';
 import '../models/final_action_vehicle_receive_request_params.dart';
+import '../models/vehicle_camera_dto.dart';
 import '../models/vehicle_receive_request_dto.dart';
+import '../models/vehicle_traking_dto.dart';
+import '../models/vehicle_video_params.dart';
 import '../models/vehicle_violation_dto.dart';
 import '../models/covenant_vehicle_dto.dart';
 import '../models/insurance_types_dto.dart';
@@ -50,21 +57,25 @@ class VehiclesAPI {
     String? vehicleBrandId,
     String? companyId,
     String? projectId,
+
     int? vehicleColorId,
+    String? mobileVehicleIndexCode,
   ) {
     return api.addVehicle(
-        vehicleCode,
-        model,
-        yearOfManufacture,
-        plateNumber,
-        licenseNumber,
-        licenseExpiryDate,
-        specifications,
-        VehicleImageFile,
-        vehicleBrandId,
-        companyId,
-        projectId,
-        vehicleColorId);
+      vehicleCode,
+      model,
+      yearOfManufacture,
+      plateNumber,
+      licenseNumber,
+      licenseExpiryDate,
+      specifications,
+      VehicleImageFile,
+      vehicleBrandId,
+      companyId,
+      projectId,
+      vehicleColorId,
+      mobileVehicleIndexCode,
+    );
   }
 
   Future<ApiResponse> addInsurance(
@@ -75,53 +86,71 @@ class VehiclesAPI {
     String? vehicleInsuranceTypeId,
     File insuranceImage,
   ) {
-    return api.addInsurance(insuranceNumber, insuranceProvider,
-        insuranceExpiryDate, vehicleId, vehicleInsuranceTypeId, insuranceImage);
+    return api.addInsurance(
+      insuranceNumber,
+      insuranceProvider,
+      insuranceExpiryDate,
+      vehicleId,
+      vehicleInsuranceTypeId,
+      insuranceImage,
+    );
   }
 
   Future<ApiResponse> editInsurance(
-      int? id,
-      String? insuranceNumber,
-      String? insuranceProvider,
-      String? insuranceExpiryDate,
-      int? vehicleId,
-      String? vehicleInsuranceTypeId,
-      {File? insuranceImage = null}) {
-    return api.editInsurance(id, insuranceNumber, insuranceProvider,
-        insuranceExpiryDate, vehicleId, vehicleInsuranceTypeId,
-        insuranceImage: insuranceImage);
+    int? id,
+    String? insuranceNumber,
+    String? insuranceProvider,
+    String? insuranceExpiryDate,
+    int? vehicleId,
+    String? vehicleInsuranceTypeId, {
+    File? insuranceImage = null,
+  }) {
+    return api.editInsurance(
+      id,
+      insuranceNumber,
+      insuranceProvider,
+      insuranceExpiryDate,
+      vehicleId,
+      vehicleInsuranceTypeId,
+      insuranceImage: insuranceImage,
+    );
   }
 
   Future<ApiResponse<VehiclesDto>> editVehicle(
-      int? id,
-      int? vehicleCode,
-      String? model,
-      String? yearOfManufacture,
-      String? plateNumber,
-      String? licenseNumber,
-      String? licenseExpiryDate,
-      String? specifications,
-      String? vehicleImage,
-      String? vehicleBrandId,
-      String? companyId,
-      String? projectId,
-      int? vehicleColorId,
-      {File? vehicleImageFile = null}) {
+    int? id,
+    int? vehicleCode,
+    String? model,
+    String? yearOfManufacture,
+    String? plateNumber,
+    String? licenseNumber,
+    String? licenseExpiryDate,
+    String? specifications,
+    String? vehicleImage,
+    String? vehicleBrandId,
+    String? companyId,
+    String? projectId,
+
+    int? vehicleColorId,
+    String? mobileVehicleIndexCode, {
+    File? vehicleImageFile = null,
+  }) {
     return api.editVehicle(
-        id,
-        vehicleCode,
-        model,
-        yearOfManufacture,
-        plateNumber,
-        licenseNumber,
-        licenseExpiryDate,
-        specifications,
-        vehicleImage,
-        vehicleBrandId,
-        companyId,
-        projectId,
-        vehicleColorId,
-        vehicleImageFile: vehicleImageFile);
+      id,
+      vehicleCode,
+      model,
+      yearOfManufacture,
+      plateNumber,
+      licenseNumber,
+      licenseExpiryDate,
+      specifications,
+      vehicleImage,
+      vehicleBrandId,
+      companyId,
+      projectId,
+      vehicleColorId,
+      mobileVehicleIndexCode,
+      vehicleImageFile: vehicleImageFile,
+    );
   }
 
   Future<ApiResponse<List<VehiclesDto>>> fetchVehicles() {
@@ -141,7 +170,8 @@ class VehiclesAPI {
   }
 
   Future<ApiResponse<List<InsurancesDto>>> fetchInsurancesByVehicleId(
-      int vehicleId) {
+    int vehicleId,
+  ) {
     return api.fetchInsurancesByVehicleId(vehicleId);
   }
 
@@ -168,14 +198,30 @@ class VehiclesAPI {
     File custodyImage,
   ) {
     return api.addCovenant(
-        vehicleId, Name, Description, custodyImagePath, custodyImage);
+      vehicleId,
+      Name,
+      Description,
+      custodyImagePath,
+      custodyImage,
+    );
   }
 
-  Future<ApiResponse> editCovenant(int? id, int? vehicleId, String? Name,
-      String? Description, String? custodyImagePath,
-      {File? custodyImage = null}) {
-    return api.editCovenant(id, vehicleId, Name, Description, custodyImagePath,
-        custodyImage: custodyImage);
+  Future<ApiResponse> editCovenant(
+    int? id,
+    int? vehicleId,
+    String? Name,
+    String? Description,
+    String? custodyImagePath, {
+    File? custodyImage = null,
+  }) {
+    return api.editCovenant(
+      id,
+      vehicleId,
+      Name,
+      Description,
+      custodyImagePath,
+      custodyImage: custodyImage,
+    );
   }
 
   Future<ApiResponse> deleteCovenant(int id) {
@@ -191,7 +237,8 @@ class VehiclesAPI {
   }
 
   Future<ApiResponse<ContractViolationDto>> addContractViolation(
-      AddVehicleViolationParams params) {
+    AddVehicleViolationParams params,
+  ) {
     return api.addContractViolation(params);
   }
 
@@ -204,41 +251,91 @@ class VehiclesAPI {
     int contractViolationId,
   ) {
     return api.addContractViolationAttachments(
-        attachments, contractViolationId);
+      attachments,
+      contractViolationId,
+    );
   }
 
   Future<ApiResponse<List<CommonListItemDto>>>
-      fetchActionVehicleReceiveRequestStatues() {
+  fetchActionVehicleReceiveRequestStatues() {
     return api.fetchActionVehicleReceiveRequestStatues();
   }
 
   Future<ApiResponse<List<CommonListItemDto>>>
-      fetchVehicleReceiveRequestTypesTabs() {
+  fetchVehicleReceiveRequestTypesTabs() {
     return api.fetchVehicleReceiveRequestTypesTabs();
   }
 
   Future<ApiResponse<List<VehicleReceiveRequestDto>>>
-      fetchVehicleReceiveRequestsByType(int type) async {
+  fetchVehicleReceiveRequestsByType(int type) async {
     return api.fetchVehicleReceiveRequestsByType(type);
   }
 
   Future<ApiResponse> actionVehicleReceiveRequest(
-      ActionVehicleReceiveRequestParams params) {
+    ActionVehicleReceiveRequestParams params,
+  ) {
     return api.actionVehicleReceiveRequest(params);
   }
 
   Future<ApiResponse> finalActionVehicleReceiveRequest(
-      FinalActionVehicleReceiveRequestParams params) {
+    FinalActionVehicleReceiveRequestParams params,
+  ) {
     return api.finalActionVehicleReceiveRequest(params);
   }
 
   Future<ApiResponse<List<CommonListItemDto>>> fetchVehicleEmployeeByProject(
-      int id) {
+    int id,
+  ) {
     return api.fetchVehicleEmployeeByProject(id);
   }
 
-  Future<ApiResponse<DownLoadSalaryDefinition>> qrCodeVehicle(int vehicleId) {
+  Future<ApiResponse<DownLoadFileDto>> qrCodeVehicle(int vehicleId) {
     return api.qrCodeVehicle(vehicleId);
   }
 
+  Future<ApiResponse<List<VehicleCameraDto>>> fetchVehicleCameras(
+    int vehicleId,
+  ) {
+    return api.fetchVehicleCameras(vehicleId);
+  }
+
+  Future<ApiResponse<VehicleCameraDto>> fetchVehicleCameraById(int id) {
+    return api.fetchVehicleCameraById(id);
+  }
+
+  Future<ApiResponse> addVehicleCamera(AddVehicleCameraParams params) {
+    return api.addVehicleCamera(params);
+  }
+
+  Future<ApiResponse> editVehicleCamera(AddVehicleCameraParams params) {
+    return api.editVehicleCamera(params);
+  }
+
+  Future<ApiResponse> deleteVehicleCamera(int id) {
+    return api.deleteVehicleCamera(id);
+  }
+
+  Future<ApiResponse<CameraSearchResultsDto>> fetchVehicleVideo(
+    VehicleVideoParams params,
+  ) {
+    return api.fetchVehicleVideo(params);
+  }
+
+  Future<ApiResponse<VehicleTrakingDto>> fetchVehicleTracingDetails(
+    VehicleTrakingDetailsPrams prams,
+  ) {
+    return api.fetchVehicleTracingDetails(prams);
+  }
+
+  Future<ApiResponse<String>> fetchVehicleEventPicture(
+    VehicleEventPicturePrams prams,
+  ) {
+    return api.fetchVehicleEventPicture(prams);
+  }
+
+  Future<ApiResponse<VehicleLocationDto>> fetchVehicleLocation(
+      String cameraIndexCode,
+  ) {
+    return api.fetchVehicleLocation(cameraIndexCode);
+  }
 }

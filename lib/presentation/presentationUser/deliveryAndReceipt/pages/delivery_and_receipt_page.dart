@@ -23,14 +23,14 @@ class DeliveryAndReceiptPage extends BaseBlocWidget<
 
   @override
   void loadInitialData(context) {
-    int? id = ModalRoute.of(context)?.settings.arguments as int?;
+    int? id = getArguments(context);
     bloc.loadInitialData(id ?? 0);
   }
 
   @override
   Widget buildWidget(
       BuildContext context, InitializedDeliveryAndReceipt state) {
-    int? id = ModalRoute.of(context)?.settings.arguments as int?;
+    int? id = getArguments(context);
     return DeliveryAndReceiptScreen(
       id: id ?? 0,
       deviceByFocusPoint: state.deviceByFocusPoint,

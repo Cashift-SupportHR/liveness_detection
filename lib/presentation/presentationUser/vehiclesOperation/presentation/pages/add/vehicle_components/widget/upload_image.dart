@@ -2,6 +2,7 @@
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:shiftapp/extensions/extensions.dart';
 import 'package:shiftapp/presentation/shared/components/base_stateless_widget.dart';
 
 import '../../../../../../../../utils/app_icons.dart';
@@ -54,7 +55,7 @@ class UploadImage extends BaseStatelessWidget {
                     setState(() {});
                   },
                 ),
-                if(images==File('')) Text(
+                if(images==File('') || images.isNullOrEmpty()) Text(
                   strings.add_image,
                   style: kTextRegular.copyWith(
                     color: kPrimary,

@@ -38,7 +38,6 @@ class AppOutlineButton extends StatelessWidget {
     final defaultFontColor =enable ?   kFontDark :kFontDark.withOpacity(0.5);
     return OutlinedButton(
       onPressed: onClick,
-
       style: ButtonStyle(
         overlayColor: MaterialStateProperty.all(kPrimary.withOpacity(0.4)),
         textStyle: MaterialStateProperty.all(textStyle ?? kTextLabelFontDark),

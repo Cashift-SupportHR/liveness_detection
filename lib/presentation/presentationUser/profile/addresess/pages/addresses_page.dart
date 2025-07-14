@@ -44,6 +44,9 @@ class AddressesPage
   Widget buildWidget(BuildContext context, Initialized state) {
    return AddressesScreen(
       addresses: state.data,
+     onRefresh: () {
+       bloc.fetchFavoriteAddresses();
+     },
     );
   }
 

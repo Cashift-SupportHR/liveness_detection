@@ -119,7 +119,7 @@ class ReviewOpportunityItemWidget extends BaseStatelessWidget {
                           kTextMedium.copyWith(fontSize: 14, color: kOrange00),
                     ),
                   ),
-                  if (opportunity.isAllowUpdateStatus == true)
+                if (opportunity.isAllowUpdateStatus == true)
                     AppOutlineButton(
                       onClick: () {
                         onSubmit(opportunity);

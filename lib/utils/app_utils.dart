@@ -263,11 +263,11 @@ class AppUtils {
   }
 
   static showDateTimePicker(BuildContext context,
-      {required Function(DateTime) onConfirm, DateTime? initialDate}) {
+      {required Function(DateTime) onConfirm, DateTime? initialDate, DateTime? firstDate}) {
     showDatePicker(
       context: context,
       initialDate: initialDate ?? DateTime.now(),
-      firstDate: DateTime(2015, 8),
+      firstDate: firstDate ?? DateTime(2015, 8),
       lastDate: DateTime(2101),
     ).then((value) {
       if (value != null) {

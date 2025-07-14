@@ -11,15 +11,15 @@ import '../../../../models/add-address/index.dart';
 
   AddAddressAPI(this.api);
 
-  Future<ApiResponse<List<Address>>> fetchFavoriteAddresses(){
+  Future<ApiResponse<List<AddressDto>>> fetchFavoriteAddresses(){
     return api.fetchFavoriteAddresses();
   }
 
-  Future<ApiResponse<bool>> addFavoriteAddresses(Address address){
+  Future<ApiResponse<bool>> addFavoriteAddresses(AddressDto address){
     return api.addFavoriteAddresses(address);
   }
 
-  Future<ApiResponse<String>> editFavoriteAddresses(Address address){
+  Future<ApiResponse<String>> editFavoriteAddresses(AddressDto address){
     return api.editFavoriteAddresses(address);
   }
 

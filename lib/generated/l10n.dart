@@ -13253,11 +13253,741 @@ class S {
     );
   }
 
+  /// `Image before maintenance`
+  String get image_before_maintenance {
+    return Intl.message(
+      'Image before maintenance',
+      name: 'image_before_maintenance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Image after maintenance`
+  String get image_after_maintenance {
+    return Intl.message(
+      'Image after maintenance',
+      name: 'image_after_maintenance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Operation type`
+  String get type_operation {
+    return Intl.message(
+      'Operation type',
+      name: 'type_operation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View maintenance and faults`
+  String get view_maintenance {
+    return Intl.message(
+      'View maintenance and faults',
+      name: 'view_maintenance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Maintenance work`
+  String get add_maintenance {
+    return Intl.message(
+      'Maintenance work',
+      name: 'add_maintenance',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Verification`
   String get verification {
     return Intl.message(
       'Verification',
       name: 'verification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Maintenance and Breakdowns`
+  String get breakdown_maintenance {
+    return Intl.message(
+      'Maintenance and Breakdowns',
+      name: 'breakdown_maintenance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your action will be saved and sent to the project manager for review and response.`
+  String get waring_action_notification {
+    return Intl.message(
+      'Your action will be saved and sent to the project manager for review and response.',
+      name: 'waring_action_notification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `It will be sent to the supervisor.`
+  String get waring_final_action_notification {
+    return Intl.message(
+      'It will be sent to the supervisor.',
+      name: 'waring_final_action_notification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select an image before maintenance`
+  String get shod_image_before_maintenance {
+    return Intl.message(
+      'Please select an image before maintenance',
+      name: 'shod_image_before_maintenance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select an image after maintenance`
+  String get shod_image_after_maintenance {
+    return Intl.message(
+      'Please select an image after maintenance',
+      name: 'shod_image_after_maintenance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Driver violations`
+  String get driver_violations {
+    return Intl.message(
+      'Driver violations',
+      name: 'driver_violations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Speeding during the violation`
+  String get speeding_during_violation {
+    return Intl.message(
+      'Speeding during the violation',
+      name: 'speeding_during_violation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Click here to view the location of the violation`
+  String get click_here_view_violation_location {
+    return Intl.message(
+      'Click here to view the location of the violation',
+      name: 'click_here_view_violation_location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Violation time`
+  String get violation_time {
+    return Intl.message(
+      'Violation time',
+      name: 'violation_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vehicle performance`
+  String get vehicle_performance {
+    return Intl.message(
+      'Vehicle performance',
+      name: 'vehicle_performance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Maximum recorded speed`
+  String get maximum_recorded_speed {
+    return Intl.message(
+      'Maximum recorded speed',
+      name: 'maximum_recorded_speed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vehicle path`
+  String get vehicle_path {
+    return Intl.message(
+      'Vehicle path',
+      name: 'vehicle_path',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `km/h`
+  String get km_h {
+    return Intl.message(
+      'km/h',
+      name: 'km_h',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications`
+  String get notifications {
+    return Intl.message(
+      'Notifications',
+      name: 'notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `add breakdown`
+  String get add_breakdown {
+    return Intl.message(
+      'add breakdown',
+      name: 'add_breakdown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Receive vehicle details`
+  String get receive_vehicle_details {
+    return Intl.message(
+      'Receive vehicle details',
+      name: 'receive_vehicle_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Write the action to be taken`
+  String get write_action_to_be_taken {
+    return Intl.message(
+      'Write the action to be taken',
+      name: 'write_action_to_be_taken',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go to the violation site`
+  String get go_violation_site {
+    return Intl.message(
+      'Go to the violation site',
+      name: 'go_violation_site',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Download violation image`
+  String get download_violation_image {
+    return Intl.message(
+      'Download violation image',
+      name: 'download_violation_image',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Camera name in Arabic`
+  String get camera_name_ar {
+    return Intl.message(
+      'Camera name in Arabic',
+      name: 'camera_name_ar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type camera name in Arabic`
+  String get type_camera_name_ar {
+    return Intl.message(
+      'Type camera name in Arabic',
+      name: 'type_camera_name_ar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Camera name in English`
+  String get camera_name_en {
+    return Intl.message(
+      'Camera name in English',
+      name: 'camera_name_en',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type camera name in English`
+  String get type_camera_name_en {
+    return Intl.message(
+      'Type camera name in English',
+      name: 'type_camera_name_en',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Camera code`
+  String get camera_code {
+    return Intl.message(
+      'Camera code',
+      name: 'camera_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type camera code`
+  String get type_camera_code {
+    return Intl.message(
+      'Type camera code',
+      name: 'type_camera_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start video`
+  String get start_video {
+    return Intl.message(
+      'Start video',
+      name: 'start_video',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Live feed`
+  String get live_feed {
+    return Intl.message(
+      'Live feed',
+      name: 'live_feed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select video date`
+  String get select_video_date {
+    return Intl.message(
+      'Select video date',
+      name: 'select_video_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Camera name`
+  String get camera_name {
+    return Intl.message(
+      'Camera name',
+      name: 'camera_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Camera type`
+  String get camera_type {
+    return Intl.message(
+      'Camera type',
+      name: 'camera_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start live feed`
+  String get start_live_feed {
+    return Intl.message(
+      'Start live feed',
+      name: 'start_live_feed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add camera`
+  String get camera_add {
+    return Intl.message(
+      'Add camera',
+      name: 'camera_add',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cameras`
+  String get cameras {
+    return Intl.message(
+      'Cameras',
+      name: 'cameras',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View cameras`
+  String get view_cameras {
+    return Intl.message(
+      'View cameras',
+      name: 'view_cameras',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add camera`
+  String get add_camera {
+    return Intl.message(
+      'Add camera',
+      name: 'add_camera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit camera`
+  String get edit_camera {
+    return Intl.message(
+      'Edit camera',
+      name: 'edit_camera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete camera`
+  String get delete_camera {
+    return Intl.message(
+      'Delete camera',
+      name: 'delete_camera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Track vehicle on the map`
+  String get track_vehicle_on_map {
+    return Intl.message(
+      'Track vehicle on the map',
+      name: 'track_vehicle_on_map',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `driver name`
+  String get driver_name {
+    return Intl.message(
+      'driver name',
+      name: 'driver_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select a date from and to`
+  String get select_date_from_to {
+    return Intl.message(
+      'Please select a date from and to',
+      name: 'select_date_from_to',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `play`
+  String get play {
+    return Intl.message(
+      'play',
+      name: 'play',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stop`
+  String get stop {
+    return Intl.message(
+      'Stop',
+      name: 'stop',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Position:`
+  String get position {
+    return Intl.message(
+      'Position:',
+      name: 'position',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Speed:`
+  String get speed {
+    return Intl.message(
+      'Speed:',
+      name: 'speed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vehicle camera code`
+  String get vehicle_camera_code {
+    return Intl.message(
+      'Vehicle camera code',
+      name: 'vehicle_camera_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit date and time`
+  String get edit_date_time {
+    return Intl.message(
+      'Edit date and time',
+      name: 'edit_date_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Videos`
+  String get videos {
+    return Intl.message(
+      'Videos',
+      name: 'videos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Live streaming`
+  String get live_streaming {
+    return Intl.message(
+      'Live streaming',
+      name: 'live_streaming',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select camera`
+  String get select_camera {
+    return Intl.message(
+      'Select camera',
+      name: 'select_camera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date from`
+  String get date_from {
+    return Intl.message(
+      'Date from',
+      name: 'date_from',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date to`
+  String get date_to {
+    return Intl.message(
+      'Date to',
+      name: 'date_to',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `video`
+  String get video {
+    return Intl.message(
+      'video',
+      name: 'video',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The date to must be greater than the date from`
+  String get date_to_must_be_greater_than_date_from {
+    return Intl.message(
+      'The date to must be greater than the date from',
+      name: 'date_to_must_be_greater_than_date_from',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There are no videos yet`
+  String get there_are_videos_yet {
+    return Intl.message(
+      'There are no videos yet',
+      name: 'there_are_videos_yet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select the time and date you want the videos to be shown`
+  String get videos_dates_validate_msg {
+    return Intl.message(
+      'Please select the time and date you want the videos to be shown',
+      name: 'videos_dates_validate_msg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select date and time`
+  String get select_date_and_time {
+    return Intl.message(
+      'Select date and time',
+      name: 'select_date_and_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Drivers`
+  String get drivers {
+    return Intl.message(
+      'Drivers',
+      name: 'drivers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Maximum speed`
+  String get maximum_speed {
+    return Intl.message(
+      'Maximum speed',
+      name: 'maximum_speed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `transactions`
+  String get transactions {
+    return Intl.message(
+      'transactions',
+      name: 'transactions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `view transactions`
+  String get view_transactions {
+    return Intl.message(
+      'view transactions',
+      name: 'view_transactions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `add transactions`
+  String get add_transactions {
+    return Intl.message(
+      'add transactions',
+      name: 'add_transactions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completed Tasks`
+  String get completed_tasks {
+    return Intl.message(
+      'Completed Tasks',
+      name: 'completed_tasks',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `In Progress`
+  String get in_progress {
+    return Intl.message(
+      'In Progress',
+      name: 'in_progress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `update transactions`
+  String get update_transactions {
+    return Intl.message(
+      'update transactions',
+      name: 'update_transactions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reschedule`
+  String get reschedule {
+    return Intl.message(
+      'Reschedule',
+      name: 'reschedule',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delivery Date`
+  String get delivery_date {
+    return Intl.message(
+      'Delivery Date',
+      name: 'delivery_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Entity`
+  String get entity {
+    return Intl.message(
+      'Entity',
+      name: 'entity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reload`
+  String get reload {
+    return Intl.message(
+      'Reload',
+      name: 'reload',
       desc: '',
       args: [],
     );

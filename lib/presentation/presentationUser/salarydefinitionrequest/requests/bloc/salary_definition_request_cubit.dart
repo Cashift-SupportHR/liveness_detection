@@ -39,7 +39,7 @@ class SalaryDefinitionRequestCubit extends BaseCubit {
     }
   }
 
-  base64Strings(DownLoadSalaryDefinition response) async {
+  base64Strings(DownLoadFileDto response) async {
     try {
       requestPermission();
       FilesManager().saveFileFromBase64(response);

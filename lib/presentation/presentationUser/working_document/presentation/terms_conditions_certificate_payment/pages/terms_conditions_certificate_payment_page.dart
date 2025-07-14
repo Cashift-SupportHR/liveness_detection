@@ -25,7 +25,7 @@ class TermsConditionsCertificatePaymentPage extends BaseBlocWidget<
   }
   @override
   void loadInitialData(context) {
-    int? paymentId = ModalRoute.of(context)?.settings.arguments as int?;
+    int? paymentId = getArguments(context) as int?;
     bloc.fetchTermsConditionsCertificatePayment(paymentId ?? 0);
   }
 

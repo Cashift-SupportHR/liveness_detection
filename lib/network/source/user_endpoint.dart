@@ -43,7 +43,10 @@ import '../../domain/entities/terms/terms_item.dart';
 import '../../domain/entities/wallet/index.dart';
 import '../../presentation/adminFeatures/employees/data/models/emp_attandance_prams.dart';
 import '../../presentation/adminFeatures/employees/data/models/emp_attendance_dto.dart';
+import '../../presentation/adminFeatures/maintenanceAndBreakdowns/data/models/maintenance_dto.dart';
 import '../../presentation/adminFeatures/vehicles/data/models/vehicle_details_dto.dart';
+import '../../presentation/adminFeatures/vehicles/data/models/vehicle_violation_dto.dart';
+import '../../presentation/adminFeatures/vehicles/domain/entities/vehicle_violation.dart';
 import '../../presentation/presentationUser/AttendanceAndDepartureNotifications/data/models/index.dart';
 import '../../presentation/presentationUser/employeesCertificates/data/models/index.dart';
 import '../../presentation/presentationUser/pledgesAndGeneralization/data/models/pledge_generalization_dto.dart';
@@ -54,11 +57,20 @@ import '../../presentation/presentationUser/profile/requests/data/models/request
 import '../../presentation/presentationUser/profile/requests/data/models/shift_rquest_type_dto.dart';
 import '../../presentation/presentationUser/profile/requests/data/models/terms_and_conditions_requests_dto.dart';
 import '../../presentation/presentationUser/profile/requests/data/models/upload_file_request_prams.dart';
+import '../../presentation/presentationUser/transactions/data/models/add_transactions_prams.dart';
+import '../../presentation/presentationUser/transactions/data/models/reschedule_transactions_prams.dart';
+import '../../presentation/presentationUser/transactions/data/models/transactions_dto.dart';
+import '../../presentation/presentationUser/transactions/data/models/transactions_prams.dart';
+import '../../presentation/presentationUser/transactions/data/models/update_transactions_prams.dart';
 import '../../presentation/presentationUser/vehiclesOperation/data/models/add_round_trip_fill_station_prams.dart';
 import '../../presentation/presentationUser/vehiclesOperation/data/models/confirm_receive_vehicle_params.dart';
+import '../../presentation/presentationUser/vehiclesOperation/data/models/download_vehicle_violation_picture_params.dart';
+import '../../presentation/presentationUser/vehiclesOperation/data/models/driver_violation_dto.dart';
 import '../../presentation/presentationUser/vehiclesOperation/data/models/gas_station_trip_dto.dart';
 import '../../presentation/presentationUser/vehiclesOperation/data/models/index.dart';
 import '../../presentation/presentationUser/vehiclesOperation/data/models/receive_vehicle_details_dto.dart';
+import '../../presentation/presentationUser/vehiclesOperation/data/models/vehicle_performance_dto.dart';
+import '../../presentation/presentationUser/vehiclesOperation/data/models/receive_vehicle_prams.dart';
 import '../../presentation/presentationUser/violations/data/models/approve_reject_violation_params.dart';
 import '../../presentation/presentationUser/violations/data/models/violations_user_data_dto.dart';
 import '../../presentation/presentationUser/workHazards/data/models/index.dart';
@@ -71,7 +83,7 @@ import '../../presentation/shared/models/common_list_item_dto.dart';
 part 'user_endpoint.g.dart';
 
 @Injectable()
-@RestApi(baseUrl: kBASE_URL)
+@RestApi()
 abstract class UserEndpoint {
   @factoryMethod
   factory UserEndpoint(Dio dio) = _UserEndpoint;
@@ -83,21 +95,27 @@ abstract class UserEndpoint {
 
   @POST('/v2/VerifyCode/CheckCodeByFreeLance')
   Future<ApiResponse<User>> confirmOtp(@Body() ConfirmOtpParams loginParams);
-//http://85.184.232.38:8003/api/v3/VerifyCode/CheckCodeResetPassword
+  //http://85.184.232.38:8003/api/v3/VerifyCode/CheckCodeResetPassword
 
   @POST('/v3/VerifyCode/CheckCodeResetPassword')
-  Future<ApiResponse<String>> confirmRestPasswordOtp(@Body() ConfirmOtpParams loginParams);
+  Future<ApiResponse<String>> confirmRestPasswordOtp(
+    @Body() ConfirmOtpParams loginParams,
+  );
 
   @POST('/v3/FreeLancerInfo/RegisterFreeLance')
   Future<ApiResponse<String>> register(@Body() RegisterParams loginParams);
 
   //http://85.184.232.38:8003/api/v3/FreeLancerInfo/SendSMSResetPassword?phoneNumber=559135678
   @GET('/v3/FreeLancerInfo/SendSMSResetPassword')
-  Future<ApiResponse<String>> sendRestPasswordCode(@Query('phoneNumber') String phoneNumber);
+  Future<ApiResponse<String>> sendRestPasswordCode(
+    @Query('phoneNumber') String phoneNumber,
+  );
 
-//http://85.184.232.38:8003/api/v3/FreeLancerInfo/ResetPassword
+  //http://85.184.232.38:8003/api/v3/FreeLancerInfo/ResetPassword
   @POST('/v3/FreeLancerInfo/ResetPassword')
-  Future<ApiResponse<bool>> restPasswordByCode(@Body() RestPasswordParams phoneNumber);
+  Future<ApiResponse<bool>> restPasswordByCode(
+    @Body() RestPasswordParams phoneNumber,
+  );
 
   @POST('/v3/TransactionMobile/AddTransactionMobileLog')
   Future<ApiResponse<bool>> sendLog(@Body() LoggerParams params);
@@ -108,30 +126,34 @@ abstract class UserEndpoint {
 
   @POST('/v1/EmployeeRequest/CreateEmpRequest')
   Future<ApiResponse<String>> addAbsenceNotice(
-      @Body() AddAbsenceNoticeParams addAbsenceNoticeParams);
+    @Body() AddAbsenceNoticeParams addAbsenceNoticeParams,
+  );
 
   /// activity log
   @GET('/v1/PushNotificationMessag/GetAllMessagePushedByFreelanceInfo')
   Future<ApiResponse<List<NotificationItem>>> fetchActivityLog(
-      @Query('StatusId') int statusId);
+    @Query('StatusId') int statusId,
+  );
 
   @POST('/v3/PushNotificationMessag/ConfirmForJob')
   Future<ApiResponse<String>> confirmActivity(
-      @Body() ConfirmActivityParams confirmActivityParams);
+    @Body() ConfirmActivityParams confirmActivityParams,
+  );
 
   /// favorite addresses
   @GET('/v6/FreelancerFavoriteAddresses/GetFreelancerFavoriteAddresses')
-  Future<ApiResponse<List<Address>>> fetchFavoriteAddresses();
+  Future<ApiResponse<List<AddressDto>>> fetchFavoriteAddresses();
 
   @POST('/v6/FreelancerFavoriteAddresses/AddFreelancerFavoriteAddresses')
-  Future<ApiResponse<bool>> addFavoriteAddresses(@Body() Address address);
+  Future<ApiResponse<bool>> addFavoriteAddresses(@Body() AddressDto address);
 
   @POST('/v6/FreelancerFavoriteAddresses/EditFreelancerFavoriteAddresses')
-  Future<ApiResponse<String>> editFavoriteAddresses(@Body() Address address);
+  Future<ApiResponse<String>> editFavoriteAddresses(@Body() AddressDto address);
 
   @POST('/v1/FreeLancerInfo/UpdateFreeLancerLocation')
   Future<ApiResponse> addHomeAddress(
-      @Body() AddHomeLocationParams addHomeLocation);
+    @Body() AddHomeLocationParams addHomeLocation,
+  );
 
   /// advanced filter
   @GET('/v1/OpportunitiesAvailble/GetJobsCompanyByOpp')
@@ -148,7 +170,8 @@ abstract class UserEndpoint {
 
   @POST('/v2/OpportunitiesAvailbleV/GetSearchOpportunitiesAvailble')
   Future<ApiResponse<List<JobOfferDto>>> fetchJobsCompanyByOppWithFilter(
-      @Body() SearchOpportunitiesAvailableParams params);
+    @Body() SearchOpportunitiesAvailableParams params,
+  );
 
   /// attendance
   @GET('/v5/FreeLancerInfo/GetSupportShiftByProject')
@@ -159,7 +182,8 @@ abstract class UserEndpoint {
 
   @POST('/v6/TransactionLogCashift/TransactionLogCashift')
   Future<ApiResponse<String>> registerAttendance(
-      @Body() AttendanceQuery params);
+    @Body() AttendanceQuery params,
+  );
 
   @POST('/v1/FreeLanceApplyOpportunities/StartShiftComplementary')
   Future<ApiResponse<String>> startOvertime(@Body() AttendanceQuery params);
@@ -170,7 +194,8 @@ abstract class UserEndpoint {
   //http://85.184.232.38:8003/api/v5/TransactionLogCashift/EmployeeTransactionLog
   @POST('/v5/TransactionLogCashift/EmployeeTransactionLog')
   Future<ApiResponse<List<AttendanceLog>>> fetchAttendanceLog(
-      @Body() AttendanceLogQuery query);
+    @Body() AttendanceLogQuery query,
+  );
   //v1/FreeLanceApplyOpportunities/GetListComplementart
   @GET('/v1/FreeLanceApplyOpportunities/GetListComplementart')
   Future<ApiResponse<List<AttendanceLog>>> fetchOvertimeLog();
@@ -180,20 +205,23 @@ abstract class UserEndpoint {
 
   @POST('/v1/Dashboard/FreelanceAttendance')
   Future<ApiResponse<String>> autoAttendanceDto(
-      @Body() AutoAttendanceDto params);
+    @Body() AutoAttendanceDto params,
+  );
 
   /// bail requests
   @GET('/v1/Guarantor/GetRequestGuarantor')
   Future<ApiResponse<List<BailRequestDto>>> fetchBailRequests(
-      @Query('type') int type);
+    @Query('type') int type,
+  );
 
   @POST('/v1/Guarantor/ApproveRejectLoans')
   Future<ApiResponse<String>> approveRejectBailRequest(
-      @Body() ApproveRejectBailParams params);
+    @Body() ApproveRejectBailParams params,
+  );
 
   @GET('/v2/TermsAndCondtion/GetLoanTermandCondition')
   Future<ApiResponse<List<BailTermAndConditionDto>>>
-      fetchBailTermsAndConditions();
+  fetchBailTermsAndConditions();
 
   /// Bank
   @GET('/v1/Bank/GetAllBank')
@@ -204,18 +232,21 @@ abstract class UserEndpoint {
 
   @GET('/v1/TermsAndCondtionOfBank/GetTermsAndCondtionOfBank')
   Future<ApiResponse<List<String>>> fetchDisclosure();
-//v2/VerifyCode/CheckCodeByFreeLance
+  //v2/VerifyCode/CheckCodeByFreeLance
   @POST('/v1/FreelanceBankInfo/AddFreeLanceBankInfo')
   Future<ApiResponse<int>> addFreeLanceBankInfo(
-      @Body() AddBankInfoParams bankInfoParams);
+    @Body() AddBankInfoParams bankInfoParams,
+  );
 
   @POST('/v1/ProviderPhoneCashDetails/AddFreeLanceProvider')
   Future<ApiResponse<int>> addElectronicWallet(
-      @Body() AddElectronicWalletParams params);
+    @Body() AddElectronicWalletParams params,
+  );
 
   @POST('/v3/FreeLanceCollected/CollectedFreeLancerMoneyByBank')
   Future<ApiResponse<String>> withDrawFreeLanceMoney(
-      @Body() WithDrawParams params);
+    @Body() WithDrawParams params,
+  );
 
   @GET('/v1/FreelanceBankInfo/GetFreeLanceBankInfo')
   Future<ApiResponse<BankAccountInfo>> getFreeLanceBankInfo();
@@ -226,28 +257,34 @@ abstract class UserEndpoint {
   /// Collect Cash
   @GET('/v2/FreeLanceCollected/GetCollectedandNonCollectedFreeLaceForMob')
   Future<ApiResponse<List<DuesItem>>> fetchCollectedAndNonCollectedJobs(
-      @Query('StatusId') int statusId);
+    @Query('StatusId') int statusId,
+  );
 
   @GET('/v3/FreeLanceCollected/GetCollectedFreeLaceByProjectForMob')
   Future<ApiResponse<List<JobCash>>> fetchWallet();
 
   @GET('/v4/FreeLanceCollected/AssignRandomNumbertoUserForMob')
   Future<ApiResponse<String>> generateReceiveCashCode(
-      @Query('Id') int id, @Query('Type') int type);
+    @Query('Id') int id,
+    @Query('Type') int type,
+  );
 
   @GET('/v4/ResponsiblePersonCasher/GetResponsiblePersonCasherByFreeLance')
   Future<ApiResponse<List<Cashier>>> fetchCashierList(
-      @Query('ComapnyId') int id);
+    @Query('ComapnyId') int id,
+  );
 
   /// Evaluation
   @GET('/v1/Evaluations/GetCompanyEvaluations/{transactionId}')
   Future<ApiResponse<List<EvaluationItem>>> fetchEvaluationItems(
-      @Path('transactionId') int transactionId);
-//v2/VerifyCode/CheckCodeByFreeLance
+    @Path('transactionId') int transactionId,
+  );
+  //v2/VerifyCode/CheckCodeByFreeLance
   @POST('/v1/Evaluations/SaveCompanyEvaluations/{transactionId}')
   Future<ApiResponse<bool>> saveEvaluations(
-      @Body() EvulationParamsDto evaluations,
-      @Path('transactionId') int transactionId);
+    @Body() EvulationParamsDto evaluations,
+    @Path('transactionId') int transactionId,
+  );
 
   /// FavoriteProjects
   @GET('/v1/FavourateProjects/GetFavourateProjectsByFreeLance')
@@ -265,7 +302,8 @@ abstract class UserEndpoint {
 
   @POST('/v6/TransactionLogCashift/TransactionLogCashiftOffLine')
   Future<ApiResponse<String>> attendanceCashiftOffLine(
-      @Body() List<AttendanceOfflineQuery> attendanceOfflineQuery);
+    @Body() List<AttendanceOfflineQuery> attendanceOfflineQuery,
+  );
 
   @GET('/v7/OpportunitiesAvailble/GetAllOpportunitiesAvailble')
   Future<ApiResponse<List<JobOfferDto>>> fetchOpportunities();
@@ -277,22 +315,27 @@ abstract class UserEndpoint {
   Future<ApiResponse<List<JobOfferDto>>> fetchSepcialOpportunities();
 
   @GET(
-      '/v6/OpportunitiesAvailble/GetFavourateOpportunitiesAvailbleandLastMinutesWithLogoForMob')
+    '/v6/OpportunitiesAvailble/GetFavourateOpportunitiesAvailbleandLastMinutesWithLogoForMob',
+  )
   Future<ApiResponse<List<JobOfferDto>>> fetchFavoritesOpportunities();
 
   @GET(
-      '/v6/OpportunitiesAvailbleV/GetAllOpportunitiesAvailbleWithoutLoginForMob')
+    '/v6/OpportunitiesAvailbleV/GetAllOpportunitiesAvailbleWithoutLoginForMob',
+  )
   Future<ApiResponse<List<JobOfferDto>>> fetchOpportunitiesUnAuth();
 
   @GET(
-      '/v2/OpportunitiesAvailbleV/CheckFreeLanceApplyOpportunityAvailbleByIdForMob')
+    '/v2/OpportunitiesAvailbleV/CheckFreeLanceApplyOpportunityAvailbleByIdForMob',
+  )
   Future<ApiResponse<String>> applyJob(@Query('Id') int id);
 
   /// JobOffers
   @GET(
-      '/v5/FreeLanceApplyOpportunities/GetAllFreeLanceApplyOpportunitiesForStartForMob')
+    '/v5/FreeLanceApplyOpportunities/GetAllFreeLanceApplyOpportunitiesForStartForMob',
+  )
   Future<ApiResponse<List<AppliedOfferDto>>> fetchAppliedOpportunities(
-      @Query('statusId') int statusId);
+    @Query('statusId') int statusId,
+  );
 
   @POST('/v3/FreeLanceApplyOpportunities/StartFreeLanceWork')
   Future<ApiResponse<String>> startShift(@Body() StartShiftParams shiftParams);
@@ -301,20 +344,24 @@ abstract class UserEndpoint {
   Future<ApiResponse<String>> finishShift(@Body() EndShiftParams shiftParams);
 
   @GET(
-      '/v4/FreeLanceApplyOpportunities/GetCurrentFreeLanceApplyOpportunitiesForMob')
+    '/v4/FreeLanceApplyOpportunities/GetCurrentFreeLanceApplyOpportunitiesForMob',
+  )
   Future<ApiResponse<AppliedOfferDto>> fetchCurrentShift();
 
   @GET('/v6/OpportunitiesAvailble/GetOpportuntyAvalibleDetailsById')
   Future<ApiResponse<JobDetailsDto>> fetchOpportunityDetails(
-      @Query('Id') String id);
+    @Query('Id') String id,
+  );
 
   @GET('/v5/TermsAndCondtion/GetTermandConditionByOpportunityId')
   Future<ApiResponse<JobTerms>> fetchTermsAndConditionByCompanyId(
-      @Query('Id') String id);
+    @Query('Id') String id,
+  );
 
   @GET('/v2/CompleteFreeLanceInfoByCompany/AddRequestToCompleteJobByFreeLance')
   Future<ApiResponse<InterviewInfo>> requestToJobInterview(
-      @Query('CompanyId') String companyId);
+    @Query('CompanyId') String companyId,
+  );
 
   @GET('/v1/FavourateProjects/CheckFavourateProjectsByFreeLance')
   Future<ApiResponse<bool>> fetchSelectedFavoriteProjectsStatus();
@@ -342,44 +389,54 @@ abstract class UserEndpoint {
 
   @GET('/v1/Dashboard/DashBoardAction')
   Future<ApiResponse<String>> confirmDashBoardAction(
-      @Query('type') String? type, @Query('objectData') String? objectData);
+    @Query('type') String? type,
+    @Query('objectData') String? objectData,
+  );
 
   @GET('/v1/CertificateJobPayments/CheckCertificateJob')
   Future<ApiResponse<CheckWorkingDocumentDto>> checkCertificateJob(
-      @Query('Id') int? JobId);
+    @Query('Id') int? JobId,
+  );
 
   @GET('/v1/OpportunitiesAvailble/ApologyTerms')
   Future<ApiResponse<CancelOpportunityApologizingDto>>
-      fetchCancelOpportunityApologizingData(
-          @Query('freeLanceApplyOpportunityId') int? id);
+  fetchCancelOpportunityApologizingData(
+    @Query('freeLanceApplyOpportunityId') int? id,
+  );
 
   /// LoansRequest
   @GET('/v1/Loans/GetLoanFreeLaceHousing')
   Future<ApiResponse<List<LoanRequestDto>>> fetchLoansRequests(
-      @Query('type') int type);
+    @Query('type') int type,
+  );
 
   @POST('/v1/Loans/AddNewLoans')
   Future<ApiResponse<String>> addNewLoanRequest(
-      @Body() AddLoanRequestParams params);
+    @Body() AddLoanRequestParams params,
+  );
 
   @GET('/v1/Loans/GetLoans')
   Future<ApiResponse<List<LoanTypeDto>>> fetchLoansTypes();
   @GET('/v1/Loans/GetLoansTypeById')
   Future<ApiResponse<LoanNumMonthConditionDto>> fetchLoanNumMonthsConditions(
-      @Query('Id') int id);
+    @Query('Id') int id,
+  );
 
   @GET('/v1/FreeLancerInfo/GetNamedByIdNumberForLoans')
   Future<ApiResponse<NameByIdNumber>> fetchNamedByIdNumberForLoan(
-      @Query('IdNumber') String idNumber);
+    @Query('IdNumber') String idNumber,
+  );
 
   @GET('/v1/FreeLancerInfo/GetNamedByIdNumber')
   Future<ApiResponse<NameByIdNumber>> fetchNamedByIdNumber(
-      @Query('IdNumber') String idNumber);
+    @Query('IdNumber') String idNumber,
+  );
 
   /// NotificationOffers
   @POST('/v1/OpportunitiesAvailble/GetOpporuntyByNotification')
   Future<ApiResponse<List<JobOfferDto>>> fetchNotificationOffers(
-      @Body() NotificationOfferParams params);
+    @Body() NotificationOfferParams params,
+  );
 
   /// Profile
   @GET('/v3/FreeLancerInfo/DeleteFreeLanceInfoProfile')
@@ -395,11 +452,13 @@ abstract class UserEndpoint {
   @MultiPart()
   @POST('/v1/FreeLancerInfo/UploadFreelancerProfileImage')
   Future<ApiResponse<String>> uploadProfilePhoto(
-      @Part(name: 'ProfileImage') File image);
+    @Part(name: 'ProfileImage') File image,
+  );
 
   @POST('/v1/FreeLancerInfo/UpdatePasswordFreelancer')
   Future<ApiResponse> updatePassword(
-      @Body() ChangePasswordParams updatePasswordParams);
+    @Body() ChangePasswordParams updatePasswordParams,
+  );
 
   @GET('/v4/FreeLancerInfo/ChecklogOut')
   Future<ApiResponse> checkLogout();
@@ -410,29 +469,33 @@ abstract class UserEndpoint {
   @MultiPart()
   @POST('/v1/FreeLancerInfo/UpdateFaceRecognition')
   Future<ApiResponse<String>> uploadFaceRecognition(
-      @Part(name: 'files') File files);
+    @Part(name: 'files') File files,
+  );
 
   @MultiPart()
   @POST('/v1/FreeLancerInfo/FakeFaceRecognition')
   Future<ApiResponse<String>> uploadFakeFaceRecognition(
-      @Part(name: 'files') File files);
+    @Part(name: 'files') File files,
+  );
 
   /// Resume
 
   @POST('/v5/FreeLancerInfo/UpdateFreeLancerCV')
   Future<ApiResponse<bool>> updateResume(
-      @Body() UpdateResumeParams updateResumeParams);
+    @Body() UpdateResumeParams updateResumeParams,
+  );
 
   @GET('/v6/FreeLancerInfo/GetFreeLanceLoginCV')
   Future<ApiResponse<Resume>> fetchResume();
 
-//v1/FreeLancerInfo/GetAllLevels
+  //v1/FreeLancerInfo/GetAllLevels
   @GET('/v1/FreeLancerInfo/GetAllLevels')
   Future<ApiResponse<List<LevelItem>>> fetchLevels();
 
   @GET('/v1/District/GetDistrictByCityId')
   Future<ApiResponse<List<DistrictItem>>> fetchDistricts(
-      @Query('cityId') int cityId);
+    @Query('cityId') int cityId,
+  );
 
   @GET('/v2/FreeLancerInfoV/GetAllEducationalQualification')
   Future<ApiResponse<List<LevelItem>>> getAllEducationalQualification();
@@ -447,7 +510,7 @@ abstract class UserEndpoint {
   ///api/v2/FreeLancerInfoV/GetAllQualificationName
   @GET('/v1/FreeLancerInfoV/GetAllQualificationName')
   Future<ApiResponse<List<String>>> fetchQualificationsName();
-//api/v1/Jobs/GetJobByGender
+  //api/v1/Jobs/GetJobByGender
   @GET('/v1/Jobs/GetJobByGender')
   Future<ApiResponse<List<JobItem>>> fetchJobs(@Query('gender') bool gender);
 
@@ -456,32 +519,37 @@ abstract class UserEndpoint {
 
   @GET('/v1/JobSkills/GetJobSkills')
   Future<ApiResponse<List<JobSkills>>> fetchJobSkills(
-      @Query('JobId') int jobId);
+    @Query('JobId') int jobId,
+  );
 
   /// SalaryDefinitionRequest
   @GET('/v1/EmployeeRequest/GetEmployeeSalaryDefinition')
   Future<ApiResponse<List<SalaryDefinitionRequestDto>>>
-      fetchSalaryDefinitionRequest(@Query('type') int type);
+  fetchSalaryDefinitionRequest(@Query('type') int type);
 
   @POST('/v1/EmployeeRequest/CreateEmployeeSalaryDefinition')
   Future<ApiResponse<String>> addSalaryDefinition(
-      @Body() AddSalaryDefinitionRequestPrams query);
+    @Body() AddSalaryDefinitionRequestPrams query,
+  );
 
   @GET('/v1/EmployeeRequest/GetTypeOfCommerce')
   Future<ApiResponse<List<TypeOfCommerce>>> fetchTypeOFCommerce();
 
   @GET('/v1/EmployeeRequest/DownLoadSalaryDefinition')
-  Future<ApiResponse<DownLoadSalaryDefinition>> downLoadSalaryDefinition(
-      @Query('id') String id, @Query('type') String type);
+  Future<ApiResponse<DownLoadFileDto>> downLoadSalaryDefinition(
+    @Query('id') String id,
+    @Query('type') String type,
+  );
 
   @GET('/v1/EmployeeRequest/GetResonSalary')
   Future<ApiResponse<List<ReasonSalaryDefinitionRequestDto>>>
-      fetchReasonSalaryDefinitionRequest();
+  fetchReasonSalaryDefinitionRequest();
 
   /// Services
   @GET('/v2/CategoryServices/GetCategoryServices')
   Future<ApiResponse<List<ServiceModel>>> fetchService(
-      @Query("isAdmin") bool isAdmin);
+    @Query("isAdmin") bool isAdmin,
+  );
 
   /// PublicTermsAndCondition
   @GET('/v2/TermsAndCondtion/GetPublicTermandCondition')
@@ -494,39 +562,45 @@ abstract class UserEndpoint {
 
   @POST('/v3/FreeLanceCollected/CollectedFreeLancerMoneyByProvider')
   Future<ApiResponse<String>> withdrawByPhoneWallet(
-      @Body() WithdrawByPhoneWalletParams params);
+    @Body() WithdrawByPhoneWalletParams params,
+  );
 
   @POST('/v2/TranserHead/TransferOneToOne')
   Future<ApiResponse<String>> withdrawToAnotherAccount(
-      @Body() WithdrawToAnotherAccountParams params);
+    @Body() WithdrawToAnotherAccountParams params,
+  );
 
   //http://85.184.232.38:8003/api/v1/FreeLanceApplyOpportunities/GetCompanyBalanceByFreeLance?StatusId=2
   @GET('/v1/FreeLanceApplyOpportunities/GetCompanyBalanceByFreeLance')
   Future<ApiResponse<List<WalletBalanceItem>>> fetchWalletBalances(
-      @Query('StatusId') int statusId);
+    @Query('StatusId') int statusId,
+  );
 
   @GET('/v1/ExchangeMethodCompany/GetCompanyByExchange')
   Future<ApiResponse<List<WalletBalanceItem>>>
-      fetchAvailableCompaniesForWithdrawMethod(@Query('ExchangeId') int id);
+  fetchAvailableCompaniesForWithdrawMethod(@Query('ExchangeId') int id);
 
   @GET('/v1/ExchangeMethodCompany/GetExchangeByCompany')
   Future<ApiResponse<List<WithdrawMethod>>>
-      fetchAvailableWithdrawMethodsForCompany(@Query('CompanyId') int id);
+  fetchAvailableWithdrawMethodsForCompany(@Query('CompanyId') int id);
 
   @GET('/v1/FreeLanceApplyOpportunities/GetCurrentBalanceByFreeLance')
   Future<ApiResponse<CurrentBalance>> fetchCurrentBalance();
 
   @POST('/v2/FreeLanceApplyOpportunities/GetApplyDetails')
   Future<ApiResponse<List<ApplyDetails>>> fetchApplyDetails(
-      @Body() BalanceDetailsQuery query);
+    @Body() BalanceDetailsQuery query,
+  );
 
   @POST('/v1/FreeLanceApplyOpportunities/CancelTransactionInderTransfer')
   Future<ApiResponse<String>> cancelTransaction(
-      @Body() CancelTransactionParams params);
+    @Body() CancelTransactionParams params,
+  );
 
   @POST('/v1/ExchangeMethodCompany/GetBalacnceByExchange')
   Future<ApiResponse<WithdrawData>> getWithdrawData(
-      @Body() BalanceByExchangeParams params);
+    @Body() BalanceByExchangeParams params,
+  );
 
   @GET('/v1/FreeLanceApplyFocusPoint/GetFocusPointFreeLanceInfo')
   Future<ApiResponse<FocusPointInfoDto>> fetchFocusPointFreeLanceInfo();
@@ -536,93 +610,107 @@ abstract class UserEndpoint {
 
   @POST('/v1/FreeLanceApplyFocusPoint/StartAttendanceFocusPoint')
   Future<ApiResponse<String>> startAttendanceFocusPoint(
-      @Body() StartAttendanceFocusPointParams params);
+    @Body() StartAttendanceFocusPointParams params,
+  );
 
   @POST('/v1/FreeLanceApplyFocusPoint/EndAttendanceFocusPoint')
   Future<ApiResponse<String>> endAttendanceFocusPoint(
-      @Body() StartAttendanceFocusPointParams params);
+    @Body() StartAttendanceFocusPointParams params,
+  );
 
   @GET('/v1/FocusPointsDeviceSetting/GetDeviceByFocusPoint')
   Future<ApiResponse<DeviceByFocusPointDto>> fetchDevicesByFocusPoint(
-      @Query('FocusPointId') int focusPointId);
+    @Query('FocusPointId') int focusPointId,
+  );
 
   @GET('/v1/FocusPointsDeviceSetting/GetDeviceSettingFocusPoint')
   Future<ApiResponse<DeviceSettingFocusPointDto>>
-      fetchDevicesSettingFocusPoint();
+  fetchDevicesSettingFocusPoint();
 
   @MultiPart()
   @POST('/v1/FocusPointsReceivedDevices/AddFocusPointsReceivedDevices')
   Future<ApiResponse<String>> addFocusPointsReceivedDevices(
-      @Part(name: 'vM') List<AddFocusPointsReceivedDevicesParams> params);
+    @Part(name: 'vM') List<AddFocusPointsReceivedDevicesParams> params,
+  );
 
   /// AttendanceNotification
   @GET('/v1/AttendanceNotifi/GetAllAttendanceNotifications')
   Future<ApiResponse<List<AttendanceNotifiActionDto>>>
-      fetchAttendanceNotifications();
+  fetchAttendanceNotifications();
   @GET('/v1/AttendanceNotifiType/GetAllAttendanceNotifiTypes')
   Future<ApiResponse<List<AttendanceNotifiTypeDto>>> fetchAttendanceType();
 
   @POST('/v1/AttendanceNotifi/AddAttendanceNotification')
   Future<ApiResponse> addAttendanceNotifications(
-      @Body() AddAttendanceNotificationsPrams addAttendanceNotificationsPrams);
+    @Body() AddAttendanceNotificationsPrams addAttendanceNotificationsPrams,
+  );
 
   /// EmployeesCertificates
   @GET('/v1/ClearanceCertificate/GetClearnceByFreelanceId')
   Future<ApiResponse<List<EmployeeCertificateDto>>>
-      fetchEmployeesCertificates();
+  fetchEmployeesCertificates();
 
   @GET('/v1/ClearanceCertificate/DownLoadClearanceCertificateForMob')
-  Future<ApiResponse<DownLoadSalaryDefinition>> downLoadEmployeeCertificate(
-      @Query('Id') int id);
+  Future<ApiResponse<DownLoadFileDto>> downLoadEmployeeCertificate(
+    @Query('Id') int id,
+  );
 
   /// PledgeGeneralization
   @GET('/v1/ClearanceCertificate/GetClearanceByType')
   Future<ApiResponse<List<PledgeGeneralizationDto>>>
-      fetchPledgesAndGeneralization(@Query('type') int type);
+  fetchPledgesAndGeneralization(@Query('type') int type);
 
   @GET('/v1/ClearanceCertificate/UpdateClearance')
   Future<ApiResponse<String>> resetPledgesAndGeneralization(
-      @Query('Id') int id);
+    @Query('Id') int id,
+  );
 
   /// ReceiveVehicle
-  @GET('/v1/Vehicles/GetVehicleByCode')
+  @GET('/v2/Vehicles/GetVehicleByCode')
   Future<ApiResponse<VehicleDetailsDto>> fetchVehicleByCode(
-      @Query("code") String code);
+    @Query("code") String code,
+  );
 
   @GET('/v1/VehicleComponents/GetAllVehicleComponents')
   Future<ApiResponse<List<VehicleComponentsDto>>> fetchVehicleComponents();
 
   @GET('/v1/Custodies/GetAllCustodiesByVehicleId')
   Future<ApiResponse<List<VehicleComponentsDto>>> fetchVehicleCustodies(
-      @Query("vehicleId") int vehicleId);
+    @Query("vehicleId") int vehicleId,
+  );
 
-  @GET('/v1/VehicleHandovers/GetAllVehiclesHandoversByType')
-  Future<ApiResponse<List<ReceiveVehicleDto>>> fetchReceiveVehicle(
-      @Query("isComplete") bool isComplete);
+  @POST('/v2/VehicleHandovers/GetAllVehiclesHandoversByType')
+  Future<ApiResponse<ReceiveVehicleDto>> fetchReceiveVehicle(
+    @Body() ReceiveVehiclePrams receiveVehiclePrams,
+  );
 
   @POST('/v1/VehicleHandovers/CreateVehicleHandover')
   Future<ApiResponse<CreateVehicleHandoverDto>> createVehicleHandover(
-      @Body() CreateVehicleHandoverPrams createVehicleHandoverPrams);
+    @Body() CreateVehicleHandoverPrams createVehicleHandoverPrams,
+  );
 
   @MultiPart()
   @POST('/v1/VehicleComponentsHandovers/AddTrueVehicleComponentsHandover')
   Future<ApiResponse> addImageAndDescriptionsComponents(
-      @Queries()
-      AddImageAndDescriptionsComponentsPrams
-      addImageAndDescriptionsComponentsPrams,
-      {@Part(name: 'AttachmentFile') File? file});
+    @Queries()
+    AddImageAndDescriptionsComponentsPrams
+    addImageAndDescriptionsComponentsPrams, {
+    @Part(name: 'AttachmentFile') File? file,
+  });
 
   @MultiPart()
   @POST('/v1/VehicleCustodyHandovers/AddTrueVehicleCustodiesHandover')
   Future<ApiResponse> addImageAndDescriptionsCustodies(
-      @Queries()
-      AddImageAndDescriptionsComponentsPrams
-      addImageAndDescriptionsComponentsPrams,
-      {@Part(name: 'AttachmentFile') File? file});
+    @Queries()
+    AddImageAndDescriptionsComponentsPrams
+    addImageAndDescriptionsComponentsPrams, {
+    @Part(name: 'AttachmentFile') File? file,
+  });
 
   @POST('/v1/VehicleComponentsHandovers/AddFalseVehicleComponentsHandover')
   Future<ApiResponse> addComponents(
-      @Body() AddComponentsPrams addComponentsPrams);
+    @Body() AddComponentsPrams addComponentsPrams,
+  );
 
   @POST('/v1/VehicleCustodyHandovers/AddFalseVehicleCustodiesHandover')
   Future<ApiResponse> addCustodies(@Body() AddCustodiesPrams addCustodiesPrams);
@@ -630,18 +718,21 @@ abstract class UserEndpoint {
   /// Violations
   @GET('/v3/ViolationsFreelance/GetViolationByFreelanceApply')
   Future<ApiResponse<ViolationsUserDataDto>> fetchViolationsData(
-      @Query('type') int type);
+    @Query('type') int type,
+  );
 
   @POST('/v1/ViolationsFreelance/ApproveRejectViolationApply')
   Future<ApiResponse<String>> approveRejectViolation(
-      @Body() ApproveRejectViolationParams params);
+    @Body() ApproveRejectViolationParams params,
+  );
 
   @GET('/v1/HazardOperation/GetAllHazardOperation')
   Future<ApiResponse<List<WorkHazardDto>>> fetchWorkHazards();
 
   @POST('/v1/HazardOperation/GetHazardOperationById')
   Future<ApiResponse<WorkHazardDto>> fetchWorkHazardDetails(
-      @Query('Id') int id);
+    @Query('Id') int id,
+  );
 
   @GET('/v1/HazardType/GetAllHazardTypes')
   Future<ApiResponse<List<CommonListItemDto>>> fetchWorkHazardsTypes();
@@ -651,50 +742,58 @@ abstract class UserEndpoint {
 
   @GET('/v1/HazardTypeInstructions/GetAllHazardTypeInstructionsByTypeId')
   Future<ApiResponse<List<CommonListItemDto>>>
-      fetchHazardTypeInstructionsByTypeId(@Query('typeId') int typeId);
+  fetchHazardTypeInstructionsByTypeId(@Query('typeId') int typeId);
 
   @POST('/v1/HazardOperation/AddEditHazardOperation')
   Future<ApiResponse<WorkHazardDto>> addWorkHazard(
-      @Body() AddWorkHazardParams params);
+    @Body() AddWorkHazardParams params,
+  );
 
   @MultiPart()
   @POST('/v1/HazardDocument/AddHazardDocuments')
-  Future<ApiResponse> uploadWorkHazardFiles(@Query('HazardId') int? id,
-      @Part(name: 'AttachmentFiles') List<File> files);
+  Future<ApiResponse> uploadWorkHazardFiles(
+    @Query('HazardId') int? id,
+    @Part(name: 'AttachmentFiles') List<File> files,
+  );
 
   @GET('/v1/CertificateBenefits/GetCertificateBenefits')
   Future<ApiResponse<WorkingDocumentDto>> fetchWorkingDocumentData(
-      @Query('JobId') int JobId);
+    @Query('JobId') int JobId,
+  );
 
   @GET('/v1/InstallmentConfig/GetInstallmentDetails')
   Future<ApiResponse<List<InstallmentWithCashiftDto>>>
-      fetchInstallmentWithCashiftData(@Query('paymentId') int paymentId);
+  fetchInstallmentWithCashiftData(@Query('paymentId') int paymentId);
 
   @GET('/v1/CertificateJobPayments/AddInstallmentCertificate')
   Future<ApiResponse<String>> addInstallmentWithCashift(
-      @Query('InstallmentId') int InstallmentId);
+    @Query('InstallmentId') int InstallmentId,
+  );
 
   @GET(
-      '/v1/TermandConditionCertificatePayments/GetTermandConditionCertificatePayments')
+    '/v1/TermandConditionCertificatePayments/GetTermandConditionCertificatePayments',
+  )
   Future<ApiResponse<List<TermConditionCertificatePaymentDto>>>
-      fetchTermsConditionsCertificatePayment(@Query('paymentId') int paymentId);
+  fetchTermsConditionsCertificatePayment(@Query('paymentId') int paymentId);
 
   @GET('/v1/CertificateJobPayments/AddPaymentCertificateDescription')
   Future<ApiResponse<String>> saveInstallmentPostponement(
-      @Query('paymentId') int? paymentId,
-      @Query('Description') String? description);
+    @Query('paymentId') int? paymentId,
+    @Query('Description') String? description,
+  );
 
   @GET('/v1/VehiclesZone/GetAllFreeLancerVehiclesZones')
   Future<ApiResponse<List<CommonListItemDto>>>
-      fetchAllFreeLancerVehiclesZones();
+  fetchAllFreeLancerVehiclesZones();
 
   @GET('/v1/RoundType/GetAllRoundTypesForTripDropDown')
   Future<ApiResponse<List<CommonListItemDto>>> fetchAllRoundTypes();
 
   @GET(
-      '/v1/RoundTypeTermsAndCondation/GetRoundTypeTermsAndCondationsByRoundTypeId')
+    '/v1/RoundTypeTermsAndCondation/GetRoundTypeTermsAndCondationsByRoundTypeId',
+  )
   Future<ApiResponse<List<RoundTypeTermsAndConditionDto>>>
-      fetchRoundTypeTermsAndCondition(@Query('RoundTypeId') int roundTypeId);
+  fetchRoundTypeTermsAndCondition(@Query('RoundTypeId') int roundTypeId);
 
   @POST('/v1/RoundTrip/AddRoundTrip')
   Future<ApiResponse> addRoundTrip(@Body() AddRoundTripParams params);
@@ -707,18 +806,35 @@ abstract class UserEndpoint {
 
   @POST('/v1/RoundTripDetails/AddRoundTripDetails')
   Future<ApiResponse> addRoundTripDetails(
-      @Body() AddRoundTripDetailsParams params);
+    @Body() AddRoundTripDetailsParams params,
+  );
 
   @GET('/v1/RoundTripDetails/GetRoundTRipDetailsByTripId')
   Future<ApiResponse<List<RoundTripDetailsDto>>> fetchRoundTripDetails(
-      @Query('RoundTripId') int roundTripId);
+    @Query('RoundTripId') int roundTripId,
+  );
+
+  @GET('/v1/ContractViolation/GetAllContractViolationByRoundTrip')
+  Future<ApiResponse<List<ContractViolationDto>>> fetchRoundViolation (
+    @Query('roundTripId') int roundTripId,
+  );
+
+  @GET('/v1/FaultsMaintenance/GetAllFaultsMaintenanceByRoundTrip')
+  Future<ApiResponse<List<MaintenanceDto>>> fetchRoundsMaintenance(
+    @Query('roundTripId') int roundTripId,
+  );
 
   //  request
   @GET('/v1/CashifterRequests/GetAllCashifterRequests')
   Future<ApiResponse<List<RequestsUserDto>>> fetchRequestsUser();
 
-  @GET('/v1/CashifterRequestsTermsAndConditions/GetAllCashifterRequestTermsAndConditionsByTypeAndStatus')
-  Future<ApiResponse<List<TermsAndConditionsRequestsDto>>> fetchTermsAndConditionsRequests(@Queries() TermsAndConditionsRequestsPrams termsAndConditionsRequestsPrams);
+  @GET(
+    '/v1/CashifterRequestsTermsAndConditions/GetAllCashifterRequestTermsAndConditionsByTypeAndStatus',
+  )
+  Future<ApiResponse<List<TermsAndConditionsRequestsDto>>>
+  fetchTermsAndConditionsRequests(
+    @Queries() TermsAndConditionsRequestsPrams termsAndConditionsRequestsPrams,
+  );
 
   @GET('/v1/CashifterRequestTypes/GetAllCashifterRequestTypes')
   Future<ApiResponse<List<ShiftRquestTypeDto>>> fetchRequestsUserType();
@@ -727,37 +843,84 @@ abstract class UserEndpoint {
   Future<ApiResponse> addRequest(@Body() AddRequestPrams params);
 
   @POST('/v1/CashifterRequests/VerifyCashifterPhoneNumber')
-  Future<ApiResponse> confirmRequest (@Queries() ConfirmRequesPrams confirmRequesPrams);
-
+  Future<ApiResponse> confirmRequest(
+    @Queries() ConfirmRequesPrams confirmRequesPrams,
+  );
 
   @MultiPart()
   @POST('/v1/CashifterRequests/CreateOrUpdateCashifterRequest')
   Future<ApiResponse> addFileRequest(
-      @Queries()
-      UploadFileRequestPrams
-      uploadFileRequestPrams,
-      @Part(name: 'AttachmentDocument') File file);
+    @Queries() UploadFileRequestPrams uploadFileRequestPrams,
+    @Part(name: 'AttachmentDocument') File file,
+  );
 
   // ChashiftLons
 
   @GET('/v1/CashiftLoanByFreelanceDetails/GetTotalLoans')
-  Future<ApiResponse<TabsAndTotalLoansDto>> fetchTabsAndTotalLoans(@Query("isAdmin") bool isAdmin);
+  Future<ApiResponse<TabsAndTotalLoansDto>> fetchTabsAndTotalLoans(
+    @Query("isAdmin") bool isAdmin,
+  );
   @GET('/v1/CashiftLoanByFreelanceDetails/GetAllLoans')
   Future<ApiResponse<List<LoanDataDto>>> fetchLoans(
-      @Query("isAdmin") bool isAdmin,
-      @Query("status") int status,
-      );
+    @Query("isAdmin") bool isAdmin,
+    @Query("status") int status,
+  );
   @GET('/v1/VehicleHandovers/GetVehicleHandoverDetailsById')
-  Future<ApiResponse<ReceiveVehicleDetailsDto>> fetchReceiveVehicleDetails(@Query('id') int id);
+  Future<ApiResponse<ReceiveVehicleDetailsDto>> fetchReceiveVehicleDetails(
+    @Query('id') int id,
+  );
 
   @GET('/v1/RoundTrip/GetFillingStationsByRoundTripId')
-  Future<ApiResponse<List<GasStationTripDto>>> fetchGasStationTrip(@Query('RoundId') int roundId);
+  Future<ApiResponse<List<GasStationTripDto>>> fetchGasStationTrip(
+    @Query('RoundId') int roundId,
+  );
 
   @POST('/v1/VehicleHandovers/ConfirmVehicleHandover')
-  Future<ApiResponse> confirmRejectReceiveVehicle(@Body() ConfirmReceiveVehicleParams params);
-
+  Future<ApiResponse> confirmRejectReceiveVehicle(
+    @Body() ConfirmReceiveVehicleParams params,
+  );
 
   @POST('/v1/RoundTripDetails/AddRoundTripFillStationDetails')
-  Future<ApiResponse> addRoundTripFillStation(@Body() AddRoundTripFillStationPrams params);
+  Future<ApiResponse> addRoundTripFillStation(
+    @Body() AddRoundTripFillStationPrams params,
+  );
 
+  @MultiPart()
+  @POST('/v1/VehicleHandoverImages/AddVehicleHandoverImages')
+  Future<ApiResponse> addVehicleHandoverImages(@Body() FormData params);
+
+  @POST('/v1/VehicleEventsTypes/GetVehicleGPSDetails')
+  Future<ApiResponse<VehiclePerformanceDto>> fetchVehiclePerformance(
+    @Query('vehicleHandoverId') int id,
+  );
+
+  @GET('/v1/VehicleEventsTypes/GetAllVehicleEvents')
+  Future<ApiResponse<List<DriverViolationDto>>> fetchDriverViolations(
+    @Query('vehicleHandoverId') int id,
+  );
+
+  @GET('/v1/VehicleEventsTypes/DownloadVehicleEventPicture')
+  Future<ApiResponse<String>> downloadVehicleViolationPicture(
+    @Queries() DownloadVehicleViolationPictureParams params,
+  );
+
+  ////  transactions
+  @POST('/v1/CashifterTasks/GetAllCashifterTasksByStatus')
+  Future<ApiResponse<List<TransactionsDto>>> fetchTransactions(
+      @Part(name: 'Status') String? status,
+      @Part(name: 'EndDateTime') String? endDateTime,
+      @Part(name: 'StartDateTime') String? startDateTime,
+      @Part(name: 'SearchString') String? searchString,
+  );
+
+  @POST('/v1/CashifterTasks/AddNewCashifterTask')
+  Future<ApiResponse> addTransactions(@Body() AddTransactionsPrams prams);
+
+  @POST('/v1/CashifterTasks/FinishCashifterTask')
+  Future<ApiResponse> updateTransactions(@Body() UpdateTransactionsPrams prams);
+
+  @POST('/v1/CashifterTasks/RescheduleCashifterTask')
+  Future<ApiResponse> rescheduleTransactions(
+    @Body() RescheduleTransactionsPrams prams,
+  );
 }

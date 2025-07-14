@@ -1,9 +1,8 @@
 import 'dart:io';
 
 import 'package:injectable/injectable.dart';
+import 'package:platform_device_id_plus/platform_device_id.dart';
 import 'package:shiftapp/domain/entities/shared/device.dart';
-
-import '../../../utils/platform_device_id.dart';
 
 @Injectable()
 class DeviceInfoRepository{

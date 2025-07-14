@@ -7,7 +7,7 @@ import '../../../../common/common_state.dart';
 import '../bloc/employee_certificate_details_cubit.dart';
 
 class EmployeeCertificateDetailsPage extends BaseBlocWidget<
-    Initialized<DownLoadSalaryDefinition>, EmployeeCertificateDetailsCubit> {
+    Initialized<DownLoadFileDto>, EmployeeCertificateDetailsCubit> {
 
   EmployeeCertificateDetailsPage({Key? key})
       : super(key: key);
@@ -21,13 +21,13 @@ class EmployeeCertificateDetailsPage extends BaseBlocWidget<
 
   @override
   void loadInitialData(context) {
-    int id = ModalRoute.of(context)?.settings.arguments as int;
+    int id = getArguments(context);
     bloc.downLoadEmployeeCertificate(id);
   }
 
   @override
   Widget buildWidget(
-      BuildContext context, Initialized<DownLoadSalaryDefinition> state) {
+      BuildContext context, Initialized<DownLoadFileDto> state) {
     return FileViewScreen(
       data: state.data,
     );

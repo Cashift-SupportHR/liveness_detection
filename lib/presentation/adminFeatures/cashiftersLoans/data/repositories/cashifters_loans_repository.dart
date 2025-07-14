@@ -19,22 +19,22 @@ class CashiftersLoansRepository {
 
   Future<List<CommonListItemDto>> fetchCashifters(int companyId) async {
     final response = await _api.fetchCashifters(companyId);
-    return response.payload!;
+    return response.payload??[];
   }
 
   Future<List<CommonListItemDto>> fetchCashifterLoanTypes() async {
     final response = await _api.fetchCashifterLoanTypes();
-    return response.payload!;
+    return response.payload??[];
   }
 
   Future<List<CommonListItemDto>> fetchDiscountPercentages() async {
     final response = await _api.fetchDiscountPercentages();
-    return response.payload!;
+    return response.payload??[];
   }
 
   Future<List<CommonListItemDto>> fetchCashiftLoanTermsAndConditions() async {
     final response = await _api.fetchCashiftLoanTermsAndConditions();
-    return response.payload!;
+    return response.payload??[];
   }
 
 

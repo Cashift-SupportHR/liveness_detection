@@ -86,12 +86,13 @@ import '../../adminFeatures/shared/domain/entities/opportunities/ProjectFiterOpp
 import '../../adminFeatures/usersManagement/domain/entities/brand.dart';
 import '../../adminFeatures/usersManagement/domain/entities/company.dart';
 import '../../adminFeatures/usersManagement/domain/entities/info_user_manager.dart';
+import '../../adminFeatures/vehicles/domain/entities/vehicle_image_face.dart';
 import '../../shared/loans/domain/entities/loan_data.dart';
 import '../../shared/loans/domain/entities/tabs_and_total_loans.dart';
 import '../geofence/geo_task.dart';
 import '../../adminFeatures/usersManagement/domain/entities/user_area.dart';
 import '../vehiclesOperation/domain/entities/CreateVehicleHandover.dart';
-import '../vehiclesOperation/domain/entities/receive_vehicle_details.dart';
+ import '../vehiclesOperation/domain/entities/receive_vehicle_details.dart';
 import '../vehiclesOperation/domain/entities/vehicleComponents.dart';
 
 abstract class CommonState extends DataState {
@@ -254,6 +255,8 @@ class InitializedEmploymentTabsData<T> extends CommonStateFBuilder {
   });
 }
 
+
+
 class InitializedServiceData<T> extends CommonStateFBuilder {
   bool isAdmin;
   String token;
@@ -270,7 +273,6 @@ class InitializedToggleData<T> extends CommonStateFBuilder {
   String image;
   bool isAdmin;
   bool adminEnable;
-  bool haveAdminFeatures;
   bool isAllowFaceRecognition;
   final User user;
   FaceRecognitionConfig? faceRecognitionConfig;
@@ -279,7 +281,6 @@ class InitializedToggleData<T> extends CommonStateFBuilder {
     required this.image,
     required this.isAdmin,
     required this.user,
-    required this.haveAdminFeatures,
     required this.adminEnable,
     required this.isAllowFaceRecognition,
     this.faceRecognitionConfig,
@@ -309,14 +310,22 @@ class InitializeActionUserRequests extends CommonStateFBuilder {
   });
 }
 
+class InitializedReceivedVehiclesImages<T> extends CommonStateFBuilder {
+  List<VehicleImageFace> vehicleImageFaces;
+  CreateVehicleHandover createVehicleHandover;
+
+  InitializedReceivedVehiclesImages({
+    required this.vehicleImageFaces,
+    required this.createVehicleHandover,
+  });
+}
+
 class InitializedVehiclesComponents<T> extends CommonStateFBuilder {
   List<VehicleComponents> vehicleComponents;
-  CreateVehicleHandover createVehicleHandover;
   ReceiveVehicleDetails? receiveVehicleDetails;
 
   InitializedVehiclesComponents({
     required this.vehicleComponents,
-    required this.createVehicleHandover,
     this.receiveVehicleDetails,
   });
 }
@@ -436,11 +445,10 @@ class InitializedAddNewUser<T> extends CommonStateFBuilder {
 
 class InitializedGasStations<T> extends CommonStateFBuilder {
   List<Company> companies;
-  List<ProjectManagementDto> project;
 
   InitializedGasStations({
     required this.companies,
-    required this.project,
+
   });
 }
 

@@ -104,7 +104,7 @@ class AddAdditionalLocationsPage extends BaseBlocWidget<Initialized<List<Locatio
   }
 
   int getProjectId(BuildContext context) {
-    return (ModalRoute.of(context)?.settings.arguments ?? idCallback!()) as int;
+    return (getArguments(context) ?? idCallback!()) as int;
   }
 
   @override

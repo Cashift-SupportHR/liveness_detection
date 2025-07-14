@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
@@ -34,6 +35,7 @@ class FilesPreviewScreen extends BaseStatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("FilesPreviewScreen build called with data: $data");
     selectedUrl = data.first;
     return Padding(
       padding: const EdgeInsets.all(10),
@@ -112,10 +114,19 @@ class FilesPreviewScreen extends BaseStatelessWidget {
   }
 
   showImage(String url) {
-    return kBuildImage(
-      url,
-      fit: BoxFit.fill,
-    );
+       if(url.startsWith("http")) {
+         return  kBuildImage(
+           url,
+           fit: BoxFit.fill,
+         );
+       }else{
+         Uint8List? imageBytes   = base64Decode(url);
+        return Center(
+           child:   Image.memory(imageBytes),
+         );
+       }
+
+
   }
 
   sliderImages() {
@@ -157,10 +168,7 @@ class FilesPreviewScreen extends BaseStatelessWidget {
                                   color: kWhite,
                                   size: 40,
                                 )
-                              : kBuildImage(
-                                  e,
-                                  border: 0,
-                                ),
+                              : showImage(e),
                         ),
                       ))
                   .toList(),

@@ -27,12 +27,16 @@ abstract class BaseCubit extends BlocBase<CommonState> {
   }
 
   executeBuilder<T>(Future<T> Function() invoke,
-      {required ValueChanged<T> onSuccess, ValueChanged? onError}) async {
+      {bool isRefresh = true,required ValueChanged<T> onSuccess, ValueChanged? onError}) async {
     try {
-      emit(LoadingState());
+      if (isRefresh) {
+        emit(LoadingState());
+      }
+
       final response = await invoke();
       onSuccess(response);
     } catch (e) {
+      print('executeBuilder ${e}');
       if (onError != null) {
         onError(e);
       } else {
@@ -41,6 +45,8 @@ abstract class BaseCubit extends BlocBase<CommonState> {
       rethrow;
     }
   }
+
+
 
   executeListener<T>(Future<T> Function() invoke,
       {required ValueChanged<T> onSuccess, bool showLoading = true}) async {
@@ -143,16 +149,7 @@ abstract class BaseCubit extends BlocBase<CommonState> {
     } catch (e) {}
   }
 
-  Future<bool> checkFaceRecognition() async {
-    bool isCheckFaceRecognition =
-        await CheckFaceRecognitionPage.pushIsDetectedSuccess();
-    if (!isCheckFaceRecognition) {
-      emit(ErrorState(VerificationFaceException()));
-      return false;
-    } else {
-      return true;
-    }
-  }
+
   emitVerificationFaceException(){
     emit(ErrorState(VerificationFaceException()));
   }

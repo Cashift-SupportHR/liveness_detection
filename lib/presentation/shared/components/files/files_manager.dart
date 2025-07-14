@@ -13,13 +13,14 @@ import '../../../../data/models/salary-definition-request/down_load_salary_defin
 
 class FilesManager{
 
-  saveFileFromBase64(DownLoadSalaryDefinition response) async {
-    print('file data: ${response.toJson()}');
+  saveFileFromBase64(DownLoadFileDto response) async {
+    // print('file data: ${response.toJson()}');
     try {
       requestPermission();
 
       Uint8List bytes = base64.decode(response.fileAttachment ?? '');
-      final data = await FileSaver.instance.saveAs(name: response.fileName ?? '',  bytes: bytes, ext: response.fileAttachmentType ?? '',  mimeType: MimeType.other);
+      String fileName = response.fileName ?? '${DateTime.now().millisecondsSinceEpoch}';
+      final data = await FileSaver.instance.saveAs(name: fileName,  bytes: bytes, ext: response.fileAttachmentType ?? '',  mimeType: MimeType.other);
       log(data.toString());
 
     } on Exception catch (e) {
@@ -28,8 +29,8 @@ class FilesManager{
   }
 
   saveFileFromFile(String filePath) async {
-    print('file data: ${filePath}');
-    print('file data: ${filePath.split('.').last}');
+    // print('file data: ${filePath}');
+    // print('file data: ${filePath.split('.').last}');
     try {
       requestPermission();
 
@@ -89,7 +90,7 @@ class FilesManager{
     }
   }
 
-  Future<String> createFileFromBase64(DownLoadSalaryDefinition data) async {
+  Future<String> createFileFromBase64(DownLoadFileDto data) async {
     _checkPermission();
     _prepareSaveDir();
     try {
@@ -108,14 +109,24 @@ class FilesManager{
   }
 
   static Future<String> downloadFileFromUrl(imageUrl) async {
-    final response = await http.get(Uri.parse(imageUrl));
-    final appDirectory = await getApplicationDocumentsDirectory();
-    String fileName = imageUrl.split('/').last;
-    // check if the file name is too long and truncate it
-    fileName = fileName.length > 255 ? fileName.substring(0, 255) : fileName;
-    final file = File('${appDirectory.path}/$fileName');
-    await file.writeAsBytes(response.bodyBytes);
-   return file.path;
+    bool is64 = !imageUrl.startsWith('http');
+    if (is64) {
+      // convert to from base64 to file
+      Uint8List bytes = base64.decode(imageUrl);
+      final appDirectory = await getApplicationDocumentsDirectory();
+      String fileName = 'downloaded_image_${DateTime.now().millisecondsSinceEpoch}.png';
+      final file = File('${appDirectory.path}/$fileName');
+      await file.writeAsBytes(bytes);
+      return file.path;
+    } else{
+      final response = await http.get(Uri.parse(imageUrl));
+      final appDirectory = await getApplicationDocumentsDirectory();
+      String fileName = imageUrl.split('/').last;
+      // check if the file name is too long and truncate it
+      fileName = fileName.length > 255 ? fileName.substring(0, 255) : fileName;
+      final file = File('${appDirectory.path}/$fileName');
+      await file.writeAsBytes(response.bodyBytes);
+      return file.path;
+    }
   }
-
 }

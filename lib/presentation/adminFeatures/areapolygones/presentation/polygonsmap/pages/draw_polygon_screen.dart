@@ -23,14 +23,15 @@ class DrawPolygonWithMarkersScreen extends StatefulWidget {
   final Function(String) onFetchAutoComplete;
   final Function(String) onFetchPlaceDetails;
 
-  DrawPolygonWithMarkersScreen(
-      {Key? key,
-      required this.myLocationStream,
-      required this.predictionsSearchStream,
-      required this.onFetchAutoComplete,
-      required this.placeDetailsStream,
-      required this.onFetchPlaceDetails})
-      : super(key: key);
+  DrawPolygonWithMarkersScreen({
+    Key? key,
+    required this.myLocationStream,
+    required this.predictionsSearchStream,
+    required this.onFetchAutoComplete,
+    required this.placeDetailsStream,
+    required this.onFetchPlaceDetails,
+  }) : super(key: key);
+
   @override
   _DrawPolygonWithMarkersScreenState createState() =>
       _DrawPolygonWithMarkersScreenState();
@@ -42,6 +43,12 @@ class _DrawPolygonWithMarkersScreenState
   List<LatLng> polygonPoints = [];
   Set<Polygon> polygons = Set<Polygon>();
   Set<Marker> markers = Set<Marker>();
+  bool readOnly = false;
+  bool isFirstTap = true;
+  TextEditingController searchController = TextEditingController();
+
+  DrawPolygonWithMarkersArgs? args;
+  StreamStateInitial<bool> isSaveData = StreamStateInitial<bool>();
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
@@ -49,6 +56,10 @@ class _DrawPolygonWithMarkersScreenState
   }
 
   void _onTap(LatLng latLng) {
+    if(isFirstTap) {
+      isFirstTap = false;
+      _clearPolygon();
+    }
     setState(() {
       polygonPoints.add(latLng);
 
@@ -88,36 +99,39 @@ class _DrawPolygonWithMarkersScreenState
     });
   }
 
-  DrawPolygonWithMarkersArgs? args;
-  StreamStateInitial<bool> isSaveData = StreamStateInitial<bool>();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _initData();
+  }
 
   @override
   Widget build(BuildContext context) {
     final strings = Get.context!.getStrings();
-    args = ModalRoute.of(context)?.settings.arguments
-        as DrawPolygonWithMarkersArgs?;
-    final readOnly = args?.isOnlyView == true;
-    print('polygonPoints $polygonPoints');
-    final initPolygons = readOnly ? mapPolygons(args?.latlngs ?? []) : polygons;
-    final initMarkers =
-        readOnly ? mapPointsMarkers(args?.latlngs ?? []) : markers;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-            (args?.latlngs == null || readOnly) ? strings.mark_box_map : strings.edit_select_map,
-            style: kTextBold),
-        actions: readOnly
-            ? null
-            : [
-                TextButton(
-                  onPressed: _clearPolygon,
-                  child: Text(strings.clear),
-                ),
-              ],
+          (args?.latlngs == null || readOnly)
+              ? strings.mark_box_map
+              : strings.edit_select_map,
+          style: kTextBold,
+        ),
+        actions:
+            readOnly
+                ? null
+                : [
+                  TextButton(
+                    onPressed: _clearPolygon,
+                    child: Text(strings.clear),
+                  ),
+                ],
       ),
-      bottomSheet: (args != null && args!.isOnlyView == true)
-          ? null
-          : saveButton(context),
+      bottomSheet:
+          (args != null && args!.isOnlyView == true)
+              ? null
+              : saveButton(context),
       body: Stack(
         children: [
           GoogleMap(
@@ -128,11 +142,12 @@ class _DrawPolygonWithMarkersScreenState
               target: LatLng(37.7749, -122.4194), // Set the initial location
               zoom: 16, // Set the initial zoom level
             ),
-            polygons: initPolygons,
-            markers: initMarkers, // Display markers on the map
+            polygons: polygons,
+            markers: markers,
+            // Display markers on the map
             onTap: readOnly ? null : _onTap, // Register tap events
           ),
-          if (args != null && args!.isOnlyView != true) searchWidget(),
+          if (args?.isOnlyView != true) searchWidget(),
           _detectMyLocationButton(),
         ],
       ),
@@ -169,14 +184,16 @@ class _DrawPolygonWithMarkersScreenState
         return AppCupertinoButton(
           text: context.getStrings().save_selection,
           margin: EdgeInsets.all(16),
-          onPressed: snapshot.data == true ?
-              () {
-            // Save the polygon points
-            print(polygonPoints);
-            Navigator.pop(context, polygonPoints);
-          } : null,
+          onPressed:
+              snapshot.data == true
+                  ? () {
+                    // Save the polygon points
+                    print(polygonPoints);
+                    Navigator.pop(context, polygonPoints);
+                  }
+                  : null,
         );
-      }
+      },
     );
   }
 
@@ -187,10 +204,9 @@ class _DrawPolygonWithMarkersScreenState
         onSearch: (value) {
           widget.onFetchAutoComplete(value);
         },
+        searchController: searchController,
         predictionsSearchStream: widget.predictionsSearchStream,
         onSelectPlace: (item) {
-          print('onSelectPlace ${item.toJson()}');
-          //onZoom(item);
           widget.onFetchPlaceDetails(item.placeId ?? '');
           placeDetailsStream();
         },
@@ -216,8 +232,11 @@ class _DrawPolygonWithMarkersScreenState
       }
       final position = await LocationService.determinePosition(context);
       LatLng latLng = LatLng(position.latitude!, position.longitude!);
-      mapController.animateCamera(CameraUpdate.newCameraPosition(
-          CameraPosition(target: latLng, zoom: 16)));
+      mapController.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(target: latLng, zoom: 16),
+        ),
+      );
       return position;
     } catch (e) {
       return Future.error(e);
@@ -246,7 +265,9 @@ class _DrawPolygonWithMarkersScreenState
     if (args != null) {
       mapController.animateCamera(
         CameraUpdate.newLatLngBounds(
-            _calculatePolygonBounds(args?.latlngs ?? []), 50), // 50 is padding
+          _calculatePolygonBounds(args?.latlngs ?? []),
+          50,
+        ), // 50 is padding
       );
     } else {
       streamLocation();
@@ -272,12 +293,7 @@ class _DrawPolygonWithMarkersScreenState
       double.parse(item.geometry?.location?.lng?.toString() ?? '0.0'),
     );
     mapController.animateCamera(
-      CameraUpdate.newCameraPosition(
-        CameraPosition(
-          target: latLng,
-          zoom: 18,
-        ),
-      ),
+      CameraUpdate.newCameraPosition(CameraPosition(target: latLng, zoom: 18)),
     );
     _onTap(latLng);
   }
@@ -300,10 +316,19 @@ class _DrawPolygonWithMarkersScreenState
   void streamLocation() {
     widget.myLocationStream.stream.listen((event) {
       if (event != null) {
-        mapController.animateCamera(
-          CameraUpdate.newLatLng(event),
-        );
+        mapController.animateCamera(CameraUpdate.newLatLng(event));
       }
     });
+  }
+
+  void _initData() {
+    args =
+        MyModalRoute.of(context)?.settings.arguments
+            as DrawPolygonWithMarkersArgs?;
+    if (args != null) {
+      readOnly = args!.isOnlyView ?? false;
+      polygons = mapPolygons(args?.latlngs ?? []);
+      markers = mapPointsMarkers(args?.latlngs ?? []);
+    }
   }
 }

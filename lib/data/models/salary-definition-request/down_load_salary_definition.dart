@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'down_load_salary_definition.g.dart'; 
 
 @JsonSerializable(ignoreUnannotated: false)
-class DownLoadSalaryDefinition {
+class DownLoadFileDto {
   @JsonKey(name: 'fileAttachmentType')
   String? fileAttachmentType;
   @JsonKey(name: 'fileName')
@@ -11,10 +11,10 @@ class DownLoadSalaryDefinition {
   @JsonKey(name: 'fileAttachment')
   String? fileAttachment;
 
-  DownLoadSalaryDefinition({this.fileAttachmentType, this.fileName, this.fileAttachment});
+  DownLoadFileDto({this.fileAttachmentType, this.fileName, this.fileAttachment});
 
-   factory DownLoadSalaryDefinition.fromJson(Map<String, dynamic> json) => _$DownLoadSalaryDefinitionFromJson(json);
+   factory DownLoadFileDto.fromJson(Map<String, dynamic> json) => _$DownLoadFileDtoFromJson(json);
 
-   Map<String, dynamic> toJson() => _$DownLoadSalaryDefinitionToJson(this);
+   Map<String, dynamic> toJson() => _$DownLoadFileDtoToJson(this);
 }
 

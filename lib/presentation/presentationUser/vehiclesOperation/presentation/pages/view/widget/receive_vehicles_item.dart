@@ -1,7 +1,9 @@
 import 'package:shiftapp/utils/app_icons.dart';
 
 import '../../../../../../../core/services/routes.dart';
+import '../../../../../../../domain/entities/shared/date_formatter.dart';
 import '../../../../../../adminFeatures/available_opportunities/presentation/widgets/build_popup_menu_button.dart';
+import '../../../../../../adminFeatures/vehicles/data/models/vehicle_traking_details_prams.dart';
 import '../../../../../../shared/components/index.dart';
 import '../../../../../resources/colors.dart';
 import '../../../../../resources/constants.dart';
@@ -11,7 +13,7 @@ import '../../add/main_receive_vehicle_page.dart';
 
 class ReceiveVehiclesItem extends BaseStatelessWidget {
   final int tabId;
-  ReceiveVehicle data;
+  ReceiveVehicleData data;
   final Function() onRefresh;
   ReceiveVehiclesItem(
       {super.key,
@@ -20,7 +22,7 @@ class ReceiveVehiclesItem extends BaseStatelessWidget {
       required this.data});
   @override
   Widget build(BuildContext context) {
-    print(tabId);
+    print(data.handoverId);
     print("tabId");
     return Container(
       decoration: Decorations.decorationTabs,
@@ -35,6 +37,7 @@ class ReceiveVehiclesItem extends BaseStatelessWidget {
             icons: [
               AppIcons.carNumber,
               AppIcons.calander5,
+              AppIcons.carTime,
               AppIcons.timer5,
               AppIcons.handUser,
             ],
@@ -42,12 +45,14 @@ class ReceiveVehiclesItem extends BaseStatelessWidget {
               strings.plate_number,
               strings.date,
               strings.time,
+              strings.working_period,
               strings.name_receipt,
             ],
             values: [
               data.vehiclePlateNumber ?? "",
               data.vehicleHandoverDate ?? "",
-              data.vehicleHandoverTimeFormatted ?? "",
+              data.vehicleHandoverTime ?? "",
+              data.shiftName ?? "",
               data.freelancerName ?? "",
             ],
           ),
@@ -56,6 +61,9 @@ class ReceiveVehiclesItem extends BaseStatelessWidget {
       ),
     );
   }
+
+  String get vehicleHandoverTimeFormatted =>
+      DateFormatter.repairApiTime(data.vehicleHandoverTime ?? "" ?? '');
 
   Widget headerVehicles() {
     return Row(
@@ -76,26 +84,20 @@ class ReceiveVehiclesItem extends BaseStatelessWidget {
                 style: kTextBold.copyWith(fontSize: 16),
               ),
               Text(
-                tabId == 1
-                    ? strings.complete_receipt
-                    : strings.incomplete_receipt,
-                style: kTextRegular.copyWith(
-                    fontSize: 12, color: tabId == 1 ? kPrimaryDark : kRed),
+                "${strings.project_name} : ${data.projectName}",
+                style: kTextRegular.copyWith(fontSize: 12, color: kPrimaryDark),
               ),
             ],
           ),
         ),
-        tabId == 2
-            ? _OptionsMenuButton(
-                data: data,
-                onRefresh: onRefresh,
-              )
-            : SizedBox(),
+        _OptionsMenuButton(
+          data: data,
+          tabId: tabId,
+          onRefresh: onRefresh,
+        ),
       ],
     );
   }
-
-
 
   GestureDetector detailsButton(BuildContext context) {
     return GestureDetector(
@@ -117,9 +119,11 @@ class ReceiveVehiclesItem extends BaseStatelessWidget {
 }
 
 class _OptionsMenuButton extends BaseStatelessWidget {
-  final ReceiveVehicle data;
+  final ReceiveVehicleData data;
   final Function() onRefresh;
-  _OptionsMenuButton({super.key, required this.data, required this.onRefresh});
+  int tabId;
+  _OptionsMenuButton(
+      {required this.tabId, required this.data, required this.onRefresh});
   @override
   Widget build(BuildContext context) {
     TextStyle titleStyle = kTextBold.copyWith(fontSize: 10, color: kGreen_54);
@@ -127,18 +131,31 @@ class _OptionsMenuButton extends BaseStatelessWidget {
     return OptionsMenuButton(
       options: [
         BuildPopupMenuItemContent(
-          title: strings.complete_receipt_information,
+          title: strings.track_vehicle_on_map,
           titleStyle: titleStyle,
           isDivider: false,
         ),
+        if (tabId == 2)
+          BuildPopupMenuItemContent(
+            title: strings.complete_receipt_information,
+            titleStyle: titleStyle,
+            isDivider: false,
+          ),
       ],
       onSelect: (value) async {
         if (value == 0) {
+          Navigator.pushNamed(context, Routes.vehiclesTrackingPage,
+              arguments: VehicleTrakingDetailsPrams(
+                vehicleHandoverId: data.handoverId,
+                isVehicleHandover: true,
+                vehicleId: data.vehicleId,
+              ));
+        } else if (value == 1) {
           MainReceiveVehiclePage.push(context,
               mainReceiveVehicleArg:
-                  MainReceiveVehicleArg(isEdit: true, receiveVehicle: data),
+                  MainReceiveVehicleArg(isEdit: true, receiveVehicleData: data),
               onSuccess: () {
-                onRefresh();
+            onRefresh();
           });
         }
       },

@@ -63,6 +63,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_area": MessageLookupByLibrary.simpleMessage("اضافة منطقة"),
         "add_bank_account":
             MessageLookupByLibrary.simpleMessage("اضف حسابك الان"),
+        "add_breakdown": MessageLookupByLibrary.simpleMessage("اضافة عطل "),
+        "add_camera": MessageLookupByLibrary.simpleMessage("اضافة كاميرا"),
         "add_cashifters":
             MessageLookupByLibrary.simpleMessage("اضافة كاشفتر جديد"),
         "add_classification":
@@ -101,6 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_loans": MessageLookupByLibrary.simpleMessage("إضافه سلفه جديده "),
         "add_location": MessageLookupByLibrary.simpleMessage("اضف موقع"),
         "add_logo": MessageLookupByLibrary.simpleMessage("اضف شعار"),
+        "add_maintenance": MessageLookupByLibrary.simpleMessage("طلب صيانة"),
         "add_mobile_new": MessageLookupByLibrary.simpleMessage(
             "عليك ادخال رقم الجوال الجديد لنرسل لك رمز التحقق علي جوالك"),
         "add_more_the_work_periods":
@@ -148,6 +151,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اضافة شروط واحكام الفرص"),
         "add_tracking_request":
             MessageLookupByLibrary.simpleMessage("اضافة طلب تتبع"),
+        "add_transactions":
+            MessageLookupByLibrary.simpleMessage("اضافة  معاملة"),
         "add_vehicle": MessageLookupByLibrary.simpleMessage("اضافة مركبة"),
         "add_vehicles": MessageLookupByLibrary.simpleMessage("اضافة مركبة"),
         "add_violation": MessageLookupByLibrary.simpleMessage("اضافة مخالفة"),
@@ -333,9 +338,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "body_mass": MessageLookupByLibrary.simpleMessage("كتلة الجسم"),
         "brand_name": MessageLookupByLibrary.simpleMessage("اسم البراند"),
         "brand_type": MessageLookupByLibrary.simpleMessage("نوع البراند"),
+        "breakdown_maintenance":
+            MessageLookupByLibrary.simpleMessage(" الصيانة والأعطال"),
         "calculation_method":
             MessageLookupByLibrary.simpleMessage("طريقة الحساب "),
         "camera": MessageLookupByLibrary.simpleMessage("الكاميرا"),
+        "camera_add": MessageLookupByLibrary.simpleMessage("اضافة كاميرا"),
+        "camera_code": MessageLookupByLibrary.simpleMessage("كود الكاميرا"),
+        "camera_name": MessageLookupByLibrary.simpleMessage("اسم الكاميرا"),
+        "camera_name_ar":
+            MessageLookupByLibrary.simpleMessage("اسم الكاميرا عربي"),
+        "camera_name_en":
+            MessageLookupByLibrary.simpleMessage("اسم الكاميرا بالانجليزي"),
+        "camera_type": MessageLookupByLibrary.simpleMessage("نوع الكاميرا"),
+        "cameras": MessageLookupByLibrary.simpleMessage("الكاميرات"),
         "cancel": MessageLookupByLibrary.simpleMessage("إغلاق"),
         "cancel_button": MessageLookupByLibrary.simpleMessage("الغاء"),
         "cancel_message_opportunity":
@@ -408,6 +424,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "click_access_account":
             MessageLookupByLibrary.simpleMessage("أضغط هنا للوصول لحسابك"),
         "click_here": MessageLookupByLibrary.simpleMessage("اضغط هنا"),
+        "click_here_view_violation_location":
+            MessageLookupByLibrary.simpleMessage(
+                "اضغط هنا لرؤية موقع  المخالفة"),
         "click_to_reload": MessageLookupByLibrary.simpleMessage("إعادة تحميل"),
         "clicking_check_mark_means_you_agree":
             MessageLookupByLibrary.simpleMessage(
@@ -457,6 +476,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "completed": MessageLookupByLibrary.simpleMessage("إكتمل"),
         "completed_gates":
             MessageLookupByLibrary.simpleMessage("تم الانتهاء منها"),
+        "completed_tasks":
+            MessageLookupByLibrary.simpleMessage("التاسكات المنتهية"),
         "condition_ar":
             MessageLookupByLibrary.simpleMessage("كتابه الشرط باللغه العربيه"),
         "condition_ar_validation":
@@ -528,10 +549,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "date_absence": MessageLookupByLibrary.simpleMessage("تاريخ الغياب"),
         "date_create": MessageLookupByLibrary.simpleMessage("تاريخ الانشاء "),
         "date_dispose": MessageLookupByLibrary.simpleMessage("تاريخ الايداع"),
+        "date_from": MessageLookupByLibrary.simpleMessage("التاريخ من"),
         "date_opportunity_offered":
             MessageLookupByLibrary.simpleMessage("تاريخ عرض الفرصه"),
         "date_pledge": MessageLookupByLibrary.simpleMessage("تاريخ التعهد"),
         "date_request": MessageLookupByLibrary.simpleMessage("تاريخ الطلب"),
+        "date_to": MessageLookupByLibrary.simpleMessage("التاريخ الي"),
+        "date_to_must_be_greater_than_date_from":
+            MessageLookupByLibrary.simpleMessage(
+                "التاريخ الي يجب ان يكون اكبر من التاريخ من"),
         "dates_not_set":
             MessageLookupByLibrary.simpleMessage("المواعيد لم تحدد"),
         "day": MessageLookupByLibrary.simpleMessage("يوم"),
@@ -555,6 +581,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "هل انت متأكد انك تريد حذف حسابك ؟ "),
         "delete_all": MessageLookupByLibrary.simpleMessage("حذف الكل"),
         "delete_area": MessageLookupByLibrary.simpleMessage("حذف المنطقة"),
+        "delete_camera": MessageLookupByLibrary.simpleMessage("حذف كاميرا"),
         "delete_custody": MessageLookupByLibrary.simpleMessage(
             "هل انت متأكد انك تريد حذف هذه العهدة ؟"),
         "delete_employment_official_data":
@@ -565,6 +592,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("حذف العقوبة"),
         "delete_time": MessageLookupByLibrary.simpleMessage("حذف الوقت"),
         "delete_user": MessageLookupByLibrary.simpleMessage("حذف المستخدم"),
+        "delivery_date": MessageLookupByLibrary.simpleMessage("تاريخ الاستلام"),
         "denied_camera_permission": MessageLookupByLibrary.simpleMessage(
             "عذرًا ، يجب عليك الانتقال إلى إعدادات التطبيق والسماح بالوصول إلى الكاميرا حتى تتمكن من مسح رمز qr ضوئيًا"),
         "departure_registration":
@@ -610,6 +638,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تحميل ملف الصورة"),
         "download_qr_code":
             MessageLookupByLibrary.simpleMessage("تحميل QR Code"),
+        "download_violation_image":
+            MessageLookupByLibrary.simpleMessage("تحميل صورة المخالفة"),
+        "driver_name": MessageLookupByLibrary.simpleMessage("اسم السائق"),
+        "driver_violations":
+            MessageLookupByLibrary.simpleMessage("مخالفات السائق"),
+        "drivers": MessageLookupByLibrary.simpleMessage("السائقين"),
         "dta_service":
             MessageLookupByLibrary.simpleMessage(" الحضور والإنصراف"),
         "duration_monthly":
@@ -619,6 +653,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit_additional_sites":
             MessageLookupByLibrary.simpleMessage("تعديل المواقع الاضافية"),
         "edit_area": MessageLookupByLibrary.simpleMessage("تعديل منطقة"),
+        "edit_camera": MessageLookupByLibrary.simpleMessage("تعديل كاميرا"),
         "edit_cashifters":
             MessageLookupByLibrary.simpleMessage("تعديل كاشفتر "),
         "edit_classification":
@@ -630,6 +665,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit_data": MessageLookupByLibrary.simpleMessage("تعديل البيانات"),
         "edit_data_vehicles":
             MessageLookupByLibrary.simpleMessage("تعديل بيانات المركبة"),
+        "edit_date_time":
+            MessageLookupByLibrary.simpleMessage("تعديل التاريخ والوقت"),
         "edit_employee": MessageLookupByLibrary.simpleMessage("تعديل موظف"),
         "edit_employment_official_data":
             MessageLookupByLibrary.simpleMessage("تعديل بيانات مسئول توظيف"),
@@ -722,6 +759,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enter_your_phone_number_retrieve_password":
             MessageLookupByLibrary.simpleMessage(
                 "ادخل رقم الهاتف الخاص بك لاسترجاع كلمة المرور"),
+        "entity": MessageLookupByLibrary.simpleMessage("الجهة"),
         "error_internet_connection":
             MessageLookupByLibrary.simpleMessage("خطأ في الاتصال بالشبكة"),
         "error_qr": MessageLookupByLibrary.simpleMessage(
@@ -806,6 +844,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "generalizations": MessageLookupByLibrary.simpleMessage("التعاميم"),
         "get_me_on_your_way":
             MessageLookupByLibrary.simpleMessage("وصلنى على طريقك"),
+        "go_violation_site":
+            MessageLookupByLibrary.simpleMessage("توجه لموقع المخالفة"),
         "good_evening": MessageLookupByLibrary.simpleMessage("مساء الخير"),
         "good_morning": MessageLookupByLibrary.simpleMessage("صباح الخير"),
         "goto_map":
@@ -837,8 +877,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "id_number": MessageLookupByLibrary.simpleMessage("رقم الهوية"),
         "id_number_recipient_account":
             MessageLookupByLibrary.simpleMessage("رقم الهوية لحساب المستلم"),
+        "image_after_maintenance":
+            MessageLookupByLibrary.simpleMessage(" صورة بعد الصيانة "),
+        "image_before_maintenance":
+            MessageLookupByLibrary.simpleMessage(" صورة قبل الصيانة "),
         "important_disclosure":
             MessageLookupByLibrary.simpleMessage("توضيح هام"),
+        "in_progress": MessageLookupByLibrary.simpleMessage("جاري المعالجة"),
         "in_work": MessageLookupByLibrary.simpleMessage("علي رأس العمل"),
         "inactive": MessageLookupByLibrary.simpleMessage("غير نشط"),
         "inactive_f": MessageLookupByLibrary.simpleMessage("غير نشطه"),
@@ -905,6 +950,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("فرص في انتظارك "),
         "jobs_review": MessageLookupByLibrary.simpleMessage("مراجعة الوظائف"),
         "join": MessageLookupByLibrary.simpleMessage("التحاق"),
+        "km_h": MessageLookupByLibrary.simpleMessage("كم/س"),
         "landing_page_desc1": MessageLookupByLibrary.simpleMessage(
             "اول منصة الكترونية مسجلة لدى هيئة الملكية الفكرية توفر فرص بشكل يومي بنظام الساعة والدفع فوري فور انتهاء ساعات عملك بواسطة احدث طرق الدفع "),
         "landing_page_desc2": MessageLookupByLibrary.simpleMessage(
@@ -941,6 +987,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "list_empty": MessageLookupByLibrary.simpleMessage("القائمة فارغة"),
         "list_gates_added":
             MessageLookupByLibrary.simpleMessage("قائمة البوابات المضافة"),
+        "live_feed": MessageLookupByLibrary.simpleMessage("بث المباشر"),
+        "live_streaming": MessageLookupByLibrary.simpleMessage("بث مباشر"),
         "load_failed_refresh_data": MessageLookupByLibrary.simpleMessage(
             "فشل التحميل، قم بتحديث البيانات"),
         "load_more": MessageLookupByLibrary.simpleMessage("تحميل المزيد"),
@@ -982,6 +1030,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "mark_box_map":
             MessageLookupByLibrary.simpleMessage("تحديد المنطقة علي الخريطة"),
         "maximum": MessageLookupByLibrary.simpleMessage("الحد الاقصي"),
+        "maximum_recorded_speed":
+            MessageLookupByLibrary.simpleMessage("أقصى سرعة مسجلة"),
+        "maximum_speed": MessageLookupByLibrary.simpleMessage("أقصي سرعة"),
         "menu_applicants":
             MessageLookupByLibrary.simpleMessage("قائمة المتقدمين"),
         "method_accept_employees":
@@ -1096,6 +1147,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("إشعار استلام وتسلم"),
         "notice_receipt_delivery_desc": MessageLookupByLibrary.simpleMessage(
             "يجب التأكد من حالة العهدة اولا قبل استلامها"),
+        "notifications": MessageLookupByLibrary.simpleMessage("الاشعارات"),
         "num": MessageLookupByLibrary.simpleMessage("العدد"),
         "num_accepted": MessageLookupByLibrary.simpleMessage("عدد المقبولين"),
         "num_applicants": MessageLookupByLibrary.simpleMessage("عدد المتقدمين"),
@@ -1211,6 +1263,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "plate_number": MessageLookupByLibrary.simpleMessage("رقم اللوحة"),
         "platform_description": MessageLookupByLibrary.simpleMessage(
             "هذه المنصه مسجله لدي الهيئة السعودية للملكية الفكرية"),
+        "play": MessageLookupByLibrary.simpleMessage("تشغيل"),
         "please_add_all":
             MessageLookupByLibrary.simpleMessage("من فضلك اكمل الاخيارات"),
         "please_add_logo":
@@ -1289,6 +1342,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "point": MessageLookupByLibrary.simpleMessage("نقطة"),
         "point_type": MessageLookupByLibrary.simpleMessage("نوع النقطة"),
         "points": MessageLookupByLibrary.simpleMessage("نقاط"),
+        "position": MessageLookupByLibrary.simpleMessage("الموضع:"),
         "power": MessageLookupByLibrary.simpleMessage("قوة"),
         "previous": MessageLookupByLibrary.simpleMessage("السابق"),
         "previous_button": MessageLookupByLibrary.simpleMessage("السابق"),
@@ -1359,6 +1413,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "receipt_status":
             MessageLookupByLibrary.simpleMessage("حالة استلام العهدة :"),
         "receive_vehicle": MessageLookupByLibrary.simpleMessage("استلام مركبة"),
+        "receive_vehicle_details":
+            MessageLookupByLibrary.simpleMessage("تفاصيل استلام المركبة"),
         "record_attendance":
             MessageLookupByLibrary.simpleMessage("تسجيل الحضور"),
         "record_attendance_scan_description_face_print":
@@ -1383,6 +1439,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reject_service_permission_message": MessageLookupByLibrary.simpleMessage(
             "*وفي حالة عدم الموافقة على تمكين البرنامج بالعمل لاثبات وقت الحضور والإنصراف بشكل صحيح تعتبر حالتك غياب."),
         "rejected": MessageLookupByLibrary.simpleMessage("تم الرفض"),
+        "reload": MessageLookupByLibrary.simpleMessage("إعادة تحميل"),
         "remaining": MessageLookupByLibrary.simpleMessage("متبقي"),
         "remaining_balance":
             MessageLookupByLibrary.simpleMessage("الرصيد المتبقي"),
@@ -1411,6 +1468,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("العدد المطلوب"),
         "required_reason_refuse":
             MessageLookupByLibrary.simpleMessage("سبب الرفض مطلوب"),
+        "reschedule": MessageLookupByLibrary.simpleMessage("إعادة جدولة"),
         "resend_code": MessageLookupByLibrary.simpleMessage("إعادة إرسال"),
         "reserved_opportunities":
             MessageLookupByLibrary.simpleMessage("الفرص المحجوزة"),
@@ -1519,6 +1577,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اختر اسم البراند"),
         "select_brand_type":
             MessageLookupByLibrary.simpleMessage("اختر نوع البراند"),
+        "select_camera": MessageLookupByLibrary.simpleMessage("اختر الكاميرا"),
         "select_cashifter":
             MessageLookupByLibrary.simpleMessage("اختر الكاشفتر"),
         "select_city": MessageLookupByLibrary.simpleMessage("اختر المدينة"),
@@ -1539,6 +1598,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اختيار موقفك الحالي"),
         "select_date_absence":
             MessageLookupByLibrary.simpleMessage(" حدد تاريخ الغياب"),
+        "select_date_and_time":
+            MessageLookupByLibrary.simpleMessage("اختر التاريخ والوقت"),
+        "select_date_from_to":
+            MessageLookupByLibrary.simpleMessage("من فضلك اختار تاريخ من إلى"),
         "select_day": MessageLookupByLibrary.simpleMessage("حدد يوم "),
         "select_degree_importance":
             MessageLookupByLibrary.simpleMessage("اختر درجة الاهمية"),
@@ -1621,6 +1684,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اختر نوع المركبة"),
         "select_vehicles":
             MessageLookupByLibrary.simpleMessage("اختر المركبات"),
+        "select_video_date":
+            MessageLookupByLibrary.simpleMessage("اختر تاريخ الفيديو"),
         "select_violation_name":
             MessageLookupByLibrary.simpleMessage("اختر اسم المخالفة"),
         "select_wallet": MessageLookupByLibrary.simpleMessage("اختر محفظة"),
@@ -1653,6 +1718,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "shift_hours": MessageLookupByLibrary.simpleMessage("مواعيد العمل"),
         "shift_name": MessageLookupByLibrary.simpleMessage("اسم الدوام"),
         "shift_times": MessageLookupByLibrary.simpleMessage("مواعيد العمل"),
+        "shod_image_after_maintenance": MessageLookupByLibrary.simpleMessage(
+            "يرجي اختيار صورة بعد الصيانة "),
+        "shod_image_before_maintenance": MessageLookupByLibrary.simpleMessage(
+            " يرجي اختيار صورة قبل الصيانة "),
         "show_cashifter_data":
             MessageLookupByLibrary.simpleMessage("إظهار بيانات الكاشيفتر"),
         "show_cashifter_images":
@@ -1675,6 +1744,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "special_offer":
             MessageLookupByLibrary.simpleMessage("عروض خاصة (قريباً)"),
         "specialization": MessageLookupByLibrary.simpleMessage("التخصص"),
+        "speed": MessageLookupByLibrary.simpleMessage("السرعة:"),
+        "speeding_during_violation":
+            MessageLookupByLibrary.simpleMessage("السرعة أثناء المخالفة"),
         "sponsor_data": MessageLookupByLibrary.simpleMessage("بيانات الكفيل"),
         "sponsor_mobile": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
         "sponsor_name": MessageLookupByLibrary.simpleMessage("اسم الكفيل"),
@@ -1685,6 +1757,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "start_date": MessageLookupByLibrary.simpleMessage("تاريخ البداية"),
         "start_date_blocking":
             MessageLookupByLibrary.simpleMessage("تاريخ بدأ الحجب :"),
+        "start_live_feed":
+            MessageLookupByLibrary.simpleMessage("بدأ البث المباشر"),
         "start_overtime":
             MessageLookupByLibrary.simpleMessage("بدء الوقت الإضافي"),
         "start_shift_label":
@@ -1694,6 +1768,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "قبل بدأ الجولة يجب ان تحدد نوع جولة لكي يتم استلامك  للمركبة."),
         "start_typing_search":
             MessageLookupByLibrary.simpleMessage("ابدأ الكتابة للبحث"),
+        "start_video": MessageLookupByLibrary.simpleMessage("بدأ الفيديو"),
         "state_emp": MessageLookupByLibrary.simpleMessage("حالة الموظف"),
         "statistic_emp":
             MessageLookupByLibrary.simpleMessage("احصائيات الموظف"),
@@ -1701,6 +1776,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "status_infringement":
             MessageLookupByLibrary.simpleMessage("حالة المخالفه"),
         "status_request": MessageLookupByLibrary.simpleMessage("حالة الطلب "),
+        "stop": MessageLookupByLibrary.simpleMessage("إيقاف"),
         "street_name": MessageLookupByLibrary.simpleMessage("اسم الشارع"),
         "submission_date":
             MessageLookupByLibrary.simpleMessage("تاريخ التقديم"),
@@ -1742,6 +1818,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "there_are_no_notes":
             MessageLookupByLibrary.simpleMessage("لا يوجد ملاحظات"),
         "there_are_notes": MessageLookupByLibrary.simpleMessage("يوجد ملاحظات"),
+        "there_are_videos_yet":
+            MessageLookupByLibrary.simpleMessage("لا توجد فيديوهات بعد"),
         "there_many_ways_pay":
             MessageLookupByLibrary.simpleMessage("هناك طرق عديده للدفع"),
         "there_many_ways_pay_desc": MessageLookupByLibrary.simpleMessage(
@@ -1785,11 +1863,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اجمالي قيمة السلفه "),
         "tour_history": MessageLookupByLibrary.simpleMessage("تاريخ الجولات"),
         "tour_type": MessageLookupByLibrary.simpleMessage("نوع الجولة"),
+        "track_vehicle_on_map":
+            MessageLookupByLibrary.simpleMessage("تتبع المركبة علي الخريطة"),
         "tracking_focus_points":
             MessageLookupByLibrary.simpleMessage("متابعة نقاط التمركز"),
         "tracking_period": MessageLookupByLibrary.simpleMessage("فترة التتبُع"),
         "transaction_history":
             MessageLookupByLibrary.simpleMessage("سجل المعاملات"),
+        "transactions": MessageLookupByLibrary.simpleMessage("المعاملات"),
         "transfer": MessageLookupByLibrary.simpleMessage("تحويل"),
         "transfer_amount": MessageLookupByLibrary.simpleMessage("مبلغ المحول"),
         "transfer_balance": MessageLookupByLibrary.simpleMessage("رصيد محول"),
@@ -1812,6 +1893,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اكتب اسم المنطقة"),
         "type_back_up_number":
             MessageLookupByLibrary.simpleMessage("اكتب عدد القبول الاحتياطى"),
+        "type_camera_code":
+            MessageLookupByLibrary.simpleMessage("اكتب كود الكاميرا"),
+        "type_camera_name_ar":
+            MessageLookupByLibrary.simpleMessage("اكتب اسم الكاميرا بالعربي"),
+        "type_camera_name_en": MessageLookupByLibrary.simpleMessage(
+            "اكتب اسم الكاميرا بالانجليزي"),
         "type_contractual_power_number":
             MessageLookupByLibrary.simpleMessage("اكتب القوة التعاقدية"),
         "type_covenant_desc":
@@ -1838,6 +1925,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اكتب عدد الدقائق"),
         "type_number_required_for_opportunity":
             MessageLookupByLibrary.simpleMessage("اكتب العدد المطلوب للفرصة"),
+        "type_operation": MessageLookupByLibrary.simpleMessage("نوع العملية"),
         "type_opportunities_number":
             MessageLookupByLibrary.simpleMessage("اكتب العدد المطلوب"),
         "type_opportunity_value":
@@ -1869,6 +1957,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تغير الحالة الي نشط"),
         "update_status_unActive":
             MessageLookupByLibrary.simpleMessage("تغير الحالة الي غير نشط"),
+        "update_transactions":
+            MessageLookupByLibrary.simpleMessage(" تحديث المعاملة"),
         "upload_image": MessageLookupByLibrary.simpleMessage("رفع صورة"),
         "upload_pdf_image":
             MessageLookupByLibrary.simpleMessage("رفع صورة او ملف PDF"),
@@ -1876,8 +1966,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "user_account": MessageLookupByLibrary.simpleMessage("حساب المستخدم"),
         "user_request_accept_subtitle_msg": MessageLookupByLibrary.simpleMessage(
             "اذا كنت توافق علي طلب الكاشفتر سينتقل الطلب الي قائمة الموافقة ويتحول الطلب الي الادارة"),
-        "user_request_accept_title": MessageLookupByLibrary.simpleMessage(
-            "هل انت متأكد من الموافقة علي تغيير رقم جوال الكاشفتر؟"),
+        "user_request_accept_title":
+            MessageLookupByLibrary.simpleMessage("هل انت متأكد من الموافقة؟"),
         "user_request_reject_subtitle": MessageLookupByLibrary.simpleMessage(
             "اذا كنت ترفض طلب الكاشفتر عليك كتابة السبب"),
         "user_request_reject_title":
@@ -1915,6 +2005,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "value_total":
             MessageLookupByLibrary.simpleMessage("اجمالي القيمة المستردة"),
         "vehicle": MessageLookupByLibrary.simpleMessage("المركبة"),
+        "vehicle_camera_code":
+            MessageLookupByLibrary.simpleMessage("معرف كود الكاميرا للمركبة"),
         "vehicle_color": MessageLookupByLibrary.simpleMessage("لون المركبة"),
         "vehicle_components":
             MessageLookupByLibrary.simpleMessage("مكونات المركبة"),
@@ -1924,6 +2016,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تأمين المركبة"),
         "vehicle_note": MessageLookupByLibrary.simpleMessage(
             "اضغط علي  ( لا ) عندما لا يوجد اي ملاحظات علي المركبة أو ( نعم ) في حالة لم تكن تعمل أو يوجد بها ملاحظات مع التوضيح ."),
+        "vehicle_path": MessageLookupByLibrary.simpleMessage("مسار المركبة"),
+        "vehicle_performance":
+            MessageLookupByLibrary.simpleMessage("أداء المركبة"),
         "vehicle_specifications":
             MessageLookupByLibrary.simpleMessage("مواصفات المركبة"),
         "vehicle_type": MessageLookupByLibrary.simpleMessage("نوع المركبة"),
@@ -1937,15 +2032,24 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("كود التفعيل"),
         "verification_code_sent_desc": MessageLookupByLibrary.simpleMessage(
             "سوف يتم ارسال كود التحقق الي رقم الجوال القديم , عليك مراجعته الان"),
+        "video": MessageLookupByLibrary.simpleMessage("الفيديو"),
+        "videos": MessageLookupByLibrary.simpleMessage("فيديوهات"),
+        "videos_dates_validate_msg": MessageLookupByLibrary.simpleMessage(
+            "من فضلك حدّد الوقت والتاريخ الذي تريده لعرض الفيديوهات فيه"),
         "view_all": MessageLookupByLibrary.simpleMessage("عرض الكل"),
         "view_areas": MessageLookupByLibrary.simpleMessage("عرض المناطق"),
+        "view_cameras": MessageLookupByLibrary.simpleMessage("عرض الكاميرات"),
         "view_details": MessageLookupByLibrary.simpleMessage("عرض التفاصيل"),
+        "view_maintenance":
+            MessageLookupByLibrary.simpleMessage("عرض الصيانة والأعطال"),
         "view_search_results":
             MessageLookupByLibrary.simpleMessage("عرض نتائج البحث"),
         "view_terms_conditions":
             MessageLookupByLibrary.simpleMessage("الاطلاع علي الشروط والاحكام"),
         "view_tracking_requests":
             MessageLookupByLibrary.simpleMessage("عرض طلبات التتبع"),
+        "view_transactions":
+            MessageLookupByLibrary.simpleMessage("عرض المعاملات"),
         "view_work_hazards":
             MessageLookupByLibrary.simpleMessage("عرض مخاطر العمل"),
         "violation": MessageLookupByLibrary.simpleMessage("مخالفة "),
@@ -1960,6 +2064,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اسم المخالفة بالانجليزي "),
         "violation_repeated":
             MessageLookupByLibrary.simpleMessage("عدد مرات التكرار"),
+        "violation_time": MessageLookupByLibrary.simpleMessage("وقت المخالفة"),
         "violation_type": MessageLookupByLibrary.simpleMessage("نوع المخالفة"),
         "violation_value":
             MessageLookupByLibrary.simpleMessage("قيمة المخالفه"),
@@ -1981,6 +2086,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("في انتظار المراجعة"),
         "wallet": MessageLookupByLibrary.simpleMessage("المحفظة"),
         "wanted_number": MessageLookupByLibrary.simpleMessage("عدد المطلوبين"),
+        "waring_action_notification": MessageLookupByLibrary.simpleMessage(
+            " سيتم حفظ اجراءك وارساله الي مدير المشروع لمراجعته والرد عليه "),
+        "waring_final_action_notification":
+            MessageLookupByLibrary.simpleMessage("سيتم ارساله للمشرف ."),
         "ways_accept_job":
             MessageLookupByLibrary.simpleMessage("طرق قبول الوظيفه"),
         "weight": MessageLookupByLibrary.simpleMessage("الوزن"),
@@ -2049,6 +2158,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("عدد ساعات العمل"),
         "working_period": MessageLookupByLibrary.simpleMessage("فترة العمل"),
         "working_time": MessageLookupByLibrary.simpleMessage("وقت العمل"),
+        "write_action_to_be_taken":
+            MessageLookupByLibrary.simpleMessage("اكتب الإجراء الذي ستتخذه"),
         "write_address": MessageLookupByLibrary.simpleMessage("اكتب العنوان"),
         "write_body_mass":
             MessageLookupByLibrary.simpleMessage("اكتب كتلة الجسم"),

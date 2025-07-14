@@ -15,55 +15,25 @@ import '../../../../shared/components/adminToggle/cubit/admin_toggle_cubit.dart'
 import '../../../../shared/components/dialogs_manager.dart';
 
 class RequestItemBuilder
-    extends BaseBlocWidget<InitializedToggleData, AdminToggleCubit> {
-  @override
-  bool detectRequiredTasks() {
-    return false;
-  }
+    extends BaseStatelessWidget{
+  final bool faceDetectionEnabled  ;
 
-  @override
-  void loadInitialData(BuildContext context) {
-    if (bloc.image == null) {
-      bloc.fetchRegisteredFace();
-    }
-  }
+  RequestItemBuilder({required this.faceDetectionEnabled});
 
-  @override
-  Widget buildWidget(BuildContext context, InitializedToggleData state) {
-    print("AdminTogglePage state");
-    print(bloc.image);
-    print("AdminTogglePage state");
-    return buildProfileItem(strings.requests,
-        icon: kLoadSvgInCircle("requests"), onTap: () async {
+@override
+  Widget build(BuildContext context) {
+  return buildProfileItem(strings.requests,
+      icon: kLoadSvgInCircle("requests"), onTap: () async {
 
-      if (state.image == "") {
-        state.isAllowFaceRecognition == true
-            ? await Navigator.pushNamed(context, Routes.faceRecognitionPage,
-                arguments: state.user)
-            : Navigator.pushNamed(context, Routes.requestsUserPage);
-        ;
-      } else {
-        onFaceDetection(context);
-      }
-    });
-  }
-
-  double? simi;
-  File? face;
-
-  bool isShowDialogs = false;
-  final CustomProgressDialog dialogs =
-      DialogsManager.createProgressWithMessage(Get.context!);
-  showDialogs() {
-    if (!isShowDialogs) {
-      dialogs.show();
-      isShowDialogs = true;
-    }
-  }
-
-  dismissDialogs() {
-    dialogs.dismiss();
-    isShowDialogs = false;
+        if (faceDetectionEnabled) {
+          final matching = await checkFaceRecognition(context);
+          if(matching){
+            Navigator.pushNamed(context, Routes.requestsUserPage);
+          }
+        } else {
+          Navigator.pushNamed(context, Routes.requestsUserPage);
+        }
+      });
   }
 
   buildProfileItem(String data,
@@ -81,78 +51,5 @@ class RequestItemBuilder
         : Container();
   }
 
-  Future<void> onFaceDetection(
-    BuildContext context,
-  ) async {
-    try {
-      simi = null;
-      final pickedFile = await navigateToCamera(publicContext);
-      if (pickedFile != null) {
-        simi = await detectFaceSimilitry(pickedFile);
-        if (simi != null && simi! > 60) {
-          face = pickedFile;
-          Navigator.pushNamed(context, Routes.requestsUserPage);
-        }
-      }
-    } catch (e) {
-      handleErrorDialog(strings.undefine_error, context);
-    }
-  }
 
-  Future<double?> detectFaceSimilitry(File pickedFile) async {
-    print('detectFaceSimilitry');
-    try {
-      showDialogs();
-      DialogsManager.createProgressWithMessage(context);
-      final pickedUintList = pickedFile.readAsBytesSync();
-      final simi =
-          await FaceMatchingUtils.matchFaces(pickedUintList, bloc.image??'');
-
-      dismissDialogs();
-
-      print('matchingProcess ${simi}');
-      return simi;
-    } catch (e) {
-      print(e);
-      print("errorccc");
-      dismissDialogs();
-      handleErrorDialog(strings.face_not_matched, publicContext);
-
-      return null;
-    }
-  }
-
-  Future<File?> navigateToCamera(BuildContext context) async {
-    try {
-      final granted =
-          await PermissionDetector.detectCameraAndStoragePermission(context);
-      if (granted == false) return null;
-      File? imageFile;
-      WakelockPlus.enable();
-      final data = bloc.getDataToggle();
-      print("jkkk");
-      print(data?.eyeCheck);
-      print(data?.moveFace);
-      print(data?.smile);
-      print("jkkk");
-      final imagePath = await Navigator.pushNamed(
-        context,
-        Routes.faceDetectorPage,
-        arguments: AttendanceConfigDto(
-          eyeCheck: data?.eyeCheck,
-          moveFace: data?.moveFace,
-          smile: data?.smile,
-        ),
-      );
-
-      WakelockPlus.disable();
-      if (imagePath is String && !imagePath.isNullOrEmpty()) {
-        imageFile = File(imagePath);
-        return imageFile;
-      }
-      return null;
-    } catch (e) {
-      return null;
-    }
-  }
 }

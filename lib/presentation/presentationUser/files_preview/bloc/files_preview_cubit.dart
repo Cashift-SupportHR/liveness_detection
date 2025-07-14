@@ -17,7 +17,8 @@ class FilesPreviewCubit extends BaseCubit {
     emit(LoadingStateListener());
     try {
       String filePath = await FilesManager.downloadFileFromUrl(data);
-      emit(SuccessStateListener<List<XFile>>(data: [XFile(filePath)]));
+
+   emit(SuccessStateListener<List<XFile>>(data: [XFile(filePath)]));
     }catch (e) {
       emit(FailureStateListener(e));
       rethrow;
@@ -27,8 +28,14 @@ class FilesPreviewCubit extends BaseCubit {
   Future<void> downLoadFromUrl(String data) async {
     emit(LoadingStateListener());
     try {
-      String filePath = await FilesManager.downloadFileFromUrl(data);
-      await FilesManager().saveFileFromFile(filePath);
+      if(data.startsWith("http")){
+        String filePath = await FilesManager.downloadFileFromUrl(data);
+        await FilesManager().saveFileFromFile(filePath);
+      } else{
+        await FilesManager().saveFileFromBase64(
+          DownLoadFileDto(fileAttachment: data,),
+        );
+      }
       emit(SuccessStateListener(
           data: Get.context!.getStrings().successfully_downloaded));
     }catch (e) {
@@ -37,3 +44,4 @@ class FilesPreviewCubit extends BaseCubit {
     }
   }
 }
+

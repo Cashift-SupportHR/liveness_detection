@@ -10,7 +10,7 @@ import '../../../../../domain/entities/project_management.dart';
 import '../../../bloc/project_successfully_bloc.dart';
 
 class ShowQrCodePage extends BaseBlocWidget<
-    Initialized<DownLoadSalaryDefinition>, ProjectSuccessfullyCubit> {
+    Initialized<DownLoadFileDto>, ProjectSuccessfullyCubit> {
   ShowQrCodePage({
     Key? key,
   }) : super(key: key);
@@ -36,7 +36,7 @@ class ShowQrCodePage extends BaseBlocWidget<
 
   @override
   Widget buildWidget(
-      BuildContext context, Initialized<DownLoadSalaryDefinition> state) {
+      BuildContext context, Initialized<DownLoadFileDto> state) {
     return FileViewScreen(
       data: state.data,
       isShowShareAndDownloadButtons: true,
