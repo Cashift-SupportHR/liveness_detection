@@ -10,6 +10,7 @@ import 'package:shiftapp/presentation/shared/components/base_widget_bloc.dart';
 import '../../../../../data/models/create_vehicle_handover_prams.dart';
 
 import '../../../../../data/models/mainReceiveVehicleArgument.dart';
+import '../../../../../domain/entities/CreateVehicleHandover.dart';
 import '../../../../../domain/entities/custody_handover.dart';
 import '../bloc/vehicles_components_cubit.dart';
 import '../intent/vehicle_components_intents.dart';
@@ -19,7 +20,7 @@ class VehicleComponentsPage extends BaseBlocWidget<
   final Function(int handoverId, List<CustodyHandover>?) onNext;
 
   final Function() onCancel;
-  CreateVehicleHandoverPrams? Function()? onInitialDataCallback;
+  CreateVehicleHandover? Function()? onInitialDataCallback;
   MainReceiveVehicleArg? mainReceiveVehicleArg;
 
   VehicleComponentsPage(
@@ -32,25 +33,25 @@ class VehicleComponentsPage extends BaseBlocWidget<
 
   @override
   void loadInitialData(BuildContext context) {
-    bloc.fetchVehicleComponents(
-        onInitialDataCallback!(), mainReceiveVehicleArg?.receiveVehicle?.id);
+    bloc.fetchVehicleComponents(mainReceiveVehicleArg?.receiveVehicleData?.id);
   }
 
   int? handoverId;
   List<CustodyHandover> custodiesHandovers = [];
+  CreateVehicleHandover? createVehicleHandover;
 
   @override
   Widget buildWidget(
       BuildContext context, InitializedVehiclesComponents state) {
+    createVehicleHandover = onInitialDataCallback!();
+    handoverId = createVehicleHandover?.id ?? mainReceiveVehicleArg?.receiveVehicleData?.handoverId ?? 0;
     custodiesHandovers =
         state.receiveVehicleDetails?.vehiclesCustodiesHandovers ?? [];
     return VehicleComponentsScreen(
       addStream: bloc.addStream,
       vehicleComponentList: state.vehicleComponents,
       // receiveVehicleDetails: state.receiveVehicleDetails,
-      handoverId: mainReceiveVehicleArg?.isEdit == false
-          ? state.createVehicleHandover.id ?? 0
-          : mainReceiveVehicleArg?.receiveVehicle?.handoverId ?? 0,
+      handoverId: handoverId ?? 0,
       intentCallBack: (VehicleComponentsIntents intent) {
         print('intentCallBack');
         onIntent(intent, state);
@@ -61,13 +62,15 @@ class VehicleComponentsPage extends BaseBlocWidget<
   onIntent(
       VehicleComponentsIntents intent, InitializedVehiclesComponents state) {
     if (intent is SubmitVehicleComponents) {
+      bloc.vehicleComponents = intent.vehicleComponents;
       if (mainReceiveVehicleArg?.isEdit == false) {
-        handoverId = state.createVehicleHandover.id;
+        handoverId = createVehicleHandover?.id ?? 0;
       }
-
+      intent.data.vehicleHandoverId = handoverId;
       bloc.addComponents(intent.data);
     }
     if (intent is CancelVehicleComponents) {
+      bloc.vehicleComponents = intent.vehicleComponents;
       onCancel();
     }
     if (intent is SubmitQuestionAnswer) {
@@ -80,7 +83,9 @@ class VehicleComponentsPage extends BaseBlocWidget<
 
   @override
   void onSuccessDataState(data) {
+    print("onSuccessDataState handoverId $handoverId");
     if (data == "onNext") {
+      print("if onSuccessDataState handoverId $handoverId");
       onNext(handoverId ?? 0, custodiesHandovers);
     }
   }

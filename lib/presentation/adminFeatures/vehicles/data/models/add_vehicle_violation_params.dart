@@ -18,8 +18,10 @@ class AddVehicleViolationParams {
   double? lng;
   @JsonKey(name: 'contractViolationTypeId')
   int? contractViolationTypeId;
+  @JsonKey(name: 'roundTripId')
+  int? roundTripId;
 
-  AddVehicleViolationParams({this.id, this.details, this.companyName, this.streetName, this.lat, this.lng, this.contractViolationTypeId});
+  AddVehicleViolationParams({this.id, this.details, this.companyName, this.streetName, this.lat, this.lng, this.contractViolationTypeId, this.roundTripId});
 
    factory AddVehicleViolationParams.fromJson(Map<String, dynamic> json) => _$AddVehicleViolationParamsFromJson(json);
 

@@ -77,11 +77,11 @@ class CompletedOpportunityData {
   @JsonKey(name: 'isAllowUpdateStatus')
   bool? isAllowUpdateStatus;
   @JsonKey(name: 'deservedAmount')
-  int? deservedAmount;
+  num? deservedAmount;
   @JsonKey(name: 'totalDeductMoneyClearanceCertificate')
-  int? totalDeductMoneyClearanceCertificate;
+  num? totalDeductMoneyClearanceCertificate;
   @JsonKey(name: 'ammountViolations')
-  int? ammountViolations;
+  num? ammountViolations;
 
   CompletedOpportunityData({this.id, this.shiftId, this.typeOpportunty, this.typeOfOpportunty, this.freelanceId, this.freelanceName, this.idNumber, this.phoneNumber, this.status, this.statusId, this.workingDate, this.startShiftDate, this.endShiftDate, this.workingDateTime, this.endWorkingDateTime, this.workingStartDate, this.workingEndDate, this.jobName, this.projectName, this.address, this.cityName, this.description, this.endAllowMinutes, this.startShiftTime, this.oppId, this.isAllowUpdateStatus, this.deservedAmount, this.totalDeductMoneyClearanceCertificate, this.ammountViolations});
 

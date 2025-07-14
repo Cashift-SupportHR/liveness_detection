@@ -1,10 +1,12 @@
  import 'package:shiftapp/presentation/adminFeatures/available_opportunities/presentation/widgets/build_popup_menu_button.dart';
+import 'package:shiftapp/presentation/adminFeatures/vehicles/data/models/vehicle_traking_details_prams.dart';
 import 'package:shiftapp/presentation/presentationUser/resources/colors.dart';
 import 'package:shiftapp/presentation/presentationUser/resources/constants.dart';
 import 'package:shiftapp/presentation/shared/components/index.dart';
  import 'package:shiftapp/utils/app_icons.dart';
 import '../../../../../../core/services/routes.dart';
  import '../../../../../../domain/entities/shared/date_formatter.dart';
+import '../../../../../shared/components/bottom_sheet/bottom_sheet_options.dart';
 import '../../../domain/entities/vehicle.dart';
 
 class VehiclesItem extends BaseStatelessWidget {
@@ -21,14 +23,13 @@ class VehiclesItem extends BaseStatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(10),
-      decoration: Decorations.decorationTabs,
-      child: Column(
-        children: [
-          Stack(
-            alignment: AlignmentDirectional.topEnd,
+    return Stack(
+      children: [
+        Container(
+          margin: EdgeInsets.all(10),
+          padding: EdgeInsets.all(10),
+          decoration: Decorations.decorationTabs,
+          child: Column(
             children: [
               Row(
                 children: [
@@ -55,40 +56,45 @@ class VehiclesItem extends BaseStatelessWidget {
                   ),
                 ],
               ),
-              _OptionsMenuButton(
-                vehicleId: data.id ?? 0,
-                onDelete: () => onDelete(data.id ?? 0),
-                onRefresh: onRefresh,
-              )
+              SizedBox(height: 10),
+              ListRowTextsIcons(icons: [
+                AppIcons.buildingsOutline,
+                AppIcons.car3,
+                AppIcons.car3,
+                AppIcons.color,
+                AppIcons.calandery,
+              ], titles: [
+                strings.company_name,
+                strings.plate_number,
+                strings.license_number,
+                strings.color,
+                strings.year_crate,
+              ], values: [
+                '${data.companyName ?? ""}',
+                data.plateNumber ?? "",
+                data.licenseNumber ?? "",
+                data.vehicleColorName ?? "",
+                data.yearOfManufacture?.toString() ?? "",
+
+              ]),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: detailsButton(context),
+              ),
             ],
           ),
-          SizedBox(height: 10),
-          ListRowTextsIcons(icons: [
-            AppIcons.buildingsOutline,
-            AppIcons.car3,
-            AppIcons.car3,
-            AppIcons.color,
-            AppIcons.calandery,
-          ], titles: [
-            strings.company_name,
-            strings.plate_number,
-            strings.license_number,
-            strings.color,
-            strings.year_crate,
-          ], values: [
-            '${data.companyName ?? ""}',
-            data.plateNumber ?? "",
-            data.licenseNumber ?? "",
-            data.vehicleColorName ?? "",
-            data.yearOfManufacture?.toString() ?? "",
+        ),
 
-          ]),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: detailsButton(context),
+        PositionedDirectional(
+          end: 10,
+          top: 10,
+          child: _OptionsMenuButton(
+            item: data,
+            onDelete: () => onDelete(data.id ?? 0),
+            onRefresh: onRefresh,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -115,11 +121,11 @@ class VehiclesItem extends BaseStatelessWidget {
 }
 
 class _OptionsMenuButton extends BaseStatelessWidget {
-  final int vehicleId;
+  final Vehicle item;
   final Function() onDelete;
   final Function() onRefresh;
   _OptionsMenuButton({
-    required this.vehicleId,
+    required this.item,
     required this.onDelete,
     required this.onRefresh,
     Key? key,
@@ -127,75 +133,62 @@ class _OptionsMenuButton extends BaseStatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle titleStyle = kTextBold.copyWith(fontSize: 10, color: kGreen_54);
-    double iconSize = 20;
-
-    return OptionsMenuButton(
-      options: [
-        BuildPopupMenuItemContent(
-          title: strings.edit_data_vehicles,
-          iconPath: AppIcons.carEdit,
-          titleStyle: titleStyle,
-          iconSize: iconSize,
-        ),
-        // BuildPopupMenuItemContent(
-        //   title: strings.maintenance,
-        //   iconPath: AppIcons.maintenance,
-        //   titleStyle: titleStyle,
-        //   iconSize: iconSize,
-        //   isDivider: false,
-        // ),
-
-        BuildPopupMenuItemContent(
-          title: strings.vehicle_insurance,
-          iconPath: AppIcons.car3,
-          titleStyle: titleStyle,
-          iconSize: iconSize,
-        ),
-        BuildPopupMenuItemContent(
-          title: strings.edit_covenant,
-          iconPath: AppIcons.hand,
-          titleStyle: titleStyle,
-          iconSize: iconSize,
-        ),
-
-        BuildPopupMenuItemContent(
-          title: strings.print_qr_code,
-          iconPath: AppIcons.qr3,
-          titleStyle: titleStyle,
-          iconSize: iconSize,
-        ),
-        BuildPopupMenuItemContent(
-          title: strings.delete,
-          iconPath: AppIcons.deleteOutline,
-          titleStyle: titleStyle,
-          iconSize: iconSize,
-          isDivider: false,
-        ),
-      ],
-      onSelect: (value) async {
-        if (value == 0) {
-          final isRefresh = await  Navigator.pushNamed(context, Routes.mainAddVehiclePage, arguments: vehicleId);
-          print("isRefresh $isRefresh");
-          if(isRefresh == true){
-            onRefresh();
-          }
-        }
-        else if (value == 1) {
-          //vehicle_insurance
-          Navigator.pushNamed(context, Routes.insurancePage,
-              arguments: vehicleId);
-        } else if (value == 2) {
-          Navigator.pushNamed(context, Routes.vehiclesCovenantPage,
-              arguments: vehicleId);
-        } else if (value == 3) {
-          Navigator.pushNamed(context, Routes.vehicleQrCodePage, arguments: vehicleId);
-
-        } else if (value == 4) {
-          onDelete();
-
-        }
-      },
+    return BottomSheetOptionsMenu(
+      options: getOptionsMenu(context),
     );
+  }
+
+  List<BottomSheetOption> getOptionsMenu(BuildContext context) {
+   return [
+     BottomSheetOption(
+       title: strings.edit_data_vehicles,
+       icon: AppIcons.carEdit,
+       onTap: () async {
+         final isRefresh = await  Navigator.pushNamed(context, Routes.mainAddVehiclePage, arguments: item.id);
+         print("isRefresh $isRefresh");
+         if(isRefresh == true){
+           onRefresh();
+         }
+       },
+     ),
+     BottomSheetOption(
+       title: strings.vehicle_insurance,
+       icon: AppIcons.car3,
+       routeName: Routes.insurancePage,
+       arguments: item.id,
+     ),
+     BottomSheetOption(
+       title: strings.edit_covenant,
+       icon: AppIcons.hand,
+       routeName: Routes.vehiclesCovenantPage,
+       arguments: item.id,
+     ),
+     BottomSheetOption(
+       title: strings.print_qr_code,
+       icon: AppIcons.qr3,
+       routeName: Routes.vehicleQrCodePage,
+       arguments: item.id,
+     ),
+     BottomSheetOption(
+       title: strings.cameras,
+       icon: AppIcons.camera_vehicle,
+       routeName: Routes.vehicleCamerasPage,
+       arguments: item,
+     ),
+     BottomSheetOption(
+       title: strings.track_vehicle_on_map,
+       icon: AppIcons.carTime,
+       routeName: Routes.vehiclesTrackingPage,
+       arguments: VehicleTrakingDetailsPrams(isVehicleHandover:false,vehicleHandoverId: 0,vehicleId: item.id,  ),
+     ),
+     BottomSheetOption(
+       title: strings.delete,
+       icon: AppIcons.deleteOutline,
+       onTap: () {
+         Navigator.pop(context);
+         onDelete();
+       },
+     ),
+   ];
   }
 }

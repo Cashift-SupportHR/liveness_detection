@@ -3,8 +3,10 @@ import 'package:shiftapp/presentation/presentationUser/resources/constants.dart'
 import 'package:shiftapp/presentation/shared/components/index.dart';
 import 'package:shiftapp/utils/app_icons.dart';
 import '../../../../../../core/services/routes.dart';
+import '../../../../../domain/constants/codes_constants.dart';
 import '../../../../shared/components/bottom_sheet/custom_bottom_sheets.dart';
 import '../../../../shared/components/buttons/details_button.dart';
+import '../../../../shared/models/common_list_item.dart';
 import '../../data/models/reject_user_request_params.dart';
 import '../../domain/entities/user_request.dart';
 import '../pages/user_request_terms_builder.dart';
@@ -13,12 +15,14 @@ class UserRequestItem extends BaseStatelessWidget {
   final UserRequest data;
   final Function() onRefresh;
   final Function(RejectUserRequestParams) onReject;
+  final CommonListItem? selectedTab;
 
   UserRequestItem({
     Key? key,
     required this.data,
     required this.onRefresh,
     required this.onReject,
+    this.selectedTab,
   }) : super(key: key);
 
   @override
@@ -33,6 +37,7 @@ class UserRequestItem extends BaseStatelessWidget {
           listRowTextsIcons(),
           attachments(context),
           // detailsButton(context),
+          if(selectedTab?.isShowActionButton == true)
           rowButtonsActions(context),
         ],
       ),
@@ -122,6 +127,7 @@ class UserRequestItem extends BaseStatelessWidget {
       context,
       onRefresh: onRefresh,
       userRequest: data,
+      codeTab: selectedTab?.code ?? '',
     );
   }
 
@@ -142,6 +148,7 @@ class UserRequestItem extends BaseStatelessWidget {
     onReject(RejectUserRequestParams(
       id: data.id,
       reason: value,
+      statusId: CodesConstants.rejected,
     ));
   }
 }

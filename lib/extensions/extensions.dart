@@ -10,7 +10,7 @@ import '../../../data/datasources/remote/unauthorized_exception.dart';
 import '../../../data/exceptions/app_exception.dart';
 import '../../../data/exceptions/empty_list_exception.dart';
 import '../../../domain/entities/api_code.dart';
-import '../main_index.dart';
+import '../l10n/app_localizations.dart';
 extension AppResource on BuildContext {
 
   AppLocalizations getStrings() {
@@ -40,11 +40,17 @@ extension NullOrEmpty on String? {
   bool isNullOrEmpty() {
     return this == null || this!.trim().isEmpty ;
   }
+  bool isNotNullOrEmpty() {
+    return !isNullOrEmpty();
+  }
 }
 
 extension NullOrEmptyFile on File? {
   bool isNullOrEmpty() {
     return this == null || this!.path.trim().isEmpty;
+  }
+  bool isNotNullOrEmpty() {
+    return this != null && this!.path.trim().isNotEmpty;
   }
 }
 
@@ -83,7 +89,11 @@ extension ObjectExtension on Object {
 
 extension ContextExtension on BuildContext {
   T? getArguments<T>() {
-    return MyModalRoute.of(this)?.settings.arguments as T?;
+    final args = MyModalRoute.of(this)!.settings.arguments;
+    if (args != null && args is T) {
+      return MyModalRoute.of(this)!.settings.arguments as T;
+    }
+    return null;
   }
 
   Locale getLocal() {
@@ -126,7 +136,7 @@ extension ContextExtension on BuildContext {
         print('handleApiError whenApiException is dio   $message');
       } else if (isRequireLogin(exception)) {
         message = getStrings().required_login;
-      } else {
+      }  else {
         message = getStrings().undefine_error;
       }
     }
@@ -229,19 +239,33 @@ extension DateUtils on DateTime {
   }
 }
 
-/// replace ModalRoute.of(context)
-class MyModalRoute {
 
-  static ModalRoute<dynamic>? of(BuildContext context) {
-    ModalRoute<dynamic>? route;
+
+/// replace ModalRoute.of(context)
+@pragma('vm:entry-point')
+class MyModalRoute {
+  /// Finds the nearest ancestor InheritedWidget that has a `route` property
+  /// of type [ModalRoute<T>] and returns it.
+  @pragma('vm:entry-point')
+  static ModalRoute<T>? of<T>(BuildContext context) {
+    ModalRoute<T>? found;
     context.visitAncestorElements((element) {
-      if(element.widget.runtimeType.toString() == '_ModalScopeStatus') {
-        dynamic widget = element.widget;
-        route = widget.route as ModalRoute;
-        return false;
+      final widget = element.widget;
+      // Only InheritedWidgets can be ancestor Route-carriers
+      if (widget is InheritedWidget) {
+        try {
+          // `as dynamic` so we can test for a `route` field at runtime
+          final candidate = (widget as dynamic).route;
+          if (candidate is ModalRoute<T>) {
+            found = candidate;
+            return false; // stop walking
+          }
+        } catch (_) {
+          // no `.route` field, or not the right type
+        }
       }
-      return true;
+      return true; // keep walking
     });
-    return route;
+    return found;
   }
 }

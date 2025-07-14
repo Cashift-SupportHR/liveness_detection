@@ -42,7 +42,7 @@ class VehicleAddNote extends BaseStatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         BuildTextFieldItem(
-          title: initialData.name ?? "",
+          title: strings.write_your_notes_here,
           hintText: initialData.description,
           controller: descrtiptionController,
           keyboardType: TextInputType.text,

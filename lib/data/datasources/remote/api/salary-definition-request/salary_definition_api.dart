@@ -23,7 +23,7 @@ class SalaryDefinitionAPI {
     return await api.fetchTypeOFCommerce();
   }
 
-  Future<ApiResponse<DownLoadSalaryDefinition>> downLoadSalaryDefinition(String id, String type) async {
+  Future<ApiResponse<DownLoadFileDto>> downLoadSalaryDefinition(String id, String type) async {
     return await api.downLoadSalaryDefinition(id, type);
   }
 

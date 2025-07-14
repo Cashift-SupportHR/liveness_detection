@@ -33,7 +33,7 @@ class VehiclesCovenantPage extends BaseBlocWidget<
 
   @override
   String? title(context) {
-    int? id = ModalRoute.of(context)?.settings.arguments as int?;
+    int? id = getArguments(context);
     return id == null ? null : strings.covenants;
   }
 

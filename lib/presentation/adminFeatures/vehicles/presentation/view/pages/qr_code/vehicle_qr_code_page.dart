@@ -9,7 +9,7 @@ import '../../../../../../shared/components/files/file_view_screen.dart';
 import '../../bloc/vehicles_cubit.dart';
 
 class VehicleQrCodePage extends BaseBlocWidget<
-    Initialized<DownLoadSalaryDefinition>, VehiclesCubit> {
+    Initialized<DownLoadFileDto>, VehiclesCubit> {
 
 
   @override
@@ -33,7 +33,7 @@ class VehicleQrCodePage extends BaseBlocWidget<
 
   @override
   Widget buildWidget(
-      BuildContext context, Initialized<DownLoadSalaryDefinition> state) {
+      BuildContext context, Initialized<DownLoadFileDto> state) {
     return FileViewScreen(
       data: state.data,
       isShowShareAndDownloadButtons: true,

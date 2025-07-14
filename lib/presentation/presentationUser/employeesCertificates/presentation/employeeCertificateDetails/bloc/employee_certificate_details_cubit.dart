@@ -20,7 +20,7 @@ class EmployeeCertificateDetailsCubit extends BaseCubit {
         String filePath = await FilesManager().createFileFromBase64(result.payload!);
         result.payload?.fileAttachment = filePath;
       }
-      emit(Initialized<DownLoadSalaryDefinition>(data: result.payload!));
+      emit(Initialized<DownLoadFileDto>(data: result.payload!));
     } on Exception catch (e) {
       emit(FailureStateListener(e));
     }

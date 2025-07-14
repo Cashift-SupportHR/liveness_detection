@@ -43,6 +43,7 @@ class AppCupertinoButton extends StatelessWidget {
       child: CupertinoButton(
         padding: padding ?? const EdgeInsets.all(12),
         borderRadius: radius ?? BorderRadius.circular(20),
+
         onPressed: enable==true ? onPressed:null,
         minSize: height,
         disabledColor: kPrimary.withOpacity(0.5),

@@ -39,7 +39,7 @@ class OpportunityDetailsPage extends BaseBlocWidget<Initialized<OpportunityDetai
 
   @override
   Widget buildWidget(BuildContext context, Initialized<OpportunityDetailsData> state) {
-    OpportunityDetailsPageArgs args = ModalRoute.of(context)!.settings.arguments as OpportunityDetailsPageArgs;
+    OpportunityDetailsPageArgs args = getArguments(context);
     return AppScaffold(
       canBak: false,
       body: OpportunityDetailsScreenV2(

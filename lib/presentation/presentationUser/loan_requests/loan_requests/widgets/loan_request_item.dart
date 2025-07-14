@@ -45,7 +45,7 @@ class LoanRequestItem extends BaseStatelessWidget {
                 ),
                 _CustomRichText(
                   title1: strings.amount_value,
-                  value: (request.loanAmount ?? '0.0') + ' ' + strings.sar,
+                  value: (request.loanAmount ?? '0.0') ,
                 ),
                 if(type != EmployeeServicesStatus.rejected)
                   InstallmentDetails(request: request),

@@ -1,18 +1,21 @@
- import 'package:shiftapp/presentation/adminFeatures/available_opportunities/presentation/widgets/build_popup_menu_button.dart';
+import 'package:shiftapp/presentation/adminFeatures/available_opportunities/presentation/widgets/build_popup_menu_button.dart';
 import 'package:shiftapp/presentation/presentationUser/resources/colors.dart';
 import 'package:shiftapp/presentation/presentationUser/resources/constants.dart';
 import 'package:shiftapp/presentation/shared/components/index.dart';
- import 'package:shiftapp/utils/app_icons.dart';
+import 'package:shiftapp/utils/app_icons.dart';
 
 import '../../../../../../../core/services/routes.dart';
+import '../../../../../../presentationUser/vehiclesOperation/domain/entities/vehicle_violation_args.dart';
 import '../../../../domain/entities/vehicle_violation.dart';
 
 class VehicleViolationItem extends BaseStatelessWidget {
   final ContractViolation item;
   final Function() onRefresh;
+  final bool isPlan;
   VehicleViolationItem({
     Key? key,
     required this.item,
+    required this.isPlan,
     required this.onRefresh,
   }) : super(key: key);
 
@@ -25,10 +28,9 @@ class VehicleViolationItem extends BaseStatelessWidget {
       child: Stack(
         alignment: AlignmentDirectional.topEnd,
         children: [
-          _OptionsMenuButton(
-            id: item.id ?? 0,
-            onRefresh: onRefresh,
-          ),
+          isPlan == true
+              ? SizedBox()
+              : _OptionsMenuButton(id: item.id ?? 0, onRefresh: onRefresh),
           Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -62,8 +64,12 @@ class VehicleViolationItem extends BaseStatelessWidget {
     );
   }
 
-  Padding buildIconDoubleText(
-      {required String icon, required String title, required String value, Color? colorText}) {
+  Padding buildIconDoubleText({
+    required String icon,
+    required String title,
+    required String value,
+    Color? colorText,
+  }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: IconDoubleText(
@@ -102,11 +108,8 @@ class VehicleViolationItem extends BaseStatelessWidget {
 class _OptionsMenuButton extends BaseStatelessWidget {
   final int id;
   final Function() onRefresh;
-  _OptionsMenuButton({
-    required this.id,
-    required this.onRefresh,
-    Key? key,
-  }) : super(key: key);
+  _OptionsMenuButton({required this.id, required this.onRefresh, Key? key})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -125,8 +128,12 @@ class _OptionsMenuButton extends BaseStatelessWidget {
       ],
       onSelect: (value) async {
         if (value == 0) {
-          final isRefresh = await  Navigator.pushNamed(context, Routes.addViolationVehiclePage, arguments: id);
-          if(isRefresh == true){
+          final isRefresh = await Navigator.pushNamed(
+            context,
+            Routes.addViolationVehiclePage,
+            arguments: AddVehicleViolationArgs(violationId: id),
+          );
+          if (isRefresh == true) {
             onRefresh();
           }
         }

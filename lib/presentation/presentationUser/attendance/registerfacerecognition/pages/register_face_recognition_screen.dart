@@ -74,34 +74,6 @@ class RegisterFaceRecognitionScreen extends BaseStatelessWidget {
     );
   }
 
-  navigateToCamera(BuildContext context) async {
-    try {
-      final imageFile = await FaceMatchingUtils.startLivelyness(context);
-        pickedImage.setData(imageFile);
-    } catch (e) {}
-  }
 
-  Widget footer(BuildContext context, {bool isSave = false}) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        WarningWidget(
-          warningText: strings.scan_fac_note,
-          margin: EdgeInsets.zero,
-          color: kPrimary,
-        ),
-        AppCupertinoButton(
-          text: isSave ? strings.save_button : strings.scan_now,
-          radius: BorderRadius.circular(6),
-          margin: const EdgeInsets.symmetric(vertical: 16),
-          onPressed: () {
-            print('imageFile ${imageFile.path}');
-            isSave ? onImagePicked(imageFile) : navigateToCamera(context);
-            // onImagePicked(imageFile.path!)
-            },
-        ),
-      ],
-    );
-  }
+
 }

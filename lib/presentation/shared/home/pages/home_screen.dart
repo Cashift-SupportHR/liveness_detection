@@ -17,15 +17,21 @@ import '../../../adminFeatures/employeeMap/presentation/pages/search_employee_ma
 import '../../../adminFeatures/employees/presentation/employees/pages/employees_page.dart';
 import '../../../adminFeatures/gasStations/presentation/pages/view/screen/gas_stations_page.dart';
 import '../../../adminFeatures/jobUniform/presentation/pages/add_job_uniform_page.dart';
+import '../../../adminFeatures/maintenanceAndBreakdowns/presentation/view/pages/maintenance_breakdowns_page.dart';
+import '../../../adminFeatures/notifications/presentation/view/pages/notification_screen.dart';
+import '../../../adminFeatures/notifications/presentation/view/pages/notifications_page.dart';
 import '../../../adminFeatures/overview/presentation/pages/admin_overview_page.dart';
-import '../../../adminFeatures/reviewShifts/presentation/pages/review_opportunities_tabs_page.dart';
+import '../../../adminFeatures/vehicles/presentation/vehicleTracking/widgets/show_image_violation_build.dart';
 import '../../../presentationUser/joboffers/job_offer_details/job_offer_details_page.dart';
 import '../../../presentationUser/mainnavigation/jobmap/jobs_map_page.dart';
 import '../../../presentationUser/mainnavigation/overview/overview_page.dart';
 import '../../../presentationUser/mainnavigation/wallet/pages/wallet_page.dart';
 import '../../../presentationUser/resources/colors.dart';
+import '../../../presentationUser/transactions/presentation/view/pages/transactions_page.dart';
 import '../../../presentationUser/vehiclesOperation/presentation/currentTourMap/view/bloc/current_tour_map_state.dart';
-import '../../../presentationUser/vehiclesOperation/presentation/pages/view/screen/receive_vehicles_tab.dart';
+import '../../../presentationUser/vehiclesOperation/presentation/pages/view/screen/receive_vehicles_page.dart';
+import '../../../adminFeatures/vehicles/presentation/vehicleTracking/pages/vehicles_tracking_page.dart';
+import '../../components/camera_streaming/hls_player_widget.dart';
 import '../../components/offline_place_holder/offline_place_holder_widget.dart';
 import '/generated/assets.dart';
 import '/presentation/presentationUser/common/common_state.dart';
@@ -45,7 +51,7 @@ class MyHomeScreen extends StatefulWidget {
 
 class _MyHomeScreenState extends BaseState<MyHomeScreen> {
   late HomeBloc homeBloc;
-  FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
+  // FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
 
   List<BottomNavigationWidgetModel> getNavigationItemsList() {
     final List<BottomNavigationWidgetModel> _widgetOptions =
@@ -73,6 +79,7 @@ class _MyHomeScreenState extends BaseState<MyHomeScreen> {
     ];
     return _widgetOptions;
   }
+
 
   List<BottomNavigationWidgetModel> adminNavigationItemsList() {
     final List<BottomNavigationWidgetModel> _widgetOptions =
@@ -103,22 +110,22 @@ class _MyHomeScreenState extends BaseState<MyHomeScreen> {
     return _widgetOptions;
   }
 
-  Future<void> initDynamicLinks(BuildContext context) async {
-    final PendingDynamicLinkData? data =
-        await FirebaseDynamicLinks.instance.getInitialLink();
-
-    handleLink(data, context);
-
-    dynamicLinks.onLink.listen((dynamicLinkData) {
-      handleLink(dynamicLinkData, context);
-    });
-    FirebaseMessaging.instance.getInitialMessage().then((value) async {
-      if (value != null) {
-        String valueMap = json.encode(value.data);
-        onSelectNotification(valueMap, context);
-      }
-    });
-  }
+  // Future<void> initDynamicLinks(BuildContext context) async {
+  //   final PendingDynamicLinkData? data =
+  //       await FirebaseDynamicLinks.instance.getInitialLink();
+  //
+  //   handleLink(data, context);
+  //
+  //   dynamicLinks.onLink.listen((dynamicLinkData) {
+  //     handleLink(dynamicLinkData, context);
+  //   });
+  //   FirebaseMessaging.instance.getInitialMessage().then((value) async {
+  //     if (value != null) {
+  //       String valueMap = json.encode(value.data);
+  //       onSelectNotification(valueMap, context);
+  //     }
+  //   });
+  // }
 
   handleLink(PendingDynamicLinkData? pendingDynamicLinkData,
       BuildContext context) async {
@@ -148,7 +155,7 @@ class _MyHomeScreenState extends BaseState<MyHomeScreen> {
       print('checkUserRolePrivilege initState');
       homeBloc.checkUserRolePrivilege();
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        initDynamicLinks(context);
+        // initDynamicLinks(context);
       });
     }
     homeBloc.fetchCurrentTrip();
@@ -172,12 +179,7 @@ class _MyHomeScreenState extends BaseState<MyHomeScreen> {
         if (state is OfflineState) {
           return offlineErrorPlaceHolder();
         }
-        return ErrorPlaceHolderWidget(
-          error: 'Undefined error with state ${state}',
-          onClickReload: () {
-            setState(() {});
-          },
-        );
+        return LoadingView(color: kBackground);
       },
       listener: (CommonState state) {
         if (state is NewUpdateAvailable) {

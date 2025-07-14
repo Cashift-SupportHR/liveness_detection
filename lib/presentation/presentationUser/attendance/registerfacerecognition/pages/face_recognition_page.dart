@@ -35,7 +35,7 @@ class FaceRecognitionPage extends BaseBlocWidget<Initialized<RegisteredFace?>,
 
   @override
   Widget buildWidget(BuildContext context, Initialized<RegisteredFace?> state) {
-    User? user = ModalRoute.of(context)!.settings.arguments as User?;
+    User? user = getArguments(context);
     return state.data == null
         ? RegisterFaceRecognitionScreen(
             onImagePicked: (file) {
@@ -51,17 +51,10 @@ class FaceRecognitionPage extends BaseBlocWidget<Initialized<RegisteredFace?>,
           );
   }
 
-  navigateToCamera(BuildContext context) async {
-    try {
-      final imageFile = await FaceMatchingUtils.startLivelyness(context);
-      bloc.saveFace(imageFile);
-    } catch (e) {}
-  }
 
   @override
   void onSuccessDismissed() {
     loadInitialData(context);
-      getIt.get<AdminToggleCubit>()..image="";
   }
 
   @override

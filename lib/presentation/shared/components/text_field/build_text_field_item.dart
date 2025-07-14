@@ -40,7 +40,9 @@ class BuildTextFieldItem extends BaseStatelessWidget {
   final int minLines;
   final String? iconTitle;
   final Widget? suffixWidget;
-  BuildTextFieldItem({Key? key, this.title, this.style, this.inputDecoration, this.heightSizedBox, this.autoValidateMode, this.isRequired = false, this.isInfoRequired = false, this.messageTooltip, this.onTap, this.onChanged, this.isSizedBox = true,  this.suffixIcon, this.controller, this.keyboardType, this.validator, this.isValidator = true, this.hintText, this.maxLength, this.titleStyle, this.endIconWidget, this.isPassword = false, this.obscureText = true, this.endIcon, this.onTapEndIcon, this.sizeEndIcon, this.showCustomEndIcon = false, this.minLines = 1, this.iconTitle, this.suffixWidget,this.readOnly=false}) : super(key: key);
+  final double? space;
+  final String? prefixIcon;
+  BuildTextFieldItem({Key? key, this.title, this.style, this.inputDecoration, this.heightSizedBox, this.autoValidateMode, this.isRequired = false, this.isInfoRequired = false, this.messageTooltip, this.onTap, this.onChanged, this.isSizedBox = true,  this.suffixIcon, this.controller, this.keyboardType, this.validator, this.isValidator = true, this.hintText, this.maxLength, this.titleStyle, this.endIconWidget, this.isPassword = false, this.obscureText = true, this.endIcon, this.onTapEndIcon, this.sizeEndIcon, this.showCustomEndIcon = false, this.minLines = 1, this.iconTitle, this.suffixWidget,this.readOnly=false, this.space, this.prefixIcon}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,7 @@ class BuildTextFieldItem extends BaseStatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
+        if(title != null) Row(
           children: [
             if(iconTitle != null)
               Padding(
@@ -88,7 +90,7 @@ class BuildTextFieldItem extends BaseStatelessWidget {
           ],
         ),
         SizedBox(
-          height: isInfoRequired ? 4 : 8,
+          height: space ?? (isInfoRequired ? 4 : 8),
         ),
         StatefulBuilder(
           builder: (context, setState) {
@@ -96,6 +98,7 @@ class BuildTextFieldItem extends BaseStatelessWidget {
               keyboardType: keyboardType ?? TextInputType.number,
               key: key,
               minLines: minLines,
+
               maxLines: isPassword! ? 1 : 5,
               maxLength: maxLength,
               style: style ?? kTextRegular.copyWith(color: kAlmostBlack, fontSize: 14),
@@ -104,6 +107,21 @@ class BuildTextFieldItem extends BaseStatelessWidget {
               inputDecoration: inputDecoration ?? kRectangleTextFieldDecoration.copyWith(
                 hintText: hintText,
                 alignLabelWithHint: true,
+                prefixIconConstraints: const BoxConstraints(
+                  minWidth: 0,
+                  minHeight: 0,
+                  maxHeight: 100,
+                  maxWidth: 100,
+                ),
+                contentPadding: prefixIcon != null ? const EdgeInsetsDirectional.only(start: 10, top: 10, bottom: 10) : null,
+                prefixIcon: prefixIcon != null ? Padding(
+                  padding: const EdgeInsetsDirectional.only(start: 10, end: 5),
+                  child: kLoadSvgInCirclePath(
+                    prefixIcon ?? '',
+                    height: 20,
+                    width: 20,
+                  ),
+                ) : null,
                 suffixIcon: isPassword! ? IconButton(
                   icon: Icon(
                     obscureText ? Icons.visibility_off : Icons.visibility,

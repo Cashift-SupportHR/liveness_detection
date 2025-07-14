@@ -13,9 +13,6 @@ class AdditionalVehicleSpecificationsCubit extends BaseCubit {
   AdditionalVehicleSpecificationsCubit(
       this._repository);
 
-  StreamDataStateInitial<List<CommonListItem>?> projectsStream =
-      StreamDataStateInitial<List<CommonListItem>?>();
-
   void fetchAllaData() {
     executeEmitterData(() => _repository.fetchVehiclesImagesFaces());
   }

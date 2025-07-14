@@ -24,7 +24,7 @@ class UsersRequestsAPI {
     return await api.fetchUsersRequests(type);
   }
 
-  Future<ApiResponse<List<String>>> fetchUserRequestTerms(UserRequestTermsParams params) async {
+  Future<ApiResponse<List<CommonListItemDto>>> fetchUserRequestTerms(UserRequestTermsParams params) async {
     return await api.fetchUserRequestTerms(params);
   }
 

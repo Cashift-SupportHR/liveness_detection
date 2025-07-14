@@ -10,8 +10,9 @@ class CommonListItem{
   String? name;
   String? icon;
   String? code;
+  bool? isShowActionButton;
 
-  CommonListItem({this.id, this.employeeId, this.name, this.icon, this.code});
+  CommonListItem({this.id, this.employeeId, this.name, this.icon, this.code, this.isShowActionButton});
 
    factory CommonListItem.fromDto(CommonListItemDto json) {
     return CommonListItem(
@@ -20,6 +21,7 @@ class CommonListItem{
       name: json.name,
       icon: json.icon,
       code: json.code,
+      isShowActionButton: json.isShowActionButton,
     );
    }
 
@@ -40,6 +42,11 @@ class CommonListItem{
       name: e.name ?? '',
       code: e.code,
     )).toList();
+  }
+
+  static CommonListItem getShowActionButton(int id, List<CommonListItem> list) {
+    final item = list.firstWhere((element) => element.id == id, orElse: () => CommonListItem());
+    return item;
   }
 }
 

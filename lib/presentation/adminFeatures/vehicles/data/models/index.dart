@@ -1,2 +1,17 @@
 export '../repositories/vehicles_repository.dart';
 export '../models/vehicles_dto.dart';
+export '../models/vehicle_camera_dto.dart';
+export '../models/vehicle_receive_request_dto.dart';
+export '../models/vehicle_violation_dto.dart';
+export '../models/covenant_vehicle_dto.dart';
+export '../models/insurance_types_dto.dart';
+export '../models/insurances_dto.dart';
+export '../models/vehicle_image_face_dto.dart';
+export '../models/vehicle_details_dto.dart';
+export '../models/action_vehicle_receive_request_params.dart';
+export '../models/add_insurance_prams.dart';
+export '../models/add_vehicle_violation_attachment_params.dart';
+export '../models/add_vehicle_violation_params.dart';
+export '../models/final_action_vehicle_receive_request_params.dart';
+export '../models/add_vehicle_camera_params.dart';
+export '../models/vehicle_video_params.dart';

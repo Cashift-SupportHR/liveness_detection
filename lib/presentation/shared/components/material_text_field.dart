@@ -69,6 +69,7 @@ class MaterialTextField extends StatelessWidget {
               onTap: onTap,
               inputFormatters: inputFormatters,
               maxLength: maxLength,
+
               enableInteractiveSelection: enableInteractiveSelection ?? true,
               enabled: enabled,
               cursorColor: kPrimary,

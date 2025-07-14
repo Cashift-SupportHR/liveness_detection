@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
+
 class Config {
 
-  static const isTestVersion = false;
+  static const isTestVersion = true;
   static const isDebuggable = false;
   static const AppStoreId = '1593657179';
   static final AppVersion = Platform.isIOS ? '1.7.6' : '1.8.1';

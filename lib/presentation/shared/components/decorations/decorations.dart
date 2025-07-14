@@ -22,7 +22,8 @@ class Decorations {
     );
   }
 
-  static Decoration createRectangleDecoration({double? radius, double? border, Color? color}) {
+  static Decoration createRectangleDecoration(
+      {double? radius, double? border, Color? color}) {
     return BoxDecoration(
         borderRadius: BorderRadius.circular(radius ?? 6),
         /*  border:border Border.all(
@@ -30,10 +31,13 @@ class Decorations {
         width: 2.0,
       ),*/
         color: color,
-        border: border == 0 ? Border.all(style: BorderStyle.none) : Border.all(color: kBordColor, width: border ?? 2.0));
+        border: border == 0
+            ? Border.all(style: BorderStyle.none)
+            : Border.all(color: kBordColor, width: border ?? 2.0));
   }
 
-  static Decoration createRectangleWithColorDecoration(Color color, Color bag, double radius) {
+  static Decoration createRectangleWithColorDecoration(
+      Color color, Color bag, double radius) {
     return BoxDecoration(
       color: bag,
       borderRadius: BorderRadius.circular(radius),
@@ -44,15 +48,17 @@ class Decorations {
     );
   }
 
-  static Decoration createRectangleDecorationOnlyBottom() {
+  static Decoration createRectangleDecorationOnlyBottom({
+    Color? color,
+  }) {
     return BoxDecoration(
-      color: kPrimary,
+      color: color??kPrimary,
       borderRadius: const BorderRadius.only(
         bottomRight: Radius.circular(15),
         bottomLeft: Radius.circular(15),
       ),
       border: Border.all(
-        color: kPrimary,
+        color:color?? kPrimary,
         width: 2.0,
       ),
     );
@@ -102,9 +108,12 @@ class Decorations {
         color: kWhite,
       );
 
-  static Decoration decorationTabsOnlyTop({BorderRadiusGeometry? borderRadius}) {
+  static Decoration decorationTabsOnlyTop(
+      {BorderRadiusGeometry? borderRadius}) {
     return BoxDecoration(
-      borderRadius: borderRadius ?? const BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+      borderRadius: borderRadius ??
+          const BorderRadius.only(
+              topLeft: Radius.circular(15), topRight: Radius.circular(15)),
       color: kWhite,
       boxShadow: [
         BoxShadow(
@@ -117,7 +126,8 @@ class Decorations {
     );
   }
 
-  static Decoration get decorationTabs => decorationTabsOnlyTop(borderRadius: BorderRadius.circular(10));
+  static Decoration get decorationTabs =>
+      decorationTabsOnlyTop(borderRadius: BorderRadius.circular(10));
 
   static Decoration decorationTabBarView({double? radius}) {
     return BoxDecoration(
@@ -134,7 +144,8 @@ class Decorations {
     );
   }
 
-  static Decoration decorationNetworkImageAndShadow(String image) => BoxDecoration(
+  static Decoration decorationNetworkImageAndShadow(String image) =>
+      BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
@@ -161,7 +172,9 @@ class Decorations {
     return BoxDecoration(
       color: color ?? Colors.white,
       borderRadius: BorderRadius.all(Radius.circular(radius ?? 8)),
-      border: Border.all(color: borderColor ?? kGreen_2.withOpacity(0.3), width: borderWidth ?? 0.5),
+      border: Border.all(
+          color: borderColor ?? kGreen_2.withOpacity(0.3),
+          width: borderWidth ?? 0.5),
     );
   }
 
@@ -212,7 +225,11 @@ class Decorations {
     );
   }
 
-  static Decoration decorationWithGradientNotSpread({Color? color, Color? shadowColor, double? radius, List<BoxShadow>? boxShadow}) {
+  static Decoration decorationWithGradientNotSpread(
+      {Color? color,
+      Color? shadowColor,
+      double? radius,
+      List<BoxShadow>? boxShadow}) {
     return BoxDecoration(
       color: color ?? kBackgroundColor,
       borderRadius: BorderRadius.circular(radius ?? 10),
@@ -245,7 +262,8 @@ class Decorations {
     return BoxDecoration(
       color: color ?? Colors.white,
       borderRadius: BorderRadius.all(Radius.circular(radius ?? 15)),
-      border: Border.all(color: borderColor ?? kPrimary.withOpacity(0.2), width: 0.8),
+      border: Border.all(
+          color: borderColor ?? kPrimary.withOpacity(0.2), width: 0.8),
       boxShadow: [
         BoxShadow(
           color: shadowColor ?? kPrimary.withOpacity(0.1),
@@ -266,14 +284,16 @@ class Decorations {
     return BoxDecoration(
       color: color ?? Colors.white,
       shape: BoxShape.circle,
-      border: Border.all(color: borderColor ?? kYellow_00, width: borderWidth ?? 2.5),
+      border: Border.all(
+          color: borderColor ?? kYellow_00, width: borderWidth ?? 2.5),
     );
   }
 
   static ShapeDecoration shapeDecoration({Color? color, double? radius}) {
     return ShapeDecoration(
       color: color ?? kWhite,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius ?? 5)),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(radius ?? 5)),
       shadows: [
         BoxShadow(
           color: kGray_00,
@@ -292,13 +312,16 @@ class Decorations {
     double? borderWidth,
     double? radius,
   }) {
-    return BoxDecoration(color: Colors.white.withOpacity(0.0), border: Border(bottom: BorderSide(color: color ?? kGray_CD, width: 1)));
+    return BoxDecoration(
+        color: Colors.white.withOpacity(0.0),
+        border: Border(bottom: BorderSide(color: color ?? kGray_CD, width: 1)));
   }
 
   static ShapeDecoration decorationOnlyRadius({Color? color, double? radius}) {
     return ShapeDecoration(
       color: color ?? kGrey_EE,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius ?? 5)),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(radius ?? 5)),
     );
   }
 
@@ -380,11 +403,11 @@ class Decorations {
     double? radius,
   }) {
     return BoxDecoration(
-        color: color ?? Colors.white,
-        borderRadius: BorderRadius.only(
-          bottomRight: Radius.circular(radius ?? 15),
-          bottomLeft: Radius.circular(radius ?? 15),
-        ),
+      color: color ?? Colors.white,
+      borderRadius: BorderRadius.only(
+        bottomRight: Radius.circular(radius ?? 15),
+        bottomLeft: Radius.circular(radius ?? 15),
+      ),
     );
   }
 }

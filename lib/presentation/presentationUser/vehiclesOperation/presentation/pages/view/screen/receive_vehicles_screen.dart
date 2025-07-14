@@ -6,7 +6,7 @@ import '../../../../domain/entities/receiveVehicle.dart';
 
 class ReceiveVehiclesScreen extends BaseStatelessWidget {
   final int tabId;
-  final List<ReceiveVehicle> data;
+  final List<ReceiveVehicleData> data;
   final Function() onRefresh;
 
   ReceiveVehiclesScreen(

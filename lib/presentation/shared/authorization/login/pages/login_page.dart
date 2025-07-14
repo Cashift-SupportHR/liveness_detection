@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:shiftapp/presentation/presentationUser/common/common_state.dart';
+import 'package:shiftapp/presentation/shared/splash/splash_page.dart';
 import 'package:local_auth_darwin/local_auth_darwin.dart';
 
 import 'package:local_auth_android/local_auth_android.dart';

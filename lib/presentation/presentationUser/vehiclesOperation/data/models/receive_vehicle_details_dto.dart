@@ -7,6 +7,8 @@ part 'receive_vehicle_details_dto.g.dart';
 
 @JsonSerializable(ignoreUnannotated: false)
 class ReceiveVehicleDetailsDto {
+  @JsonKey(name: 'vehicleHandoverImages')
+  List<String>? vehicleHandoverImages;
   @JsonKey(name: 'vehiclesComponentsHandovers')
   List<VehicleComponentHandoverDto>? vehiclesComponentsHandovers;
   @JsonKey(name: 'vehiclesCustodiesHandovers')
@@ -39,14 +41,18 @@ class ReceiveVehicleDetailsDto {
   String? companyName;
   @JsonKey(name: 'projectId')
   int? projectId;
+  @JsonKey(name: 'roundTripId')
+  int? roundTripId;
   @JsonKey(name: 'projectName')
   String? projectName;
   @JsonKey(name: 'licenseExpiryDate')
   String? licenseExpiryDate;
   @JsonKey(name: 'licenseNumber')
   String? licenseNumber;
+  @JsonKey(name: 'specifications')
+  String? specifications;
 
-  ReceiveVehicleDetailsDto({this.vehiclesComponentsHandovers, this.vehiclesCustodiesHandovers, this.id, this.vehicleId, this.vehicleBrand, this.vehicleModel, this.vehiclePlateNumber, this.vehicleHandoverDate, this.vehicleHandoverTime, this.freelancerInfoId, this.freelancerName, this.vehicleImage, this.isComplete, this.companyId, this.companyName, this.projectId, this.projectName, this.licenseExpiryDate, this.licenseNumber});
+  ReceiveVehicleDetailsDto({this.roundTripId, this.vehicleHandoverImages, this.vehiclesComponentsHandovers, this.vehiclesCustodiesHandovers, this.id, this.vehicleId, this.vehicleBrand, this.vehicleModel, this.vehiclePlateNumber, this.vehicleHandoverDate, this.vehicleHandoverTime, this.freelancerInfoId, this.freelancerName, this.vehicleImage, this.isComplete, this.companyId, this.companyName, this.projectId, this.projectName, this.licenseExpiryDate, this.licenseNumber, this.specifications});
 
    factory ReceiveVehicleDetailsDto.fromJson(Map<String, dynamic> json) => _$ReceiveVehicleDetailsDtoFromJson(json);
 

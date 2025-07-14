@@ -13,17 +13,17 @@ class AddAddressRepository {
 
   AddAddressRepository(this._api);
 
-  Future<List<Address>> fetchFavoriteAddresses() async {
+  Future<List<AddressDto>> fetchFavoriteAddresses() async {
     final response = await _api.fetchFavoriteAddresses();
     return response.payload ?? [];
   }
 
-  Future<String> addFavoriteAddresses(Address address) async {
+  Future<String> addFavoriteAddresses(AddressDto address) async {
     final response = await _api.addFavoriteAddresses(address);
     return response.message ?? '';
   }
 
-  Future<String> editFavoriteAddresses(Address address) async {
+  Future<String> editFavoriteAddresses(AddressDto address) async {
     final response = await _api.editFavoriteAddresses(address);
     return response.message ?? '';
   }

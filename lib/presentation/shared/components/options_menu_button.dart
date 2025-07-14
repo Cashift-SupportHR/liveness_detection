@@ -76,7 +76,7 @@ class OptionsMenuButton extends BaseStatelessWidget {
 
   Widget defaultIcon() {
     return Padding(
-      padding: padding ?? const EdgeInsetsDirectional.only(end: 15, top: 20, start: 40, bottom: 10),
+      padding: padding ?? const EdgeInsetsDirectional.only(end: 30, top: 20, start: 40, bottom: 18),
       child: kLoadSvgInCirclePath(
         AppIcons.menu,
         height: 6,

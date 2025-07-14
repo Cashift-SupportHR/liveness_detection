@@ -12,7 +12,11 @@ class DateFormatter{
   static const DATE_TIME ='dd/MM/yyyy HH:mm:ss' ;
   static const DATE_TIME_API ='MM/dd/yyyy HH:mm:ss' ;
   static const DATE_TIME_UI ='EEE ,d MMM  yyyy , hh:mm a' ;
+  static const DATE_TIME_UI_2 ='d MMM  yyyy , hh:mm a' ;
+  static const DATE_TIME_UI_3 ='d MMM , hh:mm a' ;
   static const WORKING_DATE_TIME_UI ='dd-MM-yyyy HH:mm a' ;
+  static const DATE_TIME_UI_HOUR_MINUT_12 ='dd/MM/yyyy h:mm a' ;
+  static const  DATE_TIME_UIF ="MM/dd/yyyy HH:mm" ;
   static const DATE_UI ='EEE ,d MMM  yyyy ' ;
   static const MONTH_NAME_YEAR ='MMM yyyy ' ;
   static const TIME_UI ='hh:mm' ;
@@ -32,7 +36,7 @@ class DateFormatter{
 
 
  static String formatDate(DateTime dateTime ,String pattern , {String  ?   local }){
-   final langCode =local ?? Get.locale?.languageCode;
+   final langCode = local ?? Get.locale?.languageCode;
    try {
      return DateFormat(pattern, langCode).format(dateTime);
    }catch(e){
@@ -82,9 +86,9 @@ class DateFormatter{
      return '';
    }
  }
-  static String formatTimeStamp(String date,{String ? pattern , String ? apiPattern} ){
+  static String formatTimeStamp(String date,{String ? pattern , String ? apiPattern, String local = 'en'} ){
     try {
-      return formatDateString(date, apiPattern??DAY_MONTH_YEAR, pattern ??TIME_STAMP, local: 'en');
+      return formatDateString(date, apiPattern??DAY_MONTH_YEAR, pattern ??TIME_STAMP, local: local);
     }catch(e){
       print('formatTimeStamp $e');
       return '';
@@ -97,8 +101,8 @@ class DateFormatter{
      return '';
    }
  }
-  static DateTime dateFromString(date , {String pattern = DATE_TIME}){
-    DateTime tempDate = DateFormat(pattern).parse(date);
+  static DateTime dateFromString(date , {String pattern = DATE_TIME, String ? local}){
+    DateTime tempDate = DateFormat(pattern, local).parse(date);
     return tempDate;
   }
   static DateTime dateFromTimeStamp(date){
@@ -210,6 +214,37 @@ class DateFormatter{
     }catch(e){
   //    print('parseTimeOfDayError $e');
       return TimeOfDay.now();
+    }
+  }
+
+
+
+  static DateTime parseDateAndTimeOfDay(String date, {String? pattern}) {
+    //  print('parseTimeOfDay $time');
+    try {
+      // Convert Arabic AM/PM → English AM/PM
+      date = date
+          .replaceAll('ص', 'AM')
+          .replaceAll('م', 'PM').replaceAll('  ', ' ');
+      print('parseDateAndTimeOfDay $date');
+      return  DateFormat('dd/M/yyyy hh:mm a').parse(date);
+    } catch(e){
+      print('parseTimeOfDayError $e');
+      return DateTime.now();
+    }
+  }
+
+  static String plusOneMinute(String date) {
+    try {
+      // 1. Parse your string into a DateTime
+      final original = DateTime.parse(date);
+
+      // 2. Add one minute
+      final plusOneMinute = original.add(const Duration(minutes: 1));
+      return plusOneMinute.toIso8601String();
+    } catch (e) {
+      print('formatDateTimeError $e');
+      return '';
     }
   }
 }

@@ -44,8 +44,8 @@ class ListRowTextsV2 extends StatelessWidget {
             .map((e) => isHideEmptyValue
                 ? (e.title.isEmpty
                     ? SizedBox.shrink()
-                    : buildText(e.title, e.value))
-                : buildText(e.title,e.value))
+                    : buildText(e.title, e.value??""))
+                : buildText(e.title,e.value??""))
             .toList(),
       ),
     );
@@ -59,6 +59,7 @@ class ListRowTextsV2 extends StatelessWidget {
         value: value,
         isExpanded: isExpanded,
         spaceHoriz: spaceHoriz,
+
         flex: flex,
         crossAxisAlignment: crossAxisAlignment,
         textStyle:

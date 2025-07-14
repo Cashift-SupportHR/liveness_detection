@@ -84,7 +84,7 @@ class _FilterVehiclesZoneScreenState extends State<CurrentTourMapScreen> {
   @override
   Widget build(BuildContext context) {
     strings = context.getStrings();
-    canPop = ModalRoute.of(context)?.canPop ?? false;
+    canPop = MyModalRoute.of(context)?.canPop ?? false;
     return Stack(
       children: [
         GoogleMap(
@@ -120,6 +120,7 @@ class _FilterVehiclesZoneScreenState extends State<CurrentTourMapScreen> {
       child: AppCupertinoButton(
         text: strings.end_field_survey,
         margin: EdgeInsets.all(16),
+        backgroundColor: kRed_01,
         onPressed: () {
           onEndRoundTripPressed();
         },
@@ -168,6 +169,18 @@ class _FilterVehiclesZoneScreenState extends State<CurrentTourMapScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           iconButton(
+            icon: AppIcons.factoryViolations,
+            onPressed: () {
+              Navigator.pushNamed(context, Routes.factoryViolationsPlanePage,arguments:currentRoundTrip.id );
+            },
+          ),
+          iconButton(
+            icon: AppIcons.maintenances,
+            onPressed: () {
+              Navigator.pushNamed(context, Routes.maintenanceBreakdownsPlanPage,arguments:currentRoundTrip.id);
+            },
+          ),
+          iconButton(
             icon: AppIcons.staution,
             onPressed: () {
               showGasStationsBottomSheet();
@@ -189,7 +202,8 @@ class _FilterVehiclesZoneScreenState extends State<CurrentTourMapScreen> {
             icon: AppIcons.job_duties_colored,
             onPressed: () {
               widget.onFetchRoundTypeTermsAndCondition(
-                  currentRoundTrip.roundTypeId ?? 0);
+                currentRoundTrip.roundTypeId ?? 0,
+              );
               showJobDutiesBottomSheet();
             },
           ),
@@ -205,13 +219,13 @@ class _FilterVehiclesZoneScreenState extends State<CurrentTourMapScreen> {
       start: 70,
       end: 5,
       child: Container(
-        decoration:
-            Decorations.decorationOnlyRadius(color: kOrangeE1, radius: 20),
+        decoration: Decorations.decorationOnlyRadius(
+          color: kOrangeE1,
+          radius: 20,
+        ),
         child: Row(
           children: [
-            SizedBox(
-              width: 10,
-            ),
+            SizedBox(width: 10),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -221,9 +235,7 @@ class _FilterVehiclesZoneScreenState extends State<CurrentTourMapScreen> {
                     currentRoundTrip.pubupMessage ?? "",
                     style: kTextRegular.copyWith(fontSize: 12, color: kBlack),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  SizedBox(height: 10),
                   SizedBox(
                     width: 80,
                     child: AppCupertinoButton(
@@ -245,9 +257,7 @@ class _FilterVehiclesZoneScreenState extends State<CurrentTourMapScreen> {
                 ],
               ),
             ),
-            SizedBox(
-              width: 10,
-            ),
+            SizedBox(width: 10),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: SvgPicture.asset(AppIcons.car_gas),
@@ -265,9 +275,7 @@ class _FilterVehiclesZoneScreenState extends State<CurrentTourMapScreen> {
         child: kLoadSvgInCirclePath(icon),
         // elevation: 1,
         backgroundColor: kWhite,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(500),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(500)),
         onPressed: onPressed,
       ),
     );
@@ -301,13 +309,12 @@ class _FilterVehiclesZoneScreenState extends State<CurrentTourMapScreen> {
 
   showTourHistoryBottomSheet() {
     showAppModalBottomSheet(
-        context: context,
-        title: strings.tour_history,
-        isScrollControlled: true,
-        padding: EdgeInsets.zero,
-        child: TourHistoryPage(
-          currentRoundTrip: currentRoundTrip,
-        ));
+      context: context,
+      title: strings.tour_history,
+      isScrollControlled: true,
+      padding: EdgeInsets.zero,
+      child: TourHistoryPage(currentRoundTrip: currentRoundTrip),
+    );
   }
 
   showJobDutiesBottomSheet() {
@@ -317,17 +324,18 @@ class _FilterVehiclesZoneScreenState extends State<CurrentTourMapScreen> {
       isScrollControlled: false,
       padding: EdgeInsets.zero,
       child: StreamBuilder<List<RoundTypeTermsAndCondition>?>(
-          stream: widget.state.roundTypeTermsAndConditionStream?.stream,
-          builder: (context, snapshot) {
-            final data = snapshot.data;
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return LoadingView();
-            }
-            return SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
-              child: JobDutiesTour(data: snapshot.data ?? []),
-            );
-          }),
+        stream: widget.state.roundTypeTermsAndConditionStream?.stream,
+        builder: (context, snapshot) {
+          final data = snapshot.data;
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return LoadingView();
+          }
+          return SingleChildScrollView(
+            padding: const EdgeInsets.all(16),
+            child: JobDutiesTour(data: snapshot.data ?? []),
+          );
+        },
+      ),
     );
   }
 
@@ -335,15 +343,19 @@ class _FilterVehiclesZoneScreenState extends State<CurrentTourMapScreen> {
     if (polygonPoints.isEmpty) {
       return Set();
     }
-    Uint8List iconData =
-        await loadAndResizePng(Assets.imagesLocation, width: 50, height: 50);
-    final list = polygonPoints.map((e) {
-      return Marker(
-        markerId: MarkerId('marker_${e}'),
-        position: e,
-        icon: BitmapDescriptor.fromBytes(iconData),
-      );
-    }).toList();
+    Uint8List iconData = await loadAndResizePng(
+      Assets.imagesLocation,
+      width: 50,
+      height: 50,
+    );
+    final list =
+        polygonPoints.map((e) {
+          return Marker(
+            markerId: MarkerId('marker_${e}'),
+            position: e,
+            icon: BitmapDescriptor.fromBytes(iconData),
+          );
+        }).toList();
     return Set<Marker>.of(list);
   }
 
@@ -351,28 +363,32 @@ class _FilterVehiclesZoneScreenState extends State<CurrentTourMapScreen> {
     if (polygonPoints.isEmpty) {
       return Set();
     }
-    final list = polygonPoints.map((e) {
-      return Polygon(
-        polygonId: PolygonId('polygon_${e}'),
-        points: polygonPoints,
-        strokeWidth: 2,
-        strokeColor: kPrimary,
-        fillColor: kPrimary.withOpacity(0.1),
-      );
-    }).toList();
+    final list =
+        polygonPoints.map((e) {
+          return Polygon(
+            polygonId: PolygonId('polygon_${e}'),
+            points: polygonPoints,
+            strokeWidth: 2,
+            strokeColor: kPrimary,
+            fillColor: kPrimary.withOpacity(0.1),
+          );
+        }).toList();
     return Set<Polygon>.of(list);
   }
 
   Future<void> displayPolygonPoints() async {
     List<LatLng> polygonPoints = VehicleZoneLatLng.toLatLngList(
-        widget.state.currentRoundTrip?.latlngs ?? []);
+      widget.state.currentRoundTrip?.latlngs ?? [],
+    );
     print('polygonPoints: $polygonPoints');
     if (polygonPoints.isNotEmpty) {
       polygons = mapPolygons(polygonPoints);
       markers = await mapPointsMarkers(polygonPoints);
       mapController.animateCamera(
         CameraUpdate.newLatLngBounds(
-            _calculatePolygonBounds(polygonPoints), 50), // 50 is padding
+          _calculatePolygonBounds(polygonPoints),
+          50,
+        ), // 50 is padding
       );
       setState(() {});
     } else {
@@ -380,19 +396,26 @@ class _FilterVehiclesZoneScreenState extends State<CurrentTourMapScreen> {
     }
   }
 
-  Future<Uint8List> loadAndResizePng(String assetPath,
-      {int width = 100, int height = 100}) async {
+  Future<Uint8List> loadAndResizePng(
+    String assetPath, {
+    int width = 100,
+    int height = 100,
+  }) async {
     // Load the PNG image as Uint8List
     final ByteData data = await rootBundle.load(assetPath);
 
     // Decode the image to resize it
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
-        targetWidth: width, targetHeight: height);
+    ui.Codec codec = await ui.instantiateImageCodec(
+      data.buffer.asUint8List(),
+      targetWidth: width,
+      targetHeight: height,
+    );
     ui.FrameInfo frameInfo = await codec.getNextFrame();
 
     // Convert the resized image back to Uint8List
-    final ByteData? byteData =
-        await frameInfo.image.toByteData(format: ui.ImageByteFormat.png);
+    final ByteData? byteData = await frameInfo.image.toByteData(
+      format: ui.ImageByteFormat.png,
+    );
     return byteData!.buffer.asUint8List();
   }
 
@@ -403,9 +426,7 @@ class _FilterVehiclesZoneScreenState extends State<CurrentTourMapScreen> {
       decoration: Decorations.shapeDecorationShadow(),
       child: ExpansionTile(
         tilePadding: EdgeInsets.zero,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(4),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
         title: buildIconDoubleText(
           icon: AppIcons.operating_plan,
           title: context.getStrings().operating_plan,
@@ -435,22 +456,30 @@ class _FilterVehiclesZoneScreenState extends State<CurrentTourMapScreen> {
           buildIconDoubleText(
             icon: AppIcons.violation_name,
             title: context.getStrings().violations_num,
-            value: (currentRoundTrip.numberOfViolations?.toString() ?? '0') +
+            value:
+                (currentRoundTrip.numberOfViolations?.toString() ?? '0') +
                 ' ' +
                 context.getStrings().violation,
           ),
           SizedBox(height: 10),
-          addViolationButton(),
+          Row(
+            children: [
+              addViolationButton(),
+              SizedBox(width: 20),
+              addMaintenanceButton(),
+            ],
+          ),
         ],
       ),
     );
   }
 
-  IconDoubleText buildIconDoubleText(
-      {required String icon,
-      required String title,
-      required String value,
-      Color? colorText}) {
+  IconDoubleText buildIconDoubleText({
+    required String icon,
+    required String title,
+    required String value,
+    Color? colorText,
+  }) {
     return IconDoubleText(
       icon: icon,
       name: title + ' :',
@@ -465,27 +494,49 @@ class _FilterVehiclesZoneScreenState extends State<CurrentTourMapScreen> {
     return Padding(
       padding: EdgeInsetsDirectional.only(bottom: 10, start: 5),
       child: OutlinedButton.icon(
-        icon: Icon(
-          Icons.add,
-          color: kPrimary,
-          size: 20,
-        ),
+        icon: Icon(Icons.add, color: kPrimary, size: 20),
         style: ElevatedButton.styleFrom(
           side: BorderSide(color: kPrimary, width: 1),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
         label: Text(
           context.getStrings().add_violation,
-          style: kTextRegular.copyWith(
-            color: kPrimary,
-            fontSize: 14,
-          ),
+          style: kTextRegular.copyWith(color: kPrimary, fontSize: 14),
         ),
         onPressed: () async {
           final isRefresh = await Navigator.pushNamed(
-              context, Routes.addViolationVehiclePage);
+            context,
+            Routes.addViolationVehiclePage,
+            arguments: currentRoundTrip.getVehicleViolationArgs(),
+          );
+          print('isRefresh $isRefresh');
+          if (isRefresh == true) {
+            widget.onRefresh();
+          }
+        },
+      ),
+    );
+  }
+
+  Padding addMaintenanceButton() {
+    return Padding(
+      padding: EdgeInsetsDirectional.only(bottom: 10, start: 5),
+      child: OutlinedButton.icon(
+        icon: Icon(Icons.car_rental_outlined, color: kOrange00, size: 20),
+        style: ElevatedButton.styleFrom(
+          side: BorderSide(color: kOrange00, width: 1),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+        label: Text(
+          context.getStrings().add_maintenance,
+          style: kTextRegular.copyWith(color: kOrange00, fontSize: 14),
+        ),
+        onPressed: () async {
+          final isRefresh = await Navigator.pushNamed(
+            context,
+            Routes.addMaintenanceBreakdownsPage,
+            arguments: currentRoundTrip.id,
+          );
           print('isRefresh $isRefresh');
           if (isRefresh == true) {
             widget.onRefresh();

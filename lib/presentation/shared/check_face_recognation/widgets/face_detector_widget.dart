@@ -2,6 +2,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:livelyness_detection/index.dart';
 import 'package:livelyness_detection/livelyness_detection.dart';
 import 'package:shiftapp/main_index.dart';
+import 'package:shiftapp/presentation/presentationUser/attendance/facerecognation/face_matching_result.dart';
 import 'package:shiftapp/presentation/presentationUser/resources/colors.dart';
 import 'package:shiftapp/presentation/shared/components/app_widgets.dart';
 import 'package:shiftapp/presentation/shared/components/base_stateful_widget.dart';
@@ -9,25 +10,28 @@ import 'package:shiftapp/presentation/shared/components/base_stateful_widget.dar
 import '../../../../data/models/attendance/attendance_config_dto.dart';
 import '../../../../generated/assets.dart';
 import '../../../../utils/app_icons.dart';
+import '../../../presentationUser/attendance/facerecognation/faces_matching.dart';
 import '../../../presentationUser/resources/constants.dart';
 import '../../../shared/components/app_cupertino_button.dart';
 import '../../../shared/components/image_builder.dart';
 import '../../../shared/components/outlint_button.dart';
+import '../../components/index.dart';
 
 class FaceDetectorWidget extends StatefulWidget {
   final AttendanceConfigDto attendanceConfigDto;
-  final Function(String) onFaceDetection;
-  FaceDetectorWidget({required this.attendanceConfigDto, required this.onFaceDetection});
+  final String  refImageBase64;
+  final Function(bool) onFaceDetection;
+  FaceDetectorWidget({required this.attendanceConfigDto, required this.onFaceDetection,required this.refImageBase64});
 
   @override
-  State<FaceDetectorWidget> createState() => _ExpampleScreenState();
+  State<FaceDetectorWidget> createState() => _M7ExpampleScreenState();
 }
 
-class _ExpampleScreenState extends BaseState<FaceDetectorWidget> {
+class _M7ExpampleScreenState extends BaseState<FaceDetectorWidget> {
   //* MARK: - Private Variables
   //? =========================================================
-  String? _capturedImagePath;
-  final List<LivelynessStepItem> _veificationSteps = [];
+  FaceMatchingResult? matchingResult;
+
 
   //* MARK: - Life Cycle Methods
   //? =========================================================
@@ -78,11 +82,11 @@ class _ExpampleScreenState extends BaseState<FaceDetectorWidget> {
           style: kTextBold.copyWith(color: kBlack, fontSize: 16),
         ),
         const SizedBox(height: 20),
-        _capturedImagePath == null
+        matchingResult == null
             ? SizedBox.shrink()
             : Expanded(
                 child: Image.file(
-                  File(_capturedImagePath!),
+                  File(matchingResult!.path),
                   width: 600,
                   fit: BoxFit.contain,
                 ),
@@ -103,34 +107,7 @@ class _ExpampleScreenState extends BaseState<FaceDetectorWidget> {
   //? =========================================================
   void _initValues() {
     print('widget.attendanceConfigDto ${widget.attendanceConfigDto.toJson()}');
-    _veificationSteps.addAll(
-      [
-        if (widget.attendanceConfigDto.eyeCheck == true)
-          LivelynessStepItem(
-            step: LivelynessStep.blink,
-            title: strings.blink_your_eyes,
-            isCompleted: false,
-          ),
-        if (widget.attendanceConfigDto.moveFace == true)
-          LivelynessStepItem(
-            step: LivelynessStep.turnLeft,
-            title: strings.turn_right,
-            isCompleted: false,
-          ),
-        if (widget.attendanceConfigDto.smile == true)
-          LivelynessStepItem(
-            step: LivelynessStep.smile,
-            title: strings.smil,
-            isCompleted: false,
-          ),
-      ],
-    );
-    LivelynessDetection.instance.configure(
-      dotColor: Colors.white,
-      thresholds: [
-        SmileDetectionThreshold(),
-      ],
-    );
+
     bool isDirectDetectFace = widget.attendanceConfigDto.isDirectDetectFace ?? false;
     if (isDirectDetectFace) {
       Future.delayed(Duration(milliseconds: 500), () {
@@ -140,26 +117,17 @@ class _ExpampleScreenState extends BaseState<FaceDetectorWidget> {
   }
 
   void _onStartLivelyness() async {
-    setState(() => _capturedImagePath = null);
-    final response = await LivelynessDetection.instance.detectLivelyness(
-      context,
-      config: DetectionConfig(
-        steps: _veificationSteps,
-        startWithInfoScreen: false,
-        maxSecToDetect: 60,
-        allowAfterMaxSec: false,
-        captureButtonColor: Colors.red,
-      ),
-    );
-    if (response?.imgPath == null) {
-      return;
-    }
-    _capturedImagePath = response?.imgPath;
+    setState(() => matchingResult = null);
+
+    matchingResult =await  FaceMatchingUtils.startMatching(context, refImageBase64: widget.refImageBase64,config: widget.attendanceConfigDto);
+
+
+
     setState(() {});
     if (isDirectDetectFace) {
-      confirmAction();
+      confirmAction(matchingResult);
     }
-    print('_capturedImagePath $_capturedImagePath');
+
   }
 
   Widget footer(BuildContext context) {
@@ -170,7 +138,7 @@ class _ExpampleScreenState extends BaseState<FaceDetectorWidget> {
           radius: 6,
           height: 50,
           width: double.infinity,
-          onClick: _capturedImagePath != null
+          onClick: matchingResult != null
               ? null
               : () {
                   _onStartLivelyness();
@@ -182,20 +150,22 @@ class _ExpampleScreenState extends BaseState<FaceDetectorWidget> {
         AppCupertinoButton(
           text: strings.confirm_button,
           radius: BorderRadius.circular(6),
-          onPressed: confirmAction(),
+          onPressed: confirmAction(matchingResult),
         ),
       ],
     );
   }
 
-  confirmAction() {
+  confirmAction(FaceMatchingResult?  matching) {
     print('confirmAction');
-    if (_capturedImagePath != null) {
+    if (matching != null) {
       Future.delayed(Duration(milliseconds: 500), () {
-        widget.onFaceDetection(_capturedImagePath!);
+        widget.onFaceDetection(matching.match);
       });
     } else {
       return null;
     }
   }
+
+
 }

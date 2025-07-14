@@ -16,6 +16,11 @@ class ProfilePage extends BaseBlocWidget<ProfileInitialize, ProfileCubit> {
   void loadInitialData(BuildContext context) {
     bloc.fetchProfileData();
   }
+  @override
+  bool detectRequiredTasks() {
+    return false;
+  }
+
 
   @override
   String? title(BuildContext context) {

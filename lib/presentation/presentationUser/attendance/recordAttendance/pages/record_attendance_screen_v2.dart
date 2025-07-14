@@ -201,16 +201,8 @@ class RecordAttendanceScreenV2 extends BaseStatelessWidget {
     try {
       showProgress();
       final pickedUintList = pickedFile.readAsBytesSync();
-      final pickedImage =
-          FaceMatchingUtils.convertImageFileToMatchable(pickedUintList);
-      print('registeredFace $registeredFace');
-
-      final registeredImage =
-          FaceMatchingUtils.convertBase64FileToMatchable(registeredFace!);
-      print('registeredFace registeredImage $registeredImage');
-
       final simi =
-          await FaceMatchingUtils.matchFaces(pickedImage, registeredImage);
+          await FaceMatchingUtils.matchFaces(pickedUintList, registeredFace??'');
 
       dismissProgress();
       print('matchingProcess ${simi}');
@@ -270,10 +262,10 @@ class RecordAttendanceScreenV2 extends BaseStatelessWidget {
   }
 
   Future scanQr(BuildContext context) async {
-    if (Config.isDebuggable) {
-      File? file;
-      return Future.value(QrCode('shift',file,allowFile: registerAttendanceRequest.allowToTrack()),);
-    }
+    // if (Config.isDebuggable) {
+    //   File? file;
+    //   return Future.value(QrCode('shift',file,allowFile: registerAttendanceRequest.allowToTrack()),);
+    // }
     return await Navigator.pushNamed(context, Routes.qrScanner,arguments: QrCode('',null,allowFile: registerAttendanceRequest.allowToTrack()),) as QrCode;
 
   }

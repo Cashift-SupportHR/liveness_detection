@@ -22,10 +22,10 @@ class UsersRequestsRepository {
     return UserRequest.fromDtoList(res.payload ?? []);
   }
 
-  Future<List<String>> fetchUserRequestTerms(
+  Future<List<CommonListItem>> fetchUserRequestTerms(
       UserRequestTermsParams params) async {
     final res = await _api.fetchUserRequestTerms(params);
-    return res.payload ?? [];
+    return CommonListItem.fromDtoList(res.payload ?? []);
   }
 
   Future<ApiResponse> acceptRejectUserRequest(

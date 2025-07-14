@@ -12,5 +12,4 @@ class LocalConstants {
   static const GeofenceServiceCurrentStatus = "GeofenceServiceCurrentStatus";
   static const GeofenceServiceOldStatus = "GeofenceServiceOldStatus";
   static const FirstOpenDialogPermissionGeofencing = "FirstOpenDialogPermissionGeofencing";
-  static const RecognitionEncryptedFilePATH = "RecognitionEncryptedFilePATH";
 }

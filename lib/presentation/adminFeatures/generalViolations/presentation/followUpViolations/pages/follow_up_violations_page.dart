@@ -36,7 +36,9 @@ class FollowUpViolationsPage extends BaseBlocWidget<
   @override
   Widget buildWidget(
       BuildContext context, Initialized<List<CommonListItem>> state) {
-    return DynamicTabBarView(
+
+    code = state.data[0].code ?? '';
+      return DynamicTabBarView(
       isSeparate: true,
       tabs: CommonListItem.toDynamicItemsList(state.data),
       padding: EdgeInsets.symmetric(vertical: 10),
@@ -44,6 +46,8 @@ class FollowUpViolationsPage extends BaseBlocWidget<
       onTap: (id) {
         int index = state.data.indexWhere((element) => element.id == id);
         code = state.data[index].code ?? '';
+        print(code);
+        print("lllll");
         bloc.fetchUsersRequests(state.data[index].id ?? 0);
       },
       pageWidget: Column(

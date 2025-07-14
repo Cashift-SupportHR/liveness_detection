@@ -25,7 +25,7 @@ class WorkingDocumentPage extends BaseBlocWidget<
   }
   @override
   void loadInitialData(context) {
-    int? jobId = ModalRoute.of(context)?.settings.arguments as int? ?? 0;
+    int? jobId = getArguments(context) as int? ?? 0;
     bloc.fetchWorkingDocumentData(jobId);
   }
 

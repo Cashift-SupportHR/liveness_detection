@@ -28,7 +28,8 @@ class VehicleDetails {
       this.id, 
       this.vehicleCode, 
       this.model, 
-      this.yearOfManufacture, 
+      this.mobileVehicleIndexCode,
+      this.yearOfManufacture,
       this.plateNumber, 
       this.licenseNumber, 
       this.licenseExpiryDate, 
@@ -54,6 +55,7 @@ class VehicleDetails {
   String? licenseNumber;
   String? licenseExpiryDate;
   String? specifications;
+  String? mobileVehicleIndexCode;
   String? vehicleImage;
   String? licenseImage;
   String? vehicleBrandName;
@@ -70,6 +72,7 @@ class VehicleDetails {
         id: json.id,
         vehicleCode: json.vehicleCode,
         model: json.model,
+      mobileVehicleIndexCode: json.mobileVehicleIndexCode,
       custodies: json.custodies,
         yearOfManufacture: json.yearOfManufacture,
         plateNumber: json.plateNumber,

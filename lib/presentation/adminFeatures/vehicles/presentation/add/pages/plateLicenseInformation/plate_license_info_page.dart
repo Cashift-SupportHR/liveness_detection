@@ -42,6 +42,7 @@ class PlateLicenseInfoPage
         params.vehicleColorId = valueParams.vehicleColorId;
         params.licenseExpiryDate = valueParams.licenseExpiryDate;
         params.vehicleImageFile = valueParams.vehicleImageFile;
+        params.mobileVehicleIndexCode = valueParams.mobileVehicleIndexCode;
         print("onNext from BasicVehicleInformationPage ${params.toJson()}");
         bloc.addVehicle(params);
       },

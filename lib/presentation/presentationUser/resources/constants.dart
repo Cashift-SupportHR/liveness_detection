@@ -134,6 +134,9 @@ const kTextBodyBold = TextStyle(
   fontFamily: 'Bold',
 );
 
+const kTextFontIcon = TextStyle(fontFamily: 'fontIcon');
+TextStyle get fontIcon =>kTextFontIcon;
+
 const kTextExtraBold = TextStyle(
   color: kFontDarkGreen,
   fontSize: 18.0,
@@ -170,6 +173,7 @@ const kTextFieldProfileItemDecoration = InputDecoration(
       borderRadius: BorderRadius.all(Radius.circular(8)),
       borderSide: BorderSide.none,
     ));
+
 
 const kTextDescriptionFieldDecoration = InputDecoration(
     filled: true,
@@ -223,6 +227,7 @@ const kTextFieldCommentDecoration = InputDecoration(
 final kTextFieldDecoration = InputDecoration(
     filled: false,
     hintText: "",
+
     hintStyle: kTextLabelFontDark.copyWith(fontSize: 14, color: kSilver),
     contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 24),
     border: const OutlineInputBorder(
@@ -245,6 +250,7 @@ final kRectangleTextFieldDecoration = kTextFieldDecoration.copyWith(
   hintStyle: kTextRegular.copyWith(
       color: kBattleShipGrey2.withOpacity(0.8), fontSize: 14),
   enabledBorder: const OutlineInputBorder(
+
     borderSide: BorderSide(color: kGrey_EB, width: 1),
   ),
   focusedBorder: const OutlineInputBorder(

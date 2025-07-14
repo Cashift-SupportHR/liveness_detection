@@ -1,17 +1,24 @@
 import 'dart:io';
 
-import 'package:injectable/injectable.dart';
+ import 'package:injectable/injectable.dart';
 
 import '../../../../../data/models/api_response.dart';
+import '../../../../adminFeatures/maintenanceAndBreakdowns/domain/entities/maintenance.dart';
 import '../../../../adminFeatures/vehicles/data/models/vehicle_details_dto.dart';
+  import '../../../../adminFeatures/vehicles/domain/entities/vehicle_violation.dart';
 import '../../../../shared/models/common_list_item.dart';
+import '../../domain/entities/driver_violation.dart';
 import '../../domain/entities/gas_station_trip.dart';
 import '../../domain/entities/index.dart';
 import '../../domain/entities/receive_vehicle_details.dart';
+ import '../../domain/entities/vehicle_performance.dart';
 import '../datasource/vehicles_operation_provider.dart';
 import '../models/add_round_trip_fill_station_prams.dart';
 import '../models/confirm_receive_vehicle_params.dart';
+import '../models/download_vehicle_violation_picture_params.dart';
 import '../models/index.dart';
+ import '../models/receive_vehicle_prams.dart';
+import '../models/vehicle_received_images_params.dart';
 
 @injectable
 class ReceiveVehiclesRepository {
@@ -24,14 +31,14 @@ class ReceiveVehiclesRepository {
     return VehicleComponents.fromDtoList(response.payload!);
   }
 
-  Future<List<VehicleComponents>> fetchVehicleCustodies(
-      int vehicleId) async {
+  Future<List<VehicleComponents>> fetchVehicleCustodies(int vehicleId) async {
     final response = await _api.fetchVehicleCustodies(vehicleId);
     return VehicleComponents.fromDtoList(response.payload!);
   }
 
-  Future<List<ReceiveVehicleDto>> fetchReceiveVehicle(bool isComplete) async {
-    final response = await _api.fetchReceiveVehicle(isComplete);
+  Future<ReceiveVehicleDto> fetchReceiveVehicle(
+      ReceiveVehiclePrams receiveVehiclePrams) async {
+    final response = await _api.fetchReceiveVehicle(receiveVehiclePrams);
     return response.payload!;
   }
 
@@ -40,11 +47,11 @@ class ReceiveVehiclesRepository {
     return response.payload!;
   }
 
-  Future<CreateVehicleHandoverDto> createVehicleHandover(
+  Future<CreateVehicleHandover> createVehicleHandover(
       CreateVehicleHandoverPrams createVehicleHandoverPrams) async {
     final response =
         await _api.createVehicleHandover(createVehicleHandoverPrams);
-    return response.payload!;
+    return CreateVehicleHandover.fromDto(response.payload!);
   }
 
   Future<ApiResponse> addComponents(
@@ -58,7 +65,6 @@ class ReceiveVehiclesRepository {
     final data = await _api.addCustodies(addCustodiesPrams);
     return ApiResponse(
         status: data.status, message: "onNext", payload: data.payload);
-
   }
 
   Future<ApiResponse> addImageAndDescriptionsComponents(
@@ -71,7 +77,8 @@ class ReceiveVehiclesRepository {
 
   Future<ApiResponse> addImageAndDescriptionsCustodies(
       {required AddImageAndDescriptionsComponentsPrams
-          addImageAndDescriptionsComponentsPrams, File? file}) async {
+          addImageAndDescriptionsComponentsPrams,
+      File? file}) async {
     return await _api.addImageAndDescriptionsCustodies(
         addImageAndDescriptionsComponentsPrams, file);
   }
@@ -86,12 +93,14 @@ class ReceiveVehiclesRepository {
     return CommonListItem.fromDtoList(data.payload!);
   }
 
-  Future<List<RoundTypeTermsAndCondition>> fetchRoundTypeTermsAndCondition(int roundTypeId) async {
+  Future<List<RoundTypeTermsAndCondition>> fetchRoundTypeTermsAndCondition(
+      int roundTypeId) async {
     final data = await _api.fetchRoundTypeTermsAndCondition(roundTypeId);
     return RoundTypeTermsAndCondition.fromListDto(data.payload!);
   }
 
-  Future<ApiResponse> addRoundTrip(AddRoundTripParams addRoundTripParams) async {
+  Future<ApiResponse> addRoundTrip(
+      AddRoundTripParams addRoundTripParams) async {
     return await _api.addRoundTrip(addRoundTripParams);
   }
 
@@ -100,11 +109,12 @@ class ReceiveVehiclesRepository {
   }
 
   Future<CurrentRoundTrip> fetchCurrentTrip() async {
-    final res =  await _api.fetchCurrentTrip();
+    final res = await _api.fetchCurrentTrip();
     return CurrentRoundTrip.fromDto(res.payload ?? CurrentRoundTripDto());
   }
 
-  Future<ApiResponse> addRoundTripDetails(AddRoundTripDetailsParams params) async {
+  Future<ApiResponse> addRoundTripDetails(
+      AddRoundTripDetailsParams params) async {
     return await _api.addRoundTripDetails(params);
   }
 
@@ -113,7 +123,7 @@ class ReceiveVehiclesRepository {
     return RoundTripDetails.fromListDto(res.payload!);
   }
 
-   Future<List<GasStationTrip>> fetchGasStationTrip(int roundTripId) async {
+  Future<List<GasStationTrip>> fetchGasStationTrip(int roundTripId) async {
     final res = await _api.fetchGasStationTrip(roundTripId);
     return GasStationTrip.fromDtoList(res.payload!);
   }
@@ -123,14 +133,46 @@ class ReceiveVehiclesRepository {
     return ReceiveVehicleDetails.fromDto(res.payload!);
   }
 
-  Future<String> confirmRejectReceiveVehicle(ConfirmReceiveVehicleParams params) async {
-    final res =  await _api.confirmRejectReceiveVehicle(params);
+  Future<String> confirmRejectReceiveVehicle(
+      ConfirmReceiveVehicleParams params) async {
+    final res = await _api.confirmRejectReceiveVehicle(params);
     return res.message!;
   }
-  Future<ApiResponse> addRoundTripFillStation(AddRoundTripFillStationPrams params) async {
-    final res =  await _api.addRoundTripFillStation(params);
+
+  Future<ApiResponse> addRoundTripFillStation(
+      AddRoundTripFillStationPrams params) async {
+    final res = await _api.addRoundTripFillStation(params);
     return res;
   }
 
+  Future<ApiResponse> addVehicleHandoverImages(
+      VehicleReceivedImagesParams params) async {
+    return await _api.addVehicleHandoverImages(params);
+  }
+
+  Future<VehiclePerformance> fetchVehiclePerformance(int id) async {
+    final res = await _api.fetchVehiclePerformance(id);
+    return VehiclePerformance.fromDto(res.payload!);
+  }
+
+  Future<List<DriverViolation>> fetchDriverViolations(int id) async {
+    final res = await _api.fetchDriverViolations(id);
+    return DriverViolation.fromDtoList(res.payload!);
+  }
+
+  Future<List<ContractViolation>> fetchRoundViolation(int id) async {
+    final res = await _api.fetchRoundViolation(id);
+    return ContractViolation.fromDtoList(res.payload!);
+  }
+  Future<List<Maintenance>> fetchRoundsMaintenance(int id) async {
+    final res = await _api.fetchRoundsMaintenance(id);
+    return Maintenance.fromDtoList(res.payload!);
+  }
+
+
+
+  Future<ApiResponse<String>> downloadVehicleViolationPicture(DownloadVehicleViolationPictureParams params) async{
+    return  await _api.downloadVehicleViolationPicture(params);
+  }
 
 }

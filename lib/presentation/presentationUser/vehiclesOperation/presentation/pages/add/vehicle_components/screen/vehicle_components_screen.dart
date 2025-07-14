@@ -32,8 +32,9 @@ class VehicleComponentsScreen extends BaseStatelessWidget {
     MainReceiveVehicleArg arg = getArguments(context);
     return AppScaffold(
       bottomNavigationBar: RowButtons(
-        onCancel: () =>
-            intentCallBack(CancelVehicleComponents()),
+        onCancel: () => intentCallBack(CancelVehicleComponents(
+            vehicleComponents: vehicleComponentList,
+        )),
         onSave: () {
           onSavePressed(context);
         },
@@ -102,7 +103,10 @@ class VehicleComponentsScreen extends BaseStatelessWidget {
           vehicleComponentsStatuses: idNo
               .map((e) => VehicleComponentsStatuse(
               componentStatus: false, vehicleComponentId: e))
-              .toList())));
+              .toList()),
+          vehicleComponents: vehicleComponentList
+
+      ));
     }
   }
 

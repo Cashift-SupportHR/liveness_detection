@@ -8042,7 +8042,7 @@ abstract class AppLocalizations {
   /// No description provided for @take_action.
   ///
   /// In ar, this message translates to:
-  /// **'اتخاذ اجراء'**
+  /// **'اتخذ اجراء'**
   String get take_action;
 
   /// No description provided for @vehicle_name.
@@ -8150,7 +8150,7 @@ abstract class AppLocalizations {
   /// No description provided for @final_action.
   ///
   /// In ar, this message translates to:
-  /// **'الإجراء النهائي'**
+  /// **'إتخذ إجراء نهائي'**
   String get final_action;
 
   /// No description provided for @final_action_taken_waring_msg.
@@ -8210,7 +8210,7 @@ abstract class AppLocalizations {
   /// No description provided for @user_request_accept_title.
   ///
   /// In ar, this message translates to:
-  /// **'هل انت متأكد من الموافقة علي تغيير رقم جوال الكاشفتر؟'**
+  /// **'هل انت متأكد من الموافقة؟'**
   String get user_request_accept_title;
 
   /// No description provided for @user_request_accept_subtitle_msg.
@@ -8297,11 +8297,461 @@ abstract class AppLocalizations {
   /// **' انتهاء '**
   String get end_but;
 
+  /// No description provided for @image_before_maintenance.
+  ///
+  /// In ar, this message translates to:
+  /// **' صورة قبل الصيانة '**
+  String get image_before_maintenance;
+
+  /// No description provided for @image_after_maintenance.
+  ///
+  /// In ar, this message translates to:
+  /// **' صورة بعد الصيانة '**
+  String get image_after_maintenance;
+
+  /// No description provided for @shod_image_before_maintenance.
+  ///
+  /// In ar, this message translates to:
+  /// **' يرجي اختيار صورة قبل الصيانة '**
+  String get shod_image_before_maintenance;
+
+  /// No description provided for @shod_image_after_maintenance.
+  ///
+  /// In ar, this message translates to:
+  /// **'يرجي اختيار صورة بعد الصيانة '**
+  String get shod_image_after_maintenance;
+
+  /// No description provided for @type_operation.
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع العملية'**
+  String get type_operation;
+
   /// No description provided for @verification.
   ///
   /// In ar, this message translates to:
   /// **'تحقق'**
   String get verification;
+
+  /// No description provided for @view_maintenance.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض الصيانة والأعطال'**
+  String get view_maintenance;
+
+  /// No description provided for @breakdown_maintenance.
+  ///
+  /// In ar, this message translates to:
+  /// **' الصيانة والأعطال'**
+  String get breakdown_maintenance;
+
+  /// No description provided for @waring_action_notification.
+  ///
+  /// In ar, this message translates to:
+  /// **' سيتم حفظ اجراءك وارساله الي مدير المشروع لمراجعته والرد عليه '**
+  String get waring_action_notification;
+
+  /// No description provided for @waring_final_action_notification.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيتم ارساله للمشرف .'**
+  String get waring_final_action_notification;
+
+  /// No description provided for @add_maintenance.
+  ///
+  /// In ar, this message translates to:
+  /// **'طلب صيانة'**
+  String get add_maintenance;
+
+  /// No description provided for @add_breakdown.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضافة عطل '**
+  String get add_breakdown;
+
+  /// No description provided for @driver_violations.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخالفات السائق'**
+  String get driver_violations;
+
+  /// No description provided for @speeding_during_violation.
+  ///
+  /// In ar, this message translates to:
+  /// **'السرعة أثناء المخالفة'**
+  String get speeding_during_violation;
+
+  /// No description provided for @click_here_view_violation_location.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط هنا لرؤية موقع  المخالفة'**
+  String get click_here_view_violation_location;
+
+  /// No description provided for @violation_time.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت المخالفة'**
+  String get violation_time;
+
+  /// No description provided for @vehicle_performance.
+  ///
+  /// In ar, this message translates to:
+  /// **'أداء المركبة'**
+  String get vehicle_performance;
+
+  /// No description provided for @maximum_recorded_speed.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقصى سرعة مسجلة'**
+  String get maximum_recorded_speed;
+
+  /// No description provided for @vehicle_path.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسار المركبة'**
+  String get vehicle_path;
+
+  /// No description provided for @km_h.
+  ///
+  /// In ar, this message translates to:
+  /// **'كم/س'**
+  String get km_h;
+
+  /// No description provided for @notifications.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاشعارات'**
+  String get notifications;
+
+  /// No description provided for @receive_vehicle_details.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل استلام المركبة'**
+  String get receive_vehicle_details;
+
+  /// No description provided for @write_action_to_be_taken.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب الإجراء الذي ستتخذه'**
+  String get write_action_to_be_taken;
+
+  /// No description provided for @track_vehicle_on_map.
+  ///
+  /// In ar, this message translates to:
+  /// **'تتبع المركبة علي الخريطة'**
+  String get track_vehicle_on_map;
+
+  /// No description provided for @driver_name.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم السائق'**
+  String get driver_name;
+
+  /// No description provided for @select_date_from_to.
+  ///
+  /// In ar, this message translates to:
+  /// **'من فضلك اختار تاريخ من إلى'**
+  String get select_date_from_to;
+
+  /// No description provided for @play.
+  ///
+  /// In ar, this message translates to:
+  /// **'تشغيل'**
+  String get play;
+
+  /// No description provided for @stop.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف'**
+  String get stop;
+
+  /// No description provided for @position.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموضع:'**
+  String get position;
+
+  /// No description provided for @speed.
+  ///
+  /// In ar, this message translates to:
+  /// **'السرعة:'**
+  String get speed;
+
+  /// No description provided for @vehicle_camera_code.
+  ///
+  /// In ar, this message translates to:
+  /// **'معرف كود الكاميرا للمركبة'**
+  String get vehicle_camera_code;
+
+  /// No description provided for @go_violation_site.
+  ///
+  /// In ar, this message translates to:
+  /// **'توجه لموقع المخالفة'**
+  String get go_violation_site;
+
+  /// No description provided for @download_violation_image.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحميل صورة المخالفة'**
+  String get download_violation_image;
+
+  /// No description provided for @camera_name_ar.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الكاميرا عربي'**
+  String get camera_name_ar;
+
+  /// No description provided for @type_camera_name_ar.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب اسم الكاميرا بالعربي'**
+  String get type_camera_name_ar;
+
+  /// No description provided for @camera_name_en.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الكاميرا بالانجليزي'**
+  String get camera_name_en;
+
+  /// No description provided for @type_camera_name_en.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب اسم الكاميرا بالانجليزي'**
+  String get type_camera_name_en;
+
+  /// No description provided for @camera_code.
+  ///
+  /// In ar, this message translates to:
+  /// **'كود الكاميرا'**
+  String get camera_code;
+
+  /// No description provided for @type_camera_code.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب كود الكاميرا'**
+  String get type_camera_code;
+
+  /// No description provided for @start_video.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدأ الفيديو'**
+  String get start_video;
+
+  /// No description provided for @live_feed.
+  ///
+  /// In ar, this message translates to:
+  /// **'بث المباشر'**
+  String get live_feed;
+
+  /// No description provided for @select_video_date.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر تاريخ الفيديو'**
+  String get select_video_date;
+
+  /// No description provided for @camera_name.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الكاميرا'**
+  String get camera_name;
+
+  /// No description provided for @camera_type.
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع الكاميرا'**
+  String get camera_type;
+
+  /// No description provided for @start_live_feed.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدأ البث المباشر'**
+  String get start_live_feed;
+
+  /// No description provided for @camera_add.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضافة كاميرا'**
+  String get camera_add;
+
+  /// No description provided for @cameras.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكاميرات'**
+  String get cameras;
+
+  /// No description provided for @view_cameras.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض الكاميرات'**
+  String get view_cameras;
+
+  /// No description provided for @add_camera.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضافة كاميرا'**
+  String get add_camera;
+
+  /// No description provided for @edit_camera.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل كاميرا'**
+  String get edit_camera;
+
+  /// No description provided for @delete_camera.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف كاميرا'**
+  String get delete_camera;
+
+  /// No description provided for @edit_date_time.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل التاريخ والوقت'**
+  String get edit_date_time;
+
+  /// No description provided for @videos.
+  ///
+  /// In ar, this message translates to:
+  /// **'فيديوهات'**
+  String get videos;
+
+  /// No description provided for @video.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفيديو'**
+  String get video;
+
+  /// No description provided for @live_streaming.
+  ///
+  /// In ar, this message translates to:
+  /// **'بث مباشر'**
+  String get live_streaming;
+
+  /// No description provided for @select_camera.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر الكاميرا'**
+  String get select_camera;
+
+  /// No description provided for @date_from.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ من'**
+  String get date_from;
+
+  /// No description provided for @date_to.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ الي'**
+  String get date_to;
+
+  /// No description provided for @date_to_must_be_greater_than_date_from.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ الي يجب ان يكون اكبر من التاريخ من'**
+  String get date_to_must_be_greater_than_date_from;
+
+  /// No description provided for @there_are_videos_yet.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد فيديوهات بعد'**
+  String get there_are_videos_yet;
+
+  /// No description provided for @videos_dates_validate_msg.
+  ///
+  /// In ar, this message translates to:
+  /// **'من فضلك حدّد الوقت والتاريخ الذي تريده لعرض الفيديوهات فيه'**
+  String get videos_dates_validate_msg;
+
+  /// No description provided for @select_date_and_time.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر التاريخ والوقت'**
+  String get select_date_and_time;
+
+  /// No description provided for @drivers.
+  ///
+  /// In ar, this message translates to:
+  /// **'السائقين'**
+  String get drivers;
+
+  /// No description provided for @maximum_speed.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقصي سرعة'**
+  String get maximum_speed;
+
+  /// No description provided for @transactions.
+  ///
+  /// In ar, this message translates to:
+  /// **'المعاملات'**
+  String get transactions;
+
+  /// No description provided for @view_transactions.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض المعاملات'**
+  String get view_transactions;
+
+  /// No description provided for @add_transactions.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضافة  معاملة'**
+  String get add_transactions;
+
+  /// No description provided for @update_transactions.
+  ///
+  /// In ar, this message translates to:
+  /// **' تحديث المعاملة'**
+  String get update_transactions;
+
+  /// No description provided for @completed_tasks.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاسكات المنتهية'**
+  String get completed_tasks;
+
+  /// No description provided for @in_progress.
+  ///
+  /// In ar, this message translates to:
+  /// **'جاري المعالجة'**
+  String get in_progress;
+
+  /// No description provided for @reschedule.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة جدولة'**
+  String get reschedule;
+
+  /// No description provided for @delivery_date.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ الاستلام'**
+  String get delivery_date;
+
+  /// No description provided for @entity.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجهة'**
+  String get entity;
+
+  /// No description provided for @reload.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة تحميل'**
+  String get reload;
+
+  /// No description provided for @violations_of_operation.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخالفات التشغيل'**
+  String get violations_of_operation;
+
+  /// No description provided for @violations_of_factory.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخالفات المصانع'**
+  String get violations_of_factory;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

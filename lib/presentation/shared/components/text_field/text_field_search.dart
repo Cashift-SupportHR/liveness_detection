@@ -11,12 +11,13 @@ import '../../../shared/components/base_stateless_widget.dart';
 class TextFieldSearch extends BaseStatelessWidget {
   final String? title;
   final bool? readOnly;
+  Widget? suffix;
   final bool? isSuffixIcon;
   final void Function()? onTap;
   final void Function(String)? onChanged;
   final TextEditingController? controller;
   final EdgeInsetsGeometry? margin;
-  TextFieldSearch({Key? key, this.title, this.isSuffixIcon=true, this.readOnly, this.onTap, this.onChanged, this.controller, this.margin}) : super(key: key);
+  TextFieldSearch({Key? key, this.title,this.suffix, this.isSuffixIcon=true, this.readOnly, this.onTap, this.onChanged, this.controller, this.margin}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +47,9 @@ class TextFieldSearch extends BaseStatelessWidget {
             padding: const EdgeInsets.all(14.0),
             child: kLoadSvgInCirclePath(AppIcons.search, width: 20, height: 20),
           ),
-          suffixIcon:isSuffixIcon==false?SizedBox.shrink(): Padding(
+          contentPadding: const EdgeInsets.all(5.0),
+
+          suffixIcon:isSuffixIcon==false?SizedBox.shrink():suffix?? Padding(
             padding: const EdgeInsets.all(14.0),
             child: kLoadSvgInCirclePath(AppIcons.filter, width: 20, height: 20),
           ),
