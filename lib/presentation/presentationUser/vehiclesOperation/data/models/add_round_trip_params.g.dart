@@ -18,6 +18,6 @@ Map<String, dynamic> _$AddRoundTripParamsToJson(AddRoundTripParams instance) =>
     <String, dynamic>{
       'id': instance.id,
       'vehiclesZoneId': instance.vehiclesZoneId,
-      'vehicleHandoverId': instance.vehicleHandoverId,
       'roundTyepId': instance.roundTypeId,
+      'vehicleHandoverId': instance.vehicleHandoverId,
     };

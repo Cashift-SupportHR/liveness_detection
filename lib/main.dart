@@ -44,8 +44,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
 
-  // await FirebaseBootstrapper.initFirebase(languageCode: '');
-  // await FirebaseNotifications.firebaseInitNotifications();
+   await FirebaseBootstrapper.initFirebase(languageCode: '');
+   await FirebaseNotifications.firebaseInitNotifications();
   ChuckerFlutter.showOnRelease = true;
   AppLoggers.setupLogger();
   await configureDependencies();
