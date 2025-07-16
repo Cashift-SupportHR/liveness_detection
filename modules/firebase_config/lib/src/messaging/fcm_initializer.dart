@@ -6,5 +6,8 @@ Future<void> initializeFirebase({bool isLive = true}) async {
       .platformConfig
       .currentConfig;
 
-  await Firebase.initializeApp(options: config.toFirebaseOptions());
+  if (Firebase.apps.isEmpty) {
+    await Firebase.initializeApp(options: config.toFirebaseOptions());
+
+  }
 }
